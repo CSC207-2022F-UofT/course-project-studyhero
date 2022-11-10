@@ -1,0 +1,2 @@
+public class loadGameContoller {
+}

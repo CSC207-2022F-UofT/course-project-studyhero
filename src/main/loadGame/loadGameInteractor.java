@@ -1,0 +1,2 @@
+public class loadGameInteractor {
+}
