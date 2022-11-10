@@ -1,2 +1,2 @@
-public class loadGameOutputBoundary {
+public interface loadGameOutputBoundary {
 }
