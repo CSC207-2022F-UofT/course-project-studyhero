@@ -1,4 +1,4 @@
 package InventoryMenu.InventoryList;
 
-public class Consumable {
+public interface Consumable {
 }

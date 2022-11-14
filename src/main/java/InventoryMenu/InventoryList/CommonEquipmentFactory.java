@@ -1,4 +1,4 @@
 package InventoryMenu.InventoryList;
 
-public interface Equipment {
+public class CommonEquipmentFactory {
 }

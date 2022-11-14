@@ -1,4 +1,4 @@
 package InventoryMenu.InventoryMenuUI;
 
-public class SortInventoryByType {
+public class SortInventoryByTypeButton {
 }
