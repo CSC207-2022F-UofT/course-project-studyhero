@@ -1,5 +1,7 @@
 package stats;
 
+import entities.Stats;
+
 public class StatsUser implements Stats {
 
     private int level;
