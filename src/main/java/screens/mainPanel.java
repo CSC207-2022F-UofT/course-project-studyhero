@@ -1,8 +1,6 @@
 package screens;
 
-import screens.panels.breakPanel;
-import screens.panels.shopPanel;
-import screens.panels.startPanel;
+import screens.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,16 +16,20 @@ public class mainPanel implements ActionListener {
         //card.show(mainPanel,index);
     }
 
-    public static JPanel getMainPanel(){
+    public JPanel getMainPanel(){
         JPanel mainPanel = new JPanel();
         CardLayout card = getCard();
         mainPanel.setLayout(card);
+
+        //get all panels
         JPanel breakP = breakPanel.breakPanel();
         JPanel startP = startPanel.startPanel();
         JPanel shopP = shopPanel.shopPanel();
         JPanel menuP = new JPanel();
+        JPanel buyMenuP = buyMenuPanel.buyMenuPanel();
+        JPanel sellMenuP = sellMenuPanel.sellMenuPanel();
 
-
+        // all navigating buttons
         JButton button1 = new JButton("Switch to Start");
         menuP.add(button1);
         button1.addActionListener(e -> card.show(mainPanel,"Start"));
@@ -41,39 +43,54 @@ public class mainPanel implements ActionListener {
         button3.addActionListener(e -> card.show(mainPanel,"Shop"));
 
         JButton buttonMain1 = new JButton("Back to Menu");
-        buttonMain1.addActionListener(e -> card.show(mainPanel,"Menu"));
+        buttonMain1.addActionListener(e -> card.show(mainPanel, "Menu"));
         startP.add(buttonMain1);
 
         JButton buttonMain2 = new JButton("Back to Menu");
-        buttonMain2.addActionListener(e -> card.show(mainPanel,"Menu"));
+        buttonMain2.addActionListener(e -> card.show(mainPanel, "Menu"));
         breakP.add(buttonMain2);
 
         JButton buttonMain3 = new JButton("Back to Menu");
-        buttonMain3.addActionListener(e -> card.show(mainPanel,"Menu"));
+        buttonMain3.addActionListener(e -> card.show(mainPanel, "Menu"));
         shopP.add(buttonMain3);
 
+        JButton shopMenuToBuyMenu = new JButton("Buy items");
+        shopMenuToBuyMenu.addActionListener(e -> card.show(mainPanel, "Buy Menu"));
+        shopP.add(shopMenuToBuyMenu);
+
+        JButton buyMenuToShopMenu = new JButton("Back to Shop");
+        buyMenuToShopMenu.addActionListener(e -> card.show(mainPanel, "Shop"));
+        buyMenuP.add(buyMenuToShopMenu);
+
+
+        JButton shopMenuToSellMenu = new JButton("Sell items");
+        shopMenuToSellMenu.addActionListener(e -> card.show(mainPanel, "Sell Menu"));
+        shopP.add(shopMenuToSellMenu);
+
+        JButton sellMenuToShopMenu = new JButton("Back to Shop");
+        sellMenuToShopMenu.addActionListener(e -> card.show(mainPanel, "Shop"));
+        sellMenuP.add(sellMenuToShopMenu);
+
+
+        // add all panels
         mainPanel.add(menuP, "Menu");
         mainPanel.add(breakP, "Break");
         mainPanel.add(startP, "Start");
         mainPanel.add(shopP, "Shop");
+        mainPanel.add(buyMenuP, "Buy Menu");
+        mainPanel.add(sellMenuP, "Sell Menu");
 
 
         card.show(mainPanel, "Menu");
-
-
 
         return mainPanel;
     }
 
     public mainPanel(){
         JFrame frame = new JFrame();
-        //CardLayout card = new CardLayout();
         JPanel mainPanel = getMainPanel();
-        //mainPanel.setLayout(card);
-
 
         frame.add(mainPanel);
-        //card.show(mainPanel, "Start");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("demo");
         frame.pack();

@@ -5,7 +5,6 @@ import java.awt.*;
 import screens.panels.*;
 
 import static screens.mainCard.switchScreens;
-import static screens.mainPanel.getMainPanel;
 
 public class mainScreen {
 
@@ -16,7 +15,7 @@ public class mainScreen {
     public mainScreen(){
 
         JFrame frame = new JFrame("StudyHero");
-        JPanel mainPanel = getMainPanel(); // container
+        JPanel mainPanel = new JPanel(); // container
         JPanel panel1 = breakPanel.breakPanel();
         JPanel panel2 = startPanel.startPanel();
         JButton button1 = new JButton("Switch to Start");

@@ -13,18 +13,18 @@ public class shopPanel {
         JPanel shopPanel = new JPanel();
         JLabel title = new JLabel("Shop Screen");
 
-        JButton buyItemButton = getBuyItemButton();
-        JButton buyMenuButton = getBuyMenuButton();
+        //JButton buyItemButton = getBuyItemButton();
+        //JButton buyMenuButton = getBuyMenuButton();
         JButton leaveShopButton = getLeaveShopButton();
-        JButton sellItemButton = getSellItemButton();
-        JButton sellMenuButton = getSellMenuButton();
+        //JButton sellItemButton = getSellItemButton();
+        //JButton sellMenuButton = getSellMenuButton();
 
         shopPanel.add(title);
-        shopPanel.add(buyItemButton);
-        shopPanel.add(buyMenuButton);
+        //shopPanel.add(buyItemButton);
+        //shopPanel.add(buyMenuButton);
         shopPanel.add(leaveShopButton);
-        shopPanel.add(sellItemButton);
-        shopPanel.add(sellMenuButton);
+        //shopPanel.add(sellItemButton);
+        //shopPanel.add(sellMenuButton);
 
         return shopPanel;
     }

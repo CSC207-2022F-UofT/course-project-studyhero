@@ -6,11 +6,9 @@ import screens.panels.startPanel;
 import javax.swing.*;
 import java.awt.*;
 
-import static screens.mainPanel.getMainPanel;
-
 public class mainCard {
     final static CardLayout mainCard = new CardLayout(3, 5);
-    public static JPanel mainPanel = getMainPanel();
+    public static JPanel mainPanel = new JPanel();
     public static CardLayout getCard(){
         return mainCard;
     }
