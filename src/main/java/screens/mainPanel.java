@@ -6,10 +6,12 @@ import screens.panels.startPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static screens.mainCard.*;
 
-public class mainPanel {
+public class mainPanel implements ActionListener {
 
 
     public static void switchPanel(String index){
@@ -57,6 +59,9 @@ public class mainPanel {
 
 
         card.show(mainPanel, "Menu");
+
+
+
         return mainPanel;
     }
 
@@ -79,4 +84,8 @@ public class mainPanel {
         new mainPanel();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
