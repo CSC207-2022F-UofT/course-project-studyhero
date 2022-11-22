@@ -1,4 +1,4 @@
-package UI.buttons.saveGame;
+package UI.buttons.save_game;
 
 import UI.buttons.button;
 

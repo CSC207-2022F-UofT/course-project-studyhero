@@ -1,4 +1,4 @@
-package UI.buttons.newGame;
+package UI.buttons.new_game;
 
 import UI.buttons.button;
 

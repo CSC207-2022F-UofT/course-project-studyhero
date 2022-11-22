@@ -1,12 +1,7 @@
-package UI.buttons.newGame;
+package UI.buttons.new_game;
 
-import screens.mainPanel;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static screens.mainCard.switchScreens;
 
 public class newGameButtonListener implements ActionListener {
     @Override

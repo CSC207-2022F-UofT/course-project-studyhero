@@ -1,4 +1,4 @@
-package UI.buttons.quitGame;
+package UI.buttons.quit_game;
 
 import UI.buttons.button;
 

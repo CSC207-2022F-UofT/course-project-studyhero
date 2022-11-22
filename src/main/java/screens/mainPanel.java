@@ -28,31 +28,24 @@ public class mainPanel implements ActionListener {
         JPanel menuP = new JPanel();
         JPanel buyMenuP = buyMenuPanel.buyMenuPanel();
         JPanel sellMenuP = sellMenuPanel.sellMenuPanel();
+        JPanel bossP = bossPanel.bossPanel();
 
         // all navigating buttons
-        JButton button1 = new JButton("Switch to Start");
-        menuP.add(button1);
-        button1.addActionListener(e -> card.show(mainPanel,"Start"));
+        JButton menuToStart = new JButton("Start");
+        menuP.add(menuToStart);
+        menuToStart.addActionListener(e -> card.show(mainPanel,"Start"));
 
-        JButton button2 = new JButton("Switch to Break");
-        menuP.add(button2);
-        button2.addActionListener(e -> card.show(mainPanel,"Break"));
+        JButton menuToBreak = new JButton("Break");
+        menuP.add(menuToBreak);
+        menuToBreak.addActionListener(e -> card.show(mainPanel,"Break"));
 
-        JButton button3 = new JButton("Switch to Shop");
-        menuP.add(button3);
-        button3.addActionListener(e -> card.show(mainPanel,"Shop"));
+        JButton menuToShop = new JButton("Shop");
+        menuP.add(menuToShop);
+        menuToShop.addActionListener(e -> card.show(mainPanel,"Shop"));
 
-        JButton buttonMain1 = new JButton("Back to Menu");
-        buttonMain1.addActionListener(e -> card.show(mainPanel, "Menu"));
-        startP.add(buttonMain1);
-
-        JButton buttonMain2 = new JButton("Back to Menu");
-        buttonMain2.addActionListener(e -> card.show(mainPanel, "Menu"));
-        breakP.add(buttonMain2);
-
-        JButton buttonMain3 = new JButton("Back to Menu");
-        buttonMain3.addActionListener(e -> card.show(mainPanel, "Menu"));
-        shopP.add(buttonMain3);
+        JButton menuToBoss = new JButton("Boss Fight");
+        menuP.add(menuToBoss);
+        menuToBoss.addActionListener(e -> card.show(mainPanel, "Boss"));
 
         JButton shopMenuToBuyMenu = new JButton("Buy items");
         shopMenuToBuyMenu.addActionListener(e -> card.show(mainPanel, "Buy Menu"));
@@ -71,6 +64,22 @@ public class mainPanel implements ActionListener {
         sellMenuToShopMenu.addActionListener(e -> card.show(mainPanel, "Shop"));
         sellMenuP.add(sellMenuToShopMenu);
 
+        JButton buttonMain1 = new JButton("Back to Menu");
+        buttonMain1.addActionListener(e -> card.show(mainPanel, "Menu"));
+        startP.add(buttonMain1);
+
+        JButton buttonMain2 = new JButton("Back to Menu");
+        buttonMain2.addActionListener(e -> card.show(mainPanel, "Menu"));
+        breakP.add(buttonMain2);
+
+        JButton buttonMain3 = new JButton("Back to Menu");
+        buttonMain3.addActionListener(e -> card.show(mainPanel, "Menu"));
+        shopP.add(buttonMain3);
+
+        JButton runAway = new JButton("Run Away");
+        runAway.addActionListener(e -> card.show(mainPanel, "Menu"));
+        bossP.add(runAway);
+
 
         // add all panels
         mainPanel.add(menuP, "Menu");
@@ -79,6 +88,7 @@ public class mainPanel implements ActionListener {
         mainPanel.add(shopP, "Shop");
         mainPanel.add(buyMenuP, "Buy Menu");
         mainPanel.add(sellMenuP, "Sell Menu");
+        mainPanel.add(bossP, "Boss");
 
 
         card.show(mainPanel, "Menu");

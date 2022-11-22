@@ -1,4 +1,4 @@
-package UI.buttons.loadGame;
+package UI.buttons.load_game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
