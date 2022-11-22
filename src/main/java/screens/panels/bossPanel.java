@@ -7,7 +7,6 @@ import static UI.buttons.boss_fight.blockButton.getBlockButton;
 import static UI.buttons.boss_fight.slashButton.getSlashButton;
 import static UI.buttons.boss_fight.stabButton.getStabButton;
 import static UI.buttons.boss_fight.useConsumableButton.getUseConsumableButton;
-import static screens.mainCard.getCard;
 
 public class bossPanel {
     public static JPanel bossPanel(){
