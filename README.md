@@ -1,4 +1,8 @@
 # Study Hero
+## User Specification
+The program is a productivity timer with an adventure game aspect, letting a user designate durations for their work and break sessions (e.g., Pomodoro). After the user has completed the work timer, they obtain loot and upgrades that make the user’s character stronger, getting more loot the longer they have studied (if the user does not finish their session, they will receive less loot). Once the user starts their break session, they have a menu they can access for going to the shop and buying equipment, fighting bosses, changing equipment, or going back to studying.
+
+The character should have stats the user can access that see how strong they are and what equipment they have. These stats determine their ability to defeat bosses. The user should be able to change the timer settings to match how much time they want to study and save their progress if they want to keep how long they’ve studied for using the program.
 
 ## Features
 - Timer: Start, pause, or early end a timer. After the timer is complete, it should go to the break menu. There is also the ability to change the timer duration to be different from the default 25 minutes.
