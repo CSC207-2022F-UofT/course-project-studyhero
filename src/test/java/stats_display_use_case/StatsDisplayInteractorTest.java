@@ -20,10 +20,6 @@ class StatsDisplayInteractorTest {
         this.statsInteractor = new StatsDisplayInteractor(stats, statsPresenter);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void testStatsDisplayInteractorReturnsViewModel() {
         assert(this.statsInteractor.display() instanceof StatsDisplayViewModel);
