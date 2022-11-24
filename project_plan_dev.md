@@ -57,7 +57,7 @@ When you work on a feature, you are always required to create a **branch** for t
 ## Merge Feature Branch to Main Branch
 When you finish working on a feature, you are required to merge the feature branch back to the main branch with a **pull request**.
 
-1. After you make changes to the code and commit them to the feature branch, you will see a **Compare & pull request** button on the repository page. Click it to create a pull request.
+1. After you make changes to the code and commit them to the feature branch, you will see a **Compare & pull request** buttons.button on the repository page. Click it to create a pull request.
 
     *Alternatively, you can create a pull request in the **Pull requests** tab.*
 
