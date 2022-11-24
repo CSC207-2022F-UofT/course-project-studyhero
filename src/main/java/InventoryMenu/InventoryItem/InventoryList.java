@@ -23,7 +23,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      * @param csvPath file's path for storing the inventory information
      * @throws IOException file may not exist
      */
-    public InventoryList(String csvPath) throws IOException{
+    public InventoryList(String csvPath){
         csvFile = new File(csvPath);
 
         headers.put("item_type", 0);
@@ -34,11 +34,25 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
             save();
         }else{
 
-            BufferedReader reader = new BufferedReader(new FileReader(csvFile));
-            reader.readLine();
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader(new FileReader(csvFile));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                reader.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             String row;
-            while ((row = reader.readLine()) != null) {
+            while (true) {
+                try {
+                    if (!((row = reader.readLine()) != null)) break;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 String[] col = row.split(",");
                 String itemType = String.valueOf(col[headers.get("item_type")]);
                 String itemName = String.valueOf(col[headers.get("item_name")]);
@@ -46,7 +60,11 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
                 InventoryItem item = new InventoryItem(itemType,itemName,itemEffect);
                 inventoryList.add(item);
             }
-            reader.close();
+            try {
+                reader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
