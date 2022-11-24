@@ -9,15 +9,15 @@ public class StatsDisplayInteractor implements StatsDisplayInputBoundary {
 
     final Stats stats;
 
-    final StatsDisplayOutputBoundary statsDisplayPresenter;
+    final StatsDisplayOutputBoundary statsDisplayOutputBoundary;
 
-    public StatsDisplayInteractor(Stats stats, StatsDisplayOutputBoundary statsDisplayPresenter) {
+    public StatsDisplayInteractor(Stats stats, StatsDisplayOutputBoundary statsDisplayOutputBoundary) {
         this.stats = stats;
-        this.statsDisplayPresenter = statsDisplayPresenter;
+        this.statsDisplayOutputBoundary = statsDisplayOutputBoundary;
     }
 
-    public StatsDisplayViewModel display() {
+    public void display() {
         Map<String, Integer> statsMap = stats.getUserStats();
-        return statsDisplayPresenter.displayStats(statsMap);
+        statsDisplayOutputBoundary.displayStats(statsMap);
     }
 }
