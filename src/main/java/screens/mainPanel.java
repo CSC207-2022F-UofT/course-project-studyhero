@@ -11,11 +11,6 @@ import static screens.mainCard.*;
 
 public class mainPanel implements ActionListener {
 
-
-    public static void switchPanel(String index){
-        //card.show(mainPanel,index);
-    }
-
     public JPanel getMainPanel(){
         JPanel mainPanel = new JPanel();
         CardLayout card = getCard();
