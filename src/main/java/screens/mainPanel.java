@@ -24,6 +24,7 @@ public class mainPanel implements ActionListener {
         JPanel buyMenuP = buyMenuPanel.buyMenuPanel();
         JPanel sellMenuP = sellMenuPanel.sellMenuPanel();
         JPanel bossP = bossPanel.bossPanel();
+        JPanel statsP = statsPanel.statsPanel();
 
         // all navigating buttons
         JButton menuToStart = new JButton("Start");
@@ -41,6 +42,10 @@ public class mainPanel implements ActionListener {
         JButton menuToBoss = new JButton("Boss Fight");
         menuP.add(menuToBoss);
         menuToBoss.addActionListener(e -> card.show(mainPanel, "Boss"));
+
+        JButton menuToStats = new JButton("Stats");
+        menuP.add(menuToStats);
+        menuToStats.addActionListener(e -> card.show(mainPanel, "Stats"));
 
         JButton shopMenuToBuyMenu = new JButton("Buy items");
         shopMenuToBuyMenu.addActionListener(e -> card.show(mainPanel, "Buy Menu"));
@@ -81,6 +86,7 @@ public class mainPanel implements ActionListener {
         mainPanel.add(breakP, "Break");
         mainPanel.add(startP, "Start");
         mainPanel.add(shopP, "Shop");
+        mainPanel.add(statsP, "Stats");
         mainPanel.add(buyMenuP, "Buy Menu");
         mainPanel.add(sellMenuP, "Sell Menu");
         mainPanel.add(bossP, "Boss");
