@@ -2,6 +2,8 @@ package stats_display_use_case;
 
 import screens.StatsDisplayViewModel;
 
+import java.util.Map;
+
 public interface StatsDisplayInputBoundary {
-    public void display();
+    public Map<String, Integer> display();
 }
