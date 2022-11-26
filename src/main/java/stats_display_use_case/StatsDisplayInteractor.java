@@ -1,23 +1,22 @@
 package stats_display_use_case;
 
 import entities.Stats;
-import screens.StatsDisplayViewModel;
+import stats_storage.StatsDsGateway;
 
 import java.util.Map;
 
 public class StatsDisplayInteractor implements StatsDisplayInputBoundary {
 
-    final Stats stats;
+    final Map<String, Integer> stats;
 
-    final StatsDisplayOutputBoundary statsDisplayOutputBoundary;
+    final StatsDisplayOutputBoundary statsDisplayPresenter;
 
-    public StatsDisplayInteractor(Stats stats, StatsDisplayOutputBoundary statsDisplayOutputBoundary) {
-        this.stats = stats;
-        this.statsDisplayOutputBoundary = statsDisplayOutputBoundary;
+    public StatsDisplayInteractor(StatsDsGateway statsDsGateway, StatsDisplayOutputBoundary statsDisplayPresenter) {
+        this.stats = StatsDsGateway.load();
+        this.statsDisplayPresenter = statsDisplayPresenter;
     }
 
-    public void display() {
-        Map<String, Integer> statsMap = stats.getUserStats();
-        statsDisplayOutputBoundary.displayStats(statsMap);
+    public Map<String, Integer> display() {
+        return this.stats;
     }
 }
