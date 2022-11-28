@@ -1,4 +1,4 @@
-package Timer.TimerEntities;
+package Timer.timer_entity;
 
 import java.util.Timer;
 import java.util.TimerTask;

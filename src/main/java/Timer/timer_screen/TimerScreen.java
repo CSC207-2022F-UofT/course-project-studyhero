@@ -1,14 +1,12 @@
-package Timer.TimerUI;
+package Timer.timer_screen;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import Timer.TimerControllers.*;
-import Timer.TimerPresenters.*;
-import Timer.TimerUseCases.TimerRequestModel;
-import Timer.TimerUseCases.TimerResponseModel;
+import Timer.timer_use_cases.TimerRequestModel;
+import Timer.timer_use_cases.TimerResponseModel;
 
 public class TimerScreen implements ActionListener {
     private JButton startTimerButton;

@@ -1,7 +1,7 @@
-package Timer.TimerPresenters;
+package Timer.timer_screen;
 
-import Timer.TimerOutputBoundaries.TimerOutputBoundary;
-import Timer.TimerUseCases.TimerResponseModel;
+import Timer.timer_use_cases.TimerOutputBoundary;
+import Timer.timer_use_cases.TimerResponseModel;
 
 public class TimerPresenter implements TimerOutputBoundary {
     final TimerResponseModel tResponseModel;

@@ -1,4 +1,4 @@
-package Timer.TimerUseCases;
+package Timer.timer_use_cases;
 
 public class TimerRequestModel {
     private String inputTime;

@@ -1,4 +1,4 @@
-package Timer.TimerUI;
+package Timer.timer_screen;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;

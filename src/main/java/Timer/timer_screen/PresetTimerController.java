@@ -1,10 +1,9 @@
-package Timer.TimerControllers;
+package Timer.timer_screen;
 
-import Timer.TimerUseCases.TimerInteractor;
-import Timer.TimerUseCases.TimerRequestModel;
-import Timer.TimerUseCases.TimerResponseModel;
+import Timer.timer_use_cases.TimerInteractor;
+import Timer.timer_use_cases.TimerRequestModel;
+import Timer.timer_use_cases.TimerResponseModel;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 
 public class PresetTimerController {

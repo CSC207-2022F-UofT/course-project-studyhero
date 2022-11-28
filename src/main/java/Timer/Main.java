@@ -1,9 +1,7 @@
 package Timer;
 
-import Timer.TimerEntities.TimerEntity;
-import Timer.TimerUseCases.TimerInteractor;
-import Timer.TimerUI.TimerScreen;
-import Timer.TimerUI.MainFrame;
+import Timer.timer_screen.TimerScreen;
+import Timer.timer_screen.MainFrame;
 
 public class Main {
     public static void main(String[] args) {

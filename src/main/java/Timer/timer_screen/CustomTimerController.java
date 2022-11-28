@@ -1,8 +1,8 @@
-package Timer.TimerControllers;
+package Timer.timer_screen;
 
-import Timer.TimerUseCases.TimerRequestModel;
-import Timer.TimerUseCases.TimerInteractor;
-import Timer.TimerUseCases.TimerResponseModel;
+import Timer.timer_use_cases.TimerRequestModel;
+import Timer.timer_use_cases.TimerInteractor;
+import Timer.timer_use_cases.TimerResponseModel;
 
 public class CustomTimerController {
     private TimerRequestModel tRequestModel;

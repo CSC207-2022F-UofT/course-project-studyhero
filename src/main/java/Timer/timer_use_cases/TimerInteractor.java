@@ -1,7 +1,6 @@
-package Timer.TimerUseCases;
+package Timer.timer_use_cases;
 
-import Timer.TimerInputBoundaries.TimerInputBoundary;
-import Timer.TimerEntities.TimerEntity;
+import Timer.timer_entity.TimerEntity;
 
 import java.util.Timer;
 import java.util.TimerTask;

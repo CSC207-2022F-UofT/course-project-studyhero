@@ -1,6 +1,6 @@
-package Timer.TimerPresenters;
+package Timer.timer_screen;
 
-import Timer.TimerOutputBoundaries.ProgressBarOutputBoundary;
+import Timer.timer_use_cases.ProgressBarOutputBoundary;
 
 public class ProgressBarPresenter implements ProgressBarOutputBoundary {
     @Override
