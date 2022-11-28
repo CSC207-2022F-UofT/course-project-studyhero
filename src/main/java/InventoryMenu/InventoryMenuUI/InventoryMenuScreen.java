@@ -1,7 +1,5 @@
 package InventoryMenu.InventoryMenuUI;
 
-import InventoryMenu.inventory_menu_use_case.display_player_inventory.PlayerDisplayInventoryController;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

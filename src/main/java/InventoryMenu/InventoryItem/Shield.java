@@ -1,6 +1,7 @@
 package InventoryMenu.InventoryItem;
 
 public class Shield extends InventoryItem implements Equipable {
+    private final static String type = "Shield";
 
 
     /**
@@ -9,7 +10,7 @@ public class Shield extends InventoryItem implements Equipable {
      * @param shieldDefence effect that will be added to player's defence
      */
     public Shield(String name, int shieldDefence) {
-        super(name, "Shield", shieldDefence);
+        super(type, name, shieldDefence);
     }
 
     /**

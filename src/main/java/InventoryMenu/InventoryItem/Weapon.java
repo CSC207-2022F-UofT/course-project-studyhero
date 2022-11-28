@@ -1,6 +1,7 @@
 package InventoryMenu.InventoryItem;
 
 public class Weapon extends InventoryItem implements Equipable {
+    private final static String type = "Weapon";
 
     /**
      * An InventoryItem that can be equipped and add effect to player's attack.
@@ -8,7 +9,7 @@ public class Weapon extends InventoryItem implements Equipable {
      * @param weaponAttack effect that will be added to player's attack
      */
     public Weapon(String name, int weaponAttack) {
-        super(name, "Weapon", weaponAttack);
+        super(type, name, weaponAttack);
     }
 
     /**

@@ -1,6 +1,4 @@
-package InventoryMenu.inventory_menu_use_case.add_item;
-
-import InventoryMenu.InventoryItem.InventoryItem;
+package InventoryMenu.InventoryItem;
 
 /**
 This interface obtain all the methods that will be implemented to add item to the inventory
@@ -17,4 +15,17 @@ public interface AddItemDsGateway {
       * @param requestModel an inventoryItem
       */
      void save(InventoryItem requestModel);
+
+     /**
+      * Create a new AddItemDsRequestModel with every attributes on InventoryItem and an inventory id.
+      * @return the new AddItemDsRequestModel created
+      */
+     InventoryItemDsRequestModel attachId(InventoryItem newItem);
+
+     /**
+      * Checks how many items are in the inventory
+      * @return number of item in the inventory
+      */
+     int CheckLatestInventoryItemId();
+
 }
