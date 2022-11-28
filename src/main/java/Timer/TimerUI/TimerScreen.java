@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 import Timer.TimerControllers.*;
 import Timer.TimerPresenters.*;
+import Timer.TimerUseCases.TimerRequestModel;
+import Timer.TimerUseCases.TimerResponseModel;
 
 public class TimerScreen implements ActionListener {
     private JButton startTimerButton;
@@ -17,6 +19,12 @@ public class TimerScreen implements ActionListener {
     private JButton customerTimerConfirmButton;
     private JTextField customTimerTextField;
     private JLabel timerText;
+
+    TimerRequestModel tRequestModel = new TimerRequestModel();
+    TimerResponseModel tResponseModel = new TimerResponseModel();
+    CustomTimerController ctController = new CustomTimerController(tRequestModel, tResponseModel);
+    PresetTimerController ptController = new PresetTimerController(tRequestModel, tResponseModel);
+    TimerPresenter tPresenter = new TimerPresenter(tResponseModel);
 
     public void timerScreen() {
         JFrame frame = new JFrame();
@@ -39,16 +47,6 @@ public class TimerScreen implements ActionListener {
 
         timerText = new JLabel("00:00:00");
 
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TimerPresenter tPresenter = new TimerPresenter();
-                timerText.setText(tPresenter.displayTimer());
-            }
-        });
-
-        timer.start();
-
         panel.add(startTimerButton);
         panel.add(endTimerButton);
         panel.add(presetShortButton);
@@ -68,29 +66,48 @@ public class TimerScreen implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startTimerButton) {
-            CustomTimerController cTController = new CustomTimerController();
-            cTController.startTimer();
+            if (tRequestModel.getInputTime().equals("-1")) {
+                ptController.startTimer();
+            }
+            else {
+                ctController.startTimer();
+            }
+            Timer timer = new Timer(500, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    timerText.setText(tPresenter.updateTimer());
+                }
+            });
+            timer.start();
         }
         if (e.getSource() == endTimerButton) {
-            int[] time = new int[]{0, 0, 0};
-            //TimerEntity.endTimer();
-            //TimerEntity.setTimer(time);
+            if (tRequestModel.getInputTime().equals("-1")) {
+                ptController.endTimer();
+            }
+            else {
+                ctController.endTimer();
+            }
+            timerText.setText("00:00:00");
         }
         if (e.getSource() == customerTimerConfirmButton) {
             String inputTime = customTimerTextField.getText();
-            CustomTimerController cTController = new CustomTimerController();
-            cTController.getCustomTime(inputTime);
+            ctController.getCustomTime(inputTime);
             timerText.setText(inputTime);
 
         }
         if (e.getSource() == presetShortButton) {
+            ptController.selectShortTime();
+            timerText.setText(ptController.getShortTime());
 
         }
         if (e.getSource() == presetMediumButton) {
+            ptController.selectMediumTime();
+            timerText.setText(ptController.getMediumTime());
 
         }
         if (e.getSource() == presetLongButton) {
-
+            ptController.selectLongTime();
+            timerText.setText(ptController.getLongTime());
         }
     }
 }

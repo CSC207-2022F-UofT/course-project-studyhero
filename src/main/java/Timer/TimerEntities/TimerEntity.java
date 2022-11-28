@@ -27,7 +27,7 @@ public class TimerEntity {
             int hours = TimerEntity.startingTime[0];
             @Override
             public void run() {
-                timeLeft = String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
+                updateTime(hours, minutes, seconds);
                 seconds--;
                 if (seconds < 0) {
                     minutes--;
@@ -58,5 +58,9 @@ public class TimerEntity {
      */
     public static void endTimer() {
         timer.cancel();
+    }
+
+    public static void updateTime(int hours, int minutes, int seconds) {
+        timeLeft = String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
     }
 }
