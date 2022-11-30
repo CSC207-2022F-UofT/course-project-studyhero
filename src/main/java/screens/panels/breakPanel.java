@@ -8,7 +8,6 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 
 import static screens.mainCard.*;
-import static screens.mainPanel.switchPanel;
 
 public class breakPanel {
     public static JPanel breakPanel(){

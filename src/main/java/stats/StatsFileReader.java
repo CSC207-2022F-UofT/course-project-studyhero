@@ -2,10 +2,8 @@ package stats;
 
 import java.io.File;
 
-public class StatsFileReader implements StatsDisplayDsGateway {
+public class StatsFileReader {//implements StatsDisplayDsGateway {
 
 
-    public StatsDisplayViewModel displayStats() {
-        return new StatsDisplayViewModel();
-    }
+    // public StatsDisplayViewModel displayStats() {return new StatsDisplayViewModel();}
 }
