@@ -1,4 +1,4 @@
-package Dialogue;
+package dialogue;
 
 public class DialoguePresenter {
 }
