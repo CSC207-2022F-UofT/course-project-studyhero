@@ -14,19 +14,6 @@ public class HelloWorld {
             System.out.println(convert(i));
         }
 
-        Weapon sword = new Weapon("Sword", 13);
-        Weapon sword1 = new Weapon("Sword", 13);
-        InventoryList file = new InventoryList("./PlayerInventory.csv");
-        PlayerDisplayInventoryDsRequestModel iterator = file.createIterator();
-        file.save(sword);
-        file.save(sword1);
-
-        while(iterator.hasNext()){
-            InventoryItemDsRequestModel item = iterator.getNext();
-            System.out.println("Id: " + item.getId() + ", Type: " + item.getType() +
-                    ", Name: " + item.getName() +
-                    ", Effect: " + item.getEffect());
-        }
     }
 
     public static String convert(int decide) {
