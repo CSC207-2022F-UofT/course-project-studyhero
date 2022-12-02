@@ -1,4 +1,4 @@
-package inventorymenu.inventory_menu_use_case.delete_item_use_case;
+package inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case;
 
 public class DeleteItemRequestModel {
     private final int id;

@@ -6,7 +6,7 @@ This interface obtain all the methods that will be implemented to add item to th
 public interface AddItemDsGateway {
      /**
       * Check if the inventory is full
-      * @return true if the inventory is full and false if the inventory is not fullg
+      * @return true if the inventory is full and false if the inventory is not full
       */
      boolean inventoryFull();
 

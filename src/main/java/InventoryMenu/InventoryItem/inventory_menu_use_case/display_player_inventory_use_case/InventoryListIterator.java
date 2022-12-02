@@ -1,4 +1,4 @@
-package inventorymenu.inventory_menu_use_case.display_player_inventory_use_case;
+package inventorymenu.inventoryitem.inventory_menu_use_case.display_player_inventory_use_case;
 
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 
