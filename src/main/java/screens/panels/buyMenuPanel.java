@@ -1,10 +1,10 @@
 package screens.panels;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.Dimension;
 
 import static UI.buttons.shop.BuyItemButtonUI.getBuyItemButton;
 
@@ -12,11 +12,12 @@ import static UI.buttons.shop.BuyItemButtonUI.getBuyItemButton;
 // get inventory list
 
 public class buyMenuPanel extends JFrame implements ListSelectionListener {
-    static JList b;
-    static JLabel l1;
+    static JList list;
+    static JLabel selectedItem;
+    static JLabel cost;
 
     public static JPanel buyMenuPanel() {
-        //initialise new panels
+        // Initialize new panels
         JPanel mainPanel = new JPanel(); // mainPanel
         JPanel buyPanel = new JPanel(); // Panel for buying items (shop & user panels)
         JPanel userPanel = new JPanel(); // User Inventory
@@ -27,21 +28,24 @@ public class buyMenuPanel extends JFrame implements ListSelectionListener {
 
         // TEMPORARY: ADD LIST
         buyMenuPanel s = new buyMenuPanel();
+
         String week[] = { "One", "Two", "Three", "Four" };
-        JList b = new JList(week);
-        JLabel test = new JLabel("This is a Test");
-        b.setSelectedIndex(0);
-        test.setText(b.getSelectedValue().toString());
-        b.addListSelectionListener(s);
+        list = new JList(week);
+
+        list.clearSelection();
+        list.addListSelectionListener(s);
+        list.setMaximumSize(new Dimension(400, 300));
+
+        selectedItem = new JLabel("Selected: ");
+        cost = new JLabel("Cost: ");
+
 
         // user and shop Layout
         BoxLayout userBox = new BoxLayout(userPanel, BoxLayout.Y_AXIS);
         userPanel.setLayout(userBox);
-        userPanel.setBorder(new EmptyBorder(new Insets(150,75,150,75))); // border
 
         BoxLayout shopBox = new BoxLayout(shopPanel, BoxLayout.Y_AXIS);
         shopPanel.setLayout(shopBox);
-        shopPanel.setBorder(new EmptyBorder(new Insets(150,75,150,75))); // border
 
         // buy Layout
         BoxLayout buyBox = new BoxLayout(buyPanel, BoxLayout.X_AXIS);
@@ -60,43 +64,42 @@ public class buyMenuPanel extends JFrame implements ListSelectionListener {
          */
         JButton buyItemButton = getBuyItemButton();
 
-        JLabel playerItems = new JLabel("Player's Inventory");
+        JLabel itemsOwned = new JLabel("Quantity Owned: " + "0");
         JLabel shopInv = new JLabel("Shop Inventory");
 
         /*
          * ADDING PANELS
          */
 
-        // botPanel
+        // topPanel
         mainPanel.add(title);
 
-        // topPanel
-        shopPanel.add(test);
-
         // userPanel
-        userPanel.add(buyItemButton, BorderLayout.CENTER);
-        userPanel.add(playerItems, BorderLayout.CENTER);
+        userPanel.add(itemsOwned);
+        userPanel.add(buyItemButton);
 
         // shopPanel
-        shopPanel.add(shopInv);
-        shopPanel.add(b);
-
+        shopPanel.add(shopInv, BorderLayout.EAST);
+        shopPanel.add(list);
+        shopPanel.add(selectedItem);
+        shopPanel.add(cost);
 
         // buyPanel (add user and shop)
-        buyPanel.add(shopPanel);
-        buyPanel.add(userPanel);
+        buyPanel.add(shopPanel, BorderLayout.WEST);
+        buyPanel.add(userPanel, BorderLayout.EAST);
+        buyPanel.setPreferredSize(new Dimension(300,300));
 
         // add all to mainPanel
         mainPanel.add(topPanel);
-        mainPanel.add(buyPanel, BorderLayout.CENTER);
-        mainPanel.add(botPanel, BorderLayout.CENTER);
-
-
+        mainPanel.add(buyPanel);
+        mainPanel.add(botPanel);
 
         return mainPanel;
     }
+
     public void valueChanged(ListSelectionEvent e) {
-        l1.setText(b.getSelectedValue().toString());
+        selectedItem.setText("Selected: " + list.getSelectedValue().toString());
+        cost.setText("Cost: " + list.getSelectedIndex());
     }
 }
 
