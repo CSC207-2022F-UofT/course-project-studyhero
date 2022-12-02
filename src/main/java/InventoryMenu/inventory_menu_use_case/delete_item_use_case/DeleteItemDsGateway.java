@@ -1,6 +1,4 @@
-package InventoryMenu.inventory_menu_use_case.delete_item_use_case;
-
-import InventoryMenu.InventoryItem.InventoryItem;
+package inventorymenu.inventory_menu_use_case.delete_item_use_case;
 
 
 /**
@@ -23,4 +21,11 @@ public interface DeleteItemDsGateway {
       * Reassign the ids for items in inventory
       */
      void reassign();
+
+     /**
+      * Get the name of the inventory item correspond to the id in the inventory
+      * @param id of the item wants to be removed from inventory
+      * @return the name of the item that wants to be removed from inventory
+      */
+     DeleteItemDsRequestModel getName(int id);
 }

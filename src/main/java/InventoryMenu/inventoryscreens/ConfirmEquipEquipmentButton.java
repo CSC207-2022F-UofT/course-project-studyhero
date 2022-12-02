@@ -1,4 +1,4 @@
-package InventoryMenu.InventoryMenuUI;
+package inventorymenu.inventoryscreens;
 
 public class ConfirmEquipEquipmentButton {
 }

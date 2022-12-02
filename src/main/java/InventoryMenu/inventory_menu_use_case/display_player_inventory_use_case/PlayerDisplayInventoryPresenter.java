@@ -1,6 +1,6 @@
-package InventoryMenu.inventory_menu_use_case.display_player_inventory_use_case;
+package inventorymenu.inventory_menu_use_case.display_player_inventory_use_case;
 
-import InventoryMenu.InventoryItem.InventoryItemDsRequestModel;
+import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 
 
 public class PlayerDisplayInventoryPresenter implements PlayerDisplayInventoryOutputBoundary{

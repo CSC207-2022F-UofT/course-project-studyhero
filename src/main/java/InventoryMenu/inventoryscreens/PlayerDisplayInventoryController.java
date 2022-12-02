@@ -1,7 +1,7 @@
-package InventoryMenu.InventoryMenuUI;
+package inventorymenu.inventoryscreens;
 
-import InventoryMenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInputBoundary;
-import InventoryMenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryResponseModel;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInputBoundary;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryResponseModel;
 
 /**
  * This class is incomplete

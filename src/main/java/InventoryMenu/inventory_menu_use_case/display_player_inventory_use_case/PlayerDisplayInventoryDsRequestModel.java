@@ -1,7 +1,6 @@
-package InventoryMenu.inventory_menu_use_case.display_player_inventory_use_case;
+package inventorymenu.inventory_menu_use_case.display_player_inventory_use_case;
 
-import InventoryMenu.InventoryItem.InventoryItemDsRequestModel;
-import InventoryMenu.InventoryItem.InventoryList;
+import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 
 import java.util.ArrayList;
 
@@ -12,16 +11,14 @@ public class PlayerDisplayInventoryDsRequestModel implements InventoryListIterat
     private int currentPosition = 0;
 
     /**
-     *
-     * @param file contains all the inventory information
      * @param inventoryList is a list containing inventoryList
      */
-    public PlayerDisplayInventoryDsRequestModel(InventoryList file, ArrayList<InventoryItemDsRequestModel> inventoryList) {
-        this.file = file;
+    public PlayerDisplayInventoryDsRequestModel(ArrayList<InventoryItemDsRequestModel> inventoryList) {
+
         this.inventoryList = inventoryList;
     }
 
-    InventoryList file;
+
     private ArrayList<InventoryItemDsRequestModel> inventoryList;
 
     /**

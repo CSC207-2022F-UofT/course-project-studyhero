@@ -1,7 +1,7 @@
 package newGame;
 
-import InventoryMenu.InventoryItem.InventoryList;
 import entities.StatsUser;
+import inventorymenu.inventoryitem.InventoryList;
 
 public class newGameInteractor {
     public static void createNewGame(){

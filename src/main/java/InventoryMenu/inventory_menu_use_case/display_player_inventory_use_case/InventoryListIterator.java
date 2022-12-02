@@ -1,6 +1,6 @@
-package InventoryMenu.inventory_menu_use_case.display_player_inventory_use_case;
+package inventorymenu.inventory_menu_use_case.display_player_inventory_use_case;
 
-import InventoryMenu.InventoryItem.InventoryItemDsRequestModel;
+import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 
 /**
  * This interface contains method that need to implemented for an iterator class
@@ -9,9 +9,10 @@ import InventoryMenu.InventoryItem.InventoryItemDsRequestModel;
 public interface InventoryListIterator {
     /**
      * Get next item in InventoryList
-     * @return an InventoryItem
+     * @return an InventoryItem on current position of the inventory list
      */
     InventoryItemDsRequestModel getNext();
+
 
     /**
      * Check if the iterator has reached the end of the InventoryList
