@@ -1,7 +1,8 @@
-package InventoryMenu.InventoryItem;
-import InventoryMenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsGateway;
-import InventoryMenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
-import InventoryMenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+package inventorymenu.inventoryitem;
+import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemDsGateway;
+import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
+import inventorymenu.inventoryitem.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
+import inventorymenu.inventoryitem.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -155,7 +156,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public PlayerDisplayInventoryDsRequestModel createIterator() {
-        return new PlayerDisplayInventoryDsRequestModel(this, inventoryList);
+        return new PlayerDisplayInventoryDsRequestModel(inventoryList);
     }
 
     /**
@@ -173,10 +174,9 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public void deleteItem(int id) {
-        if(itemExist(id)){
             inventoryList.remove(id);
             reassign();
-        }
+            save();
     }
 
     /**
@@ -189,5 +189,11 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
            item.setId(newId);
            newId++;
        }
+    }
+
+    @Override
+    public DeleteItemDsRequestModel getName(int id) {
+        DeleteItemDsRequestModel name = new DeleteItemDsRequestModel(inventoryList.get(id + 1).getName());
+        return name;
     }
 }

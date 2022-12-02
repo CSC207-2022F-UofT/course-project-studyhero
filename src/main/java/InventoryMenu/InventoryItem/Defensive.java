@@ -1,8 +1,8 @@
-package InventoryMenu.InventoryItem;
+package inventorymenu.inventoryitem;
 
 public interface Defensive {
     /**
      * Add defenceBonus to player's defence
      */
-    void enhanceDefence(int defenceBonus);
+    void restoreHealth(int defenceBonus);
 }

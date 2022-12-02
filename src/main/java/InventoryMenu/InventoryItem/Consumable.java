@@ -1,4 +1,4 @@
-package InventoryMenu.InventoryItem;
+package inventorymenu.inventoryitem;
 
 /**
  *  This interface contains method for the InventoryItem to implement that will consume the Consumable and add bonus to

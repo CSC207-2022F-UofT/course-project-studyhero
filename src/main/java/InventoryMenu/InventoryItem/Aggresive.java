@@ -1,4 +1,4 @@
-package InventoryMenu.InventoryItem;
+package inventorymenu.inventoryitem;
 
 /**
  *  This interface contains method for the InventoryItem to implement that will increase Player's Attack

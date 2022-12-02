@@ -2,7 +2,7 @@ package tutorial;
 
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 import inventorymenu.inventoryitem.InventoryList;
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+import inventorymenu.inventoryitem.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import inventorymenu.inventoryitem.Weapon;
 
 import java.io.IOException;

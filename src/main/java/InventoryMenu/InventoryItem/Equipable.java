@@ -1,4 +1,4 @@
-package InventoryMenu.InventoryItem;
+package inventorymenu.inventoryitem;
 
 public interface Equipable {
     /**

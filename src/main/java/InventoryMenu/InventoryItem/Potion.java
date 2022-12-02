@@ -1,4 +1,4 @@
-package InventoryMenu.InventoryItem;
+package inventorymenu.inventoryitem;
 
 public class Potion extends InventoryItem implements Consumable{
     /**
@@ -7,8 +7,8 @@ public class Potion extends InventoryItem implements Consumable{
      * @param type type of the Potion
      * @param effect effect of the Potion when consumed
      */
-    public Potion(String name, String type, int effect) {
-        super(name, type, effect);
+    public Potion(String type, String name, int effect) {
+        super(type, name, effect);
     }
 
     /**

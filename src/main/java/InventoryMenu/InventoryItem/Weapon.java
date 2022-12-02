@@ -1,4 +1,4 @@
-package InventoryMenu.InventoryItem;
+package inventorymenu.inventoryitem;
 
 public class Weapon extends InventoryItem implements Equipable {
     private final static String type = "Weapon";
