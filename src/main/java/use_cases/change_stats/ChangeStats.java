@@ -19,7 +19,7 @@ public class ChangeStats {
         ValidStats stats = new ValidStats("stats.csv", presenter);
         Map<String, Integer> statsMap = stats.load();
         StatsUser intermediateUser = new StatsUser(statsMap);
-        System.out.println(intermediateUser.updateLevel());
+        intermediateUser.updateLevel();
         StatSave saver = new StatSave(intermediateUser.getUserStats(), presenter);
         saver.save();
     }

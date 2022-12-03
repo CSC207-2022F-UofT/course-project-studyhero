@@ -5,7 +5,6 @@ import use_cases.errors.ErrorPresenter;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class StatSave implements SaveGameOutputBoundary{
@@ -23,21 +22,20 @@ public class StatSave implements SaveGameOutputBoundary{
             File statsFile = new File("stats.csv");
             PrintWriter out = new PrintWriter(statsFile);
 
-            ArrayList<String> key = new ArrayList<>(stats.keySet());
+//            ArrayList<String> key = new ArrayList<>(stats.keySet());
 
-            String att0 = key.get(0), att1 = key.get(1),
-                    att2 = key.get(2), att3 = key.get(3),
-                    att4 = key.get(4);
-
-            out.printf("%s, %s, %s, %s, %s \n", att0, att1, att2, att3, att4);
-            out.printf("%d, %d, %d, %d, %d \n",
-                    stats.get(att0), stats.get(att1), stats.get(att2),
-                    stats.get(att3), stats.get(att4));
+            StringBuilder keyString = new StringBuilder();
+            StringBuilder attString = new StringBuilder();
+            for (String att: stats.keySet()){
+                keyString.append(", ").append(att);
+                attString.append(", ").append(stats.get(att));
+            }
+            out.println(keyString.substring(2));
+            out.println(attString.substring(2));
 
             out.close();
 
-            System.out.println(stats);
-            System.out.println("Saved.");
+            System.out.println("Saved. Stats: " + stats);
 
         } catch (IOException e){
             presenter.error(e.toString());

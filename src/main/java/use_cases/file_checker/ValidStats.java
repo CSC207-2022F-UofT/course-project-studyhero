@@ -1,5 +1,6 @@
 package use_cases.file_checker;
 
+import entities.StatsUser;
 import use_cases.errors.ErrorPresenter;
 
 import java.io.*;
@@ -84,7 +85,10 @@ public class ValidStats implements ValidFileDsGateway{
                 }
             }
             //checking that there is a stat value for every stat
-            if (attributes.length != stats.length && attributes.length != 5) {
+
+            if (attributes.length != stats.length ||
+                    attributes.length != new StatsUser().getUserStats().size() ||
+                    stats.length != new StatsUser().getUserStats().size()) {
                 presenter.error("Invalid " + filename + " file.");
                 return false;
             } else {return true;}
