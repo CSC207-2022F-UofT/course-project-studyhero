@@ -30,7 +30,7 @@ public class ContinueGameController implements ActionListener {
         if (statsChecker.isValid() && inventoryChecker.isValid()){
             System.out.println("Game exists. Continuing to next game...");
             System.out.println("Current stats: " + statsChecker.load());
-            card.show(parent, "Next");
+            card.show(parent, "Timer");
         }
     }
 }

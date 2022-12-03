@@ -1,16 +1,11 @@
 package UI.screens.panels;
 
-import entities.StatsUser;
 import use_cases.errors.ErrorPresenter;
-import use_cases.save_game.StatSave;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Map;
 
-public class NextScreen extends JPanel implements ActionListener {
+public class NextScreen extends JPanel{
 
     CardLayout card;
     JPanel parentPanel;
@@ -26,13 +21,14 @@ public class NextScreen extends JPanel implements ActionListener {
         JButton backButton = new JButton("Go Back");
         backButton.addActionListener(e -> card.show(parentPanel, "New"));
 
+        JButton settings = new JButton("Settings");
+        settings.addActionListener(e -> card.show(parentPanel, "Settings"));
+
         JButton changeStatsButton = new JButton("Change Stats");
         changeStatsButton.addActionListener(e-> card.show(parentPanel, "Change Stats"));
         this.add(backButton);
         this.add(changeStatsButton);
+        this.add(settings);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
 }

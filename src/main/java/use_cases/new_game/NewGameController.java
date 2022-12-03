@@ -20,6 +20,6 @@ public class NewGameController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         new NewGame("stats.csv");
         new InventoryList("Inventory");
-        card.show(parentPanel, "Next");
+        card.show(parentPanel, "Story");
     }
 }
