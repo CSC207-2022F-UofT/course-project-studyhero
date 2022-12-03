@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static loadGame.checkGameExistsInteractor.checkFile;
+import static use_cases.update_stats.checkGameExistsInteractor.checkFile;
 
 public class loadGameInteractor {
     public static void loadGame(){
