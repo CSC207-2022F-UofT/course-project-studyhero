@@ -7,12 +7,9 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static use_cases.update_stats.checkGameExistsInteractor.checkFile;
-
 public class loadGameInteractor {
     public static void loadGame(){
         File file = new File("stats.csv");
-        System.out.println(checkFile(file));
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
