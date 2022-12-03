@@ -106,6 +106,7 @@ public class mainPanel implements ActionListener {
         frame.setTitle("demo");
         frame.pack();
         frame.setVisible(true);
+        frame.setSize(800, 500);
     }
 
     public static void main(String[] args){
