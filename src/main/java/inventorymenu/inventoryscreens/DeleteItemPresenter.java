@@ -1,8 +1,7 @@
 package inventorymenu.inventoryscreens;
 
-import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemOutputBoundary;
-import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemResponseModel;
-import inventorymenu.inventoryscreens.DeleteItemFailed;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemOutputBoundary;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemResponseModel;
 
 public class DeleteItemPresenter implements DeleteItemOutputBoundary {
 

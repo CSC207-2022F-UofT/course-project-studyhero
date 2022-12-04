@@ -1,4 +1,4 @@
-package inventorymenu.inventoryitem.inventory_menu_use_case;
+package inventorymenu.inventory_menu_use_case;
 
 /**
  * This method is incomplete

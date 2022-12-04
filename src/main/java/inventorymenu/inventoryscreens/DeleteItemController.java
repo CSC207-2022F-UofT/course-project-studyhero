@@ -1,8 +1,8 @@
 package inventorymenu.inventoryscreens;
 
-import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemInputBoundary;
-import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemRequestModel;
-import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemResponseModel;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemInputBoundary;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemRequestModel;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemResponseModel;
 
 public class DeleteItemController {
     final DeleteItemInputBoundary userInput;

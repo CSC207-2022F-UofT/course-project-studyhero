@@ -1,7 +1,6 @@
 package inventorymenu.inventory_menu_use_case.display_player_inventory_use_case;
 
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
-import inventorymenu.inventoryitem.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
