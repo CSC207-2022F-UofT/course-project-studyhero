@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class ValidStats implements ValidFileDsGateway{
     String filename;
@@ -63,6 +64,7 @@ public class ValidStats implements ValidFileDsGateway{
          * other - any other error
          */
         File statsFile = new File(filename);
+
         // checking the file exists
         if (!fileExists()){
             return "exist";
@@ -70,8 +72,9 @@ public class ValidStats implements ValidFileDsGateway{
         try {
             BufferedReader br = new BufferedReader(new FileReader(statsFile));
             Path path = Paths.get(filename);
-            long numLines = Files.lines(path).count();
 
+            Stream<String> lines = Files.lines(path);
+            long numLines = lines.count();
             if (numLines != 2){return "invalid";}
 
             String[] attributes;
@@ -111,18 +114,16 @@ public class ValidStats implements ValidFileDsGateway{
     // returns a boolean for if the stats file exists and is valid
     public boolean isValid() {
         String result = checkError();
+        if (result == null){return true;}
         switch(result){
             case "exist":
                 presenter.error("There is no existing " + filename + " file.");
-                break;
+                return false;
             case "invalid":
                 presenter.error("Invalid " + filename + " file.");
-                break;
+                return false;
             case "other":
                 presenter.error("Error: please start a new game.");
-            case "null":
-                return true;
-
         }
         return false;
 

@@ -22,8 +22,6 @@ public class StatSave implements SaveGameOutputBoundary{
             File statsFile = new File("stats.csv");
             PrintWriter out = new PrintWriter(statsFile);
 
-//            ArrayList<String> key = new ArrayList<>(stats.keySet());
-
             StringBuilder keyString = new StringBuilder();
             StringBuilder attString = new StringBuilder();
             for (String att: stats.keySet()){

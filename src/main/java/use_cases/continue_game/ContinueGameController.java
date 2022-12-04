@@ -27,6 +27,8 @@ public class ContinueGameController implements ActionListener {
         ValidStats statsChecker = new ValidStats("stats.csv", presenter);
         ValidInventory inventoryChecker = new ValidInventory("Inventory", presenter);
 
+        System.out.println(statsChecker.isValid());
+
         if (statsChecker.isValid() && inventoryChecker.isValid()){
             System.out.println("Game exists. Continuing to next game...");
             System.out.println("Current stats: " + statsChecker.load());
