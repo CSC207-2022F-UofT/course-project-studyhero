@@ -8,5 +8,7 @@ public interface PlayerDisplayInventoryDsGateway {
      * create the inventoryList iterator
      * @return An iterator on InventoryList
      */
-    PlayerDisplayInventoryDsRequestModel createIterator();
+    PlayerDisplayInventoryDsRequestModel getInventoryListIterator();
+
+    void updateInventoryList();
 }

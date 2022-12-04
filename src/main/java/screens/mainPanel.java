@@ -1,5 +1,7 @@
 package screens;
 
+import inventorymenu.inventoryitem.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInputBoundary;
+import inventorymenu.inventoryscreens.PlayerDisplayInventoryController;
 import screens.panels.*;
 
 import javax.swing.*;
@@ -29,6 +31,7 @@ public class mainPanel implements ActionListener {
         JPanel buyMenuP = buyMenuPanel.buyMenuPanel();
         JPanel sellMenuP = sellMenuPanel.sellMenuPanel();
         JPanel bossP = bossPanel.bossPanel();
+
 
         // all navigating buttons
         JButton menuToStart = new JButton("Start");

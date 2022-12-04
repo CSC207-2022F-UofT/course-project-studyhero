@@ -15,11 +15,11 @@ public class DeleteItemInteractor implements DeleteItemInputBoundary{
         if(!dsGateway.itemExist(requestModel.getId())){
             return outputBoundary.prepareFailView("Item does not exist on the slot");
         }
-        dsGateway.deleteItem(requestModel.getId());
-        DeleteItemDsRequestModel name = dsGateway.getName(requestModel.getId());
+
+        DeleteItemDsRequestModel name = dsGateway.getName(requestModel.getId() - 1);
         DeleteItemResponseModel deleteItemResponseModel = new DeleteItemResponseModel(name.getName(),
                 requestModel.getId());
-
+        dsGateway.deleteItem(requestModel.getId());
         return outputBoundary.prepareSuccessView(deleteItemResponseModel);
     }
 }

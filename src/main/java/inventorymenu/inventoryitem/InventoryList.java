@@ -13,11 +13,11 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway{
+public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway{
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-    private final ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+    private ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
 
     /**
      * It read a file that stores the inventory information
@@ -55,10 +55,6 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
                     throw new RuntimeException(e);
                 }
                 String[] col = row.split(",");
-                for(String s : col){
-                    System.out.println(s);
-                }
-
                 int itemId = Integer.parseInt(col[headers.get("item_id")]);
                 String itemType = String.valueOf(col[headers.get("item_type")]);
                 String itemName = String.valueOf(col[headers.get("item_name")]);
@@ -155,8 +151,52 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      * @return an iterator object for this file object
      */
     @Override
-    public PlayerDisplayInventoryDsRequestModel createIterator() {
+    public PlayerDisplayInventoryDsRequestModel getInventoryListIterator() {
+        updateInventoryList();
+        System.out.println("Iterator list length " + inventoryList.size());
         return new PlayerDisplayInventoryDsRequestModel(inventoryList);
+    }
+
+    @Override
+    public void updateInventoryList() {
+        inventoryList.clear();
+        if(csvFile.length() == 0){
+            save();
+        }else{
+
+            BufferedReader reader;
+            try {
+                reader = new BufferedReader(new FileReader(csvFile));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                reader.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            String row;
+            while (true) {
+                try {
+                    if (((row = reader.readLine()) == null)) break;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String[] col = row.split(",");
+                int itemId = Integer.parseInt(col[headers.get("item_id")]);
+                String itemType = String.valueOf(col[headers.get("item_type")]);
+                String itemName = String.valueOf(col[headers.get("item_name")]);
+                int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
+                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId, itemType, itemName,itemEffect);
+                inventoryList.add(item);
+            }
+            try {
+                reader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**
@@ -165,6 +205,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public boolean itemExist(int id) {
+        System.out.println(inventoryList.size());
         return id <= inventoryList.size();
     }
 
@@ -174,9 +215,10 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public void deleteItem(int id) {
-            inventoryList.remove(id);
+            inventoryList.remove(id - 1);
             reassign();
             save();
+        System.out.println("Delete Item inventory length " + inventoryList.size());
     }
 
     /**
@@ -191,9 +233,57 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
        }
     }
 
+    /**
+     * get the item's name associated with inventory id
+     * @param id of the item wants to be removed from inventory
+     * @return the name of the item that wants to be removed from inventory
+     */
     @Override
     public DeleteItemDsRequestModel getName(int id) {
-        DeleteItemDsRequestModel name = new DeleteItemDsRequestModel(inventoryList.get(id + 1).getName());
-        return name;
+        return new DeleteItemDsRequestModel(inventoryList.get(id).getName());
+
+    }
+
+    /**
+     * Clear the inventory file
+     */
+    @Override
+    public void clearInventory() {
+        BufferedWriter writer;
+        try{
+            writer = new BufferedWriter(new FileWriter(csvFile));
+            writer.close();
+            inventoryList.clear();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Initialize player's inventory file
+     */
+    @Override
+    public void initialize() {
+        clearInventory();
+        InventoryItem item1 = new InventoryItem(
+                "Weapon",
+                "Sword",
+                13);
+        InventoryItem item2 = new InventoryItem(
+                "AttackPotion",
+                "StrengthPotion",
+                5);
+        InventoryItem item3 = new InventoryItem(
+                "Weapon",
+                "HammerHammer",
+                18);
+        InventoryItem item4 = new InventoryItem(
+                "Shield",
+                "BronzeShield",
+                15);
+        save(item1);
+        save(item2);
+        save(item3);
+        save(item4);
     }
 }

@@ -23,7 +23,7 @@ public class PlayerDisplayInventoryInteractor implements PlayerDisplayInventoryI
      */
     @Override
     public PlayerDisplayInventoryResponseModel display() {
-        PlayerDisplayInventoryDsRequestModel iterator = inventoryDsGateway.createIterator();
-        return outputBoundary.prepareInventoryView(iterator);
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryDsGateway.getInventoryListIterator();
+            return outputBoundary.prepareInventoryView(iterator);
     }
 }

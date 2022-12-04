@@ -8,13 +8,42 @@ public class PlayerDisplayInventoryResponseModel {
 
 
     private final ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+    private final ArrayList<String> response = new ArrayList<>();
 
-    public ArrayList<InventoryItemDsRequestModel> getInventoryList() {
-        return inventoryList;
-    }
-
+    /**
+     * Add item to the inventory list
+     * @param item is the item that needs to be added to inventory list
+     */
     public void addItem(InventoryItemDsRequestModel item){
         inventoryList.add(item);
+    }
+
+    /**
+     * Reset the Item in inventoryList
+     */
+    public void clearItem(){
+        inventoryList.clear();
+    }
+
+    public void clearResponse(){
+        response.clear();
+    }
+
+
+    /**
+     * Transform the inventory data into response model
+     * @return the response model
+     */
+    public ArrayList<String> showItem(){
+        clearResponse();
+        for(InventoryItemDsRequestModel item : inventoryList){
+            response.add("Id: " + item.getId() +
+                    "Type: " + item.getType() +
+                    "Name: " + item.getName() +
+                    "Effect: " + item.getEffect());
+
+        }
+        return response;
     }
 
 }

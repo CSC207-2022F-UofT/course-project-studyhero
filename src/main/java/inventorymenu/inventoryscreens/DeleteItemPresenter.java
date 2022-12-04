@@ -1,8 +1,10 @@
-package inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case;
+package inventorymenu.inventoryscreens;
 
+import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemOutputBoundary;
+import inventorymenu.inventoryitem.inventory_menu_use_case.delete_item_use_case.DeleteItemResponseModel;
 import inventorymenu.inventoryscreens.DeleteItemFailed;
 
-public class DeleteItemPresenter implements DeleteItemOutputBoundary{
+public class DeleteItemPresenter implements DeleteItemOutputBoundary {
 
     @Override
     public DeleteItemResponseModel prepareSuccessView(DeleteItemResponseModel responseModel) {
