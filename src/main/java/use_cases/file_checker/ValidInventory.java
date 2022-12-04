@@ -14,6 +14,7 @@ public class ValidInventory implements ValidFileDsGateway{
         this.file = new File(filename);
         this.presenter = presenter;
     }
+
     @Override
     public boolean fileExists() {
         return (file.exists() && !file.isDirectory());    }

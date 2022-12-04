@@ -12,7 +12,9 @@ public class StartScreen extends JPanel{
     CardLayout card;
     JPanel parentPanel;
     ErrorPresenter cGRM;
+
     public StartScreen(CardLayout card, JPanel parent, ErrorPresenter cGRM){
+
         this.card = card;
         this.parentPanel = parent;
         this.cGRM = cGRM;
@@ -41,5 +43,9 @@ public class StartScreen extends JPanel{
         this.add(goToSettingsButton);
         this.add(quitGameButton);
 
+        this.setSize(800,500);
+        BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        this.setLayout(gridBagLayout);
     }
 }
