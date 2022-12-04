@@ -8,4 +8,5 @@ public interface Boss {
     int getCurrentHp();
     int getDamage();
     int getDefence();
+    int updateCurrentHp();
 }

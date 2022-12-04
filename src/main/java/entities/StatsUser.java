@@ -10,25 +10,34 @@ public class StatsUser implements Stats {
 
     int level;
     int gold;
-    int hp;
-    int damage;
+    int currHp;
+    int baselineDamage;
+    int tempDamage;
     int defence;
-    static final int MAX=100;
+    int maxHp;
 
     public StatsUser() {
         this.level = 1;
         this.gold = 0;
-        this.hp = 0;
-        this.damage = 0;
+        this.currHp = 0;
+        this.baselineDamage = 5;
+        this.tempDamage = 5;
         this.defence = 0;
+        this.maxHp = 100;
     }
 
     public StatsUser(Map<String, Integer> statsMap) {
         this.level = statsMap.get("level");
         this.gold = statsMap.get("gold");
-        this.hp = statsMap.get("hp");
-        this.damage = statsMap.get("damage");
+        this.currHp = statsMap.get("hp");
+        this.baselineDamage = statsMap.get("damage");
+        this.tempDamage = statsMap.get("damage");
         this.defence = statsMap.get("defence");
+        this.maxHp = calculateMaxHpFromLevel(this.level);
+    }
+
+    private int calculateMaxHpFromLevel(int level) {
+        return 95 + 5*level;
     }
 
     public Map<String, Integer> getUserStats() {
@@ -36,40 +45,57 @@ public class StatsUser implements Stats {
     }
 
     private Map<String, Integer> getStatsMapHelper() {
-        Map<String, Integer> statsMap = new HashMap<String, Integer>();
+        Map<String, Integer> statsMap = new HashMap<>();
         statsMap.put("level", this.level);
         statsMap.put("gold", this.gold);
-        statsMap.put("hp", this.hp);
-        statsMap.put("damage", this.damage);
+        statsMap.put("hp", this.currHp);
+        statsMap.put("damage", this.baselineDamage);
         statsMap.put("defence", this.defence);
         return statsMap;
+    }
+    public int getTempDamage() {
+        return this.tempDamage;
     }
 
     public int updateLevel() {
         this.level += 1;
+        this.maxHp = calculateMaxHpFromLevel(this.level);
+        this.baselineDamage = calculateBaselineDamageFromLevel(this.level);
         return this.level;
     }
 
-    public int changeGold(int by) {
-        this.gold += changerValidator(this.gold, by);;
+    private int calculateBaselineDamageFromLevel(int level) {
+        return -3 + 8*level;
+    }
+
+    public int updateGold(int by) {
+        this.gold += changerValidator(this.gold, by);
         return this.gold;
     }
 
-    public int changeHP(int by) {
-        if((this.hp+by)>StatsUser.MAX) {
-            this.hp = StatsUser.MAX;
+    public int updateCurrHp(int by) {
+        if((this.currHp +by)>this.maxHp) {
+            this.currHp = this.maxHp;
         } else {
-            this.hp = changerValidator(this.hp, by);
-        } return this.hp;
+            this.currHp = changerValidator(this.currHp, by);
+        } return this.currHp;
     }
 
-    public int changeDamage(int by) {
-        this.damage += changerValidator(this.damage, by);
-        return this.damage;
+    public int updateBaselineDamage(int by) {
+        this.baselineDamage += changerValidator(this.baselineDamage, by);
+        return this.baselineDamage;
+    }
+    public int updateTempDamage(int by) {
+        this.tempDamage += changerValidator(this.tempDamage, by);
+        return this.tempDamage;
+    }
+    public int resetTempDamage() {
+        this.tempDamage = this.baselineDamage;
+        return this.tempDamage;
     }
 
-    public int changeDefence(int by) {
-        this.defence += changerValidator(this.defence, by);;
+    public int updateDefence(int by) {
+        this.defence += changerValidator(this.defence, by);
         return this.defence;
     }
 
