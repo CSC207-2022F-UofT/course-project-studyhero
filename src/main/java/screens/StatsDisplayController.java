@@ -3,19 +3,21 @@ package screens;
 import stats_display_use_case.StatsDisplayInputBoundary;
 import stats_display_use_case.StatsDisplayOutputBoundary;
 
+import java.util.Map;
+
 /** Controller class for displaying stats (Interface adaptors layer)
  *
  */
 public class StatsDisplayController {
-    StatsDisplayInputBoundary statsDisplayInteractor;
-    StatsDisplayOutputBoundary statsDisplayPresenter;
-    StatsDisplayViewModel statsDisplayViewModel;
+    final StatsDisplayInputBoundary statsDisplayInteractor;
+    final StatsDisplayOutputBoundary statsDisplayPresenter;
+    final StatsDisplayViewModel statsDisplayViewModel;
     public StatsDisplayController(StatsDisplayInputBoundary statsDisplayInteractor,
-                                  StatsDisplayOutputBoundary statsDisplayPresenter,
-                                  StatsDisplayViewModel statsDisplayViewModel) {
+                                  StatsDisplayOutputBoundary statsDisplayPresenter) {
         this.statsDisplayInteractor = statsDisplayInteractor;
         this.statsDisplayPresenter = statsDisplayPresenter;
-        this.statsDisplayViewModel = this.statsDisplayPresenter.displayStats(this.statsDisplayInteractor.display());
+        Map<String, Integer> statsMap = this.statsDisplayInteractor.display();
+        this.statsDisplayViewModel = this.statsDisplayPresenter.displayStats(statsMap);
     }
     public StatsDisplayViewModel displayStats() {
         return this.statsDisplayViewModel;
