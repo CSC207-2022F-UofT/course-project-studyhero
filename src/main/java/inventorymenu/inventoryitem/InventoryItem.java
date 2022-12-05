@@ -4,17 +4,21 @@ public class InventoryItem {
     private final String name;
     private final String type;
     private final int effect;
+    private final int goldValue;
 
     /**
      * Constructor for InventoryItem
-     * @param name name of the inventoryItem
-     * @param type type of the inventoryItem
-     * @param effect effect of the inventoryItem that will be added on player in some way
+     *
+     * @param type      of the inventoryItem
+     * @param name      of the inventoryItem
+     * @param effect    of the inventoryItem that will be added on player in some way
+     * @param goldValue of the inventoryItem
      */
-    public InventoryItem(String type, String name, int effect) {
+    public InventoryItem(String type, String name, int effect, int goldValue) {
         this.name = name;
         this.type = type;
         this.effect = effect;
+        this.goldValue = goldValue;
     }
 
     /**
@@ -39,5 +43,13 @@ public class InventoryItem {
      */
     public int getEffect() {
         return effect;
+    }
+
+    /**
+     * Get inventoryItem's gold value
+     * @return the gold value of the inventoryItem
+     */
+    public int getGoldValue(){
+        return goldValue;
     }
 }

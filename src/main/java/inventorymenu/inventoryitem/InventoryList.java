@@ -3,6 +3,10 @@ import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsGa
 import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+import use_cases.errors.ErrorOutputBoundary;
+import use_cases.errors.ErrorPresenter;
+import use_cases.file_checker.ValidFileDsGateway;
+import use_cases.file_checker.ValidInventory;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,32 +17,26 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class InventoryListFile implements AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway{
+public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway{
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-
-    /**
-     * Get inventoryList from the corresponding file object
-     * @return the inventory list
-     */
-    public ArrayList<InventoryItemDsRequestModel> getInventoryList() {
-        return inventoryList;
-    }
-
     private ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+
+
 
     /**
      * It read a file that stores the inventory information
      * @param csvPath file's path for storing the inventory information
      */
-    public InventoryListFile(String csvPath){
+    public InventoryList(String csvPath){
         csvFile = new File(csvPath);
 
         headers.put("item_id", 0);
         headers.put("item_type", 1);
         headers.put("item_name", 2);
         headers.put("item_effect", 3);
+        headers.put("item_gold_value", 4);
 
         readInventoryList();
     }
@@ -47,10 +45,10 @@ public class InventoryListFile implements AddItemDsGateway, PlayerDisplayInvento
      * Read the inventory File and record the information to inventory list
      */
     public void readInventoryList(){
-        if(csvFile.length() == 0){
-            save();
-        }else{
+        ErrorOutputBoundary error = new ErrorPresenter();
+        ValidFileDsGateway validFile = new ValidInventory(csvFile.getName(), error);
 
+        if(validFile.fileExists() && validFile.isValid() && validFile.isPlayable()){
             BufferedReader reader;
             try {
                 reader = new BufferedReader(new FileReader(csvFile));
@@ -75,7 +73,9 @@ public class InventoryListFile implements AddItemDsGateway, PlayerDisplayInvento
                 String itemType = String.valueOf(col[headers.get("item_type")]);
                 String itemName = String.valueOf(col[headers.get("item_name")]);
                 int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
-                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId, itemType, itemName,itemEffect);
+                int itemGoldValue = Integer.parseInt(col[headers.get("item_gold_value")]);
+                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId,
+                        itemType, itemName,itemEffect, itemGoldValue);
                 inventoryList.add(item);
             }
             try {
@@ -110,7 +110,8 @@ public class InventoryListFile implements AddItemDsGateway, PlayerDisplayInvento
         return new InventoryItemDsRequestModel(id,
                 item.getType(),
                 item.getName(),
-                item.getEffect());
+                item.getEffect(),
+                item.getGoldValue());
     }
 
 
@@ -136,11 +137,12 @@ public class InventoryListFile implements AddItemDsGateway, PlayerDisplayInvento
             writer.newLine();
 
             for(InventoryItemDsRequestModel item : inventoryList){
-                String line = String.format("%s,%s,%s,%s",
+                String line = String.format("%s,%s,%s,%s,%s",
                         item.getId(),
                         item.getType(),
                         item.getName(),
-                        item.getEffect());
+                        item.getEffect(),
+                        item.getGoldValue());
                 writer.write(line);
                 writer.newLine();
             }
@@ -242,19 +244,19 @@ public class InventoryListFile implements AddItemDsGateway, PlayerDisplayInvento
         InventoryItem item1 = new InventoryItem(
                 "Weapon",
                 "Sword",
-                13);
+                13, 10);
         InventoryItem item2 = new InventoryItem(
                 "AttackPotion",
                 "StrengthPotion",
-                5);
+                5, 23);
         InventoryItem item3 = new InventoryItem(
                 "Weapon",
                 "HammerHammer",
-                18);
+                18, 43);
         InventoryItem item4 = new InventoryItem(
                 "Shield",
                 "BronzeShield",
-                15);
+                15, 20);
         save(item1);
         save(item2);
         save(item3);

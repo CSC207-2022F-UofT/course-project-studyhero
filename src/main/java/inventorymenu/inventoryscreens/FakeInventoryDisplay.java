@@ -4,10 +4,6 @@ import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.P
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class FakeInventoryDisplay implements PlayerDisplayInventoryDsGateway {

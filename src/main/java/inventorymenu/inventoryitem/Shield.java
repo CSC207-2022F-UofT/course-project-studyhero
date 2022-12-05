@@ -5,16 +5,17 @@ public class Shield extends InventoryItem implements Equipable {
 
 
     /**
-     * An InventoryItem that can be equipped and add effect to player's defence.
+     * An InventoryItem that can be equipped and add effect to unit's defence.
      * @param name of the shield
-     * @param shieldDefence that will be added to player's defence
+     * @param shieldDefence that will be added to unit's defence
+     * @param goldValue of the shield
      */
-    public Shield(String name, int shieldDefence) {
-        super(type, name, shieldDefence);
+    public Shield(String name, int shieldDefence, int goldValue) {
+        super(type, name, shieldDefence, goldValue);
     }
 
     /**
-     * Increase player's stat by weapon's effect.(Incomplete)
+     * Increase unit's stat by weapon's effect.(Incomplete)
      */
     @Override
     public void equip() {

@@ -5,12 +5,12 @@ public class AttackPotion extends Potion implements Aggressive {
 
 
     /**
-     *
+     * @param goldValue of the AttackPotion
      * @param name of the AttackPotion
      * @param effect of the AttackPotion
      */
-    public AttackPotion(String name, int effect) {
-        super("AttackPotion", name, effect);
+    public AttackPotion(String name, int effect, int goldValue) {
+        super("AttackPotion", name, effect, goldValue);
 
     }
 

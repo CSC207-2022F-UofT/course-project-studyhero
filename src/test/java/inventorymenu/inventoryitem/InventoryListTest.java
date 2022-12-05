@@ -9,26 +9,26 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 
-class InventoryListFileTest {
+class InventoryListTest {
     String filePath = "PlayerInventoryTest.csv";
-    InventoryListFile inventoryListFile = new InventoryListFile(filePath);
+    InventoryList inventoryListFile = new InventoryList(filePath);
     ArrayList<InventoryItemDsRequestModel> referenceList = new ArrayList<>();
     InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
             "Weapon",
             "Sword",
-            13);
+            13, 10);
     InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
             "AttackPotion",
             "StrengthPotion",
-            5);
+            5, 23);
     InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
             "Weapon",
             "HammerHammer",
-            18);
+            18, 43);
     InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
             "Shield",
             "BronzeShield",
-            15);
+            15, 20);
 
 
     @BeforeEach
@@ -43,33 +43,47 @@ class InventoryListFileTest {
     @Test
     void readInventoryList() {
         inventoryListFile.readInventoryList();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = inventoryListFile.getInventoryList();
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
+        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        while(iterator.hasNext()){
+            inventoryList.add(iterator.getNext());
+        }
         for(int i = 0; i < 4; i++){
             assertEquals(referenceList.get(i).getId(), inventoryList.get(i).getId());
             assertEquals(referenceList.get(i).getName(), inventoryList.get(i).getName());
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i).getEffect());
+            assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i).getGoldValue());
         }
     }
 
     @Test
     void saveItem() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99);
+        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999);
         inventoryListFile.save(newItem);
         inventoryListFile.readInventoryList();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = inventoryListFile.getInventoryList();
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
+        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        while(iterator.hasNext()){
+            inventoryList.add(iterator.getNext());
+        }
         assertEquals(5, inventoryList.get(4).getId());
         assertEquals("UltraShield", inventoryList.get(4).getName());
         assertEquals("Shield", inventoryList.get(4).getType());
         assertEquals(99, inventoryList.get(4).getEffect());
+        assertEquals(999, inventoryList.get(4).getGoldValue());
     }
 
     @Test
     void attachId() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99);
+        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999);
         inventoryListFile.save(newItem);
         inventoryListFile.readInventoryList();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = inventoryListFile.getInventoryList();
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
+        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        while(iterator.hasNext()){
+            inventoryList.add(iterator.getNext());
+        }
         assertEquals(5, inventoryList.get(4).getId());
     }
 
@@ -80,7 +94,7 @@ class InventoryListFileTest {
 
     @Test
     void inventoryFull() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99);
+        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999);
 
         for(int i = 0; i < 15; i++){
             inventoryListFile.save(newItem);
@@ -100,13 +114,18 @@ class InventoryListFileTest {
     @Test
     void updateInventoryList() {
         inventoryListFile.deleteItem(1);
-        inventoryListFile.updateInventoryList();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = inventoryListFile.getInventoryList();
+        inventoryListFile.readInventoryList();
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
+        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        while(iterator.hasNext()){
+            inventoryList.add(iterator.getNext());
+        }
         for(int i = 1; i < 4; i++){
             assertEquals(referenceList.get(i).getId() - 1, inventoryList.get(i - 1).getId());
             assertEquals(referenceList.get(i).getName(), inventoryList.get(i - 1).getName());
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i - 1).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i - 1).getEffect());
+            assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i - 1).getGoldValue());
         }
     }
 
@@ -122,12 +141,18 @@ class InventoryListFileTest {
     @Test
     void deleteItem() {
         inventoryListFile.deleteItem(1);
-        ArrayList<InventoryItemDsRequestModel> inventoryList = inventoryListFile.getInventoryList();
+
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
+        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        while(iterator.hasNext()){
+            inventoryList.add(iterator.getNext());
+        }
         for(int i = 1; i < 4; i++){
             assertEquals(referenceList.get(i).getId() - 1, inventoryList.get(i - 1).getId());
             assertEquals(referenceList.get(i).getName(), inventoryList.get(i - 1).getName());
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i - 1).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i - 1).getEffect());
+            assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i - 1).getGoldValue());
         }
     }
 
@@ -142,18 +167,28 @@ class InventoryListFileTest {
     @Test
     void clearInventory() {
         inventoryListFile.clearInventory();
-        assertTrue(inventoryListFile.getInventoryList().size() == 0);
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
+        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        while(iterator.hasNext()){
+            inventoryList.add(iterator.getNext());
+        }
+        assertTrue(inventoryList.size() == 0);
     }
 
     @Test
     void initialize() {
         inventoryListFile.readInventoryList();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = inventoryListFile.getInventoryList();
+        PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
+        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        while(iterator.hasNext()){
+            inventoryList.add(iterator.getNext());
+        }
         for(int i = 0; i < 4; i++){
             assertEquals(referenceList.get(i).getId(), inventoryList.get(i).getId());
             assertEquals(referenceList.get(i).getName(), inventoryList.get(i).getName());
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i).getEffect());
+            assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i).getGoldValue());
         }
     }
 }

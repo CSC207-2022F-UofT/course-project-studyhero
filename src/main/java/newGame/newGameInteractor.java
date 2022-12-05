@@ -1,7 +1,7 @@
 package newGame;
 
 import entities.StatsUser;
-import inventorymenu.inventoryitem.InventoryListFile;
+import inventorymenu.inventoryitem.InventoryList;
 
 public class newGameInteractor {
     public static void createNewGame(){
@@ -9,7 +9,7 @@ public class newGameInteractor {
         StatsUser stats = new StatsUser();
         System.out.println(stats.getUserStats());
 
-        InventoryListFile inventList = new InventoryListFile("Inventory");
+        InventoryList inventList = new InventoryList("Inventory");
         System.out.println(inventList);
 
 

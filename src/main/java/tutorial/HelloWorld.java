@@ -31,7 +31,7 @@ public class HelloWorld {
         application.add(screens);
 
         PlayerDisplayInventoryDsGateway playerDisplayInventoryDsGateway;
-        playerDisplayInventoryDsGateway = new InventoryListFile(playerInventory);
+        playerDisplayInventoryDsGateway = new InventoryList(playerInventory);
 
 
         PlayerDisplayInventoryOutputBoundary playerDisplayInventoryPresenter = new PlayerDisplayInventoryPresenter();
@@ -40,7 +40,7 @@ public class HelloWorld {
 
         DeleteItemOutputBoundary deleteItemPresenter = new DeleteItemPresenter();
         DeleteItemDsGateway deleteItemDsGateway;
-        deleteItemDsGateway = new InventoryListFile(playerInventory);
+        deleteItemDsGateway = new InventoryList(playerInventory);
         DeleteItemInputBoundary deleteItemInputBoundary = new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
         DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
 

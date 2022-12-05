@@ -41,9 +41,10 @@ public class PlayerDisplayInventoryResponseModel {
         clearResponse();
         for(InventoryItemDsRequestModel item : inventoryList){
             response.add("Id: " + item.getId() +
-                    "Type: " + item.getType() +
-                    "Name: " + item.getName() +
-                    "Effect: " + item.getEffect());
+                    " Type: " + item.getType() +
+                    " Name: " + item.getName() +
+                    " Effect: " + item.getEffect() +
+                    " Gold " + item.getGoldValue());
 
         }
         return response;

@@ -3,9 +3,6 @@ package inventorymenu.inventoryscreens;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInputBoundary;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryResponseModel;
 
-/**
- * This class is incomplete
- */
 public class PlayerDisplayInventoryController {
 
     private final PlayerDisplayInventoryInputBoundary inputBoundary;

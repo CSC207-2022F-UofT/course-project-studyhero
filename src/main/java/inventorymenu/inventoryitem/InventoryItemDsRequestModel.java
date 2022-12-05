@@ -6,20 +6,21 @@ public class InventoryItemDsRequestModel {
     private final String type;
     private final int effect;
     private int id;
-
+    private final int goldValue;
 
     /**
-     *
-     * @param name of the inventory item
-     * @param type of the inventory item
-     * @param effect of the inventory item that will be added on player in some way
-     * @param id of the inventory item in player's inventory.
+     * @param id        of the inventory item in player's inventory.
+     * @param type      of the inventory item
+     * @param name      of the inventory item
+     * @param effect    of the inventory item that will be added on a unit in some way
+     * @param goldValue of the inventory item that will be added
      */
-    public InventoryItemDsRequestModel(int id, String type, String name, int effect) {
+    public InventoryItemDsRequestModel(int id, String type, String name, int effect, int goldValue) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.effect = effect;
+        this.goldValue = goldValue;
     }
 
     /**
@@ -61,4 +62,13 @@ public class InventoryItemDsRequestModel {
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     * Get the gold value of the inventory item
+     * @return gold value of the inventory item
+     */
+    public int getGoldValue() {
+        return goldValue;
+    }
+
 }

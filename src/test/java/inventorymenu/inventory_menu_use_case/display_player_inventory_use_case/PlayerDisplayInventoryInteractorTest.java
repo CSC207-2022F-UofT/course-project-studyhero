@@ -11,24 +11,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerDisplayInventoryInteractorTest {
 
+
     ArrayList<InventoryItemDsRequestModel> oldInventoryList = new ArrayList<>();
     ArrayList<InventoryItemDsRequestModel> newInventoryList = new ArrayList<>();
     InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
             "Weapon",
             "Sword",
-            13);
+            13, 10);
     InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
             "AttackPotion",
             "StrengthPotion",
-            5);
+            5, 23);
     InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
             "Weapon",
             "Hammer",
-            18);
+            18, 43);
     InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
             "Shield",
             "BronzeShield",
-            15);
+            15, 20);
 
     @Test
     void displayInventoryListWithItem() {
@@ -51,6 +52,8 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item1.getName(),referenceModel1.getName());
             assertEquals(item1.getId(),referenceModel1.getId());
             assertEquals(item1.getEffect(),referenceModel1.getEffect());
+            assertEquals(item1.getGoldValue(),referenceModel1.getGoldValue());
+
             assertTrue(dsRequestModel.hasNext());
 
             InventoryItemDsRequestModel referenceModel2 = dsRequestModel.getNext();
@@ -58,6 +61,8 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item3.getName(),referenceModel2.getName());
             assertEquals(item3.getId(),referenceModel2.getId());
             assertEquals(item3.getEffect(),referenceModel2.getEffect());
+            assertEquals(item3.getGoldValue(),referenceModel2.getGoldValue());
+
             assertFalse(dsRequestModel.hasNext());
 
             return null;
@@ -85,6 +90,8 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item1.getName(),referenceModel1.getName());
             assertEquals(item1.getId(),referenceModel1.getId());
             assertEquals(item1.getEffect(),referenceModel1.getEffect());
+            assertEquals(item1.getGoldValue(),referenceModel1.getGoldValue());
+
             assertTrue(dsRequestModel.hasNext());
 
             InventoryItemDsRequestModel referenceModel2 = dsRequestModel.getNext();
@@ -92,6 +99,8 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item3.getName(),referenceModel2.getName());
             assertEquals(item3.getId(),referenceModel2.getId());
             assertEquals(item3.getEffect(),referenceModel2.getEffect());
+            assertEquals(item3.getGoldValue(),referenceModel2.getGoldValue());
+
             assertFalse(dsRequestModel.hasNext());
 
             return null;

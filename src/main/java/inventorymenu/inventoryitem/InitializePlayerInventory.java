@@ -6,7 +6,7 @@ public class InitializePlayerInventory {
      */
     public static void InitializePlayerInventory(String csvPath) {
 
-        InitializePlayerInventoryGateway initializePlayerInventoryGateway = new InventoryListFile(csvPath);
+        InitializePlayerInventoryGateway initializePlayerInventoryGateway = new InventoryList(csvPath);
         initializePlayerInventoryGateway.initialize();
     }
 }
