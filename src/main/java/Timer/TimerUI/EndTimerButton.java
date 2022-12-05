@@ -1,4 +1,10 @@
 package Timer.TimerUI;
 
-public class EndTimerButton {
+import javax.swing.*;
+
+public class EndTimerButton extends Button {
+    static JButton endTimerButton = createButton("End Timer");
+    public static JButton endTimerButton() {
+        return endTimerButton;
+    }
 }

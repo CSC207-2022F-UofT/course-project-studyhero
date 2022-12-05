@@ -6,6 +6,11 @@ public class BossClass implements Boss{
     int currHp;
     int maxHp;
     int damage;
+
+    /**
+     * Constructor for the BossClass.
+     * @param level: integer representing the user's level
+     */
     public BossClass(int level) {
         this.maxHp = 10 + 2*level;
         this.currHp = this.maxHp;

@@ -1,4 +1,10 @@
 package Timer.TimerPresenters;
 
-public class ProgressBarPresenter {
+import Timer.TimerOutputBoundaries.ProgressBarOutputBoundary;
+
+public class ProgressBarPresenter implements ProgressBarOutputBoundary {
+    @Override
+    public void displayProgressBar() {
+
+    }
 }

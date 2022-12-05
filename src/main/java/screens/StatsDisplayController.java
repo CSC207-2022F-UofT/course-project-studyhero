@@ -1,7 +1,7 @@
 package screens;
 
-import stats_display_use_case.StatsDisplayInputBoundary;
-import stats_display_use_case.StatsDisplayOutputBoundary;
+import use_cases.stats_display_use_case.StatsDisplayInputBoundary;
+import use_cases.stats_display_use_case.StatsDisplayOutputBoundary;
 
 import java.util.Map;
 

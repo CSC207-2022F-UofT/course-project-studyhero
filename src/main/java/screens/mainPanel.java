@@ -1,7 +1,7 @@
 package screens;
 
 import screens.panels.*;
-import stats_display_use_case.StatsDisplayInteractor;
+import use_cases.stats_display_use_case.StatsDisplayInteractor;
 import stats_storage.StatsFileDataAccess;
 
 import javax.swing.*;
