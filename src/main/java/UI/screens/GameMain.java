@@ -10,6 +10,7 @@ import use_cases.errors.ErrorPresenter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class GameMain {
     public static void main(String[] args){
@@ -57,6 +58,7 @@ public class GameMain {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         mainFrame.setSize(800, 500);
+
 
 
     }
