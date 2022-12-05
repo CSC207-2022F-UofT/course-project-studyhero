@@ -3,7 +3,7 @@ package Timer;
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import Timer.timer_screen.MainPanel;
+import Timer.timer_screen.TimerPanel;
 
 import java.awt.*;
 
@@ -12,7 +12,7 @@ public class Main {
         JFrame f = new JFrame();
         JPanel mainPanel = new JPanel();
         CardLayout card = new CardLayout();
-        MainPanel mPanel = new MainPanel(card, mainPanel);
+        TimerPanel mPanel = new TimerPanel(card, mainPanel);
         mainPanel.add(mPanel, "Timer");
         mainPanel.setLayout(card);
 

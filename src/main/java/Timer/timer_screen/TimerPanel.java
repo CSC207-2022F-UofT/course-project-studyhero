@@ -13,7 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.regex.Pattern;
 
-public class MainPanel extends JPanel implements ActionListener {
+public class TimerPanel extends JPanel implements ActionListener {
     private JPanel mainPanel;
     private JLabel timerText;
     private JProgressBar progressBar;
@@ -38,7 +38,7 @@ public class MainPanel extends JPanel implements ActionListener {
     PresetTimerController ptController = new PresetTimerController(tRequestModel, tResponseModel);
     TimerPresenter tPresenter = new TimerPresenter(tResponseModel);
 
-    public MainPanel(CardLayout card, JPanel parentPanel) {
+    public TimerPanel(CardLayout card, JPanel parentPanel) {
         startTimerButton.addActionListener(this);
         endTimerButton.addActionListener(this);
         presetShortButton.addActionListener(this);
