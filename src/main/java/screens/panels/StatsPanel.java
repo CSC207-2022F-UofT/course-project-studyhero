@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.Map;
 
 public class StatsPanel extends JPanel {
-    StatsDisplayController statsDisplayController;
+    final StatsDisplayController statsDisplayController;
     public StatsPanel(StatsDisplayController statsDisplayController) {
         this.statsDisplayController = statsDisplayController;
 
