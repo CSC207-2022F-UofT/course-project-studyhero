@@ -17,102 +17,26 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway{
-
-    private final File csvFile;
-    private final Map<String, Integer> headers = new LinkedHashMap<>();
-    private ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
-
-
-
-    /**
-     * It read a file that stores the inventory information
-     * @param csvPath file's path for storing the inventory information
-     */
-    public InventoryList(String csvPath){
-        csvFile = new File(csvPath);
-
-        headers.put("item_id", 0);
-        headers.put("item_type", 1);
-        headers.put("item_name", 2);
-        headers.put("item_effect", 3);
-        headers.put("item_gold_value", 4);
-
-        readInventoryList();
-    }
+public interface InventoryList extends AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway {
 
     /**
      * Read the inventory File and record the information to inventory list
      */
-    public void readInventoryList(){
-        ErrorOutputBoundary error = new ErrorPresenter();
-        ValidFileDsGateway validFile = new ValidInventory(csvFile.getName(), error);
-
-        if(validFile.fileExists() && validFile.isValid() && validFile.isPlayable()){
-            BufferedReader reader;
-            try {
-                reader = new BufferedReader(new FileReader(csvFile));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                reader.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            String row;
-            while (true) {
-                try {
-                    if (((row = reader.readLine()) == null)) break;
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                String[] col = row.split(",");
-                int itemId = Integer.parseInt(col[headers.get("item_id")]);
-                String itemType = String.valueOf(col[headers.get("item_type")]);
-                String itemName = String.valueOf(col[headers.get("item_name")]);
-                int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
-                int itemGoldValue = Integer.parseInt(col[headers.get("item_gold_value")]);
-                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId,
-                        itemType, itemName,itemEffect, itemGoldValue);
-                inventoryList.add(item);
-            }
-            try {
-                reader.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
+    public void readInventoryList();
 
     /**
      * Add new InventoryItem to the inventory
      * @param item is the item which need to be added to the inventory
      */
-   @Override
-    public void save(InventoryItem item){
-       if(!inventoryFull()){
-           InventoryItemDsRequestModel requestModel = attachId(item);
-           inventoryList.add(requestModel);
-       }
-       this.save();
-    }
+    @Override
+    public void save(InventoryItem item);
 
     /**
      * @param item The inventory item you want to add to the inventory
      * @return a AddItemDsRequestModel with id as the next available player's inventory slot
      */
     @Override
-    public InventoryItemDsRequestModel attachId(InventoryItem item) {
-        int id = CheckLatestInventoryItemId() + 1;
-
-        return new InventoryItemDsRequestModel(id,
-                item.getType(),
-                item.getName(),
-                item.getEffect(),
-                item.getGoldValue());
-    }
+    public InventoryItemDsRequestModel attachId(InventoryItem item);
 
 
     /**
@@ -120,66 +44,32 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      * @return the number of items in the inventory
      */
     @Override
-    public int CheckLatestInventoryItemId() {
-
-        return inventoryList.size();
-    }
-
+    public int CheckLatestInventoryItemId();
 
     /**
      * Rewrite the inventory file with the added inventoryItem
      */
-    public void save(){
-        BufferedWriter writer;
-        try{
-            writer = new BufferedWriter(new FileWriter(csvFile));
-            writer.write(String.join(",", headers.keySet()));
-            writer.newLine();
-
-            for(InventoryItemDsRequestModel item : inventoryList){
-                String line = String.format("%s,%s,%s,%s,%s",
-                        item.getId(),
-                        item.getType(),
-                        item.getName(),
-                        item.getEffect(),
-                        item.getGoldValue());
-                writer.write(line);
-                writer.newLine();
-            }
-
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void save();
 
     /**
      * Return whether inventory is full
      * @return whether inventory's capacity is greater than 20
      */
     @Override
-    public boolean inventoryFull() {
-        return CheckLatestInventoryItemId() >=20;
-    }
+    public boolean inventoryFull();
 
     /**
      * Create an iterator object on InventoryList for this file
      * @return an iterator object for this file object
      */
     @Override
-    public PlayerDisplayInventoryDsRequestModel getInventoryListIterator() {
-        updateInventoryList();
-        return new PlayerDisplayInventoryDsRequestModel(inventoryList);
-    }
+    public PlayerDisplayInventoryDsRequestModel getInventoryListIterator();
 
     /**
      * Updated the inventory list information
      */
     @Override
-    public void updateInventoryList() {
-        inventoryList.clear();
-        readInventoryList();
-    }
+    public void updateInventoryList();
 
 
 
@@ -188,24 +78,14 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      * @return true if the item is in the inventory
      */
     @Override
-    public boolean itemExist(int id) {
-        return id <= inventoryList.size() && id >= 1;
-    }
+    public boolean itemExist(int id);
 
     /**
      * Delete the item from inventory
      * @param id of the item wants to be removed from inventory
      */
     @Override
-    public void deleteItem(int id) {
-            inventoryList.remove(id - 1);
-            int newId = 1;
-            for(InventoryItemDsRequestModel item : inventoryList){
-            item.setId(newId);
-            newId++;
-            }
-            save();
-    }
+    public void deleteItem(int id);
 
     /**
      * get the item's name associated with inventory id
@@ -213,53 +93,17 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      * @return the name of the item that wants to be removed from inventory
      */
     @Override
-    public DeleteItemDsRequestModel getName(int id) {
-        if(itemExist(id)){
-            return new DeleteItemDsRequestModel(inventoryList.get(id - 1).getName());
-        }
-        return null;
-    }
+    public DeleteItemDsRequestModel getName(int id);
 
     /**
      * Clear the inventory file
      */
     @Override
-    public void clearInventory() {
-        BufferedWriter writer;
-        try{
-            writer = new BufferedWriter(new FileWriter(csvFile));
-            writer.close();
-            inventoryList.clear();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void clearInventory();
 
     /**
      * Initialize player's inventory file
      */
     @Override
-    public void initialize() {
-        clearInventory();
-        InventoryItem item1 = new InventoryItem(
-                "Weapon",
-                "Sword",
-                13, 10);
-        InventoryItem item2 = new InventoryItem(
-                "AttackPotion",
-                "StrengthPotion",
-                5, 23);
-        InventoryItem item3 = new InventoryItem(
-                "Weapon",
-                "HammerHammer",
-                18, 43);
-        InventoryItem item4 = new InventoryItem(
-                "Shield",
-                "BronzeShield",
-                15, 20);
-        save(item1);
-        save(item2);
-        save(item3);
-        save(item4);
-    }
+    public void initialize();
 }

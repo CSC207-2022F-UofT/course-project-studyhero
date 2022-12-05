@@ -17,10 +17,10 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class PlayerInventoryFile implements InventoryList {
+public class ShopInventoryFile implements InventoryList {
 
     private final File csvFile;
-    private final String label = "Player Inventory";
+    private final String label = "Shop Inventory";
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
 
@@ -30,8 +30,9 @@ public class PlayerInventoryFile implements InventoryList {
      *
      * @param csvPath file's path for storing the inventory information
      */
-    public PlayerInventoryFile(String csvPath) {
+    public ShopInventoryFile(String csvPath) {
         csvFile = new File(csvPath);
+
         headers.put("item_id", 0);
         headers.put("item_type", 1);
         headers.put("item_name", 2);
@@ -46,9 +47,49 @@ public class PlayerInventoryFile implements InventoryList {
      */
     public void readInventoryList() {
         ErrorOutputBoundary error = new ErrorPresenter();
-        ValidFileDsGateway validFile = new ValidPlayerInventory(csvFile.getName(), error);
+        ValidFileDsGateway validFile = new ValidShopInventory(csvFile.getName(), error);
 
-        ShopInventoryFile.readInventory(validFile, csvFile, headers, inventoryList);
+        readInventory(validFile, csvFile, headers, inventoryList);
+    }
+
+    static void readInventory(ValidFileDsGateway validFile, File csvFile, Map<String, Integer> headers, ArrayList<InventoryItemDsRequestModel> inventoryList) {
+        if (validFile.fileExists() && validFile.isValid() && validFile.isPlayable()) {
+            BufferedReader reader;
+            try {
+                reader = new BufferedReader(new FileReader(csvFile));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                reader.readLine();
+                reader.readLine();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            String row;
+            while (true) {
+                try {
+                    if (((row = reader.readLine()) == null)) break;
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                String[] col = row.split(",");
+                int itemId = Integer.parseInt(col[headers.get("item_id")]);
+                String itemType = String.valueOf(col[headers.get("item_type")]);
+                String itemName = String.valueOf(col[headers.get("item_name")]);
+                int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
+                int itemGoldValue = Integer.parseInt(col[headers.get("item_gold_value")]);
+                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId,
+                        itemType, itemName, itemEffect, itemGoldValue);
+                inventoryList.add(item);
+            }
+            try {
+                reader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     /**
@@ -97,7 +138,33 @@ public class PlayerInventoryFile implements InventoryList {
      * Rewrite the inventory file with the added inventoryItem
      */
     public void save() {
-        ShopInventoryFile.saveInventory(csvFile, label, headers, inventoryList);
+        saveInventory(csvFile, label, headers, inventoryList);
+    }
+
+    static void saveInventory(File csvFile, String label, Map<String, Integer> headers, ArrayList<InventoryItemDsRequestModel> inventoryList) {
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(csvFile));
+            writer.write(label);
+            writer.newLine();
+            writer.write(String.join(",", headers.keySet()));
+            writer.newLine();
+
+            for (InventoryItemDsRequestModel item : inventoryList) {
+                String line = String.format("%s,%s,%s,%s,%s",
+                        item.getId(),
+                        item.getType(),
+                        item.getName(),
+                        item.getEffect(),
+                        item.getGoldValue());
+                writer.write(line);
+                writer.newLine();
+            }
+
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -195,19 +262,19 @@ public class PlayerInventoryFile implements InventoryList {
         InventoryItem item1 = new InventoryItem(
                 "Weapon",
                 "Sword",
-                13, 10);
+                3, 6);
         InventoryItem item2 = new InventoryItem(
                 "AttackPotion",
                 "StrengthPotion",
-                5, 23);
+                4, 2);
         InventoryItem item3 = new InventoryItem(
                 "Weapon",
                 "HammerHammer",
-                18, 43);
+                5, 8);
         InventoryItem item4 = new InventoryItem(
                 "Shield",
                 "BronzeShield",
-                15, 20);
+                12, 23);
         save(item1);
         save(item2);
         save(item3);
