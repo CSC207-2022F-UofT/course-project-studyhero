@@ -1,11 +1,26 @@
 package Timer;
 
-import Timer.timer_screen.TimerScreen;
-import Timer.timer_screen.MainFrame;
+import javax.swing.*;
+
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import Timer.timer_screen.MainPanel;
+
+import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        new TimerScreen().timerScreen();
-        new MainFrame().TimerScreen();
+        JFrame f = new JFrame();
+        JPanel mainPanel = new JPanel();
+        CardLayout card = new CardLayout();
+        MainPanel mPanel = new MainPanel(card, mainPanel);
+        mainPanel.add(mPanel, "Timer");
+        mainPanel.setLayout(card);
+
+        f.add(mainPanel);
+        card.show(mainPanel, "Timer");
+        f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        f.setTitle("StudyHero");
+        f.setSize(800, 500);
+        f.setVisible(true);
     }
 }

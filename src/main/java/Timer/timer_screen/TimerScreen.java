@@ -18,11 +18,17 @@ public class TimerScreen implements ActionListener {
     private JTextField customTimerTextField;
     private JLabel timerText;
 
+    private Timer timer;
+
     TimerRequestModel tRequestModel = new TimerRequestModel();
     TimerResponseModel tResponseModel = new TimerResponseModel();
     CustomTimerController ctController = new CustomTimerController(tRequestModel, tResponseModel);
     PresetTimerController ptController = new PresetTimerController(tRequestModel, tResponseModel);
     TimerPresenter tPresenter = new TimerPresenter(tResponseModel);
+
+    public TimerScreen(Timer timer) {
+        this.timer = timer;
+    }
 
     public void timerScreen() {
         JFrame frame = new JFrame();
@@ -64,7 +70,7 @@ public class TimerScreen implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startTimerButton) {
-            if (tRequestModel.getInputTime().equals("-1")) {
+            if (tRequestModel.getCustomTime().equals("-1")) {
                 ptController.startTimer();
             }
             else {
@@ -76,10 +82,11 @@ public class TimerScreen implements ActionListener {
                     timerText.setText(tPresenter.updateTimer());
                 }
             });
-            timer.start();
+
+            timer.restart();
         }
         if (e.getSource() == endTimerButton) {
-            if (tRequestModel.getInputTime().equals("-1")) {
+            if (tRequestModel.getCustomTime().equals("-1")) {
                 ptController.endTimer();
             }
             else {
@@ -89,7 +96,7 @@ public class TimerScreen implements ActionListener {
         }
         if (e.getSource() == customerTimerConfirmButton) {
             String inputTime = customTimerTextField.getText();
-            ctController.getCustomTime(inputTime);
+            ctController.setCustomTime(inputTime);
             timerText.setText(inputTime);
 
         }

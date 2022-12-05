@@ -15,7 +15,7 @@ public class PresetTimerController {
     public PresetTimerController(TimerRequestModel tRequestModel, TimerResponseModel tResponseModel) {
         presetTimes.put("Short", "00:15:00");
         presetTimes.put("Medium", "00:30:00");
-        presetTimes.put("Long", "1:00:00");
+        presetTimes.put("Long", "01:00:00");
         this.tRequestModel = tRequestModel;
         this.tInteractor = new TimerInteractor(tRequestModel, tResponseModel);
     }

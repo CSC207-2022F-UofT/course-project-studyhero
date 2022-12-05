@@ -13,8 +13,11 @@ public class CustomTimerController {
         this.tInteractor = new TimerInteractor(tRequestModel, tResponseModel);
     }
 
-    public void getCustomTime(String time) {
-        tRequestModel.setInputTime(time);
+    public void setCustomTime(String time) {
+        tRequestModel.setCustomTime(time);
+    }
+    public String getCustomTime() {
+        return tRequestModel.getCustomTime();
     }
 
     public void startTimer() {

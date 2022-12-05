@@ -15,13 +15,14 @@ public class TimerEntity {
      * The amount of time left.
      */
     public static String timeLeft = "00:00:00";
-    private static Timer timer = new Timer();
+    private static Timer timer;
 
     /**
      * Starts the timer.
      */
     public static void startTimer() {
-        timer.scheduleAtFixedRate(new TimerTask() {
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
             int seconds = TimerEntity.startingTime[2];
             int minutes = TimerEntity.startingTime[1];
             int hours = TimerEntity.startingTime[0];
@@ -41,7 +42,8 @@ public class TimerEntity {
                     seconds = 59;
                 }
             }
-        }, 0, 1000);
+        };
+        timer.scheduleAtFixedRate(timerTask, 0, 1000);
     }
 
     /**
@@ -58,6 +60,7 @@ public class TimerEntity {
      */
     public static void endTimer() {
         timer.cancel();
+        timer.purge();
     }
 
     public static void updateTime(int hours, int minutes, int seconds) {

@@ -1,18 +1,18 @@
 package Timer.timer_use_cases;
 
 public class TimerRequestModel {
-    private String inputTime;
     private String selectedTime;
+    private String inputTime;
 
     public TimerRequestModel() {
         this.inputTime = "-1";
     }
 
-    public String getInputTime() {
+    public String getCustomTime() {
         return this.inputTime;
     }
 
-    public void setInputTime(String inputTime) {
+    public void setCustomTime(String inputTime) {
         this.inputTime = inputTime;
     }
 
