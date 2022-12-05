@@ -6,7 +6,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.Dimension;
 
-import static UI.buttons.shop.SellItemButtonUI.getSellItemButton;
+// import static UI.buttons.shop.SellItemButtonUI.getSellItemButton;
 
 public class sellMenuPanel extends JFrame implements ListSelectionListener {
 
@@ -36,7 +36,7 @@ public class sellMenuPanel extends JFrame implements ListSelectionListener {
         cost = new JLabel("Sell Cost: ");
 
         //initialise content
-        JButton sellItemButton = getSellItemButton();
+        //JButton sellItemButton = getSellItemButton();
         JLabel userInv = new JLabel("User Inventory");
 
         // Layouts
@@ -63,7 +63,7 @@ public class sellMenuPanel extends JFrame implements ListSelectionListener {
 
         shopPanel.add(selectedItem);
         shopPanel.add(cost);
-        shopPanel.add(sellItemButton);
+        //shopPanel.add(sellItemButton);
 
         sellPanel.add(userPanel, BorderLayout.WEST);
         sellPanel.add(shopPanel, BorderLayout.EAST);

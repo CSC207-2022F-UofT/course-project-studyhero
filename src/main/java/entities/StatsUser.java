@@ -76,11 +76,5 @@ public class StatsUser implements Stats {
     private int changerValidator(int original, int by) {
         return Math.max(original + by, 0);
     }
-    public getBoss(){
-        int level = this.getlevel();
-        Map<String, Integer> bossStats = new Map<String, Integer>() {};
-        bossStats.put("hp", level *5);
 
-
-    }
 }
