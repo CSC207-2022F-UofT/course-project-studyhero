@@ -21,12 +21,19 @@ public class FakeInventoryDisplay implements PlayerDisplayInventoryDsGateway {
     private ArrayList<InventoryItemDsRequestModel> oldInventoryList;
     private ArrayList<InventoryItemDsRequestModel> newInventoryList;
 
+    /**
+     * create the inventoryList iterator
+     * @return An iterator on InventoryList
+     */
     @Override
     public PlayerDisplayInventoryDsRequestModel getInventoryListIterator() {
         updateInventoryList();
         return new PlayerDisplayInventoryDsRequestModel(oldInventoryList);
     }
 
+    /**
+     * update the inventory list to the corresponding inventory list file
+     */
     @Override
     public void updateInventoryList() {
         oldInventoryList.clear();

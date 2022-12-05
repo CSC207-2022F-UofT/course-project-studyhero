@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 
-class InventoryListTest {
+class InventoryListFileTest {
     String filePath = "PlayerInventoryTest.csv";
-    InventoryList inventoryListFile = new InventoryList(filePath);
+    InventoryListFile inventoryListFile = new InventoryListFile(filePath);
     ArrayList<InventoryItemDsRequestModel> referenceList = new ArrayList<>();
     InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
             "Weapon",

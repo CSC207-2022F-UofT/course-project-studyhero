@@ -13,7 +13,7 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway{
+public class InventoryListFile implements AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway{
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -32,7 +32,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      * It read a file that stores the inventory information
      * @param csvPath file's path for storing the inventory information
      */
-    public InventoryList(String csvPath){
+    public InventoryListFile(String csvPath){
         csvFile = new File(csvPath);
 
         headers.put("item_id", 0);

@@ -25,6 +25,9 @@ public class PlayerDisplayInventoryResponseModel {
         inventoryList.clear();
     }
 
+    /**
+     * Reset the response
+     */
     public void clearResponse(){
         response.clear();
     }

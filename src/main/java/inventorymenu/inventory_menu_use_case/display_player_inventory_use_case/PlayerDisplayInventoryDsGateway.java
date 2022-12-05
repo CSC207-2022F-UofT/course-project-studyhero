@@ -10,5 +10,8 @@ public interface PlayerDisplayInventoryDsGateway {
      */
     PlayerDisplayInventoryDsRequestModel getInventoryListIterator();
 
+    /**
+     * update the inventory list to the corresponding inventory list file
+     */
     void updateInventoryList();
 }

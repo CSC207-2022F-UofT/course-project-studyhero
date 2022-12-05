@@ -10,6 +10,10 @@ public class PlayerDisplayInventoryPresenter implements PlayerDisplayInventoryOu
 
     private final PlayerDisplayInventoryResponseModel inventoryList = new PlayerDisplayInventoryResponseModel();
 
+    /**
+     * @param dsRequestModel is the iterator that will be used to access inventory list
+     * @return inventory information using arraylist
+     */
     @Override
     public PlayerDisplayInventoryResponseModel prepareInventoryView(PlayerDisplayInventoryDsRequestModel dsRequestModel) {
         inventoryList.clearItem();

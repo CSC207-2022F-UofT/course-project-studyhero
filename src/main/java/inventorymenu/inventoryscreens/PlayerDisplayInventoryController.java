@@ -17,6 +17,7 @@ public class PlayerDisplayInventoryController {
 
     /**
      * Display Player's Inventory
+     * @return the response of display
      */
     public PlayerDisplayInventoryResponseModel display() {
         return inputBoundary.display();
