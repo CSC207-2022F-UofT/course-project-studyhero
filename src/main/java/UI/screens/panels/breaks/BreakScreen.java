@@ -15,9 +15,6 @@ public class BreakScreen extends JPanel {
         JButton buyMenu = new JButton("Shop");
         buyMenu.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
 
-        JButton sellMenu = new JButton("Sell your items");
-        sellMenu.addActionListener(e -> card.show(parentPanel, "Sell Menu"));
-
         JButton fightBoss = new JButton("Fight Boss");
         fightBoss.addActionListener(e -> card.show(parentPanel,"Fight Boss"));
 
@@ -26,7 +23,6 @@ public class BreakScreen extends JPanel {
 
         this.add(title);
         this.add(buyMenu);
-        this.add(sellMenu);
         this.add(fightBoss);
         this.add(settings);
     }
