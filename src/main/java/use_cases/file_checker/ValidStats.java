@@ -1,7 +1,7 @@
 package use_cases.file_checker;
 
 import entities.StatsUser;
-import use_cases.errors.ErrorPresenter;
+import use_cases.errors.ErrorOutputBoundary;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -14,8 +14,8 @@ import java.util.stream.Stream;
 public class ValidStats implements ValidFileDsGateway{
     String filename;
     File file;
-    ErrorPresenter presenter;
-    public ValidStats(String filename,ErrorPresenter presenter){
+    ErrorOutputBoundary presenter;
+    public ValidStats(String filename,ErrorOutputBoundary presenter){
         this.filename = filename;
         this.file = new File(filename);
         this.presenter = presenter;
@@ -43,6 +43,7 @@ public class ValidStats implements ValidFileDsGateway{
 
                 String[] allAttributes = br.readLine().trim().split(", ");
                 String[] allStats = br.readLine().trim().split(", ");
+                br.close();
                 for (int i = 0; i < allAttributes.length; i++){
                     statsMap.put(allAttributes[i], Integer.valueOf(allStats[i]));
                 }
@@ -63,14 +64,13 @@ public class ValidStats implements ValidFileDsGateway{
          * invalid - the attributes and stats are not in the correct format
          * other - any other error
          */
-        File statsFile = new File(filename);
 
         // checking the file exists
         if (!fileExists()){
             return "exist";
         }
         try {
-            BufferedReader br = new BufferedReader(new FileReader(statsFile));
+            BufferedReader br = new BufferedReader(new FileReader(file));
             Path path = Paths.get(filename);
 
             Stream<String> lines = Files.lines(path);
@@ -104,7 +104,7 @@ public class ValidStats implements ValidFileDsGateway{
         File file = new File(filename);
         return (file.exists() && !file.isDirectory());
     }
-
+    @Override
     public boolean isPlayable(){
         return (checkError() == null);
     }
@@ -118,10 +118,8 @@ public class ValidStats implements ValidFileDsGateway{
         switch(result){
             case "exist":
                 presenter.error("There is no existing " + filename + " file.");
-                return false;
             case "invalid":
                 presenter.error("Invalid " + filename + " file.");
-                return false;
             case "other":
                 presenter.error("Error: please start a new game.");
         }

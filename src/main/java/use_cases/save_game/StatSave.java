@@ -1,6 +1,6 @@
 package use_cases.save_game;
 
-import use_cases.errors.ErrorPresenter;
+import use_cases.errors.ErrorOutputBoundary;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,13 +9,25 @@ import java.util.Map;
 
 public class StatSave implements SaveGameOutputBoundary{
     Map<String, Integer> stats;
-    ErrorPresenter presenter;
-    public StatSave(Map<String, Integer> stats, ErrorPresenter presenter){
+    ErrorOutputBoundary presenter;
+
+    /**
+     * Returns a StatsSave object with stats represented as a
+     * Hashmap
+     *
+     * @param stats
+     * @param presenter
+     */
+    public StatSave(Map<String, Integer> stats, ErrorOutputBoundary presenter){
 
         this.stats = stats;
         this.presenter = presenter;
     }
 
+    /**
+     * Returns nothing but saves a csv file representing the
+     * current user's stats data
+     */
     @Override
     public void save(){
         try{

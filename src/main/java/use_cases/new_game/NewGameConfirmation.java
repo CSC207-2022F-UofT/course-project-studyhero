@@ -1,22 +1,22 @@
 package use_cases.new_game;
 
+import use_cases.errors.ErrorOutputBoundary;
+import use_cases.errors.ErrorPresenter;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class NewGameConfirmation {
 
-    CardLayout card;
-    JPanel parentPanel;
-
     public NewGameConfirmation(CardLayout card, JPanel parentPanel){
+        ErrorOutputBoundary presenter = new ErrorPresenter();
         JFrame confirmationWindow = new JFrame();
         JPanel confirmationPanel = new JPanel();
-        JLabel title = new JLabel();
-        title.setText("<html>"+ "Are you sure? This will overwrite your existing save files." +"</html>");
+        JLabel title = new JLabel("Are you sure? This will overwrite your existing save files.");
 
         JButton confirm = new JButton("Yes");
         ConfirmationController confirmationController =
-                new ConfirmationController(card, parentPanel, confirmationWindow);
+                new ConfirmationController(card, parentPanel, confirmationWindow, presenter);
         confirm.addActionListener(confirmationController);
 
         JButton reject = new JButton("No");

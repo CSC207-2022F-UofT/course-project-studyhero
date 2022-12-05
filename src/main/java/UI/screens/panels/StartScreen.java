@@ -1,8 +1,10 @@
 package UI.screens.panels;
 
 import use_cases.continue_game.ContinueGameController;
+import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
-import use_cases.new_game.NewGameController;
+import use_cases.new_game.NewGame;
+import controllers.new_game.NewGameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,25 +13,27 @@ public class StartScreen extends JPanel{
 
     CardLayout card;
     JPanel parentPanel;
-    ErrorPresenter cGRM;
+    ErrorOutputBoundary presenter;
 
-    public StartScreen(CardLayout card, JPanel parent, ErrorPresenter cGRM){
+    public StartScreen(CardLayout card, JPanel parent){
 
         this.card = card;
         this.parentPanel = parent;
-        this.cGRM = cGRM;
+        this.presenter = new ErrorPresenter();
 
         JLabel title = new JLabel("Start Game");
 
         //   ----- Buttons -----
+
         JButton newGameButton = new JButton("New Game");
-        NewGameController newGameListener = new NewGameController(card, parent);
-        newGameButton.addActionListener(newGameListener);
+        NewGame newGameUseCase = new NewGame("stats.csv", presenter);
+        NewGameController newGameController = new NewGameController(card, parentPanel, newGameUseCase);
+        newGameButton.addActionListener(newGameController);
 
         JButton continueGameButton = new JButton("Continue Game");
-        ContinueGameController continueGameButtonListener =
-                new ContinueGameController(card, parent, cGRM);
-        continueGameButton.addActionListener(continueGameButtonListener);
+        ContinueGameController continueGameController = new ContinueGameController(card, parent, presenter);
+        continueGameButton.addActionListener(continueGameController);
+
 
         JButton goToSettingsButton = new JButton("Settings");
         goToSettingsButton.addActionListener(e -> card.show(parent, "Start Settings"));
