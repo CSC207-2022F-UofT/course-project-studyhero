@@ -5,8 +5,8 @@ package inventorymenu.inventoryitem;
  */
 public interface Aggressive {
     /**
-     * Add attackBonus to player's stat
-     * @param attackBonus is the bonus attack that will be added to player's stat
+     * Add attackBonus to a unit's stat
+     * @param attackBonus is the bonus attack that will be added to a unit's stat
      */
     void enhanceAttack(int attackBonus);
 }

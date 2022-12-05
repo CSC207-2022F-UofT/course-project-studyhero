@@ -1,10 +1,10 @@
 package inventorymenu.inventoryitem;
 
-public class HealthPotion extends Potion implements Defensive{
+public class HealthPotion extends Potion implements Regenerative {
     /**
      *
-     * @param name This is the name of the AttackPotion
-     * @param effect This is the effect of the AttackPotion
+     * @param name of the AttackPotion
+     * @param effect of the AttackPotion
      */
     public HealthPotion(String name, int effect) {
         super("HealthPotion", name, effect);

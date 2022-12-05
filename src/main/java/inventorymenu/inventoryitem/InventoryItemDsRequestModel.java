@@ -10,10 +10,10 @@ public class InventoryItemDsRequestModel {
 
     /**
      *
-     * @param name name of the inventory item
-     * @param type type of the inventory item
-     * @param effect effect of the inventory item that will be added on player in some way
-     * @param id id of the inventory item in player's inventory.
+     * @param name of the inventory item
+     * @param type of the inventory item
+     * @param effect of the inventory item that will be added on player in some way
+     * @param id of the inventory item in player's inventory.
      */
     public InventoryItemDsRequestModel(int id, String type, String name, int effect) {
         this.id = id;
