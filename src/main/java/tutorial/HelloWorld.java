@@ -10,7 +10,6 @@ import inventory_menu.inventory_menu_use_case.delete_item_use_case.DeleteItemInp
 import inventory_menu.inventory_menu_use_case.delete_item_use_case.DeleteItemInteractor;
 import inventory_menu.inventory_menu_use_case.delete_item_use_case.DeleteItemOutputBoundary;
 import inventory_menu.inventoryscreens.*;
-import screens.panels.inventoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,12 +41,12 @@ public class HelloWorld {
         DeleteItemDsGateway deleteItemDsGateway;
         deleteItemDsGateway = new InventoryList(playerInventory);
         DeleteItemInputBoundary deleteItemInputBoundary = new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
-        DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
+        //DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
 
 
 
-        inventoryPanel inventoryScreen = new inventoryPanel(displayInventoryController, deleteItemController);
-        screens.add(inventoryScreen, "welcome");
+        //inventoryPanel inventoryScreen = new inventoryPanel(displayInventoryController, deleteItemController);
+        //screens.add(inventoryScreen, "welcome");
         cardLayout.show(screens, "inventory");
         application.pack();
         application.setVisible(true);

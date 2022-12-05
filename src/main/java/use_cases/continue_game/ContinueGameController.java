@@ -1,7 +1,6 @@
 package use_cases.continue_game;
 
 import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidInventory;
 import use_cases.file_checker.ValidStats;
 
@@ -15,17 +14,17 @@ public class ContinueGameController implements ActionListener {
     JPanel parent;
     ErrorOutputBoundary presenter;
 
-    public ContinueGameController(CardLayout card, JPanel parent){
+    public ContinueGameController(CardLayout card, JPanel parent, ErrorOutputBoundary presenter){
         this.card = card;
         this.parent = parent;
-        this.presenter = new ErrorPresenter();
+        this.presenter = presenter;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         ValidStats statsChecker = new ValidStats("stats.csv", presenter);
-        ValidInventory inventoryChecker = new ValidInventory("Inventory", presenter);
+        ValidInventory inventoryChecker = new ValidInventory("PlayerInventory.csv", presenter);
 
         System.out.println(statsChecker.isValid());
 

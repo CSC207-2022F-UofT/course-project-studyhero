@@ -1,6 +1,7 @@
 package UI.screens.panels;
 
 import use_cases.change_stats.ChangeStatsController;
+import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 
 import javax.swing.*;
@@ -9,8 +10,8 @@ import java.awt.*;
 public class ChangeStatsScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
-    ErrorPresenter cGRM;
-    public ChangeStatsScreen(CardLayout card, JPanel parent, ErrorPresenter cGRM){
+    ErrorOutputBoundary cGRM;
+    public ChangeStatsScreen(CardLayout card, JPanel parent, ErrorOutputBoundary cGRM){
         this.card = card;
         this.parentPanel = parent;
         this.cGRM = cGRM;

@@ -1,8 +1,9 @@
 package UI.screens.panels.settings;
 
 import entities.MusicPlayer;
-import use_cases.errors.ErrorPresenter;
-import use_cases.new_game.NewGameController;
+import use_cases.errors.ErrorOutputBoundary;
+import controllers.new_game.NewGameController;
+import use_cases.new_game.NewGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +11,9 @@ import java.awt.*;
 public class SettingsScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
-    ErrorPresenter presenter;
+    ErrorOutputBoundary presenter;
     public SettingsScreen(CardLayout card, JPanel parentPanel,
-                          ErrorPresenter presenter, String prevPanel,
+                          ErrorOutputBoundary presenter, String prevPanel,
                           MusicPlayer player) {
         this.card = card;
         this.parentPanel = parentPanel;
@@ -24,7 +25,8 @@ public class SettingsScreen extends JPanel {
         // ===== Main Controls =====
         JPanel mainControls = new JPanel();
         JButton newGameButton = new JButton("New Game");
-        NewGameController newGameController = new NewGameController(card, parentPanel);
+        NewGame newGameInteractor = new NewGame("stats.csv", presenter);
+        NewGameController newGameController = new NewGameController(card, parentPanel,newGameInteractor);
         newGameButton.addActionListener(newGameController);
 
         JButton goBackButton = new JButton("Back");

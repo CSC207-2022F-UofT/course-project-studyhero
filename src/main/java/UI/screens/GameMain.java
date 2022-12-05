@@ -5,6 +5,7 @@ import UI.screens.panels.breaks.SellMenuScreen;
 import UI.screens.panels.breaks.ShopMenuScreen;
 import UI.screens.panels.settings.SettingsScreen;
 import entities.MusicPlayer;
+import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 
 import javax.swing.*;
@@ -15,14 +16,14 @@ public class GameMain {
         JFrame mainFrame = new JFrame("Test Game");
         JPanel mainPanel = new JPanel();
         CardLayout card = new CardLayout();
-        ErrorPresenter cGRM = new ErrorPresenter();
+        ErrorOutputBoundary cGRM = new ErrorPresenter();
         mainPanel.setLayout(card);
 
         // ----- Music ------
         MusicPlayer player = new MusicPlayer("bgm.wav");
         player.play();
 
-        StartScreen startScreen = new StartScreen(card, mainPanel,cGRM);
+        StartScreen startScreen = new StartScreen(card, mainPanel);
         StoryScreen storyScreen = new StoryScreen(card, mainPanel);
         StudyScreen timerScreen = new StudyScreen(card,mainPanel);
 

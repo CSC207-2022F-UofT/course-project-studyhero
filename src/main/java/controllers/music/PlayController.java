@@ -1,4 +1,4 @@
-package use_cases.music;
+package controllers.music;
 
 import entities.MusicPlayer;
 
