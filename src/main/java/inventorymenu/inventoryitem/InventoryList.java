@@ -17,6 +17,15 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
+
+    /**
+     * Get inventoryList from the corresponding file object
+     * @return the inventory list
+     */
+    public ArrayList<InventoryItemDsRequestModel> getInventoryList() {
+        return inventoryList;
+    }
+
     private ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
 
     /**
@@ -31,6 +40,13 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
         headers.put("item_name", 2);
         headers.put("item_effect", 3);
 
+        readInventoryList();
+    }
+
+    /**
+     * Read the inventory File and record the information to inventory list
+     */
+    public void readInventoryList(){
         if(csvFile.length() == 0){
             save();
         }else{
@@ -68,9 +84,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
                 throw new RuntimeException(e);
             }
         }
-
     }
-
 
     /**
      * Add new InventoryItem to the inventory
@@ -91,7 +105,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public InventoryItemDsRequestModel attachId(InventoryItem item) {
-        int id = CheckLatestInventoryItemId();
+        int id = CheckLatestInventoryItemId() + 1;
 
         return new InventoryItemDsRequestModel(id,
                 item.getType(),
@@ -107,14 +121,14 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
     @Override
     public int CheckLatestInventoryItemId() {
 
-        return inventoryList.size() + 1;
+        return inventoryList.size();
     }
 
 
     /**
      * Rewrite the inventory file with the added inventoryItem
      */
-    private void save(){
+    public void save(){
         BufferedWriter writer;
         try{
             writer = new BufferedWriter(new FileWriter(csvFile));
@@ -143,7 +157,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public boolean inventoryFull() {
-        return CheckLatestInventoryItemId() >=21;
+        return CheckLatestInventoryItemId() >=20;
     }
 
     /**
@@ -153,51 +167,19 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
     @Override
     public PlayerDisplayInventoryDsRequestModel getInventoryListIterator() {
         updateInventoryList();
-        System.out.println("Iterator list length " + inventoryList.size());
         return new PlayerDisplayInventoryDsRequestModel(inventoryList);
     }
 
+    /**
+     * Updated the inventory list information
+     */
     @Override
     public void updateInventoryList() {
         inventoryList.clear();
-        if(csvFile.length() == 0){
-            save();
-        }else{
-
-            BufferedReader reader;
-            try {
-                reader = new BufferedReader(new FileReader(csvFile));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                reader.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            String row;
-            while (true) {
-                try {
-                    if (((row = reader.readLine()) == null)) break;
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                String[] col = row.split(",");
-                int itemId = Integer.parseInt(col[headers.get("item_id")]);
-                String itemType = String.valueOf(col[headers.get("item_type")]);
-                String itemName = String.valueOf(col[headers.get("item_name")]);
-                int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
-                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId, itemType, itemName,itemEffect);
-                inventoryList.add(item);
-            }
-            try {
-                reader.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        readInventoryList();
     }
+
+
 
     /**
      * Check if the item is in the inventory
@@ -205,8 +187,7 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public boolean itemExist(int id) {
-        System.out.println(inventoryList.size());
-        return id <= inventoryList.size();
+        return id <= inventoryList.size() && id >= 1;
     }
 
     /**
@@ -216,21 +197,12 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
     @Override
     public void deleteItem(int id) {
             inventoryList.remove(id - 1);
-            reassign();
+            int newId = 1;
+            for(InventoryItemDsRequestModel item : inventoryList){
+            item.setId(newId);
+            newId++;
+            }
             save();
-        System.out.println("Delete Item inventory length " + inventoryList.size());
-    }
-
-    /**
-     * Reassign the ids for items in inventory
-     */
-    @Override
-    public void reassign() {
-        int newId = 1;
-       for(InventoryItemDsRequestModel item : inventoryList){
-           item.setId(newId);
-           newId++;
-       }
     }
 
     /**
@@ -240,8 +212,10 @@ public class InventoryList implements AddItemDsGateway, PlayerDisplayInventoryDs
      */
     @Override
     public DeleteItemDsRequestModel getName(int id) {
-        return new DeleteItemDsRequestModel(inventoryList.get(id).getName());
-
+        if(itemExist(id)){
+            return new DeleteItemDsRequestModel(inventoryList.get(id - 1).getName());
+        }
+        return null;
     }
 
     /**

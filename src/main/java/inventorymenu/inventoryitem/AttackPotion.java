@@ -1,7 +1,7 @@
 package inventorymenu.inventoryitem;
 
 
-public class AttackPotion extends Potion implements Aggresive{
+public class AttackPotion extends Potion implements Aggressive {
 
 
     /**

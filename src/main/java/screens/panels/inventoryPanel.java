@@ -82,7 +82,6 @@ public class inventoryPanel extends JPanel implements ActionListener {
                 ArrayList<String> response = displayInventoryResponseModel.showItem();
                 inventoryInfo.setText("");
                 for(String line : response){
-                    System.out.println("1-----");
                     inventoryInfo.append(line + newline);
                 }
 

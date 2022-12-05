@@ -96,7 +96,27 @@ class PlayerDisplayInventoryDsRequestModelTest {
     }
 
     @Test
-    void hasNext() {
+    void hasNextPositionFirst() {
+        PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
+        assertTrue(referenceModel.hasNext());
     }
+
+    @Test
+    void hasNextPositionMiddle() {
+        PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
+        referenceModel.getNext();
+        assertTrue(referenceModel.hasNext());
+    }
+
+    @Test
+    void hasNextPositionLast() {
+        PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
+        referenceModel.getNext();
+        referenceModel.getNext();
+        referenceModel.getNext();
+        referenceModel.getNext();
+        assertTrue(!referenceModel.hasNext());
+    }
+
 }
 
