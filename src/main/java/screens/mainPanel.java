@@ -1,6 +1,8 @@
 package screens;
 
 import screens.panels.*;
+import stats_display_use_case.StatsDisplayInteractor;
+import stats_storage.StatsFileDataAccess;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +31,8 @@ public class mainPanel implements ActionListener {
         JPanel buyMenuP = buyMenuPanel.buyMenuPanel();
         JPanel sellMenuP = sellMenuPanel.sellMenuPanel();
         JPanel bossP = bossPanel.bossPanel();
+        StatsPanel statsPanel = new StatsPanel(new StatsDisplayController(new StatsDisplayInteractor(new StatsFileDataAccess()),
+        new StatsDisplayPresenter()));
 
         // all navigating buttons
         JButton menuToStart = new JButton("Start");
@@ -54,6 +58,10 @@ public class mainPanel implements ActionListener {
         JButton buyMenuToShopMenu = new JButton("Back to Shop");
         buyMenuToShopMenu.addActionListener(e -> card.show(mainPanel, "Shop"));
         buyMenuP.add(buyMenuToShopMenu);
+
+        JButton displayStats = new JButton("My Stats");
+        displayStats.addActionListener(e -> card.show(mainPanel, "Stats"));
+        menuP.add(displayStats);
 
 
         JButton shopMenuToSellMenu = new JButton("Sell items");
@@ -89,6 +97,7 @@ public class mainPanel implements ActionListener {
         mainPanel.add(buyMenuP, "Buy Menu");
         mainPanel.add(sellMenuP, "Sell Menu");
         mainPanel.add(bossP, "Boss");
+        mainPanel.add(statsPanel, "Stats");
 
 
         card.show(mainPanel, "Menu");
