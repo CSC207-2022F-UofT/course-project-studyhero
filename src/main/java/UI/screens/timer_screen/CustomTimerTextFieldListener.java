@@ -1,4 +1,4 @@
-package Timer.timer_screen;
+package UI.screens.timer_screen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

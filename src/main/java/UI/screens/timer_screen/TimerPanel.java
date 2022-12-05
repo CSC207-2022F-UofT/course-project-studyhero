@@ -1,4 +1,4 @@
-package Timer.timer_screen;
+package UI.screens.timer_screen;
 
 import Timer.timer_use_cases.TimerRequestModel;
 import Timer.timer_use_cases.TimerResponseModel;
@@ -46,6 +46,8 @@ public class TimerPanel extends JPanel implements ActionListener {
         presetLongButton.addActionListener(this);
         customTimerConfirmButton.addActionListener(this);
         customTimerTextField.addActionListener(this);
+        goToBreakMenuButton.addActionListener(e -> card.show(parentPanel, "Break"));
+
 
         CaretListener cListener = new CaretListener() {
             @Override

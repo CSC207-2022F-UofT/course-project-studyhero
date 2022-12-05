@@ -1,4 +1,5 @@
 package UI.screens;
+import UI.screens.timer_screen.TimerPanel;
 import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
 import UI.screens.panels.breaks.SellMenuScreen;
@@ -10,7 +11,6 @@ import use_cases.errors.ErrorPresenter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
 
 public class GameMain {
     public static void main(String[] args){
@@ -26,7 +26,7 @@ public class GameMain {
 
         StartScreen startScreen = new StartScreen(card, mainPanel);
         StoryScreen storyScreen = new StoryScreen(card, mainPanel);
-        StudyScreen timerScreen = new StudyScreen(card,mainPanel);
+        TimerPanel timerScreen = new TimerPanel(card,mainPanel);
 
         BreakScreen breakScreen = new BreakScreen(card,mainPanel);
         SellMenuScreen sellMenuScreen = new SellMenuScreen(card, mainPanel);

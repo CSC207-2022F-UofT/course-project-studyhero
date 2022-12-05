@@ -1,4 +1,4 @@
-package Timer.timer_screen;
+package UI.screens.timer_screen;
 
 public class CustomTimerTextField {
 }

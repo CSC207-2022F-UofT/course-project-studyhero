@@ -1,4 +1,4 @@
-package Timer.timer_screen;
+package UI.screens.timer_screen;
 
 import Timer.timer_use_cases.TimerRequestModel;
 
