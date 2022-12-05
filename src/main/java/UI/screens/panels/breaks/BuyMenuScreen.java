@@ -5,7 +5,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
-public class SellMenuScreen extends JPanel implements ListSelectionListener {
+public class BuyMenuScreen extends JPanel implements ListSelectionListener {
     CardLayout card;
     JPanel parentPanel;
 
@@ -13,9 +13,9 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
     static JLabel selectedItem;
     static JLabel cost;
 
-    public SellMenuScreen(CardLayout card, JPanel parentPanel) {
+    public BuyMenuScreen(CardLayout card, JPanel parentPanel) {
         // Initialize Panels
-        JPanel sellPanel = new JPanel();
+        JPanel buyPanel = new JPanel();
         JPanel userPanel = new JPanel();
         JPanel shopPanel = new JPanel();
         JPanel topPanel = new JPanel();
@@ -23,11 +23,12 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
         this.card = card;
         this.parentPanel = parentPanel;
 
-        JLabel title = new JLabel("Sell Menu");
+        JLabel shopInv = new JLabel("Shop Inventory");
 
-        JLabel userInv = new JLabel("User Inventory");
+        JLabel title = new JLabel("Buy Menu");
+        this.add(title);
 
-        JButton backToBreak = new JButton("Back");
+        JButton backToBreak = new JButton("Back to Shop");
         backToBreak.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
 
         // Temporary: Add list
@@ -39,7 +40,7 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
         list.setMaximumSize(new Dimension(400, 300));
 
         selectedItem = new JLabel("Selected: ");
-        cost = new JLabel("Sell Cost: ");
+        cost = new JLabel("Cost: ");
 
         // Layouts
         BoxLayout mainBox = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -51,8 +52,8 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
         BoxLayout shopBox = new BoxLayout(shopPanel, BoxLayout.Y_AXIS);
         shopPanel.setLayout(shopBox);
 
-        BoxLayout sellBox = new BoxLayout(sellPanel, BoxLayout.X_AXIS);
-        sellPanel.setLayout(sellBox);
+        BoxLayout buyBox = new BoxLayout(buyPanel, BoxLayout.X_AXIS);
+        buyPanel.setLayout(buyBox);
 
         BoxLayout topBox = new BoxLayout(topPanel, BoxLayout.Y_AXIS);
         topPanel.setLayout(topBox);
@@ -60,22 +61,23 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
         // Add to panels
         topPanel.add(title);
 
-        userPanel.add(userInv);
-        userPanel.add(list);
+        shopPanel.add(shopInv);
+        shopPanel.add(list);
 
-        shopPanel.add(selectedItem);
-        shopPanel.add(cost);
+        userPanel.add(selectedItem);
+        userPanel.add(cost);
 
-        sellPanel.add(userPanel, BorderLayout.WEST);
-        sellPanel.add(shopPanel, BorderLayout.EAST);
+        buyPanel.add(shopPanel, BorderLayout.WEST);
+        buyPanel.add(userPanel, BorderLayout.EAST);
 
         this.add(topPanel);
-        this.add(sellPanel);
+        this.add(buyPanel);
+        this.add(backToBreak);
+
         this.add(backToBreak);
     }
-
     public void valueChanged(ListSelectionEvent e) {
         selectedItem.setText("Selected: " + list.getSelectedValue().toString());
-        cost.setText("Sell Cost: " + list.getSelectedIndex());
+        cost.setText("Cost: " + list.getSelectedIndex());
     }
 }

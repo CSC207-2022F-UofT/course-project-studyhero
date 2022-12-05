@@ -13,8 +13,18 @@ public class ShopMenuScreen extends JPanel {
         JLabel title = new JLabel("Shop Menu");
         this.add(title);
 
+        JButton buyMenu = new JButton("Buy Items");
+        buyMenu.addActionListener(e -> card.show(parentPanel, "Buy Menu"));
+
+        JButton sellMenu = new JButton("Sell Items");
+        sellMenu.addActionListener(e -> card.show(parentPanel, "Sell Menu"));
+
         JButton backToBreak = new JButton("Back");
-        backToBreak.addActionListener(e -> card.show(parentPanel, "Break"));
+        backToBreak.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
+
+        this.add(buyMenu);
+        this.add(sellMenu);
         this.add(backToBreak);
+
     }
 }
