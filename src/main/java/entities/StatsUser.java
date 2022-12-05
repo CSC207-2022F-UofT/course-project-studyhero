@@ -3,7 +3,7 @@ package entities;
 import java.util.HashMap;
 import java.util.Map;
 
-/** An implementation of the Stats entity. Stats stores all the stats relevant to the player and the boss,
+/** An implementation of the Stats entity. 'Stats' stores all the stats relevant to the player and the boss,
  * which includes level, gold, hp, damage and defence of the user and the hp of the boss.
  */
 public class StatsUser implements Stats {
@@ -51,7 +51,7 @@ public class StatsUser implements Stats {
     }
 
     public int changeGold(int by) {
-        this.gold += changerValidator(this.gold, by);;
+        this.gold += changerValidator(this.gold, by);
         return this.gold;
     }
 
@@ -69,7 +69,7 @@ public class StatsUser implements Stats {
     }
 
     public int changeDefence(int by) {
-        this.defence += changerValidator(this.defence, by);;
+        this.defence += changerValidator(this.defence, by);
         return this.defence;
     }
 

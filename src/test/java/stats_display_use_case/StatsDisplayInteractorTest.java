@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import screens.StatsDisplayPresenter;
 import screens.StatsDisplayViewModel;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class StatsDisplayInteractorTest {
     StatsDisplayInputBoundary statsInteractor;
 
