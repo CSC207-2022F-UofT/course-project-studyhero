@@ -19,7 +19,7 @@ public class GameMain {
         mainPanel.setLayout(card);
 
         // ----- Music ------
-        MusicPlayer player = new MusicPlayer("bgm2.wav");
+        MusicPlayer player = new MusicPlayer("bgm.wav");
         player.play();
 
         StartScreen startScreen = new StartScreen(card, mainPanel,cGRM);

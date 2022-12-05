@@ -1,6 +1,7 @@
 package use_cases.new_game;
 
-import InventoryMenu.InventoryItem.InventoryList;
+import inventory_menu.inventory_item.InitializePlayerInventory;
+import inventory_menu.inventory_item.InventoryList;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidInventory;
 import use_cases.file_checker.ValidStats;
@@ -23,13 +24,13 @@ public class NewGameController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         ErrorPresenter presenter = new ErrorPresenter();
         ValidStats statsFile = new ValidStats("stats.csv", presenter);
-        ValidInventory inventoryFile = new ValidInventory("Inventory", presenter);
-        if (statsFile.isPlayable() && inventoryFile.fileExists()){
+        ValidInventory inventoryFile = new ValidInventory("PlayerInventory.csv", presenter);
+        if (statsFile.isPlayable() && inventoryFile.isPlayable()){
             new NewGameConfirmation(card, parentPanel);
         }
         else{
             new NewGame("stats.csv");
-            new InventoryList("Inventory");
+            new InventoryList("PlayerInventory.csv");
             card.show(parentPanel, "Story");
         }
     }

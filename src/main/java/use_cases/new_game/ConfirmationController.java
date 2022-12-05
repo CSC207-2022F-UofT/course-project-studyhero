@@ -1,6 +1,6 @@
 package use_cases.new_game;
 
-import InventoryMenu.InventoryItem.InventoryList;
+import inventory_menu.inventory_item.InventoryList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class ConfirmationController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         new NewGame("stats.csv");
-        new InventoryList("Inventory");
+        new InventoryList("PlayerInventory.csv");
         parentFrame.dispose();
         card.show(parentPanel, "Story");
     }

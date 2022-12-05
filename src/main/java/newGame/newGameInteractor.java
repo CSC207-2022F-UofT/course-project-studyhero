@@ -1,6 +1,6 @@
 package newGame;
 
-import InventoryMenu.InventoryItem.InventoryList;
+import inventory_menu.inventory_item.InventoryList;
 import entities.StatsUser;
 import entities.user;
 

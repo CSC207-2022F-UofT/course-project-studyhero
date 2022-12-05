@@ -1,6 +1,7 @@
 package UI.screens.panels;
 
 import use_cases.continue_game.ContinueGameController;
+import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.new_game.NewGameController;
 
@@ -11,7 +12,7 @@ public class StartScreen extends JPanel{
 
     CardLayout card;
     JPanel parentPanel;
-    ErrorPresenter cGRM;
+    ErrorOutputBoundary cGRM;
 
     public StartScreen(CardLayout card, JPanel parent, ErrorPresenter cGRM){
 
@@ -28,7 +29,7 @@ public class StartScreen extends JPanel{
 
         JButton continueGameButton = new JButton("Continue Game");
         ContinueGameController continueGameButtonListener =
-                new ContinueGameController(card, parent, cGRM);
+                new ContinueGameController(card, parent);
         continueGameButton.addActionListener(continueGameButtonListener);
 
         JButton goToSettingsButton = new JButton("Settings");
