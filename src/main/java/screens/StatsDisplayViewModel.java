@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class StatsDisplayViewModel {
 
-    Map <String, String> statsAsStrings;
+    final Map <String, String> statsAsStrings;
     public StatsDisplayViewModel(Map<String, Integer> statsMap) {
-        statsAsStrings = new HashMap<String, String>();
+        statsAsStrings = new HashMap<>();
         for (Map.Entry<String, Integer> entry : statsMap.entrySet()) {
             statsAsStrings.put(entry.getKey(), String.valueOf(entry.getValue()));
         }
