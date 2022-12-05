@@ -10,7 +10,7 @@ public interface Boss {
     int getMaxHp();
 
     /**
-     * Returns the current hp of the boss.
+     * Returns the current hp of the boss, which can be less than or equal to the maximum hp.
      */
     int getCurrentHp();
 
@@ -20,7 +20,8 @@ public interface Boss {
     int getDamage();
 
     /**
-     * Returns the boss's defence stat.
+     * Returns the boss's defence stat. This affects how much the user's damage reduces the boss's hp, and scales with
+     * the boss's level.
      */
     int getDefence();
 

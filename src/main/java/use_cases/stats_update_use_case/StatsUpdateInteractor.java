@@ -2,7 +2,7 @@ package use_cases.stats_update_use_case;
 
 import entities.Stats;
 import entities.StatsUser;
-import use_cases.errors.ErrorPresenter;
+import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;
 
@@ -11,47 +11,57 @@ import java.util.Map;
 public class StatsUpdateInteractor implements StatsUpdateInterface {
     Stats stats;
     ValidStats validStats;
-    ErrorPresenter statsErrorPresenter;
+    ErrorOutputBoundary statsErrorOutputBoundary;
 
-    public StatsUpdateInteractor(ErrorPresenter statsErrorPresenter, String filename) {
-        this.statsErrorPresenter = statsErrorPresenter;
-        this.validStats = new ValidStats(filename, this.statsErrorPresenter);
+    /**
+     * Constructor for StatsUpdateInteractor.
+     *
+     * @param statsErrorOutputBoundary output boundary for error cases when trying to load or save stats
+     * @param filename name of the file where the stats are stored in persistence.
+     */
+    public StatsUpdateInteractor(ErrorOutputBoundary statsErrorOutputBoundary, String filename) {
+        this.statsErrorOutputBoundary = statsErrorOutputBoundary;
+        this.validStats = new ValidStats(filename, this.statsErrorOutputBoundary);
         Map<String, Integer> statsMap = this.validStats.load();
         this.stats = new StatsUser(statsMap);
     }
     @Override
     public void updateLevel() {
         this.stats.updateLevel();
-        saveStatsToStorageAndReturn();
+        saveStatsToStorage();
     }
     @Override
     public void updateGold(int changeBy) {
         this.stats.updateGold(changeBy);
-        saveStatsToStorageAndReturn();
+        saveStatsToStorage();
     }
     @Override
-    public void updateHp(int changeBy) {
+    public void updateCurrentHp(int changeBy) {
         this.stats.updateCurrHp(changeBy);
-        saveStatsToStorageAndReturn();
+        saveStatsToStorage();
     }
     @Override
     public void updateTempDamage(int changeBy) {
         this.stats.updateTempDamage(changeBy);
-        saveStatsToStorageAndReturn();
+        saveStatsToStorage();
     }
 
     @Override
     public void updateBaselineDamage(int changeBy) {
         this.stats.updateBaselineDamage(changeBy);
-        saveStatsToStorageAndReturn();
+        saveStatsToStorage();
     }
     @Override
     public void updateDefence(int changeBy) {
         this.stats.updateDefence(changeBy);
-        saveStatsToStorageAndReturn();
+        saveStatsToStorage();
     }
-    private void saveStatsToStorageAndReturn() {
-        StatSave statSave = new StatSave(this.stats.getUserStats(), this.statsErrorPresenter);
+
+    /**
+     * Helper method for saving the stat map to storage
+     */
+    private void saveStatsToStorage() {
+        StatSave statSave = new StatSave(this.stats.getUserStats(), this.statsErrorOutputBoundary);
         statSave.save();
     }
 

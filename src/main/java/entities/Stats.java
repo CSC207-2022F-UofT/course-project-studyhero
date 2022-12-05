@@ -2,7 +2,7 @@ package entities;
 
 import java.util.Map;
 
-/** The public interface for the Stats entity. Stats stores all the stats relevant to the player and the boss,
+/** The public interface for the Stats entity. Stats stores all the stats relevant to the player
  * which includes level, gold, hp, damage and defence of the user and the hp of the boss.
  */
 public interface Stats {

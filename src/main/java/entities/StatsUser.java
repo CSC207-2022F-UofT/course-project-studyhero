@@ -16,6 +16,9 @@ public class StatsUser implements Stats {
     int defence;
     int maxHp;
 
+    /**
+     * Empty constructor for the user's stats. This initializes the stats for whenever a new game is started.
+     */
     public StatsUser() {
         this.level = 1;
         this.gold = 0;
@@ -26,6 +29,13 @@ public class StatsUser implements Stats {
         this.maxHp = 100;
     }
 
+    /**
+     * Constructor for the user's stats that takes in a map from the string describing the type of stat to the value of
+     * the stat, stored as an integer.
+     *
+     * @param statsMap map from the string describing the type of stat to the integer value of the stat. E.g.
+     *                 statsMap.get("gold") is 12 if the user has 12 gold.
+     */
     public StatsUser(Map<String, Integer> statsMap) {
         this.level = statsMap.get("level");
         this.gold = statsMap.get("gold");
