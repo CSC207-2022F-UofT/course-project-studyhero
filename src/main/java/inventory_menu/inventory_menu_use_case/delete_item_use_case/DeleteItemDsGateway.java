@@ -18,11 +18,6 @@ public interface DeleteItemDsGateway {
      void deleteItem(int id);
 
      /**
-      * Reassign the ids for items in inventory
-      */
-     void reassign();
-
-     /**
       * Get the name of the inventory item correspond to the id in the inventory
       * @param id of the item wants to be removed from inventory
       * @return the name of the item that wants to be removed from inventory

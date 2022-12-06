@@ -18,19 +18,19 @@ class PlayerDisplayInventoryDsRequestModelTest {
         InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
                 "Weapon",
                 "Sword",
-                13);
+                13, 10);
         InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
                 "AttackPotion",
                 "StrengthPotion",
-                5);
+                5, 23);
         InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
                 "Weapon",
                 "HammerHammer",
-                18);
+                18, 43);
         InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
                 "Shield",
                 "BronzeShield",
-                15);
+                15, 20);
 
         inventoryList.add(item1);
         inventoryList.add(item2);
@@ -44,7 +44,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
      */
     @Test
     void getNextCurrentPositionZero () {
-        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(1,"Weapon","Sword",13);
+        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(1,"Weapon","Sword",13, 10);
 
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
         InventoryItemDsRequestModel referenceItem = referenceModel.getNext();
@@ -63,7 +63,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
         InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(2,
                 "AttackPotion",
                 "StrengthPotion",
-                5);
+                5, 23);
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
         referenceModel.getNext();
         InventoryItemDsRequestModel referenceItem = referenceModel.getNext();
@@ -82,7 +82,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
         InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(4,
                 "Shield",
                 "BronzeShield",
-                15);
+                15, 20);
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
         referenceModel.getNext();
         referenceModel.getNext();
@@ -93,10 +93,31 @@ class PlayerDisplayInventoryDsRequestModelTest {
         assertEquals(item.getName(), referenceItem.getName());
         assertEquals(item.getEffect(), referenceItem.getEffect());
         assertEquals(item.getType(), referenceItem.getType());
+        assertEquals(item.getGoldValue(), referenceItem.getGoldValue());
     }
 
     @Test
-    void hasNext() {
+    void hasNextPositionFirst() {
+        PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
+        assertTrue(referenceModel.hasNext());
     }
+
+    @Test
+    void hasNextPositionMiddle() {
+        PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
+        referenceModel.getNext();
+        assertTrue(referenceModel.hasNext());
+    }
+
+    @Test
+    void hasNextPositionLast() {
+        PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
+        referenceModel.getNext();
+        referenceModel.getNext();
+        referenceModel.getNext();
+        referenceModel.getNext();
+        assertTrue(!referenceModel.hasNext());
+    }
+
 }
 

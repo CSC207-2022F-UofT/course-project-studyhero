@@ -1,13 +1,13 @@
 package inventory_menu.inventory_item;
 
-public class HealthPotion extends Potion implements Defensive{
+public class HealthPotion extends Potion implements Regenerative {
     /**
-     *
-     * @param name This is the name of the AttackPotion
-     * @param effect This is the effect of the AttackPotion
+     * @param goldValue of the HealthPotion
+     * @param name of the HealthPotion
+     * @param effect of the HealthPotion
      */
-    public HealthPotion(String name, int effect) {
-        super("HealthPotion", name, effect);
+    public HealthPotion(String name, int effect, int goldValue) {
+        super("HealthPotion", name, effect, goldValue);
     }
     /**
      * Add healthBonus to player's health (Incomplete)
