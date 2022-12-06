@@ -84,11 +84,18 @@ public class TimerPanel extends JPanel implements ActionListener {
 
         timerText.setFont(new Font("Verdana", Font.PLAIN, 48));
 
-        timer = new Timer(500, new ActionListener() {
+        timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                timerText.setText(tPresenter.updateTimer());
-                progressBar.setValue(progressBar.getMaximum() - convertTimeToInt(tPresenter.updateTimer()));
+                timerText.setText(tPresenter.getOutputTime());
+                progressBar.setValue(progressBar.getMaximum() - convertTimeToInt(tPresenter.getOutputTime()));
+                if ((tPresenter.getOutputTime()).equals("00:00:00")) {
+                    timer.stop();
+                    goToBreakMenuButton.setVisible(true);
+                }
+                else {
+                    goToBreakMenuButton.setVisible(false);
+                }
             }
         });
 
@@ -114,6 +121,7 @@ public class TimerPanel extends JPanel implements ActionListener {
             }
             timer.stop();
             timerText.setText("00:00:00");
+            goToBreakMenuButton.setVisible(true);
         }
         int totalTime = 0;
         if (e.getSource() == customTimerConfirmButton) {

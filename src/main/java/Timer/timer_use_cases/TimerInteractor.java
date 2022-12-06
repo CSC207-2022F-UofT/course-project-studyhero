@@ -34,7 +34,7 @@ public class TimerInteractor implements TimerInputBoundary {
             public void run() {
                 tResponseModel.setOutputTime(TimerEntity.timeLeft);
             }
-        }, 0, 1000);
+        }, 0, 100);
     }
 
     @Override
