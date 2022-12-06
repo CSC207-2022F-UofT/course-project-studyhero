@@ -1,12 +1,12 @@
 package screens.panels;
 
-import inventory_menu.inventory_menu_use_case.delete_item_use_case.*;
-import inventory_menu.inventory_menu_use_case.display_player_inventory_use_case.*;
-import inventory_menu.inventoryitem.PlayerInventoryFile;
-import inventory_menu.inventoryscreens.DeleteItemController;
-import inventory_menu.inventoryscreens.DeleteItemPresenter;
-import inventory_menu.inventoryscreens.PlayerDisplayInventoryController;
-import inventory_menu.inventoryscreens.PlayerDisplayInventoryPresenter;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.*;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.*;
+import inventorymenu.inventoryitem.PlayerInventoryFile;
+import inventorymenu.inventoryscreens.DeleteItemController;
+import inventorymenu.inventoryscreens.DeleteItemPresenter;
+import inventorymenu.inventoryscreens.PlayerDisplayInventoryController;
+import inventorymenu.inventoryscreens.PlayerDisplayInventoryPresenter;
 
 import javax.swing.*;
 import java.awt.*;
