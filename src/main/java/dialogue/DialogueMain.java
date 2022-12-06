@@ -9,9 +9,6 @@ public class DialogueMain {
 
     public static void main(String[] args) { new DialogueWindowUI().createWindow(); }
 
-//    public DialogueRunTest() {
-//        GameWindowUI.createWindow();}
-
 
 }
 

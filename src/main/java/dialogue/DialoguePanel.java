@@ -20,29 +20,35 @@ What the classes should do:
 
 public class DialoguePanel extends JPanel {
 
-    JPanel dialoguePanel;
-    JTextArea dialogueText;
-    Font dialoguefont = new Font("Papyrus", Font.PLAIN, 30);
+    // Graphics2D g2;
 
-    public DialoguePanel() {
+    Font dialogueFont = new Font("Papyrus", Font.PLAIN, 12);
 
-        // DIALOGUE CONTAINER (PANEL)
-        dialoguePanel = new JPanel();
-        dialoguePanel.setBounds(100, 100, 500, 150);
-        dialoguePanel.setBackground(Color.black);
+    public DialoguePanel() {}
 
-        // DIALOGUE TEXT
+    public JPanel createDialoguePanel() {
 
-//        dialogueText = new JTextArea("AAAA");
-//        dialogueText.setBounds(100, 100, 500, 150);
-//        dialogueText.setBackground(Color.red);
-//        dialogueText.setForeground(Color.white);
-//        dialogueText.setFont(dialoguefont);
-//        dialogueText.setLineWrap(true);
-        // TODO: Figure out whether to create different Panels for different Dialogue Cases
+        // ---------- DIALOGUE TEXT PANEL ---------- (textPanel)
+        JPanel textPanel = new JPanel();
+        textPanel.setBounds(200, 100, 400, 150);
+        textPanel.setBackground(Color.blue);
+
+        //              ACTUAL TEXT
+        JTextArea mainTextArea = new JTextArea("calls the presenter");
+        mainTextArea.setBounds(200, 100, 400, 150);
+        mainTextArea.setBackground(Color.red);
+        mainTextArea.setForeground(Color.white);
+        mainTextArea.setFont(dialogueFont);
+        mainTextArea.setLineWrap(true);
+        mainTextArea.setEditable(false);
+        textPanel.add(mainTextArea);
+        // ------------ (end of textPanel)--------------
+
+
+        //TODO: Figure out how to add a graphics2d to a JPanel
+
+        return textPanel;}
 
 
     }
 
-
-}
