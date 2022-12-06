@@ -23,34 +23,7 @@ public class HelloWorld {
         for (int i = 1; i <= 100; i++) {
             System.out.println(convert(i));
         }
-        InitializePlayerInventory.InitializePlayerInventory(playerInventory);
 
-        JFrame application = new JFrame("Inventory Example");
-        CardLayout cardLayout = new CardLayout();
-        JPanel screens = new JPanel(cardLayout);
-        application.add(screens);
-
-        PlayerDisplayInventoryDsGateway playerDisplayInventoryDsGateway;
-        playerDisplayInventoryDsGateway = new PlayerInventoryFile(playerInventory);
-
-
-        PlayerDisplayInventoryOutputBoundary playerDisplayInventoryPresenter = new PlayerDisplayInventoryPresenter();
-        PlayerDisplayInventoryInputBoundary playerDisplayInventoryInteractor = new PlayerDisplayInventoryInteractor(playerDisplayInventoryDsGateway, playerDisplayInventoryPresenter);
-        PlayerDisplayInventoryController displayInventoryController = new PlayerDisplayInventoryController(playerDisplayInventoryInteractor);
-
-        DeleteItemOutputBoundary deleteItemPresenter = new DeleteItemPresenter();
-        DeleteItemDsGateway deleteItemDsGateway;
-        deleteItemDsGateway = new PlayerInventoryFile(playerInventory);
-        DeleteItemInputBoundary deleteItemInputBoundary = new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
-        DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
-
-
-
-        inventoryPanel inventoryScreen = new inventoryPanel(displayInventoryController, deleteItemController);
-        screens.add(inventoryScreen, "welcome");
-        cardLayout.show(screens, "inventory");
-        application.pack();
-        application.setVisible(true);
 
     }
 

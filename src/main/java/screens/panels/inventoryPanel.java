@@ -1,10 +1,12 @@
 package screens.panels;
 
-import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemRequestModel;
-import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemResponseModel;
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryResponseModel;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.*;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.*;
+import inventorymenu.inventoryitem.PlayerInventoryFile;
 import inventorymenu.inventoryscreens.DeleteItemController;
+import inventorymenu.inventoryscreens.DeleteItemPresenter;
 import inventorymenu.inventoryscreens.PlayerDisplayInventoryController;
+import inventorymenu.inventoryscreens.PlayerDisplayInventoryPresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,21 +21,29 @@ public class inventoryPanel extends JPanel implements ActionListener {
     private JTextField deleteItemTextField;
     private JTextField equipItemTextField;
 
+    CardLayout card;
+    JPanel parentPanel;
+
     private final static String newline = "\n";
-    PlayerDisplayInventoryController inventoryDisplayController;
-    DeleteItemController deleteItemController;
+    static final String playerInventory = "PlayerInventory.csv";
+
+    PlayerDisplayInventoryDsGateway playerDisplayInventoryDsGateway = new PlayerInventoryFile(playerInventory);
+    PlayerDisplayInventoryOutputBoundary playerDisplayInventoryPresenter = new PlayerDisplayInventoryPresenter();
+    PlayerDisplayInventoryInputBoundary playerDisplayInventoryInteractor = new PlayerDisplayInventoryInteractor(playerDisplayInventoryDsGateway, playerDisplayInventoryPresenter);
+    PlayerDisplayInventoryController displayInventoryController = new PlayerDisplayInventoryController(playerDisplayInventoryInteractor);
+    DeleteItemOutputBoundary deleteItemPresenter = new DeleteItemPresenter();
+    DeleteItemDsGateway deleteItemDsGateway = new PlayerInventoryFile(playerInventory);
+    DeleteItemInputBoundary deleteItemInputBoundary = new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
+    DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
 
 
 
 
-    public inventoryPanel(PlayerDisplayInventoryController inventoryDisplayController, DeleteItemController deleteItemController) {
-        this.inventoryDisplayController = inventoryDisplayController;
-        this.deleteItemController = deleteItemController;
-
+    public inventoryPanel(CardLayout card, JPanel parentPanel) {
         JLabel title = new JLabel("Your Inventory");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        PlayerDisplayInventoryResponseModel displayInventoryResponseModel = inventoryDisplayController.display();
+        PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
         ArrayList<String> response = displayInventoryResponseModel.showItem();
 
         inventoryInfo = new JTextArea(20, 1);
@@ -78,7 +88,7 @@ public class inventoryPanel extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(this, deleteItemResponseModel.getName() +
                         " is deleted at slot " + deleteItemResponseModel.getId());
 
-                PlayerDisplayInventoryResponseModel displayInventoryResponseModel = inventoryDisplayController.display();
+                PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
                 ArrayList<String> response = displayInventoryResponseModel.showItem();
                 inventoryInfo.setText("");
                 for(String line : response){

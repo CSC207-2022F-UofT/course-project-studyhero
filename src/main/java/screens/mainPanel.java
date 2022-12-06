@@ -31,6 +31,7 @@ public class mainPanel implements ActionListener {
         JPanel bossP = bossPanel.bossPanel();
 
 
+
         // all navigating buttons
         JButton menuToStart = new JButton("Start");
         menuP.add(menuToStart);
