@@ -20,7 +20,7 @@ public class ShopMenuScreen extends JPanel {
         sellMenu.addActionListener(e -> card.show(parentPanel, "Sell Menu"));
 
         JButton backToBreak = new JButton("Back");
-        backToBreak.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
+        backToBreak.addActionListener(e -> card.show(parentPanel, "Break"));
 
         this.add(buyMenu);
         this.add(sellMenu);

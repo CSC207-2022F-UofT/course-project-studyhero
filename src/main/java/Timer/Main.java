@@ -3,7 +3,7 @@ package Timer;
 import javax.swing.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import Timer.timer_screen.TimerPanel;
+import UI.screens.timer_screen.TimerPanel;
 
 import java.awt.*;
 
