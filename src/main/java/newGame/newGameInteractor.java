@@ -1,8 +1,8 @@
 package newGame;
 
 import entities.StatsUser;
-import inventorymenu.inventoryitem.InventoryList;
-import inventorymenu.inventoryitem.PlayerInventoryFile;
+import inventory_menu.inventoryitem.InventoryList;
+import inventory_menu.inventoryitem.PlayerInventoryFile;
 
 public class newGameInteractor {
     public static void createNewGame(){
