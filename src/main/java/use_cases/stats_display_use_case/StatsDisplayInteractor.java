@@ -1,6 +1,6 @@
 package use_cases.stats_display_use_case;
 
-import stats_storage.StatsDsGateway;
+import use_cases.file_checker.ValidStats;
 
 import java.util.Map;
 
@@ -11,8 +11,8 @@ public class StatsDisplayInteractor implements StatsDisplayInputBoundary {
 
     final Map<String, Integer> stats;
 
-    public StatsDisplayInteractor(StatsDsGateway statsDsGateway) {
-        this.stats = statsDsGateway.loadStats();
+    public StatsDisplayInteractor(ValidStats validStats) {
+        this.stats = validStats.load();
     }
 
     public Map<String, Integer> display() {
