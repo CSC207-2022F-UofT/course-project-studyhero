@@ -19,14 +19,12 @@ public interface Boss {
      */
     int getDamage();
 
-    /**
-     * Returns the boss's defence stat. This affects how much the user's damage reduces the boss's hp, and scales with
-     * the boss's level.
-     */
-    int getDefence();
 
     /**
-     * Updates the boss's current hp.
+     * Updates the boss's current hp by amount changeBy and returns the new hp.
+     *
+     * @param changeBy amount to change currentHp by
+     * @return new current hp
      */
-    int updateCurrentHp();
+    int updateCurrentHp(int changeBy);
 }
