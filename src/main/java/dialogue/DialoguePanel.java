@@ -22,7 +22,7 @@ public class DialoguePanel extends JPanel {
 
     // Graphics2D g2;
 
-    Font dialogueFont = new Font("Papyrus", Font.PLAIN, 12);
+    Font dialogueFont = new Font("Papyrus", Font.PLAIN, 30);
 
     public DialoguePanel() {}
 
@@ -34,7 +34,7 @@ public class DialoguePanel extends JPanel {
         textPanel.setBackground(Color.blue);
 
         //              ACTUAL TEXT
-        JTextArea mainTextArea = new JTextArea("calls the presenter");
+        JTextArea mainTextArea = new JTextArea("calls the presenter aaaaaaaaaaaaaaa");
         mainTextArea.setBounds(200, 100, 400, 150);
         mainTextArea.setBackground(Color.red);
         mainTextArea.setForeground(Color.white);
