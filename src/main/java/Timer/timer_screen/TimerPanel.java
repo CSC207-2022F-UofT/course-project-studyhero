@@ -5,8 +5,6 @@ import Timer.timer_use_cases.TimerResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class TimerPanel extends JPanel {
     private JPanel mainPanel;
@@ -39,21 +37,20 @@ public class TimerPanel extends JPanel {
 
         timerText.setFont(new Font("Verdana", Font.PLAIN, 48));
 
-        timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                timerText.setText(tPresenter.getOutputTime());
-                progressBar.setValue(progressBar.getMaximum() - convertTimeToInt(tPresenter.getOutputTime()));
-                if ((tPresenter.getOutputTime()).equals("00:00:00")) {
-                    timer.stop();
-                    goToBreakMenuButton.setVisible(true);
-                }
-                else {
-                    goToBreakMenuButton.setVisible(false);
-                }
-            }
-        });
+        timer = new Timer(100, new UITimerListener(timerText, tPresenter, progressBar, timer, goToBreakMenuButton));
 
+        addListeners();
+
+        this.add(mainPanel);
+    }
+
+    public static int convertTimeToInt(String time) {
+        String[] times = time.split(":", 3);
+        int timeSeconds = Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
+        return timeSeconds;
+    }
+
+    public void addListeners() {
         startTimerButton.addActionListener(new StartTimerButtonListener(ptController, ctController, timer));
         endTimerButton.addActionListener(new EndTimerButtonListener(ptController, ctController, timer, timerText, goToBreakMenuButton));
         presetShortButton.addActionListener(new PresetShortButtonListener(ptController, ctController, timerText, progressBar));
@@ -62,13 +59,6 @@ public class TimerPanel extends JPanel {
         customTimerConfirmButton.addActionListener(new CustomTimerConfirmButtonListener(ctController, customTimerTextField, timerText, progressBar, errorLabel));
         customTimerTextField.addKeyListener(new CustomTimerTextFieldKeyListener());
         customTimerTextField.addCaretListener(new CustomTimerTextFieldCaretListener(customTimerTextField));
-        this.add(mainPanel);
-    }
-
-    public static int convertTimeToInt(String time) {
-        String[] times = time.split(":", 3);
-        int timeSeconds = Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
-        return timeSeconds;
     }
 }
 
