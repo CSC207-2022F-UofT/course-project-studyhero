@@ -26,5 +26,6 @@ public class FightBossInteractor {
     public int bossMoveMaker() {
         return GenerateRandom.generator();
     }
+
 }
 

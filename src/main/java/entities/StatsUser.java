@@ -51,7 +51,7 @@ public class StatsUser implements Stats {
     }
 
     public int changeGold(int by) {
-        this.gold += changerValidator(this.gold, by);;
+        this.gold += changerValidator(this.gold, by);
         return this.gold;
     }
 
