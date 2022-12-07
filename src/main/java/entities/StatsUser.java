@@ -35,6 +35,16 @@ public class StatsUser implements Stats {
         return getStatsMapHelper();
     }
 
+    @Override
+    public int updateGold(int by) {
+        return 0;
+    }
+
+    @Override
+    public int getTempDamage() {
+        return 0;
+    }
+
     private Map<String, Integer> getStatsMapHelper() {
         Map<String, Integer> statsMap = new HashMap<String, Integer>();
         statsMap.put("level", this.level);
@@ -48,6 +58,31 @@ public class StatsUser implements Stats {
     public int updateLevel() {
         this.level += 1;
         return this.level;
+    }
+
+    @Override
+    public int updateBaselineDamage(int by) {
+        return 0;
+    }
+
+    @Override
+    public int updateTempDamage(int by) {
+        return 0;
+    }
+
+    @Override
+    public int resetTempDamage() {
+        return 0;
+    }
+
+    @Override
+    public int updateCurrHp(int by) {
+        return 0;
+    }
+
+    @Override
+    public int updateDefence(int by) {
+        return 0;
     }
 
     public int changeGold(int by) {

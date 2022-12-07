@@ -48,8 +48,8 @@ public class StatsFileDataAccess implements StatsDsGateway {
     }
 
     @Override
-    public void saveStats(String filePath) {
-        File file = new File(filePath);
+    public void saveStats(Map<String, Integer> statsMap) {
 
     }
+
 }
