@@ -13,6 +13,7 @@ public class TimerInteractor implements TimerInputBoundary {
 
     final TimerRequestModel tRequestModel;
     final TimerResponseModel tResponseModel;
+    TimerEntity timerEntity = new TimerEntity();
 
     public TimerInteractor(TimerRequestModel tRequestModel, TimerResponseModel tResponseModel) {
         this.tRequestModel = tRequestModel;
@@ -21,25 +22,26 @@ public class TimerInteractor implements TimerInputBoundary {
 
     @Override
     public void startTimer() {
+        timerEntity = new TimerEntity();
         if (tRequestModel.getCustomTime().equals("-1")) {
-            TimerEntity.startingTime = convertTime(tRequestModel.getSelectedTime());
+            timerEntity.startingTime = convertTime(tRequestModel.getSelectedTime());
         }
         else {
-            TimerEntity.startingTime = convertTime(tRequestModel.getCustomTime());
+            timerEntity.startingTime = convertTime(tRequestModel.getCustomTime());
         }
-        TimerEntity.startTimer();
+        timerEntity.startTimer();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                tResponseModel.setOutputTime(TimerEntity.timeLeft);
+                tResponseModel.setOutputTime(timerEntity.timeLeft);
             }
         }, 0, 100);
     }
 
     @Override
     public void endTimer() {
-        TimerEntity.endTimer();
+        timerEntity.endTimer();
     }
 
     /**
@@ -47,7 +49,7 @@ public class TimerInteractor implements TimerInputBoundary {
      */
     @Override
     public void setTimer(int[] time) {
-        TimerEntity.setTimer(time);
+        timerEntity.setTimer(time);
     }
 
     private int[] convertTime(String inputTime) {

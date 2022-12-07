@@ -10,22 +10,22 @@ public class TimerEntity {
     /**
      * The time that the timer counts down from.
      */
-    public static int[] startingTime = new int[3];
+    public int[] startingTime = new int[3];
     /**
      * The amount of time left.
      */
-    public static String timeLeft = "00:00:00";
-    private static Timer timer;
+    public String timeLeft = "00:00:00";
+    private Timer timer  = new Timer();
+    private int timeElapsed = 0;
 
     /**
      * Starts the timer.
      */
-    public static void startTimer() {
-        timer = new Timer();
+    public void startTimer() {
         TimerTask timerTask = new TimerTask() {
-            int seconds = TimerEntity.startingTime[2];
-            int minutes = TimerEntity.startingTime[1];
-            int hours = TimerEntity.startingTime[0];
+            int seconds = startingTime[2];
+            int minutes = startingTime[1];
+            int hours = startingTime[0];
             @Override
             public void run() {
                 updateTime(hours, minutes, seconds);
@@ -36,6 +36,7 @@ public class TimerEntity {
                         hours--;
                         if (hours < 0) {
                             timer.cancel();
+                            timeElapsed++;
                         }
                         minutes = 59;
                     }
@@ -51,19 +52,19 @@ public class TimerEntity {
      *
      * @param time The new time that the timer starts at.
      */
-    public static void setTimer(int[] time) {
+    public void setTimer(int[] time) {
         startingTime = time;
     }
 
     /**
      * Ends the timer.
      */
-    public static void endTimer() {
+    public void endTimer() {
         timer.cancel();
         timer.purge();
     }
 
-    public static void updateTime(int hours, int minutes, int seconds) {
+    public void updateTime(int hours, int minutes, int seconds) {
         timeLeft = String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
     }
 }
