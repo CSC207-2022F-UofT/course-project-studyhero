@@ -160,7 +160,7 @@ public class TimerPanel extends JPanel implements ActionListener {
         }
     }
 
-    public int convertTimeToInt(String time) {
+    public static int convertTimeToInt(String time) {
         String[] times = time.split(":", 3);
         int timeSeconds = Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
         return timeSeconds;
