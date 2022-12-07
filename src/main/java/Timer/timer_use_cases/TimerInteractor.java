@@ -24,10 +24,10 @@ public class TimerInteractor implements TimerInputBoundary {
     public void startTimer() {
         timerEntity = new TimerEntity();
         if (tRequestModel.getCustomTime().equals("-1")) {
-            timerEntity.startingTime = convertTime(tRequestModel.getSelectedTime());
+            timerEntity.setTimer(convertTime(tRequestModel.getSelectedTime()));
         }
         else {
-            timerEntity.startingTime = convertTime(tRequestModel.getCustomTime());
+            timerEntity.setTimer(convertTime(tRequestModel.getCustomTime()));
         }
         timerEntity.startTimer();
         Timer timer = new Timer();
@@ -42,6 +42,8 @@ public class TimerInteractor implements TimerInputBoundary {
     @Override
     public void endTimer() {
         timerEntity.endTimer();
+        tResponseModel.setElapsedTime(tResponseModel.getElapsedTime() + timerEntity.getElapsedTime());
+        timerEntity = null;
     }
 
     /**

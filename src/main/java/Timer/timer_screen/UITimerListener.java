@@ -10,14 +10,12 @@ public class UITimerListener implements ActionListener {
     private JLabel timerText;
     private TimerPresenter tPresenter;
     private JProgressBar progressBar;
-    private Timer timer;
     private JButton goToBreakMenuButton;
 
-    public UITimerListener(JLabel timerText, TimerPresenter tPresenter, JProgressBar progressBar, Timer timer, JButton goToBreakMenuButton) {
+    public UITimerListener(JLabel timerText, TimerPresenter tPresenter, JProgressBar progressBar, JButton goToBreakMenuButton) {
         this.timerText = timerText;
         this.tPresenter = tPresenter;
         this.progressBar = progressBar;
-        this.timer = timer;
         this.goToBreakMenuButton = goToBreakMenuButton;
     }
 
@@ -26,7 +24,6 @@ public class UITimerListener implements ActionListener {
         timerText.setText(tPresenter.getOutputTime());
         progressBar.setValue(progressBar.getMaximum() - convertTimeToInt(tPresenter.getOutputTime()));
         if ((tPresenter.getOutputTime()).equals("00:00:00")) {
-            timer.stop();
             goToBreakMenuButton.setVisible(true);
         }
         else {

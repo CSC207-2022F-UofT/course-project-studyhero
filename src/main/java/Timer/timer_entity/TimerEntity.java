@@ -16,7 +16,7 @@ public class TimerEntity {
      */
     public String timeLeft = "00:00:00";
     private Timer timer  = new Timer();
-    private int timeElapsed = 0;
+    private int elapsedTime = 0;
 
     /**
      * Starts the timer.
@@ -29,6 +29,7 @@ public class TimerEntity {
             @Override
             public void run() {
                 updateTime(hours, minutes, seconds);
+                elapsedTime++;
                 seconds--;
                 if (seconds < 0) {
                     minutes--;
@@ -36,7 +37,6 @@ public class TimerEntity {
                         hours--;
                         if (hours < 0) {
                             timer.cancel();
-                            timeElapsed++;
                         }
                         minutes = 59;
                     }
@@ -45,6 +45,7 @@ public class TimerEntity {
             }
         };
         timer.scheduleAtFixedRate(timerTask, 0, 1000);
+
     }
 
     /**
@@ -66,5 +67,9 @@ public class TimerEntity {
 
     public void updateTime(int hours, int minutes, int seconds) {
         timeLeft = String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
+    }
+
+    public int getElapsedTime() {
+        return elapsedTime;
     }
 }

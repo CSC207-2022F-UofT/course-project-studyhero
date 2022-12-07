@@ -37,7 +37,7 @@ public class TimerPanel extends JPanel {
 
         timerText.setFont(new Font("Verdana", Font.PLAIN, 48));
 
-        timer = new Timer(100, new UITimerListener(timerText, tPresenter, progressBar, timer, goToBreakMenuButton));
+        timer = new Timer(100, new UITimerListener(timerText, tPresenter, progressBar, goToBreakMenuButton));
 
         addListeners();
 
