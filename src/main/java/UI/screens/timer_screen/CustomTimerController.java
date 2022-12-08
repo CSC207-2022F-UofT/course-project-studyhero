@@ -5,25 +5,25 @@ import Timer.timer_use_cases.TimerInteractor;
 import Timer.timer_use_cases.TimerResponseModel;
 
 public class CustomTimerController {
-    private TimerRequestModel tRequestModel;
-    private TimerInteractor tInteractor;
+    private TimerRequestModel timerRequestModel;
+    private TimerInteractor timerInteractor;
 
-    public CustomTimerController(TimerRequestModel tRequestModel, TimerResponseModel tResponseModel) {
-        this.tRequestModel = tRequestModel;
-        this.tInteractor = new TimerInteractor(tRequestModel, tResponseModel);
+    public CustomTimerController(TimerRequestModel timerRequestModel, TimerResponseModel timerResponseModel) {
+        this.timerRequestModel = timerRequestModel;
+        this.timerInteractor = new TimerInteractor(timerRequestModel, timerResponseModel);
     }
 
     public void setCustomTime(String time) {
-        tRequestModel.setCustomTime(time);
+        timerRequestModel.setCustomTime(time);
     }
     public String getCustomTime() {
-        return tRequestModel.getCustomTime();
+        return timerRequestModel.getCustomTime();
     }
 
     public void startTimer() {
-        tInteractor.startTimer();
+        timerInteractor.startTimer();
     }
     public void endTimer() {
-        tInteractor.endTimer();
+        timerInteractor.endTimer();
     }
 }

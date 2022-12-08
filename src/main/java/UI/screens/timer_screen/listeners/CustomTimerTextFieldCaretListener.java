@@ -1,4 +1,4 @@
-package UI.screens.timer_screen;
+package UI.screens.timer_screen.listeners;
 
 import javax.swing.*;
 import javax.swing.event.CaretEvent;

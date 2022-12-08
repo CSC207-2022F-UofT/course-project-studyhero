@@ -1,4 +1,8 @@
-package UI.screens.timer_screen;
+package UI.screens.timer_screen.listeners;
+
+import UI.screens.timer_screen.CustomTimerController;
+import UI.screens.timer_screen.PresetTimerController;
+import UI.screens.timer_screen.TimerPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +28,7 @@ public class PresetLongButtonListener implements ActionListener {
         ptController.selectLongTime();
         String time = ptController.getLongTime();
         timerText.setText(time);
-        int totalSeconds = TimerPanel.convertTimeToInt(time);
+        int totalSeconds = TimerPanel.convertTimeToSeconds(time);
         progressBar.setMaximum(totalSeconds);
     }
 }

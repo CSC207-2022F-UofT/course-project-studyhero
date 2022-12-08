@@ -1,4 +1,7 @@
-package UI.screens.timer_screen;
+package UI.screens.timer_screen.listeners;
+
+import UI.screens.timer_screen.CustomTimerController;
+import UI.screens.timer_screen.TimerPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +31,7 @@ public class CustomTimerConfirmButtonListener implements ActionListener {
         if (Pattern.matches("^[0-9]{2}:[0-5][0-9]:[0-5][0-9]$", inputTime)) {
             ctController.setCustomTime(inputTime);
             timerText.setText(inputTime);
-            int totalSeconds = TimerPanel.convertTimeToInt(inputTime);
+            int totalSeconds = TimerPanel.convertTimeToSeconds(inputTime);
             progressBar.setMaximum(totalSeconds);
             errorLabel.setText("");
         }

@@ -1,10 +1,12 @@
-package UI.screens.timer_screen;
+package UI.screens.timer_screen.listeners;
+
+import UI.screens.timer_screen.TimerPresenter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static UI.screens.timer_screen.TimerPanel.convertTimeToInt;
+import static UI.screens.timer_screen.TimerPanel.convertTimeToSeconds;
 
 public class UITimerListener implements ActionListener {
     private JLabel timerText;
@@ -34,7 +36,7 @@ public class UITimerListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         timerText.setText(tPresenter.getOutputTime());
-        progressBar.setValue(progressBar.getMaximum() - convertTimeToInt(tPresenter.getOutputTime()));
+        progressBar.setValue(progressBar.getMaximum() - convertTimeToSeconds(tPresenter.getOutputTime()));
         if ((tPresenter.getOutputTime()).equals("00:00:00")) {
             goToBreakMenuButton.setVisible(true);
             customTimerConfirmButton.setEnabled(true);

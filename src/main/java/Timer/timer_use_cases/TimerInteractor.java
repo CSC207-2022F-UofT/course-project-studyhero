@@ -11,30 +11,30 @@ import java.util.TimerTask;
  */
 public class TimerInteractor implements TimerInputBoundary {
 
-    final TimerRequestModel tRequestModel;
-    final TimerResponseModel tResponseModel;
+    final TimerRequestModel timerRequestModel;
+    final TimerResponseModel timerResponseModel;
     TimerEntity timerEntity = new TimerEntity();
 
-    public TimerInteractor(TimerRequestModel tRequestModel, TimerResponseModel tResponseModel) {
-        this.tRequestModel = tRequestModel;
-        this.tResponseModel = tResponseModel;
+    public TimerInteractor(TimerRequestModel timerRequestModel, TimerResponseModel timerResponseModel) {
+        this.timerRequestModel = timerRequestModel;
+        this.timerResponseModel = timerResponseModel;
     }
 
     @Override
     public void startTimer() {
         timerEntity = new TimerEntity();
-        if (tRequestModel.getCustomTime().equals("-1")) {
-            timerEntity.setTimer(convertTime(tRequestModel.getSelectedTime()));
+        if (timerRequestModel.getCustomTime().equals("-1")) {
+            timerEntity.setTimer(convertTimeToArray(timerRequestModel.getSelectedTime()));
         }
         else {
-            timerEntity.setTimer(convertTime(tRequestModel.getCustomTime()));
+            timerEntity.setTimer(convertTimeToArray(timerRequestModel.getCustomTime()));
         }
         timerEntity.startTimer();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                tResponseModel.setOutputTime(timerEntity.timeLeft);
+                timerResponseModel.setOutputTime(timerEntity.timeLeft);
             }
         }, 0, 100);
     }
@@ -42,7 +42,7 @@ public class TimerInteractor implements TimerInputBoundary {
     @Override
     public void endTimer() {
         timerEntity.endTimer();
-        tResponseModel.setElapsedTime(tResponseModel.getElapsedTime() + timerEntity.getElapsedTime());
+        timerResponseModel.setElapsedTime(timerResponseModel.getElapsedTime() + timerEntity.getElapsedTime());
         timerEntity = null;
     }
 
@@ -54,7 +54,7 @@ public class TimerInteractor implements TimerInputBoundary {
         timerEntity.setTimer(time);
     }
 
-    private int[] convertTime(String inputTime) {
+    private int[] convertTimeToArray(String inputTime) {
         int[] convertedTime = new int[3];
         String[] times = inputTime.split(":", 3);
         convertedTime[0] = Integer.parseInt(times[0]);

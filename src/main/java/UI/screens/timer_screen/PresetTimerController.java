@@ -8,36 +8,36 @@ import java.util.HashMap;
 
 public class PresetTimerController {
 
-    private TimerRequestModel tRequestModel;
-    private TimerInteractor tInteractor;
+    private TimerRequestModel timerRequestModel;
+    private TimerInteractor timerInteractor;
     private HashMap<String, String> presetTimes = new HashMap<>();
 
-    public PresetTimerController(TimerRequestModel tRequestModel, TimerResponseModel tResponseModel) {
+    public PresetTimerController(TimerRequestModel timerRequestModel, TimerResponseModel timerResponseModel) {
         presetTimes.put("Short", "00:15:00");
         presetTimes.put("Medium", "00:30:00");
         presetTimes.put("Long", "01:00:00");
-        this.tRequestModel = tRequestModel;
-        this.tInteractor = new TimerInteractor(tRequestModel, tResponseModel);
+        this.timerRequestModel = timerRequestModel;
+        this.timerInteractor = new TimerInteractor(timerRequestModel, timerResponseModel);
     }
 
     public void startTimer() {
-        tInteractor.startTimer();
+        timerInteractor.startTimer();
     }
 
     public void endTimer() {
-        tInteractor.endTimer();
+        timerInteractor.endTimer();
     }
 
     public void selectShortTime() {
-        tRequestModel.setSelectedTime(presetTimes.get("Short"));
+        timerRequestModel.setSelectedTime(presetTimes.get("Short"));
     }
 
     public void selectMediumTime() {
-        tRequestModel.setSelectedTime(presetTimes.get("Medium"));
+        timerRequestModel.setSelectedTime(presetTimes.get("Medium"));
     }
 
     public void selectLongTime() {
-        tRequestModel.setSelectedTime(presetTimes.get("Long"));
+        timerRequestModel.setSelectedTime(presetTimes.get("Long"));
     }
 
     public String getShortTime() {

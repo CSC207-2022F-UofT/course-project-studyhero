@@ -4,16 +4,16 @@ import Timer.timer_use_cases.TimerOutputBoundary;
 import Timer.timer_use_cases.TimerResponseModel;
 
 public class TimerPresenter implements TimerOutputBoundary {
-    final TimerResponseModel tResponseModel;
+    final TimerResponseModel timerResponseModel;
     String outputTime;
 
-    public TimerPresenter(TimerResponseModel tResponseModel) {
-        this.tResponseModel = tResponseModel;
+    public TimerPresenter(TimerResponseModel timerResponseModel) {
+        this.timerResponseModel = timerResponseModel;
     }
 
     @Override
     public String getOutputTime() {
-        this.outputTime = tResponseModel.getOutputTime();
+        this.outputTime = timerResponseModel.getOutputTime();
         return outputTime;
     }
 }
