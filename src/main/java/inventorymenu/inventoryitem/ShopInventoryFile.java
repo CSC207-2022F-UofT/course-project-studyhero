@@ -259,7 +259,7 @@ public class ShopInventoryFile implements InventoryList {
         clearInventory();
         InventoryItem item1 = new InventoryItem(
                 "Weapon",
-                "Sword",
+                "PISS",
                 3, 6);
         InventoryItem item2 = new InventoryItem(
                 "AttackPotion",

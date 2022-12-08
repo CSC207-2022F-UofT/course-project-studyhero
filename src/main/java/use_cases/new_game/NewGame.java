@@ -28,19 +28,18 @@ public class NewGame {
         return (statsFile.isPlayable() && inventoryFile.isPlayable());
     }
 
-    public void createNewStatsFile(){
-        if (file.exists() && !file.isDirectory()){
-            System.out.println("File exists. Overwriting...");
-        }
-        if (!file.exists() && !file.isDirectory()) {
+
+    public void newGame() {
+        if (statsFile.fileExists() && inventoryFile.fileExists()) {
+            System.out.println("Files exist. Overwriting...");
+        } else {
             System.out.println("New save.");
         }
         StatsUser newUser = new StatsUser();
         StatSave newSave = new StatSave(newUser.getUserStats(), presenter);
         newSave.save();
-    }
-    public void newGame(){
-        this.createNewStatsFile();
-        new PlayerInventoryFile("PlayerInventory.csv");
+
+        InventoryList inventoryList = new PlayerInventoryFile("PlayerInventory.csv");
+        inventoryList.initialize();
     }
 }

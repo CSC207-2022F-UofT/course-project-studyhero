@@ -4,9 +4,9 @@ import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.P
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 import inventorymenu.inventoryitem.ShopInventoryFile;
 import inventorymenu.inventoryitem.PlayerInventoryFile;
-import entities.Stats;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidStats;
+import inventorymenu.inventoryitem.InventoryItem;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -22,14 +22,20 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
     CardLayout card;
     JPanel parentPanel;
 
+    Frame frame;
+
     static JList list;
     static int index;
     static JLabel selectedItem;
     static JLabel cost;
 
-    static Stats stats;
+    static JLabel userGold;
+
+    static Map<String, Integer> statsMap;
     ErrorOutputBoundary presenter;
     static ArrayList<InventoryItemDsRequestModel> shopInventory;
+
+    static PlayerInventoryFile playerInventoryFile;
     static ArrayList<InventoryItemDsRequestModel> playerInventory;
 
 
@@ -41,13 +47,14 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         JPanel shopPanel = new JPanel();
         JPanel topPanel = new JPanel();
 
+
         // ----- Initialize Gold Values -----
         ValidStats stats = new ValidStats("stats.csv", presenter);
-        Map<String, Integer> statsMap = stats.load();
-        System.out.println(statsMap.get("gold"));
+        statsMap = stats.load();
+
 
         // ----- Initialize Files for List Generation -----
-        // NOTE: MOVE THIS TO SHOP MENU
+        // NOTE: MOVE THIS TO SHOP MENU THESE ARE INTERACTORS
         // Shop Inventory
         ShopInventoryFile shopInventoryFile = new ShopInventoryFile("ShopInventory.csv");
         shopInventoryFile.initialize();
@@ -59,7 +66,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         }
 
         // Player Inventory
-        PlayerInventoryFile playerInventoryFile =  new PlayerInventoryFile("PlayerInventory.csv");
+        playerInventoryFile =  new PlayerInventoryFile("PlayerInventory.csv");
         playerInventoryFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel playerIterator = playerInventoryFile.getInventoryListIterator();
         playerInventory = new ArrayList<>();
@@ -102,6 +109,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
         selectedItem = new JLabel("Selected: ");
         cost = new JLabel("Cost: ");
+        userGold = new JLabel("Your Gold: " + statsMap.get("gold"));
 
 
         // ----- Initialize Layouts -----
@@ -130,6 +138,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         userPanel.add(selectedItem);
         userPanel.add(cost);
         userPanel.add(buyButton);
+        userPanel.add(userGold);
 
         buyPanel.add(shopPanel, BorderLayout.WEST);
         buyPanel.add(userPanel, BorderLayout.EAST);
@@ -139,6 +148,9 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         this.add(backToBreak);
 
         this.add(backToBreak);
+
+        frame = new JFrame("TEST");
+
     }
 
 
@@ -151,8 +163,22 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
     // ----- Button -----
     public void actionPerformed(ActionEvent e) {
-        System.out.println("hi");
+        if (playerInventoryFile.inventoryFull()) {
+            JOptionPane.showMessageDialog(frame,
+                    "You do not have enough space in your inventory!");
+        } else if (statsMap.get("gold") < shopInventory.get(index).getGoldValue() ) {
+            JOptionPane.showMessageDialog(frame, "You do not have enough gold!");
+        }
         System.out.println("Item " + shopInventory.get(index).getName() + " successfully added.");
-        playerInventory.add(shopInventory.get(index));
+        playerInventoryFile.save(new InventoryItem(
+                shopInventory.get(index).getType(),
+                shopInventory.get(index).getName(),
+                shopInventory.get(index).getEffect(),
+                shopInventory.get(index).getGoldValue()
+        ));
+        if (statsMap.get("gold") < shopInventory.get(index).getGoldValue()) {
+            System.out.println("Not enough gold!");
+        }
+
     }
 }

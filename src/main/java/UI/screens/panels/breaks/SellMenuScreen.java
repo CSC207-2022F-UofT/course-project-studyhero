@@ -53,7 +53,6 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
         // Player Inventory
         PlayerInventoryFile playerInventoryFile =  new PlayerInventoryFile("PlayerInventory.csv");
         playerInventoryFile.readInventoryList();
-//        PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
         PlayerDisplayInventoryDsRequestModel playerIterator = playerInventoryFile.getInventoryListIterator();
         playerInventory = new ArrayList<>();
         while (playerIterator.hasNext()) {
