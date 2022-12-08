@@ -10,9 +10,7 @@ public class StatsUser implements Stats {
 
     int level;
     int gold;
-    int currHp;
     int baselineDamage;
-    int tempDamage;
     int defence;
     int maxHp;
 
@@ -22,9 +20,7 @@ public class StatsUser implements Stats {
     public StatsUser() {
         this.level = 1;
         this.gold = 0;
-        this.currHp = 0;
         this.baselineDamage = 5;
-        this.tempDamage = 5;
         this.defence = 0;
         this.maxHp = 100;
     }
@@ -39,9 +35,7 @@ public class StatsUser implements Stats {
     public StatsUser(Map<String, Integer> statsMap) {
         this.level = statsMap.get("level");
         this.gold = statsMap.get("gold");
-        this.currHp = statsMap.get("hp");
-        this.baselineDamage = statsMap.get("damage");
-        this.tempDamage = statsMap.get("damage");
+        this.baselineDamage = statsMap.get("baselineDamage");
         this.defence = statsMap.get("defence");
         this.maxHp = calculateMaxHpFromLevel(this.level);
     }
@@ -58,13 +52,10 @@ public class StatsUser implements Stats {
         Map<String, Integer> statsMap = new HashMap<>();
         statsMap.put("level", this.level);
         statsMap.put("gold", this.gold);
-        statsMap.put("hp", this.currHp);
-        statsMap.put("damage", this.baselineDamage);
+        statsMap.put("maxHp", this.maxHp);
+        statsMap.put("baselineDamage", this.baselineDamage);
         statsMap.put("defence", this.defence);
         return statsMap;
-    }
-    public int getTempDamage() {
-        return this.tempDamage;
     }
 
     public int updateLevel() {
@@ -83,29 +74,13 @@ public class StatsUser implements Stats {
         return this.gold;
     }
 
-    public int updateCurrHp(int by) {
-        if((this.currHp +by)>this.maxHp) {
-            this.currHp = this.maxHp;
-        } else {
-            this.currHp = changerValidator(this.currHp, by);
-        } return this.currHp;
-    }
-
     public int updateBaselineDamage(int by) {
-        this.baselineDamage += changerValidator(this.baselineDamage, by);
+        this.baselineDamage = changerValidator(this.baselineDamage, by);
         return this.baselineDamage;
-    }
-    public int updateTempDamage(int by) {
-        this.tempDamage += changerValidator(this.tempDamage, by);
-        return this.tempDamage;
-    }
-    public int resetTempDamage() {
-        this.tempDamage = this.baselineDamage;
-        return this.tempDamage;
     }
 
     public int updateDefence(int by) {
-        this.defence += changerValidator(this.defence, by);
+        this.defence = changerValidator(this.defence, by);
         return this.defence;
     }
 
