@@ -26,6 +26,7 @@ public class CurrentFightingStats implements FightingStats{
 
     public CurrentFightingStats(){
         Map<String, Integer> statsMap = getFightStats();
+        System.out.println(statsMap.toString());
         this.maxHP = statsMap.get("maxHealth");
         this.playerHP = statsMap.get("playerHealth");
         this.playerDamage = statsMap.get("playerDamage");
