@@ -9,14 +9,12 @@ import java.io.IOException;
 public class MusicPlayer {
     private Long currentPos;
     private Clip clip;
-    String status;
-    AudioInputStream inputStream;
-    String filepath;
-    ErrorOutputBoundary presenter;
+    private String status;
+    private AudioInputStream inputStream;
+    private String filepath;
 
     public MusicPlayer(String filepath, ErrorOutputBoundary presenter){
-        this.presenter = presenter;
-
+        this.currentPos = 0L;
         try {
             this.filepath = filepath;
             this.inputStream = AudioSystem.getAudioInputStream(new File(filepath));
@@ -34,7 +32,6 @@ public class MusicPlayer {
 
     public String getStatus(){return status;}
     public void setStatus(String newStatus){status = newStatus;}
-    public Long getCurrentPos(){return currentPos;}
     public void setCurrentPos(Long Pos){currentPos = Pos;}
     public Clip getClip(){return clip;}
 

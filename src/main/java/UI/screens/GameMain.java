@@ -10,7 +10,6 @@ import UI.screens.panels.settings.SettingsScreen;
 import entities.MusicPlayer;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidStats;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,12 +58,6 @@ public class GameMain {
         mainPanel.add(shopMenuScreen, "Shop Menu");
         //mainPanel.add(fightBossScreen, "Fight Boss");
         mainPanel.add(inventoryScreen, "Inventory Menu");
-
-
-        // test fight file
-//        ErrorPresenter presenter1 = new ErrorPresenter();
-//        ValidStats fightfile = new ValidStats("fightStats.csv", presenter1);
-//        System.out.println(fightfile.checkError());
 
         mainFrame.add(mainPanel);
         card.show(mainPanel, "Start");
