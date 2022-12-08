@@ -14,36 +14,36 @@ import java.awt.event.ActionListener;
  * Class for the ActionListener of the timer in TimerPanel.
  */
 public class UITimerListener implements ActionListener {
-    private PresetTimerController presetTimerController;
-    private CustomTimerController customTimerController;
-    private JLabel timerText;
-    private TimerPresenter tPresenter;
-    private JProgressBar progressBar;
-    private JButton goToBreakMenuButton;
-    private JButton customTimerConfirmButton;
-    private JButton presetLongButton;
-    private JButton presetMediumButton;
-    private JButton presetShortButton;
-    private JButton startTimerButton;
-    private JFormattedTextField customTimerTextField;
-    private JButton endTimerButton;
-    private TimerPanel timerPanel;
+    PresetTimerController presetTimerController;
+    CustomTimerController customTimerController;
+    JLabel timerText;
+    TimerPresenter tPresenter;
+    JProgressBar progressBar;
+    JButton goToBreakMenuButton;
+    JButton customTimerConfirmButton;
+    JButton presetLongButton;
+    JButton presetMediumButton;
+    JButton presetShortButton;
+    JButton startTimerButton;
+    JFormattedTextField customTimerTextField;
+    JButton endTimerButton;
+    TimerPanel timerPanel;
 
     /**
      * Constructor for UITimerListener.
      *
-     * @param timerText
-     * @param tPresenter
-     * @param progressBar
-     * @param goToBreakMenuButton
-     * @param customTimerConfirmButton
-     * @param presetLongButton
-     * @param presetMediumButton
-     * @param presetShortButton
-     * @param startTimerButton
-     * @param customTimerTextField
-     * @param endTimerButton
-     * @param timerPanel
+     * @param timerText the label displaying the time
+     * @param tPresenter the presenter for timer
+     * @param progressBar the progress bar on the timer screen
+     * @param goToBreakMenuButton the break menu button on the timer screen
+     * @param customTimerConfirmButton the confirm button on the timer screen
+     * @param presetLongButton the long preset button on the timer screen
+     * @param presetMediumButton the medium preset button on the timer screen
+     * @param presetShortButton the short button on the timer screen
+     * @param startTimerButton the start timer button on the timer screen
+     * @param customTimerTextField the text field on the timer screen
+     * @param endTimerButton the end timer button on the timer screen
+     * @param timerPanel the panel for timer
      */
     public UITimerListener(PresetTimerController presetTimerController, CustomTimerController customTimerController,
                            JLabel timerText, TimerPresenter tPresenter, JProgressBar progressBar,

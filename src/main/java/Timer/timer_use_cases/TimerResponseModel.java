@@ -40,7 +40,7 @@ public class TimerResponseModel {
 
     /**
      * Sets the time elapsed from the timer.
-     * @param elapsedTime
+     * @param elapsedTime the time elapsed
      */
     public void setElapsedTime(int elapsedTime) {
         this.elapsedTime = elapsedTime;

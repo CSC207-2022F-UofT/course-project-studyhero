@@ -8,11 +8,11 @@ import java.awt.event.KeyListener;
  * Class for the KeyListener of CustomTimerTextField.
  */
 public class CustomTimerTextFieldKeyListener implements KeyListener {
-    private JFormattedTextField customTimerTextField;
+    JFormattedTextField customTimerTextField;
 
     /**
      * Constructor for CustomTimerTextFieldKeyListener.
-     * @param customTimerTextField
+     * @param customTimerTextField the text field being listened to
      */
     public CustomTimerTextFieldKeyListener(JFormattedTextField customTimerTextField) {
         this.customTimerTextField = customTimerTextField;
@@ -29,11 +29,8 @@ public class CustomTimerTextFieldKeyListener implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent ke) {
-        if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' || ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            customTimerTextField.setEditable(true);
-        } else {
-            customTimerTextField.setEditable(false);
-        }
+        customTimerTextField.setEditable(ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' ||
+                ke.getKeyCode() == KeyEvent.VK_BACK_SPACE);
     }
 
     @Override

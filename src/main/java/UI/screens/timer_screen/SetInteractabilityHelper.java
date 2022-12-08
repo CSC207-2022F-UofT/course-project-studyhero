@@ -3,13 +3,13 @@ package UI.screens.timer_screen;
 import javax.swing.*;
 
 public class SetInteractabilityHelper {
-    private JButton customTimerConfirmButton;
-    private JButton presetLongButton;
-    private JButton presetMediumButton;
-    private JButton presetShortButton;
-    private JButton startTimerButton;
-    private JFormattedTextField customTimerTextField;
-    private JButton endTimerButton;
+    JButton customTimerConfirmButton;
+    JButton presetLongButton;
+    JButton presetMediumButton;
+    JButton presetShortButton;
+    JButton startTimerButton;
+    JFormattedTextField customTimerTextField;
+    JButton endTimerButton;
 
     public SetInteractabilityHelper(JButton customTimerConfirmButton, JButton presetLongButton,
                                     JButton presetMediumButton, JButton presetShortButton, JButton startTimerButton,

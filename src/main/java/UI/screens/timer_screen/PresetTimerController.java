@@ -13,15 +13,15 @@ public class PresetTimerController {
     /**
      * The class that stores the inputs from the user.
      */
-    private TimerRequestModel timerRequestModel;
+    TimerRequestModel timerRequestModel;
     /**
      * The class that stores the information that will be displayed back to the user.
      */
-    private TimerInteractor timerInteractor;
+    TimerInteractor timerInteractor;
     /**
      * The preset times that the user can choose from.
      */
-    private final HashMap<String, String> presetTimes = new HashMap<>();
+    HashMap<String, String> presetTimes = new HashMap<>();
 
     /**
      * Constructor for PresetTimerController. It adds the mappings for the different times

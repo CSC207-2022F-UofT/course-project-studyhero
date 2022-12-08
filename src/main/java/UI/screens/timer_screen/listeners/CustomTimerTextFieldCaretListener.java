@@ -8,11 +8,11 @@ import javax.swing.event.CaretListener;
  * Class for the CaretListener of CustomTimerTextField.
  */
 public class CustomTimerTextFieldCaretListener implements CaretListener {
-    private JFormattedTextField customTimerTextField;
+    JFormattedTextField customTimerTextField;
 
     /**
      * Constructor for CustomTimerTextFieldCaretListener.
-     * @param customTimerTextField
+     * @param customTimerTextField the text field being listened to
      */
     public CustomTimerTextFieldCaretListener(JFormattedTextField customTimerTextField) {
         this.customTimerTextField = customTimerTextField;
@@ -26,18 +26,11 @@ public class CustomTimerTextFieldCaretListener implements CaretListener {
     public void caretUpdate(CaretEvent e) {
         int textLength = customTimerTextField.getText().length();
         if (textLength == 2 || textLength == 5) {
-            SwingUtilities.invokeLater (new Runnable() {
-                public void run() {
-                    customTimerTextField.setText(customTimerTextField.getText() + ":");
-                }
-            });
+            SwingUtilities.invokeLater (() -> customTimerTextField.setText(customTimerTextField.getText() + ":"));
         }
         if (textLength >= 9) {
-            SwingUtilities.invokeLater (new Runnable() {
-                public void run() {
-                    customTimerTextField.setText(customTimerTextField.getText().substring(0, 8));
-                }
-            });
+            SwingUtilities.invokeLater (
+                    () -> customTimerTextField.setText(customTimerTextField.getText().substring(0, 8)));
         }
     }
 }

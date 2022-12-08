@@ -7,7 +7,7 @@ import UI.screens.timer_screen.TimerPanel;
 
 import java.awt.*;
 
-public class Main {
+public class TimerMain {
     public static void main(String[] args) {
         JFrame f = new JFrame();
         JPanel mainPanel = new JPanel();

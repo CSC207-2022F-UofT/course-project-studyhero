@@ -12,17 +12,17 @@ import java.awt.event.ActionListener;
  * Class for the ActionListener of PresetLongButton.
  */
 public class PresetLongButtonListener implements ActionListener {
-    private PresetTimerController ptController;
-    private CustomTimerController ctController;
-    private JLabel timerText;
-    private JProgressBar progressBar;
+    PresetTimerController ptController;
+    CustomTimerController ctController;
+    JLabel timerText;
+    JProgressBar progressBar;
 
     /**
      * Constructor for PresetLongButtonListener.
-     * @param ptController
-     * @param ctController
-     * @param timerText
-     * @param progressBar
+     * @param ptController the PresetTimerController
+     * @param ctController the CustomTimerController
+     * @param timerText the label displaying the time
+     * @param progressBar the progress bar on the timer screen
      */
     public PresetLongButtonListener(PresetTimerController ptController, CustomTimerController ctController,
                                     JLabel timerText, JProgressBar progressBar) {

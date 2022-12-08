@@ -15,39 +15,39 @@ public class EndTimerButtonListener implements ActionListener {
     /**
      * Controller for the preset portion of timer.
      */
-    private PresetTimerController ptController;
+    PresetTimerController ptController;
     /**
      * Controller for the custom portion of timer.
      */
-    private CustomTimerController ctController;
+    CustomTimerController ctController;
     /**
      * Elements that will be affected.
      */
-    private final Timer timer;
-    private final JLabel timerText;
-    private final JButton goToBreakMenuButton;
-    private JButton customTimerConfirmButton;
-    private JButton presetLongButton;
-    private JButton presetMediumButton;
-    private JButton presetShortButton;
-    private JButton startTimerButton;
-    private JFormattedTextField customTimerTextField;
-    private JButton endTimerButton;
+    Timer timer;
+    JLabel timerText;
+    JButton goToBreakMenuButton;
+    JButton customTimerConfirmButton;
+    JButton presetLongButton;
+    JButton presetMediumButton;
+    JButton presetShortButton;
+    JButton startTimerButton;
+    JFormattedTextField customTimerTextField;
+    JButton endTimerButton;
 
     /**
      * Constructor for EndTimerButtonListener.
-     * @param ptController
-     * @param ctController
-     * @param timer
-     * @param timerText
-     * @param goToBreakMenuButton
-     * @param customTimerConfirmButton
-     * @param presetLongButton
-     * @param presetMediumButton
-     * @param presetShortButton
-     * @param startTimerButton
-     * @param customTimerTextField
-     * @param endTimerButton
+     * @param ptController the PresetTimerController
+     * @param ctController the CustomTimerController
+     * @param timer the timer being stopped
+     * @param timerText the label displaying the time
+     * @param goToBreakMenuButton the break menu button on the timer screen
+     * @param customTimerConfirmButton the confirm button on the timer screen
+     * @param presetLongButton the long preset button on the timer screen
+     * @param presetMediumButton the medium preset button on the timer screen
+     * @param presetShortButton the short button on the timer screen
+     * @param startTimerButton the start timer button on the timer screen
+     * @param customTimerTextField the text field on the timer screen
+     * @param endTimerButton the end timer button on the timer screen
      */
     public EndTimerButtonListener(PresetTimerController ptController, CustomTimerController ctController, Timer timer,
                                   JLabel timerText, JButton goToBreakMenuButton, JButton customTimerConfirmButton,

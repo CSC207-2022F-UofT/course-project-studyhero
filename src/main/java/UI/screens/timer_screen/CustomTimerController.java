@@ -11,11 +11,11 @@ public class CustomTimerController {
     /**
      * The class that stores the inputs from the user.
      */
-    private TimerRequestModel timerRequestModel;
+    TimerRequestModel timerRequestModel;
     /**
      * The TimerInteractor class.
      */
-    private TimerInteractor timerInteractor;
+    TimerInteractor timerInteractor;
 
     /**
      * Constructor for CustomTimerController.

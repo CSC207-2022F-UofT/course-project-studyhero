@@ -10,7 +10,7 @@ public class TimerEntity {
     /**
      * The time that the timer starts at.
      */
-    public int[] startingTime = new int[3];
+    int[] startingTime = new int[3];
     /**
      * The amount of time left.
      */
@@ -18,7 +18,7 @@ public class TimerEntity {
     /**
      * Initialize a new timer.
      */
-    private Timer timer  = new Timer();
+    Timer timer  = new Timer();
     /**
      * The total time that has elapsed.
      */

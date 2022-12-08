@@ -8,11 +8,11 @@ import java.awt.event.FocusListener;
  * Class for the FocusListener of CustomTimerTextField.
  */
 public class CustomTimerTextFieldFocusListener implements FocusListener {
-    private JFormattedTextField customTimerTextField;
+    JFormattedTextField customTimerTextField;
 
     /**
      * Constructor for CustomTimerTextFieldFocusListener.
-     * @param customTimerTextField
+     * @param customTimerTextField the text field being listened to
      */
     public CustomTimerTextFieldFocusListener(JFormattedTextField customTimerTextField) {
         this.customTimerTextField = customTimerTextField;

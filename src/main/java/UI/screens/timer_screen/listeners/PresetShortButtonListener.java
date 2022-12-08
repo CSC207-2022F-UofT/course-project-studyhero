@@ -12,17 +12,17 @@ import java.awt.event.ActionListener;
  * Class for the ActionListener of PresetShortButton.
  */
 public class PresetShortButtonListener implements ActionListener {
-    private PresetTimerController ptController;
-    private CustomTimerController ctController;
-    private JLabel timerText;
-    private JProgressBar progressBar;
+    PresetTimerController ptController;
+    CustomTimerController ctController;
+    JLabel timerText;
+    JProgressBar progressBar;
 
     /**
      * Constructor for PresetShortButtonListener.
-     * @param ptController
-     * @param ctController
-     * @param timerText
-     * @param progressBar
+     * @param ptController the PresetTimerController
+     * @param ctController the CustomTimerController
+     * @param timerText the label displaying the time
+     * @param progressBar the progress bar on the timer screen
      */
     public PresetShortButtonListener(PresetTimerController ptController, CustomTimerController ctController,
                                      JLabel timerText, JProgressBar progressBar) {

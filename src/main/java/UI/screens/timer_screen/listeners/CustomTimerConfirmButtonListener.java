@@ -13,19 +13,19 @@ import java.util.regex.Pattern;
  * Class for the ActionListener of CustomTimerConfirmButton.
  */
 public class CustomTimerConfirmButtonListener implements ActionListener {
-    private CustomTimerController ctController;
-    private JFormattedTextField customTimerTextField;
-    private JLabel timerText;
-    private JProgressBar progressBar;
-    private JLabel errorLabel;
+    CustomTimerController ctController;
+    JFormattedTextField customTimerTextField;
+    JLabel timerText;
+    JProgressBar progressBar;
+    JLabel errorLabel;
 
     /**
      * Constructor for CustomTimerConfirmButtonListener.
-     * @param ctController
-     * @param customTimerTextField
-     * @param timerText
-     * @param progressBar
-     * @param errorLabel
+     * @param ctController the CustomTimerController
+     * @param customTimerTextField the text field on the timer screen
+     * @param timerText the label displaying the time
+     * @param progressBar the progress bar on the timer screen
+     * @param errorLabel the label that shows when an invalid time is entered
      */
     public CustomTimerConfirmButtonListener(CustomTimerController ctController,
                                             JFormattedTextField customTimerTextField, JLabel timerText,
