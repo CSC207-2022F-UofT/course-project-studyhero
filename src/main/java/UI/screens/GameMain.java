@@ -20,6 +20,8 @@ public class GameMain {
         JPanel mainPanel = new JPanel();
         CardLayout card = new CardLayout();
         ErrorOutputBoundary cGRM = new ErrorPresenter();
+
+
         mainPanel.setLayout(card);
 
         // ----- Music ------
@@ -65,8 +67,5 @@ public class GameMain {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         mainFrame.setSize(800, 500);
-
-
-
     }
 }

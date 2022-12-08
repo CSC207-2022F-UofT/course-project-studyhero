@@ -1,4 +1,4 @@
-package Timer.timer_screen;
+package UI.screens.timer_screen;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

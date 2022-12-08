@@ -21,9 +21,9 @@ public class UITimerListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        timerText.setText(tPresenter.updateTimer());
-        progressBar.setValue(progressBar.getMaximum() - convertTimeToInt(tPresenter.updateTimer()));
-        if ((tPresenter.updateTimer()).equals("00:00:00")) {
+        timerText.setText(tPresenter.getOutputTime());
+        progressBar.setValue(progressBar.getMaximum() - convertTimeToInt(tPresenter.getOutputTime()));
+        if ((tPresenter.getOutputTime()).equals("00:00:00")) {
             goToBreakMenuButton.setVisible(true);
         }
         else {

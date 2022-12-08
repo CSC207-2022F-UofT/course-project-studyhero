@@ -6,16 +6,20 @@ import java.awt.event.ActionListener;
 
 import Timer.timer_use_cases.TimerRequestModel;
 
-public class StartTimeButtonListener implements ActionListener {
-
-    private TimerRequestModel tRequestModel;
+public class StartTimerButtonListener implements ActionListener {
     private PresetTimerController ptController;
     private CustomTimerController ctController;
     private Timer timer;
 
+    public StartTimerButtonListener(PresetTimerController ptController, CustomTimerController ctController, Timer timer) {
+        this.ptController = ptController;
+        this.ctController = ctController;
+        this.timer = timer;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (tRequestModel.getCustomTime().equals("-1")) {
+        if (ctController.getCustomTime().equals("-1")) {
             ptController.startTimer();
         } else {
             ctController.startTimer();
