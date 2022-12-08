@@ -1,6 +1,5 @@
 package controllers.music;
 
-import entities.MusicPlayer;
 import use_cases.music_controls.PlayMusicInputBoundary;
 
 import java.awt.event.ActionEvent;
