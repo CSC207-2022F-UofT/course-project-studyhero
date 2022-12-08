@@ -15,7 +15,7 @@ public class FightBossScreen extends JPanel {
     public FightBossScreen(CardLayout card, JPanel parentPanel) {
         this.card = card;
         this.parentPanel = parentPanel;
-        //this.fightBossStatsDisplayInteractor = new FightBossStatsDisplayInteractor();
+        this.fightBossStatsDisplayInteractor = new FightBossStatsDisplayInteractor();
         this.fightBossStatsDisplayInteractorInitializer = new FightBossStatsDisplayInteractor("stats.csv");
 
         JPanel mainPanel = new JPanel();
@@ -38,16 +38,14 @@ public class FightBossScreen extends JPanel {
 
 
         JButton stabButton = new JButton("Stab");
-        StabController stabController = new StabController();
+        StabController stabController = new StabController(this.card, this.parentPanel, HPBar, bossHP);
         stabButton.addActionListener(stabController);
-        stabController.changeText().getBossHealth();
-
 
         JButton slashButton = new JButton("Slash");
-        SlashController slashController = new SlashController();
+        SlashController slashController = new SlashController(this.card, this.parentPanel, HPBar, bossHP);
         slashButton.addActionListener(slashController);
         JButton blockButton = new JButton("Block");
-        BlockController blockController = new BlockController();
+        BlockController blockController = new BlockController(this.card, this.parentPanel, HPBar, bossHP);
         blockButton.addActionListener(blockController);
         // bottomPanel.add(useConsumableButton);
         bottomPanel.add(stabButton);

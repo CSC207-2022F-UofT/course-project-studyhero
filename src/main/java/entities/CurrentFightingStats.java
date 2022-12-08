@@ -4,7 +4,6 @@ import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +36,7 @@ public class CurrentFightingStats implements FightingStats{
         initializeFight(newFile);
     }
     public void initializeFight(String newFile){
+        System.out.println("cock");
         Map<String, Integer> userStats = getPlayerStats(newFile);
         BossClass bossClass = new BossClass(userStats.get("level"));
         this.maxHP = userStats.get("hp");
@@ -45,28 +45,37 @@ public class CurrentFightingStats implements FightingStats{
         this.playerDefence = userStats.get("defence");
         this.bossHP = bossClass.maxHp;
         this.bossDamage = bossClass.damage;
+        saveFightStats();
     }
 
 
     public Map<String, Integer> getPlayerStats(String newFile){
         ErrorPresenter presenter = new ErrorPresenter();
         ValidStats playerStats = new ValidStats(newFile, presenter);
-        Map<String, Integer> statsMap = playerStats.load();
-        StatsUser player = new StatsUser(statsMap);
-        return player.getUserStats();
+        if (playerStats.isPlayable()) {
+            Map<String, Integer> statsMap = playerStats.load();
+            StatsUser player = new StatsUser(statsMap);
+            return player.getUserStats();
+        } else{
+            return new HashMap<>();
+        }
     }
 
     public Map<String, Integer> getFightStats(){
         ErrorPresenter presenter = new ErrorPresenter();
         ValidStats fightStats = new ValidStats("fightStats.csv", presenter);
-        Map<String, Integer> statsMap = fightStats.load();
-        return statsMap;
+        System.out.println("Error: " + fightStats.checkError());
+        if (fightStats.isPlayable()) {
+            return fightStats.load();
+        } else{
+            return new HashMap<>();
+        }
     }
 
     public Map<String, Integer> getUpdatedFightStats(){
         Map<String, Integer> updatedStatsMap = new HashMap<>();
         updatedStatsMap.put("maxHealth", this.maxHP);
-        updatedStatsMap.put("playerHealth", this.maxHP);
+        updatedStatsMap.put("playerHealth", this.playerHP);
         updatedStatsMap.put("playerDamage", this.playerDamage);
         updatedStatsMap.put("playerDefence", this.playerDefence);
         updatedStatsMap.put("bossHealth", this.bossHP);
@@ -87,9 +96,9 @@ public class CurrentFightingStats implements FightingStats{
 
     public int getPlayerDamage() { return this.playerDamage; }
 
-    public int getBossDamage() { return (this.bossDamage - this.playerDefence); }
+    public int getBossDamage() { return this.bossDamage; }
 
-    public void changePlayerHP(int by) { this.playerHP = Math.min((this.playerHP + by), this.maxHP); }
+    public void changePlayerHP(int by) { this.playerHP = this.playerHP + by; }
 
     public void changePlayerDamage(int by) { this.playerDamage = this.playerDamage + by; }
 

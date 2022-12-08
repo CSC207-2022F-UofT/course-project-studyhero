@@ -21,8 +21,8 @@ public class StatsUser implements Stats {
      */
     public StatsUser() {
         this.level = 1;
-        this.gold = 0;
-        this.currHp = 0;
+        this.gold = 100;
+        this.currHp = 100;
         this.baselineDamage = 5;
         this.tempDamage = 5;
         this.defence = 0;

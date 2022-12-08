@@ -3,10 +3,10 @@ package use_cases.boss_fight;
 import java.util.*;
 
 public class FightWinner {
-    static Map<String, ArrayList<Integer>> ht1 = new Hashtable<>();
-    static ArrayList<Integer> al1 = new ArrayList<>();
-    static ArrayList<Integer> al2 = new ArrayList<>();
-    static ArrayList<Integer> al3 = new ArrayList<>();
+    Map<String, ArrayList<Integer>> ht1 = new Hashtable<>();
+    ArrayList<Integer> al1 = new ArrayList<>();
+    ArrayList<Integer> al2 = new ArrayList<>();
+    ArrayList<Integer> al3 = new ArrayList<>();
 
     public FightWinner(){
         al1.add(1);
@@ -31,6 +31,7 @@ public class FightWinner {
         String playerString = String.valueOf(playerValue);
         String bossString = String.valueOf(bossValue);
         ArrayList<Integer> winner = ht1.get(playerString + bossString);
+        System.out.println(winner);
         return winner;
     }
 }
