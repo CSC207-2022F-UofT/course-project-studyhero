@@ -118,10 +118,13 @@ public class ValidStats implements ValidFileDsGateway{
         switch(result){
             case "exist":
                 presenter.error("There is no existing " + filename + " file.");
+                return false;
             case "invalid":
                 presenter.error("Invalid " + filename + " file.");
+                return false;
             case "other":
                 presenter.error("Error: please start a new game.");
+                return false;
         }
         return false;
     }

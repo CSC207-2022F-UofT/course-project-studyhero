@@ -23,33 +23,4 @@ public class ConfirmationWindowInteractor implements ConfirmationWindowInputBoun
         return new ConfirmationWindowPresenter(confirmation, card, parentPanel, presenter);
     }
 
-
-//    private final JFrame confirmationWindow;
-//
-//    public ConfirmationWindow(CardLayout card, JPanel parentPanel, boolean visible){
-//        ErrorOutputBoundary presenter = new ErrorPresenter();
-//        this.confirmationWindow = new JFrame();
-//        JPanel confirmationPanel = new JPanel();
-//        JLabel title = new JLabel("Are you sure? This will overwrite your existing save files.");
-//
-//        JButton confirm = new JButton("Yes");
-//        NewGameConfirmationController newGameConfirmationController =
-//                new NewGameConfirmationController(card, parentPanel, confirmationWindow, presenter);
-//        confirm.addActionListener(newGameConfirmationController);
-//
-//        JButton reject = new JButton("No");
-//        reject.addActionListener(e -> confirmationWindow.dispose());
-//
-//        confirmationPanel.add(title);
-//        confirmationPanel.add(confirm);
-//        confirmationPanel.add(reject);
-//        confirmationWindow.add(confirmationPanel);
-//        confirmationWindow.pack();
-//        confirmationWindow.getDefaultCloseOperation();
-//        confirmationWindow.setVisible(visible);
-//    }
-//
-//    public void setVisible(boolean visible){
-//        confirmationWindow.setVisible(visible);
-//    }
 }

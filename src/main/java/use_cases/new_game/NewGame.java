@@ -15,13 +15,15 @@ public class NewGame implements NewGameInputBoundary{
     private final ValidFileDsGateway inventoryFile;
     private final ErrorOutputBoundary presenter;
 
-    public NewGame(ErrorOutputBoundary presenter) {
+    public NewGame(ValidFileDsGateway statsFile,
+                   ValidFileDsGateway inventoryFile, ErrorOutputBoundary presenter) {
+        this.statsFile = statsFile;
+        this.inventoryFile = inventoryFile;
         this.presenter = presenter;
-        this.statsFile = new ValidStats("stats.csv", presenter);
-        this.inventoryFile = new ValidPlayerInventory("PlayerInventory.csv", presenter);
     }
 
     public boolean isPlayable(){
+
         return (statsFile.isPlayable() && inventoryFile.isPlayable());
     }
 

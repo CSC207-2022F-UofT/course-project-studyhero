@@ -2,17 +2,25 @@ package UI.screens.panels.settings;
 
 import entities.MusicPlayer;
 import use_cases.errors.ErrorOutputBoundary;
-import controllers.new_game.NewGameControllerOld;
-import use_cases.new_game.NewGame;
-import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
+import use_cases.errors.ErrorPresenter;
+import use_cases.file_checker.ValidFileDsGateway;
+import use_cases.file_checker.ValidPlayerInventory;
+import use_cases.file_checker.ValidStats;
+import use_cases.new_game.*;
+import use_cases.game_check.GameCheckController;
+import use_cases.game_check.GameCheckInputBoundary;
+import use_cases.game_check.GameCheckInteractor;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SettingsScreen extends JPanel {
-    CardLayout card;
-    JPanel parentPanel;
-    ErrorOutputBoundary presenter;
+    private CardLayout card;
+    private JPanel parentPanel;
+    private ErrorOutputBoundary presenter;
+    private final static String statsFilepath = "stats.csv";
+    private final static String inventoryFilepath = "PlayerInventory.csv";
+    private final static String fightStatsFilepath = "fightStats.csv";
     public SettingsScreen(CardLayout card, JPanel parentPanel,
                           ErrorOutputBoundary presenter, String prevPanel,
                           MusicPlayer player) {
@@ -25,11 +33,19 @@ public class SettingsScreen extends JPanel {
 
         // ===== Main Controls =====
         JPanel mainControls = new JPanel();
+
+
         JButton newGameButton = new JButton("New Game");
-        //ConfirmationWindowInteractor confirmation = new ConfirmationWindowInteractor(card, parentPanel, false);
-        NewGame newGameInteractor = new NewGame( presenter);
-        //NewGameControllerOld newGameControllerOld = new NewGameControllerOld(card, parentPanel, newGameInteractor, confirmation);
-        //newGameButton.addActionListener(newGameControllerOld);
+        ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
+        ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
+        ValidFileDsGateway inventoryChecker = new ValidPlayerInventory(inventoryFilepath, fileCheckerPresenter);
+        //ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
+        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker, presenter);
+        GameCheckInputBoundary gameCheckUseCase = new GameCheckInteractor(statsChecker, inventoryChecker);
+        GameCheckController gameCheckController = new GameCheckController(card, parentPanel, gameCheckUseCase,
+                newGameUseCase, presenter);
+
+        newGameButton.addActionListener(gameCheckController);
 
         JButton goBackButton = new JButton("Back");
         goBackButton.addActionListener(e -> card.show(parentPanel, prevPanel));

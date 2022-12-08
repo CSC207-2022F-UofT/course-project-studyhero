@@ -1,8 +1,7 @@
 package use_cases.continue_game;
 
 import use_cases.errors.ErrorOutputBoundary;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidStats;
+import use_cases.game_check.GameCheckInputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,27 +9,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ContinueGameController implements ActionListener {
-    CardLayout card;
-    JPanel parent;
-    ErrorOutputBoundary presenter;
+    private final CardLayout card;
+    private final JPanel parent;
+    private final GameCheckInputBoundary gameCheckUseCase;
+    private final ErrorOutputBoundary presenter;
 
-    public ContinueGameController(CardLayout card, JPanel parent, ErrorOutputBoundary presenter){
+    public ContinueGameController(CardLayout card, JPanel parent,
+                                  GameCheckInputBoundary useCase,
+                                  ErrorOutputBoundary presenter){
         this.card = card;
         this.parent = parent;
+        this.gameCheckUseCase = useCase;
         this.presenter = presenter;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("clicked");
 
-        ValidStats statsChecker = new ValidStats("stats.csv", presenter);
-        ValidPlayerInventory inventoryChecker = new ValidPlayerInventory("PlayerInventory.csv", presenter);
-
-        System.out.println(statsChecker.isValid());
-
-        if (statsChecker.isValid() && inventoryChecker.isValid()){
+        if (gameCheckUseCase.valid()){
             System.out.println("Game exists. Continuing to next game...");
-            System.out.println("Current stats: " + statsChecker.load());
             card.show(parent, "Timer");
         }
     }

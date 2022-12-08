@@ -23,12 +23,12 @@ public class GameMain {
         mainPanel.setLayout(card);
 
         // ----- Music ------
-        MusicPlayer player = new MusicPlayer("bgm.wav");
-        player.play();
+        ErrorOutputBoundary musicErrorPresenter = new ErrorPresenter();
+        MusicPlayer player = new MusicPlayer("btd1.wav", musicErrorPresenter);
 
         StartScreen startScreen = new StartScreen(card, mainPanel);
         StoryScreen storyScreen = new StoryScreen(card, mainPanel);
-        //TimerPanel timerScreen = new TimerPanel(card,mainPanel);
+        TimerPanel timerScreen = new TimerPanel(card,mainPanel);
         InventoryPanel inventoryScreen = new InventoryPanel(card, mainPanel);
         BreakScreen breakScreen = new BreakScreen(card,mainPanel);
 
@@ -48,7 +48,7 @@ public class GameMain {
 
         mainPanel.add(startScreen, "Start");
         mainPanel.add(storyScreen, "Story");
-        //mainPanel.add(timerScreen, "Timer");
+        mainPanel.add(timerScreen, "Timer");
         mainPanel.add(breakScreen, "Break");
         mainPanel.add(changeStatsScreen, "Change Stats");
         mainPanel.add(startSettingsScreen, "Start Settings");

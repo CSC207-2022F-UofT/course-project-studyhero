@@ -30,11 +30,14 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
     PlayerDisplayInventoryDsGateway playerDisplayInventoryDsGateway = new PlayerInventoryFile(playerInventory);
     PlayerDisplayInventoryOutputBoundary playerDisplayInventoryPresenter = new PlayerDisplayInventoryPresenter();
-    PlayerDisplayInventoryInputBoundary playerDisplayInventoryInteractor = new PlayerDisplayInventoryInteractor(playerDisplayInventoryDsGateway, playerDisplayInventoryPresenter);
-    PlayerDisplayInventoryController displayInventoryController = new PlayerDisplayInventoryController(playerDisplayInventoryInteractor);
+    PlayerDisplayInventoryInputBoundary playerDisplayInventoryInteractor =
+            new PlayerDisplayInventoryInteractor(playerDisplayInventoryDsGateway, playerDisplayInventoryPresenter);
+    PlayerDisplayInventoryController displayInventoryController =
+            new PlayerDisplayInventoryController(playerDisplayInventoryInteractor);
     DeleteItemOutputBoundary deleteItemPresenter = new DeleteItemPresenter();
     DeleteItemDsGateway deleteItemDsGateway = new PlayerInventoryFile(playerInventory);
-    DeleteItemInputBoundary deleteItemInputBoundary = new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
+    DeleteItemInputBoundary deleteItemInputBoundary =
+            new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
     DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
 
 
@@ -75,7 +78,6 @@ public class InventoryPanel extends JPanel implements ActionListener {
         this.add(goToBreakMenuButton);
 
     }
-
 
 
     @Override

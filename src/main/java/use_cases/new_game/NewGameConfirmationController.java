@@ -12,20 +12,22 @@ public class NewGameConfirmationController implements ActionListener {
     CardLayout card;
     JPanel parentPanel;
     JFrame parentFrame;
+    private NewGameInputBoundary useCase;
     final ErrorOutputBoundary presenter;
 
     public NewGameConfirmationController(CardLayout card, JPanel parentPanel,
-                                         JFrame parentFrame, ErrorOutputBoundary presenter){
+                                         JFrame parentFrame, NewGameInputBoundary newGameUseCase,
+                                         ErrorOutputBoundary presenter){
         this.card= card;
         this.parentPanel = parentPanel;
         this.parentFrame = parentFrame;
+        this.useCase = newGameUseCase;
         this.presenter = presenter;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new NewGame(presenter);
-        new PlayerInventoryFile("PlayerInventory.csv");
+        useCase.newGame();
         parentFrame.dispose();
         card.show(parentPanel, "Story");
     }
