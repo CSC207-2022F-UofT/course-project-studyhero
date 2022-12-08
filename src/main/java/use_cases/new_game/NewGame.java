@@ -2,8 +2,7 @@ package use_cases.new_game;
 
 import entities.CurrentFightingStats;
 import entities.StatsUser;
-import inventorymenu.inventoryitem.InventoryList;
-import inventorymenu.inventoryitem.PlayerInventoryFile;
+import inventorymenu.inventoryitem.*;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidFileDsGateway;
 import use_cases.save_game.StatSave;
@@ -45,8 +44,12 @@ public class NewGame implements NewGameInputBoundary{
         newSave.save("stats.csv");
 
         // initialise a new inventory list and saves it
-        InventoryList inventoryList = new PlayerInventoryFile("PlayerInventory.csv");
-        inventoryList.initialize();
+        InitializePlayerInventoryGateway playerInventoryList = new PlayerInventoryFile("PlayerInventory.csv");
+        playerInventoryList.initialize();
+
+        // initialise a new inventory list and saves it
+        InitializeShopInventoryGateway shopInventoryList = new ShopInventoryFile("ShopInventory.csv");
+        shopInventoryList.initialize();
 
         // initialise a new fightingStats object and saves it
 

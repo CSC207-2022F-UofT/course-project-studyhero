@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 class PlayerInventoryFileTest {
     String filePath = "PlayerInventoryTest.csv";
-    InventoryList inventoryListFile = new PlayerInventoryFile(filePath);
+    PlayerInventoryFile inventoryListFile = new PlayerInventoryFile(filePath);
     ArrayList<InventoryItemDsRequestModel> referenceList = new ArrayList<>();
     InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
             "Weapon",

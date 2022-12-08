@@ -1,6 +1,7 @@
 package inventorymenu.inventoryitem;
 import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.ShopDisplayInventoryDsGateway;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;
@@ -15,10 +16,9 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class ShopInventoryFile implements InventoryList, InitializeShopInventoryGateway{
+public class ShopInventoryFile implements InventoryList, InitializeShopInventoryGateway, ShopDisplayInventoryDsGateway {
 
     private final File csvFile;
-    private final String label = "Shop Inventory";
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
 

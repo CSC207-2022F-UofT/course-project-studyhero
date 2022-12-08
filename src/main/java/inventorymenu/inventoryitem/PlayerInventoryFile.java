@@ -1,6 +1,8 @@
 package inventorymenu.inventoryitem;
 import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+import org.jetbrains.annotations.NotNull;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;
@@ -15,7 +17,7 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class PlayerInventoryFile implements InventoryList, InitializePlayerInventoryGateway {
+public class PlayerInventoryFile implements InventoryList, InitializePlayerInventoryGateway , PlayerDisplayInventoryDsGateway {
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -48,7 +50,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
         readInventory(validFile);
     }
 
-    private void readInventory(ValidFileDsGateway validFile) {
+    private void readInventory(@NotNull ValidFileDsGateway validFile) {
         if (validFile.fileExists() && validFile.isPlayable()) {
             BufferedReader reader;
             try {
@@ -108,7 +110,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      * @return a AddItemDsRequestModel with id as the next available player's inventory slot
      */
     @Override
-    public InventoryItemDsRequestModel attachId(InventoryItem item) {
+    public InventoryItemDsRequestModel attachId(@NotNull InventoryItem item) {
         int id = CheckLatestInventoryItemId() + 1;
 
         return new InventoryItemDsRequestModel(id,
