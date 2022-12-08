@@ -1,8 +1,19 @@
 package inventorymenu.inventory_menu_use_case.equip_item_use_case;
 
+
+import entities.StatsUser;
+import use_cases.errors.ErrorOutputBoundary;
+import use_cases.errors.ErrorPresenter;
+import use_cases.file_checker.ValidStats;
+import use_cases.save_game.StatSave;
+
+import java.util.Map;
+
 public class EquipItemInteractor implements EquipItemInputBoundary{
     final EquipItemDsGateway dsGateway;
     final EquipItemOutputBoundary outputBoundary;
+
+
 
     /**
      *
@@ -35,6 +46,17 @@ public class EquipItemInteractor implements EquipItemInputBoundary{
         EquipItemResponseModel equipItemResponseModel = new EquipItemResponseModel(name.getName(),
                 requestModel.getId());
         dsGateway.equipItem(requestModel.getId());
+
+        ErrorOutputBoundary errorPresenter;
+        errorPresenter = new ErrorPresenter();
+        ValidStats stats = new ValidStats("stats.csv", errorPresenter);
+        Map<String, Integer> statsMap = stats.load();
+        StatsUser intermediateUser = new StatsUser(statsMap);
+        int difference = intermediateUser.getTempDamage() - intermediateUser.updateBaselineDamage(0);
+        intermediateUser.updateTempDamage(-difference);
+        StatSave saver = new StatSave(intermediateUser.getUserStats(), errorPresenter);
+        saver.save("stats.csv");
+
         return outputBoundary.prepareSuccessView(equipItemResponseModel);
     }
 }

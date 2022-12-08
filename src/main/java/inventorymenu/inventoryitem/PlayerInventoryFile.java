@@ -239,7 +239,8 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public boolean itemEquipable(int id) {
-        return inventoryList.get(id - 1)instanceof Equipable;
+        return inventoryList.get(id-1).getType().equals("Weapon") ||
+                inventoryList.get(id-1).getType().equals("Shield");
     }
 
     /**
@@ -256,7 +257,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
         }
 
         inventoryList.get(id - 1).setEquipped(true);
-
+        save();
     }
 
     /**
