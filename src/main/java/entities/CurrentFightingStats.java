@@ -26,6 +26,7 @@ public class CurrentFightingStats implements FightingStats{
 
     public CurrentFightingStats(){
         Map<String, Integer> statsMap = getFightStats();
+        System.out.println(statsMap.toString());
         this.maxHP = statsMap.get("maxHealth");
         this.playerHP = statsMap.get("playerHealth");
         this.playerDamage = statsMap.get("playerDamage");
@@ -34,8 +35,11 @@ public class CurrentFightingStats implements FightingStats{
         this.bossDamage = statsMap.get("bossDamage");
     }
 
-    public void initializeFight(){
-        Map<String, Integer> userStats = getPlayerStats();
+    public CurrentFightingStats(String newFile){
+        initializeFight(newFile);
+    }
+    public void initializeFight(String newFile){
+        Map<String, Integer> userStats = getPlayerStats(newFile);
         BossClass bossClass = new BossClass(userStats.get("level"));
         this.maxHP = userStats.get("hp");
         this.playerHP = userStats.get("hp");
@@ -46,9 +50,9 @@ public class CurrentFightingStats implements FightingStats{
     }
 
 
-    public Map<String, Integer> getPlayerStats(){
+    public Map<String, Integer> getPlayerStats(String newFile){
         ErrorPresenter presenter = new ErrorPresenter();
-        ValidStats playerStats = new ValidStats("stats.csv", presenter);
+        ValidStats playerStats = new ValidStats(newFile, presenter);
         Map<String, Integer> statsMap = playerStats.load();
         StatsUser player = new StatsUser(statsMap);
         return player.getUserStats();
@@ -79,31 +83,28 @@ public class CurrentFightingStats implements FightingStats{
     }
 
 
-    public int getPlayerDamage() {
-        return this.playerDamage;
-    }
+    public int getPlayerHP(){ return this.playerHP; }
 
-    public int getBossDamage() {
-        return (this.bossDamage - this.playerDefence);
-    }
+    public int getBossHP(){ return this.bossHP; }
 
-    public void changePlayerHP(int by) {
-        this.playerHP = Math.min((this.playerHP + by), this.maxHP);
-    }
+    public int getPlayerDamage() { return this.playerDamage; }
 
-    public void changePlayerDamage(int by) {
-        this.playerDamage = this.playerDamage + by;
-    }
+    public int getBossDamage() { return (this.bossDamage - this.playerDefence); }
 
-    public void changePlayerDefence(int by) {
-        this.playerDefence = this.playerDefence + by;
-    }
+    public void changePlayerHP(int by) { this.playerHP = Math.min((this.playerHP + by), this.maxHP); }
 
-    public void changeBossHP(int by) {
-        this.bossHP = this.bossHP + by;
-    }
+    public void changePlayerDamage(int by) { this.playerDamage = this.playerDamage + by; }
 
-    public boolean winCondition(){
-        return (this.playerHP <= 0 || this.bossHP <= 0);
+    public void changePlayerDefence(int by) { this.playerDefence = this.playerDefence + by; }
+
+    public void changeBossHP(int by) { this.bossHP = this.bossHP + by; }
+
+    public int winCondition(){
+        if (this.playerHP <= 0){
+            return 2;
+        } else if (this.bossHP <= 0){
+            return 1;
+        } else{
+            return 0; }
     }
 }

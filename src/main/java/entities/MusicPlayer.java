@@ -39,27 +39,9 @@ public class MusicPlayer {
     public Clip getClip(){return clip;}
 
 
-
-
     public void play(){
         clip.start();
         status = "play";
-    }
-    public void pause(){
-        if (!status.equals("paused")){
-            this.currentPos = this.clip.getMicrosecondPosition();
-            clip.stop();
-            status = "paused";
-        }
-    }
-
-    public void restart(){
-        clip.stop();
-        clip.close();
-        resetAudioStream();
-        currentPos = 0L;
-        clip.setMicrosecondPosition(0);
-        this.play();
     }
 
     public void resetAudioStream()
