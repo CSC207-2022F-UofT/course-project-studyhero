@@ -1,5 +1,6 @@
 package UI.screens.timer_screen.listeners;
 
+import UI.screens.timer_screen.ConvertTimeToSecondsHelper;
 import UI.screens.timer_screen.CustomTimerController;
 import UI.screens.timer_screen.PresetTimerController;
 
@@ -36,22 +37,12 @@ public class PresetLongButtonListener implements ActionListener {
      * @param e the event to be processed
      */
     public void actionPerformed(ActionEvent e) {
+        ConvertTimeToSecondsHelper helper = new ConvertTimeToSecondsHelper();
         ctController.setCustomTime("-1");
         ptController.selectLongTime();
         String time = ptController.getLongTime();
         timerText.setText(time);
-        int totalSeconds = convertTimeToSeconds(time);
+        int totalSeconds = helper.convertTimeToSeconds(time);
         progressBar.setMaximum(totalSeconds);
-    }
-
-    /**
-     * Helper method that converts String time into the number of seconds that it equals.
-     * @param time the time with format (00:00:00)
-     * @return the number of seconds time equals
-     */
-    public int convertTimeToSeconds(String time) {
-        String[] times = time.split(":", 3);
-        int timeSeconds = Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
-        return timeSeconds;
     }
 }

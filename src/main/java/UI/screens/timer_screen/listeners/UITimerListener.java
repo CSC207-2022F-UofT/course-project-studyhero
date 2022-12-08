@@ -4,6 +4,7 @@ import UI.screens.timer_screen.CustomTimerController;
 import UI.screens.timer_screen.PresetTimerController;
 import UI.screens.timer_screen.TimerPanel;
 import UI.screens.timer_screen.TimerPresenter;
+import UI.screens.timer_screen.ConvertTimeToSecondsHelper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -72,8 +73,9 @@ public class UITimerListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        ConvertTimeToSecondsHelper helper = new ConvertTimeToSecondsHelper();
         timerText.setText(tPresenter.getOutputTime());
-        progressBar.setValue(progressBar.getMaximum() - convertTimeToSeconds(tPresenter.getOutputTime()));
+        progressBar.setValue(progressBar.getMaximum() - helper.convertTimeToSeconds(tPresenter.getOutputTime()));
         if ((tPresenter.getOutputTime()).equals("00:00:00")) {
             if (customTimerController.getCustomTime().equals("-1")) {
                 presetTimerController.endTimer();
@@ -94,16 +96,5 @@ public class UITimerListener implements ActionListener {
         else {
             goToBreakMenuButton.setVisible(false);
         }
-    }
-
-    /**
-     * Helper method that converts String time into the number of seconds that it equals.
-     * @param time the time with format (00:00:00)
-     * @return the number of seconds time equals
-     */
-    public int convertTimeToSeconds(String time) {
-        String[] times = time.split(":", 3);
-        int timeSeconds = Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
-        return timeSeconds;
     }
 }
