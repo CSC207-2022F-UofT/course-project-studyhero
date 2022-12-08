@@ -3,9 +3,10 @@ package UI.screens.panels;
 import use_cases.continue_game.ContinueGameController;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
+import use_cases.new_game.GameCheckController;
 import use_cases.new_game.NewGame;
-import controllers.new_game.NewGameController;
-import use_cases.new_game.NewGameConfirmation;
+import controllers.new_game.NewGameControllerOld;
+import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +29,14 @@ public class StartScreen extends JPanel{
 
         JButton newGameButton = new JButton("New Game");
         NewGame newGameUseCase = new NewGame(presenter);
-        NewGameConfirmation newGameConfirmation = new NewGameConfirmation(card, parentPanel, false);
-        NewGameController newGameController =
-                new NewGameController(card, parentPanel, newGameUseCase, newGameConfirmation);
-        newGameButton.addActionListener(newGameController);
+        GameCheckController gameCheckController = new GameCheckController(card, parent, "stats.csv",
+                "PlayerInventory.csv", newGameUseCase, presenter);
+        newGameButton.addActionListener(gameCheckController);
+
+        //ConfirmationWindowInteractor confirmationWindowInteractor = new ConfirmationWindowInteractor(card, parentPanel, false);
+        //NewGameControllerOld newGameControllerOld =
+        //        new NewGameControllerOld(card, parentPanel, newGameUseCase, confirmationWindowInteractor);
+        //newGameButton.addActionListener(newGameControllerOld);
 
         JButton continueGameButton = new JButton("Continue Game");
         ContinueGameController continueGameController = new ContinueGameController(card, parent, presenter);

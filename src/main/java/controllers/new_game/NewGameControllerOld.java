@@ -1,8 +1,7 @@
 package controllers.new_game;
 
-import use_cases.errors.ErrorOutputBoundary;
 import use_cases.new_game.NewGame;
-import use_cases.new_game.NewGameConfirmation;
+import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
 import use_cases.new_game.NewGameInputBoundary;
 
 import javax.swing.*;
@@ -10,14 +9,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NewGameController implements ActionListener {
+public class NewGameControllerOld implements ActionListener {
     private final CardLayout card;
     private final JPanel parentPanel;
-    private final NewGameConfirmation confirmation;
+    private final ConfirmationWindowInteractor confirmation;
     private final NewGameInputBoundary useCase;
 
-    public NewGameController(CardLayout card, JPanel parent,
-                             NewGame useCase, NewGameConfirmation confirmation){
+    public NewGameControllerOld(CardLayout card, JPanel parent,
+                                NewGame useCase, ConfirmationWindowInteractor confirmation){
         this.card = card;
         this.parentPanel = parent;
         this.useCase = useCase;
@@ -27,7 +26,7 @@ public class NewGameController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (useCase.isPlayable()){
-            confirmation.setVisible(true);}
+            }
         else{
             useCase.newGame();
             card.show(parentPanel, "Story");

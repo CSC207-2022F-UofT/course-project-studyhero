@@ -2,9 +2,9 @@ package UI.screens.panels.settings;
 
 import entities.MusicPlayer;
 import use_cases.errors.ErrorOutputBoundary;
-import controllers.new_game.NewGameController;
+import controllers.new_game.NewGameControllerOld;
 import use_cases.new_game.NewGame;
-import use_cases.new_game.NewGameConfirmation;
+import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,11 +26,10 @@ public class SettingsScreen extends JPanel {
         // ===== Main Controls =====
         JPanel mainControls = new JPanel();
         JButton newGameButton = new JButton("New Game");
-        NewGameConfirmation confirmation = new NewGameConfirmation(card, parentPanel, false);
+        //ConfirmationWindowInteractor confirmation = new ConfirmationWindowInteractor(card, parentPanel, false);
         NewGame newGameInteractor = new NewGame( presenter);
-        NewGameController newGameController = new NewGameController(card, parentPanel,
-                newGameInteractor, confirmation);
-        newGameButton.addActionListener(newGameController);
+        //NewGameControllerOld newGameControllerOld = new NewGameControllerOld(card, parentPanel, newGameInteractor, confirmation);
+        //newGameButton.addActionListener(newGameControllerOld);
 
         JButton goBackButton = new JButton("Back");
         goBackButton.addActionListener(e -> card.show(parentPanel, prevPanel));
