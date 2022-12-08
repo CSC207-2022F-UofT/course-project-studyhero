@@ -38,11 +38,6 @@ public interface InventoryList extends AddItemDsGateway, DeleteItemDsGateway{
     int CheckLatestInventoryItemId();
 
     /**
-     * Rewrite the inventory file with the added inventoryItem
-     */
-    void save();
-
-    /**
      * Return whether inventory is full
      * @return whether inventory's capacity is greater than 20
      */

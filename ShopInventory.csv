@@ -1,0 +1,6 @@
+Player Inventory
+item_id,item_type,item_name,item_effect,item_gold_value
+1,Weapon,Sword,3,6
+2,AttackPotion,StrengthPotion,4,2
+3,Weapon,HammerHammer,5,8
+4,Shield,BronzeShield,12,23

@@ -9,5 +9,4 @@ public interface Consumable{
      * Delete current Consumable object add the corresponding effect to player's stat
      */
     void consume();
-
 }

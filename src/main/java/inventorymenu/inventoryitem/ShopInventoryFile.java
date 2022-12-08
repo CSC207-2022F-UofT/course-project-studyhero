@@ -20,7 +20,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-    private ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+    private final ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
 
 
     /**
@@ -134,8 +134,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
     /**
      * Rewrite the inventory file with the added inventoryItem
      */
-    @Override
-    public void save(){
+    private void save(){
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(csvFile));
@@ -173,28 +172,43 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
     }
 
     @Override
-    public void addNewWeapon() {
-
+    public void addNewWeapon(int level) {
+        int weaponAttack = level * 8 - 3;
+        int goldValue = level * 9 - 3;
+        InventoryItem item = new Weapon("Sword", weaponAttack, goldValue);
+        save(item);
     }
 
     @Override
-    public void addNewShield() {
-
+    public void addNewShield(int level) {
+        int shieldDefence = level * 8 - 3;
+        int goldValue = level * 9 - 3;
+        InventoryItem item = new Shield("Bronze Shield", shieldDefence, goldValue);
+        save(item);
     }
 
     @Override
-    public void addNewAttackPotion() {
-
+    public void addNewAttackPotion(int level) {
+        int effect = 15;
+        int goldValue = level * 5 - 3;
+        InventoryItem item = new AttackPotion("Strength Potion", effect, goldValue);
+        save(item);
     }
 
     @Override
-    public void addNewHealthPotion() {
-
+    public void addNewHealthPotion(int level) {
+        int effect = 15;
+        int goldValue = level * 5 - 3;
+        InventoryItem item = new HealthPotion("Health Potion", effect, goldValue);
+        save(item);
     }
 
     @Override
-    public void addPoisonPotion() {
-
+    public void addPoisonPotion(int level) {
+        int effect = 5;
+        int goldValue = level * 5 - 3;
+        InventoryItem item = new PoisonPotion("Poison Potion", effect, goldValue);
+        save(item);
     }
 
     /**
