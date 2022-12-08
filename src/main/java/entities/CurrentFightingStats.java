@@ -76,8 +76,6 @@ public class CurrentFightingStats implements FightingStats{
         ErrorPresenter presenter = new ErrorPresenter();
         StatSave statSave = new StatSave(getUpdatedFightStats(), presenter);
         statSave.save("fightStats.csv");
-
-
     }
 
 

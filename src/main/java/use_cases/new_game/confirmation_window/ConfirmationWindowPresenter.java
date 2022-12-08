@@ -17,7 +17,7 @@ public class ConfirmationWindowPresenter extends JFrame implements
 
     private final static String statsFilepath = "stats.csv";
     private final static String inventoryFilepath = "PlayerInventory.csv";
-    //private final static String fightStatsFilepath = "fightStats.csv";
+    private final static String fightStatsFilepath = "fightStats.csv";
 
     public ConfirmationWindowPresenter(String confirmation, CardLayout card, JPanel parentPanel,
                                        ErrorOutputBoundary presenter){
@@ -28,8 +28,9 @@ public class ConfirmationWindowPresenter extends JFrame implements
         ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
         ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
         ValidFileDsGateway inventoryChecker = new ValidPlayerInventory(inventoryFilepath, fileCheckerPresenter);
-        //ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
-        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker, presenter);
+        ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
+        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker,
+                fightStatsChecker, presenter);
         NewGameConfirmationController newGameConfirmationController =
                 new NewGameConfirmationController(card, parentPanel, this,
                         newGameUseCase, presenter);

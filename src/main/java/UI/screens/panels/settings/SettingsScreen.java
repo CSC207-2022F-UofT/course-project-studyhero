@@ -39,9 +39,11 @@ public class SettingsScreen extends JPanel {
         ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
         ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
         ValidFileDsGateway inventoryChecker = new ValidPlayerInventory(inventoryFilepath, fileCheckerPresenter);
-        //ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
-        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker, presenter);
-        GameCheckInputBoundary gameCheckUseCase = new GameCheckInteractor(statsChecker, inventoryChecker);
+        ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
+        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker,
+                fightStatsChecker, presenter);
+        GameCheckInputBoundary gameCheckUseCase =
+                new GameCheckInteractor(statsChecker, inventoryChecker, fightStatsChecker);
         GameCheckController gameCheckController = new GameCheckController(card, parentPanel, gameCheckUseCase,
                 newGameUseCase, presenter);
 
