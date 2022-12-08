@@ -1,6 +1,5 @@
 package use_cases.file_checker;
 
-import entities.StatsUser;
 import use_cases.errors.ErrorOutputBoundary;
 
 import java.io.*;
@@ -77,8 +76,10 @@ public class ValidStats implements ValidFileDsGateway{
             long numLines = lines.count();
             if (numLines != 2){return "invalid";}
 
-            String[] attributes;
-            if ((attributes = read(br, "attributes")).length == 0){return "invalid";}
+            // read first line as attributes
+            if ((read(br, "attributes")).length == 0){return "invalid";}
+
+            // read second line as stats
             String[] stats;
             if ((stats = read(br, "stats")).length == 0){return "invalid";}
             br.close();
