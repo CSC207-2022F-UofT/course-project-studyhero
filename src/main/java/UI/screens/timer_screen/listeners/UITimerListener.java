@@ -1,5 +1,8 @@
 package UI.screens.timer_screen.listeners;
 
+import UI.screens.timer_screen.CustomTimerController;
+import UI.screens.timer_screen.PresetTimerController;
+import UI.screens.timer_screen.TimerPanel;
 import UI.screens.timer_screen.TimerPresenter;
 
 import javax.swing.*;
@@ -12,6 +15,8 @@ import static UI.screens.timer_screen.TimerPanel.convertTimeToSeconds;
  * Class for the ActionListener of the timer in TimerPanel.
  */
 public class UITimerListener implements ActionListener {
+    private PresetTimerController presetTimerController;
+    private CustomTimerController customTimerController;
     private JLabel timerText;
     private TimerPresenter tPresenter;
     private JProgressBar progressBar;
@@ -23,9 +28,11 @@ public class UITimerListener implements ActionListener {
     private JButton startTimerButton;
     private JFormattedTextField customTimerTextField;
     private JButton endTimerButton;
+    private TimerPanel timerPanel;
 
     /**
      * Constructor for UITimerListener.
+     *
      * @param timerText
      * @param tPresenter
      * @param progressBar
@@ -37,11 +44,15 @@ public class UITimerListener implements ActionListener {
      * @param startTimerButton
      * @param customTimerTextField
      * @param endTimerButton
+     * @param timerPanel
      */
-    public UITimerListener(JLabel timerText, TimerPresenter tPresenter, JProgressBar progressBar,
+    public UITimerListener(PresetTimerController presetTimerController, CustomTimerController customTimerController,
+                           JLabel timerText, TimerPresenter tPresenter, JProgressBar progressBar,
                            JButton goToBreakMenuButton, JButton customTimerConfirmButton, JButton presetLongButton,
                            JButton presetMediumButton, JButton presetShortButton, JButton startTimerButton,
-                           JFormattedTextField customTimerTextField, JButton endTimerButton) {
+                           JFormattedTextField customTimerTextField, JButton endTimerButton, TimerPanel timerPanel) {
+        this.presetTimerController = presetTimerController;
+        this.customTimerController = customTimerController;
         this.timerText = timerText;
         this.tPresenter = tPresenter;
         this.progressBar = progressBar;
@@ -53,6 +64,7 @@ public class UITimerListener implements ActionListener {
         this.startTimerButton = startTimerButton;
         this.customTimerTextField = customTimerTextField;
         this.endTimerButton = endTimerButton;
+        this.timerPanel = timerPanel;
     }
 
     /**
@@ -65,6 +77,13 @@ public class UITimerListener implements ActionListener {
         timerText.setText(tPresenter.getOutputTime());
         progressBar.setValue(progressBar.getMaximum() - convertTimeToSeconds(tPresenter.getOutputTime()));
         if ((tPresenter.getOutputTime()).equals("00:00:00")) {
+            if (customTimerController.getCustomTime().equals("-1")) {
+                presetTimerController.endTimer();
+            }
+            else {
+                customTimerController.endTimer();
+            }
+            timerPanel.timer.stop();
             goToBreakMenuButton.setVisible(true);
             customTimerConfirmButton.setEnabled(true);
             presetLongButton.setEnabled(true);

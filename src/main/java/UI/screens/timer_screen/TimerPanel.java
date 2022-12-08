@@ -26,7 +26,7 @@ public class TimerPanel extends JPanel {
     JFormattedTextField customTimerTextField;
     JLabel errorLabel;
     JButton breakMenuButton;
-    Timer timer;
+    public Timer timer;
     /**
      * Layout that allows the user to switch between panels.
      */
@@ -54,9 +54,9 @@ public class TimerPanel extends JPanel {
 
         timerText.setFont(new Font("Verdana", Font.PLAIN, 48));
 
-        timer = new Timer(100, new UITimerListener(timerText, timerPresenter, progressBar, breakMenuButton,
-                customTimerConfirmButton, presetLongButton, presetMediumButton, presetShortButton, startTimerButton,
-                customTimerTextField, endTimerButton));
+        timer = new Timer(100, new UITimerListener(presetTimerController, customTimerController,
+                timerText, timerPresenter, progressBar, breakMenuButton, customTimerConfirmButton, presetLongButton,
+                presetMediumButton, presetShortButton, startTimerButton, customTimerTextField, endTimerButton, this));
 
         this.card = card;
         this.parentPanel = parentPanel;

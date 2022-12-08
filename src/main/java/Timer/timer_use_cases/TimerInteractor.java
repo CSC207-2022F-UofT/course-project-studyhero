@@ -22,6 +22,7 @@ public class TimerInteractor implements TimerInputBoundary {
      * The Entity class for the timer.
      */
     TimerEntity timerEntity = new TimerEntity();
+    Timer timer = new Timer();
 
     /**
      * Constructor for the TimerInteractor class.
@@ -39,7 +40,7 @@ public class TimerInteractor implements TimerInputBoundary {
      */
     @Override
     public void startTimer() {
-        //timerEntity = new TimerEntity();
+        timerEntity = new TimerEntity();
         if (timerRequestModel.getCustomTime().equals("-1")) {
             timerEntity.setTimer(convertTimeToArray(timerRequestModel.getSelectedTime()));
         }
@@ -47,7 +48,7 @@ public class TimerInteractor implements TimerInputBoundary {
             timerEntity.setTimer(convertTimeToArray(timerRequestModel.getCustomTime()));
         }
         timerEntity.startTimer();
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -61,10 +62,11 @@ public class TimerInteractor implements TimerInputBoundary {
      */
     @Override
     public void endTimer() {
+        timer.cancel();
+        timer.purge();
         timerEntity.endTimer();
         timerResponseModel.setElapsedTime(timerResponseModel.getElapsedTime() + timerEntity.getElapsedTime());
         timerEntity = null;
-        timerEntity = new TimerEntity();
     }
 
     /**
