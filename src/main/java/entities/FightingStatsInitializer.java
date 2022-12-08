@@ -26,7 +26,7 @@ public class FightingStatsInitializer {
     }
 
     public Map<String, Integer> initialize(){
-        Map<String, Integer> fightStatsMap = new HashMap<>();
+        Map<String, Integer> fightStatsMap = new HashMap<String, Integer>();
         fightStatsMap.put("maxHealth", this.maxHealth);
         fightStatsMap.put("playerHealth", this.playerHealth);
         fightStatsMap.put("playerDamage", this.playerDamage);
