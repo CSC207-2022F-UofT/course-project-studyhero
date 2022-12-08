@@ -21,7 +21,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-    private final ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+    private final ArrayList<InventoryItem> inventoryList = new ArrayList<>();
 
 
     /**
@@ -79,7 +79,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
                 String itemName = String.valueOf(col[headers.get("item_name")]);
                 int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
                 int itemGoldValue = Integer.parseInt(col[headers.get("item_gold_value")]);
-                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId,
+                InventoryItem item = new InventoryItem(itemId,
                         itemType, itemName, itemEffect, itemGoldValue,  false);
                 inventoryList.add(item);
             }
@@ -99,9 +99,9 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
     @Override
     public void save(InventoryItem item) {
         if (!inventoryFull()) {
-            InventoryItemDsRequestModel requestModel = attachId(item);
-            inventoryList.add(requestModel);
+            inventoryList.add(item);
         }
+        reassign();
         this.save();
     }
 
@@ -110,14 +110,10 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
      * @return a AddItemDsRequestModel with id as the next available player's inventory slot
      */
     @Override
-    public InventoryItemDsRequestModel attachId(InventoryItem item) {
+    public InventoryItem attachId(InventoryItem item) {
         int id = CheckLatestInventoryItemId() + 1;
-
-        return new InventoryItemDsRequestModel(id,
-                item.getType(),
-                item.getName(),
-                item.getEffect(),
-                item.getGoldValue(), false);
+        item.setId(id);
+        return item;
     }
 
 
@@ -145,7 +141,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (InventoryItemDsRequestModel item : inventoryList) {
+            for (InventoryItem item : inventoryList) {
                 String line = String.format("%s,%s,%s,%s,%s",
                         item.getId(),
                         item.getType(),
@@ -251,12 +247,19 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
     @Override
     public void deleteItem(int id) {
         inventoryList.remove(id - 1);
+        reassign();
+        save();
+    }
+
+    /**
+     * reassign the id of the inventory
+     */
+    private void reassign(){
         int newId = 1;
-        for (InventoryItemDsRequestModel item : inventoryList) {
+        for (InventoryItem item : inventoryList) {
             item.setId(newId);
             newId++;
         }
-        save();
     }
 
     /**
@@ -295,19 +298,19 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
     public void initialize() {
         clearInventory();
         InventoryItem item1 = new InventoryItem(
-                "Weapon",
+                0, "Weapon",
                 "Sword",
                 3, 6, false);
-        InventoryItem item2 = new InventoryItem(
-                "AttackPotion",
+        InventoryItem item2 = new InventoryItem(0
+                , "AttackPotion",
                 "StrengthPotion",
                 4, 2, false);
         InventoryItem item3 = new InventoryItem(
-                "Weapon",
+                0, "Weapon",
                 "HammerHammer",
                 5, 8, false);
         InventoryItem item4 = new InventoryItem(
-                "Shield",
+                0, "Shield",
                 "BronzeShield",
                 12, 23, false);
         save(item1);

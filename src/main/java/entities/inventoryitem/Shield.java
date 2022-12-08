@@ -11,7 +11,7 @@ public class Shield extends InventoryItem implements Equipable {
      * @param goldValue of the shield
      */
     public Shield(String name, int shieldDefence, int goldValue) {
-        super(type, name, shieldDefence, goldValue, false);
+        super(0, type, name, shieldDefence, goldValue, false);
     }
 
     /**

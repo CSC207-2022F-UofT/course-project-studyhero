@@ -1,6 +1,6 @@
 package inventoryMenu.inventory_menu_use_case.display_player_inventory_use_case;
 
-import entities.inventoryitem.InventoryItemDsRequestModel;
+import entities.inventoryitem.InventoryItem;
 import UI.screens.inventoryscreens.FakeInventoryDisplay;
 
 import org.junit.jupiter.api.Test;
@@ -16,21 +16,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerDisplayInventoryInteractorTest {
 
 
-    ArrayList<InventoryItemDsRequestModel> oldInventoryList = new ArrayList<>();
-    ArrayList<InventoryItemDsRequestModel> newInventoryList = new ArrayList<>();
-    InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
+    ArrayList<InventoryItem> oldInventoryList = new ArrayList<>();
+    ArrayList<InventoryItem> newInventoryList = new ArrayList<>();
+    InventoryItem item1 = new InventoryItem(1,
             "Weapon",
             "Sword",
             13, 10, true);
-    InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
+    InventoryItem item2 = new InventoryItem(2,
             "AttackPotion",
             "StrengthPotion",
             5, 23, false);
-    InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
+    InventoryItem item3 = new InventoryItem(3,
             "Weapon",
             "Hammer",
             18, 43, false);
-    InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
+    InventoryItem item4 = new InventoryItem(4,
             "Shield",
             "BronzeShield",
             15, 20, false);
@@ -51,7 +51,7 @@ class PlayerDisplayInventoryInteractorTest {
         PlayerDisplayInventoryOutputBoundary presenter = dsRequestModel -> {
             assertTrue(dsRequestModel.hasNext());
 
-            InventoryItemDsRequestModel referenceModel1 = dsRequestModel.getNext();
+            InventoryItem referenceModel1 = dsRequestModel.getNext();
             assertEquals(item1.getType(),referenceModel1.getType());
             assertEquals(item1.getName(),referenceModel1.getName());
             assertEquals(item1.getId(),referenceModel1.getId());
@@ -61,7 +61,7 @@ class PlayerDisplayInventoryInteractorTest {
 
             assertTrue(dsRequestModel.hasNext());
 
-            InventoryItemDsRequestModel referenceModel2 = dsRequestModel.getNext();
+            InventoryItem referenceModel2 = dsRequestModel.getNext();
             assertEquals(item3.getType(),referenceModel2.getType());
             assertEquals(item3.getName(),referenceModel2.getName());
             assertEquals(item3.getId(),referenceModel2.getId());
@@ -91,7 +91,7 @@ class PlayerDisplayInventoryInteractorTest {
         PlayerDisplayInventoryOutputBoundary presenter = dsRequestModel -> {
             assertTrue(dsRequestModel.hasNext());
 
-            InventoryItemDsRequestModel referenceModel1 = dsRequestModel.getNext();
+            InventoryItem referenceModel1 = dsRequestModel.getNext();
             assertEquals(item1.getType(),referenceModel1.getType());
             assertEquals(item1.getName(),referenceModel1.getName());
             assertEquals(item1.getId(),referenceModel1.getId());
@@ -101,7 +101,7 @@ class PlayerDisplayInventoryInteractorTest {
 
             assertTrue(dsRequestModel.hasNext());
 
-            InventoryItemDsRequestModel referenceModel2 = dsRequestModel.getNext();
+            InventoryItem referenceModel2 = dsRequestModel.getNext();
             assertEquals(item3.getType(),referenceModel2.getType());
             assertEquals(item3.getName(),referenceModel2.getName());
             assertEquals(item3.getId(),referenceModel2.getId());

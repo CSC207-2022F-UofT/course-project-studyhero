@@ -21,7 +21,7 @@ public interface AddItemDsGateway {
       * Create a new AddItemDsRequestModel with every attributes on inventory_item and an inventory id.
       * @return the new AddItemDsRequestModel created
       */
-     InventoryItemDsRequestModel attachId(InventoryItem newItem);
+     InventoryItem attachId(InventoryItem newItem);
 
      /**
       * Checks how many items are in the inventory

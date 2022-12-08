@@ -25,7 +25,7 @@ public interface InventoryList extends AddItemDsGateway, DeleteItemDsGateway{
      * @return a AddItemDsRequestModel with id as the next available player's inventory slot
      */
     @Override
-    InventoryItemDsRequestModel attachId(InventoryItem item);
+    InventoryItem attachId(InventoryItem item);
 
 
     /**

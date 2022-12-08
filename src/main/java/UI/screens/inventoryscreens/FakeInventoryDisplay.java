@@ -1,6 +1,6 @@
 package UI.screens.inventoryscreens;
 
-import entities.inventoryitem.InventoryItemDsRequestModel;
+import entities.inventoryitem.InventoryItem;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 
@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 public class FakeInventoryDisplay implements PlayerDisplayInventoryDsGateway {
 
-    public FakeInventoryDisplay(ArrayList<InventoryItemDsRequestModel> oldInventoryList,
-                                ArrayList<InventoryItemDsRequestModel> newInventoryList){
+    public FakeInventoryDisplay(ArrayList<InventoryItem> oldInventoryList,
+                                ArrayList<InventoryItem> newInventoryList){
         this.oldInventoryList = oldInventoryList;
         this.newInventoryList = newInventoryList;
     }
 
-    private ArrayList<InventoryItemDsRequestModel> oldInventoryList;
-    private ArrayList<InventoryItemDsRequestModel> newInventoryList;
+    private ArrayList<InventoryItem> oldInventoryList;
+    private ArrayList<InventoryItem> newInventoryList;
 
     /**
      * create the inventoryList iterator
@@ -33,7 +33,7 @@ public class FakeInventoryDisplay implements PlayerDisplayInventoryDsGateway {
     @Override
     public void updateInventoryList() {
         oldInventoryList.clear();
-        for(InventoryItemDsRequestModel item : newInventoryList){
+        for(InventoryItem item : newInventoryList){
             oldInventoryList.add(item);
         }
     }

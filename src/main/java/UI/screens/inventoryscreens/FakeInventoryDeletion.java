@@ -2,7 +2,7 @@ package UI.screens.inventoryscreens;
 
 
 
-import entities.inventoryitem.InventoryItemDsRequestModel;
+import entities.inventoryitem.InventoryItem;
 import use_cases.inventory_menu_use_case.delete_item_use_case.DeleteItemDsGateway;
 import use_cases.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
 
@@ -10,12 +10,12 @@ import java.util.ArrayList;
 
 public class FakeInventoryDeletion implements DeleteItemDsGateway {
 
-    public FakeInventoryDeletion(ArrayList<InventoryItemDsRequestModel> inventoryList) {
+    public FakeInventoryDeletion(ArrayList<InventoryItem> inventoryList) {
         this.inventoryList = inventoryList;
     }
 
 
-    private ArrayList<InventoryItemDsRequestModel> inventoryList;
+    private ArrayList<InventoryItem> inventoryList;
 
 
     /**
@@ -35,7 +35,7 @@ public class FakeInventoryDeletion implements DeleteItemDsGateway {
     public void deleteItem(int id) {
         inventoryList.remove(id - 1);
         int newId = 1;
-        for(InventoryItemDsRequestModel item : inventoryList){
+        for(InventoryItem item : inventoryList){
             item.setId(newId);
             newId++;
         }

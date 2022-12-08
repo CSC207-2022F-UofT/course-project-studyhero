@@ -1,6 +1,6 @@
 package inventoryMenu.inventory_menu_use_case.delete_item_use_case;
 
-import entities.inventoryitem.InventoryItemDsRequestModel;
+import entities.inventoryitem.InventoryItem;
 import UI.screens.inventoryscreens.FakeInventoryDeletion;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeleteItemInteractorTest {
-    ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+    ArrayList<InventoryItem> inventoryList = new ArrayList<>();
 
     @BeforeEach
     void setup(){
 
-        InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1, "Shield", "BronzeShield", 4, 10, true);
-        InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2, "Weapon", "Sword", 18, 10, false);
-        InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3, "Weapon", "Hammer", 15, 43, false);
+        InventoryItem item1 = new InventoryItem(1, "Shield", "BronzeShield", 4, 10, true);
+        InventoryItem item2 = new InventoryItem(2, "Weapon", "Sword", 18, 10, false);
+        InventoryItem item3 = new InventoryItem(3, "Weapon", "Hammer", 15, 43, false);
         inventoryList.add(item1);
         inventoryList.add(item2);
         inventoryList.add(item3);
@@ -152,7 +152,7 @@ class DeleteItemInteractorTest {
 
     @Test
     void deleteItemInEmptyInventory() {
-        ArrayList<InventoryItemDsRequestModel> emptyInventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> emptyInventoryList = new ArrayList<>();
         DeleteItemDsGateway inventoryRepo = new FakeInventoryDeletion(emptyInventoryList);
         int id = 1;
         DeleteItemOutputBoundary presenter = new DeleteItemOutputBoundary() {
