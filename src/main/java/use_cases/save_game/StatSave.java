@@ -1,4 +1,4 @@
-package use_cases.save_stats;
+package use_cases.save_game;
 
 import use_cases.errors.ErrorOutputBoundary;
 

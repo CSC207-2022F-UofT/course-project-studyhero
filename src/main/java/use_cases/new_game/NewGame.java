@@ -5,9 +5,7 @@ import inventorymenu.inventoryitem.InventoryList;
 import inventorymenu.inventoryitem.PlayerInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidStats;
-import use_cases.save_stats.StatSave;
+import use_cases.save_game.StatSave;
 
 
 public class NewGame implements NewGameInputBoundary{
@@ -35,7 +33,7 @@ public class NewGame implements NewGameInputBoundary{
         }
         StatsUser newUser = new StatsUser();
         StatSave newSave = new StatSave(newUser.getUserStats(), presenter);
-        newSave.save();
+        newSave.save("stats.csv");
 
         InventoryList inventoryList = new PlayerInventoryFile("PlayerInventory.csv");
         inventoryList.initialize();
