@@ -172,6 +172,31 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         return CheckLatestInventoryItemId() >= 20;
     }
 
+    @Override
+    public void addNewWeapon() {
+
+    }
+
+    @Override
+    public void addNewShield() {
+
+    }
+
+    @Override
+    public void addNewAttackPotion() {
+
+    }
+
+    @Override
+    public void addNewHealthPotion() {
+
+    }
+
+    @Override
+    public void addPoisonPotion() {
+
+    }
+
     /**
      * Create an iterator object on InventoryList for this file
      *

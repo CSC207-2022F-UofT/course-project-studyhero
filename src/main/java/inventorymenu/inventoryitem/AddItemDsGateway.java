@@ -11,6 +11,30 @@ public interface AddItemDsGateway {
      boolean inventoryFull();
 
      /**
+      * Generate a new weapon item
+      */
+     void addNewWeapon();
+
+     /**
+      * Generate a new shield in the inventory
+      */
+     void addNewShield();
+
+     /**
+      * Generate a new attack potion in the inventory
+      */
+     void addNewAttackPotion();
+     /**
+      * Generate a new health potion in the inventory
+      */
+     void addNewHealthPotion();
+
+     /**
+      * Generate a new poison potion in the inventory
+      */
+     void addPoisonPotion();
+
+     /**
       * Add the inventoryItem to the inventoryList
       * @param requestModel an inventoryItem
       */
