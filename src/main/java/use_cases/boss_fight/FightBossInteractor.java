@@ -11,11 +11,7 @@ public class FightBossInteractor {
 
     public FightBossInteractor() {
         this.fightWinner = new FightWinner();
-        this.currentFightingStats = new CurrentFightingStats();
-    }
-
-    public void saveFightingStats(){
-        currentFightingStats.saveFightStats();
+        currentFightingStats = new CurrentFightingStats();
     }
 
     public void fighter(int value){
@@ -23,8 +19,7 @@ public class FightBossInteractor {
         ArrayList<Integer> winner = fightWinner.winner(value, bossInput);
         currentFightingStats.changePlayerHP(-(winner.get(0) * currentFightingStats.getBossDamage()));
         currentFightingStats.changeBossHP(-(winner.get(1) * currentFightingStats.getPlayerDamage()));
-        saveFightingStats();
-        int endGame = currentFightingStats.winCondition();
+        currentFightingStats.winCondition();
     }
 
     public int bossMoveMaker() {
