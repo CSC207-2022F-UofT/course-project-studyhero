@@ -1,12 +1,13 @@
 package UI.screens.timer_screen;
 
-import saveGame.saveGameController;
+import loadGame.loadGameContoller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PresetLongButtonListener implements ActionListener {
+public class CustomTimerTextFieldListener implements ActionListener {
+    @Override
     public void actionPerformed(ActionEvent e) {
-        saveGameController.saveGame();
+        loadGameContoller.loadGame();
     }
 }
