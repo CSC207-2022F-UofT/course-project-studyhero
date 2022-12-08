@@ -1,13 +1,12 @@
 package UI.screens.panels.breaks;
 
 import entities.StatsUser;
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
-import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
-import inventorymenu.inventoryitem.ShopInventoryFile;
-import inventorymenu.inventoryitem.PlayerInventoryFile;
+import entities.inventoryitem.InventoryItem;
+import entities.inventoryitem.PlayerInventoryFile;
+import entities.inventoryitem.ShopInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidStats;
-import inventorymenu.inventoryitem.InventoryItem;
+import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import use_cases.save_game.StatSave;
 
 import javax.swing.*;
@@ -47,10 +46,10 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
     static StatsUser statsUser;
     static Map<String, Integer> statsMap;
     ErrorOutputBoundary presenter;
-    static ArrayList<InventoryItemDsRequestModel> shopInventory;
+    static ArrayList<InventoryItem> shopInventory;
 
     static PlayerInventoryFile playerInventoryFile;
-    static ArrayList<InventoryItemDsRequestModel> playerInventory;
+    static ArrayList<InventoryItem> playerInventory;
 
 
     /**
@@ -105,7 +104,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
         // Displays shop items
         ArrayList<String> displayShopItems = new ArrayList<>();
-        for (InventoryItemDsRequestModel inventoryItemDsRequestModel : shopInventory) {
+        for (InventoryItem inventoryItemDsRequestModel : shopInventory) {
             displayShopItems.add(inventoryItemDsRequestModel.getName());
         }
 
@@ -204,6 +203,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
                     " successfully added.");
 
             playerInventoryFile.save(new InventoryItem(
+                    5,
                     shopInventory.get(index).getType(),
                     shopInventory.get(index).getName(),
                     shopInventory.get(index).getEffect(),

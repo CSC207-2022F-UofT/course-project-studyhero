@@ -2,10 +2,12 @@ package use_cases.inventory_menu_use_case.equip_item_use_case;
 
 
 import entities.StatsUser;
+
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;
+
 
 import java.util.Map;
 
@@ -42,18 +44,23 @@ public class EquipItemInteractor implements EquipItemInputBoundary{
             return outputBoundary.prepareFailView("The item that you select is not equipable");
         }
 
-        EquipItemDsRequestModel name = dsGateway.getEquipName(requestModel.getId());
-        EquipItemResponseModel equipItemResponseModel = new EquipItemResponseModel(name.getName(),
+        EquipItemDsRequestModel dsModel = dsGateway.getEquipName(requestModel.getId());
+        EquipItemResponseModel equipItemResponseModel = new EquipItemResponseModel(dsModel.getName(),
                 requestModel.getId());
-        dsGateway.equipItem(requestModel.getId());
+        int diff = dsGateway.equipItem(requestModel.getId());
 
         ErrorOutputBoundary errorPresenter;
         errorPresenter = new ErrorPresenter();
         ValidStats stats = new ValidStats("stats.csv", errorPresenter);
         Map<String, Integer> statsMap = stats.load();
         StatsUser intermediateUser = new StatsUser(statsMap);
-        int difference = intermediateUser.getTempDamage() - intermediateUser.updateBaselineDamage(0);
-        intermediateUser.updateTempDamage(-difference);
+
+        if(dsModel.getType().equals("Weapon")){
+            intermediateUser.updateBaselineDamage(diff);
+        }else{
+            intermediateUser.updateDefence(diff);
+        }
+
         StatSave saver = new StatSave(intermediateUser.getUserStats(), errorPresenter);
         saver.save("stats.csv");
 

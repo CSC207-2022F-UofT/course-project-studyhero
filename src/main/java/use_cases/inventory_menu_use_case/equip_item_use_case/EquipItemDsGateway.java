@@ -17,7 +17,7 @@ public interface EquipItemDsGateway {
      * Equip the item from inventory
      * @param id of the item wants to be equipped from inventory
      */
-    void equipItem(int id);
+    int equipItem(int id);
 
     /**
      * Get the name of the inventory item correspond to the id in the inventory

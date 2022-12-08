@@ -4,6 +4,7 @@ public class EquipItemResponseModel {
     String name;
     int id;
 
+
     public String getName() {
         return name;
     }
@@ -12,10 +13,10 @@ public class EquipItemResponseModel {
         this.name = name;
     }
 
+
     /**
-     *
      * @param name is the name of the inventory item that the player wants to equip
-     * @param id the position that inventory item occupied
+     * @param id   the position that inventory item occupied
      */
     public EquipItemResponseModel(String name, int id) {
         this.name = name;
@@ -26,4 +27,5 @@ public class EquipItemResponseModel {
     public int getId() {
         return id;
     }
+
 }

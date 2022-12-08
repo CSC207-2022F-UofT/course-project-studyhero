@@ -3,14 +3,11 @@ package entities;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;
-import use_cases.stats_update_use_case.StatsUpdateInteractor;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CurrentFightingStats implements FightingStats{
-
-    StatsUpdateInteractor statsUpdateInteractor;
 
     int maxHP;
 
