@@ -1,45 +1,33 @@
 package entities;
 
-import use_cases.errors.ErrorOutputBoundary;
+import use_cases.errors.ErrorPresenter;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
 public class MusicPlayer {
-    private Long currentPos;
-    private Clip clip;
+    Long currentPos;
+    Clip clip;
     String status;
     AudioInputStream inputStream;
     String filepath;
-    ErrorOutputBoundary presenter;
+    ErrorPresenter presenter;
 
-    public MusicPlayer(String filepath, ErrorOutputBoundary presenter){
-        this.presenter = presenter;
-
+    public MusicPlayer(String filepath){
+        this.presenter = new ErrorPresenter();
         try {
             this.filepath = filepath;
             this.inputStream = AudioSystem.getAudioInputStream(new File(filepath));
             this.clip = AudioSystem.getClip();
             clip.open(inputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
-            this.play();
-            this.status = "play";
 
         } catch (UnsupportedAudioFileException | LineUnavailableException
                  | IOException e) {
             presenter.error(e.getMessage());
         }
     }
-
-    public String getStatus(){return status;}
-    public void setStatus(String newStatus){status = newStatus;}
-    public Long getCurrentPos(){return currentPos;}
-    public void setCurrentPos(Long Pos){currentPos = Pos;}
-    public Clip getClip(){return clip;}
-
-
-
 
     public void play(){
         clip.start();
@@ -74,5 +62,6 @@ public class MusicPlayer {
             throw new RuntimeException(e);
         }
     }
+
 
 }
