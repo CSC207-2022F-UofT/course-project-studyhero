@@ -11,7 +11,6 @@ public class ConvertTimeToSecondsHelper {
      */
     public int convertTimeToSeconds(String time) {
         String[] times = time.split(":", 3);
-        int timeSeconds = Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
-        return timeSeconds;
+        return Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
     }
 }

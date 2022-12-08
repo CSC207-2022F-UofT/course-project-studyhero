@@ -2,6 +2,7 @@ package UI.screens.timer_screen.listeners;
 
 import UI.screens.timer_screen.CustomTimerController;
 import UI.screens.timer_screen.PresetTimerController;
+import UI.screens.timer_screen.SetInteractabilityHelper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,13 +26,13 @@ public class EndTimerButtonListener implements ActionListener {
     private final Timer timer;
     private final JLabel timerText;
     private final JButton goToBreakMenuButton;
-    private final JButton customTimerConfirmButton;
-    private final JButton presetLongButton;
-    private final JButton presetMediumButton;
-    private final JButton presetShortButton;
-    private final JButton startTimerButton;
-    private final JFormattedTextField customTimerTextField;
-    private final JButton endTimerButton;
+    private JButton customTimerConfirmButton;
+    private JButton presetLongButton;
+    private JButton presetMediumButton;
+    private JButton presetShortButton;
+    private JButton startTimerButton;
+    private JFormattedTextField customTimerTextField;
+    private JButton endTimerButton;
 
     /**
      * Constructor for EndTimerButtonListener.
@@ -82,12 +83,9 @@ public class EndTimerButtonListener implements ActionListener {
         timer.stop();
         timerText.setText("00:00:00");
         goToBreakMenuButton.setVisible(true);
-        customTimerConfirmButton.setEnabled(true);
-        presetLongButton.setEnabled(true);
-        presetMediumButton.setEnabled(true);
-        presetShortButton.setEnabled(true);
-        startTimerButton.setEnabled(true);
-        customTimerTextField.setEnabled(true);
-        endTimerButton.setEnabled(false);
+        SetInteractabilityHelper setInteractabilityHelper = new SetInteractabilityHelper(customTimerConfirmButton,
+                presetLongButton, presetMediumButton, presetShortButton, startTimerButton, customTimerTextField,
+                endTimerButton);
+        setInteractabilityHelper.setInteractability(true);
     }
 }

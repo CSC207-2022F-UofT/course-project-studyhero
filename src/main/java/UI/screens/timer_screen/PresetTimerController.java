@@ -21,7 +21,7 @@ public class PresetTimerController {
     /**
      * The preset times that the user can choose from.
      */
-    private HashMap<String, String> presetTimes = new HashMap<>();
+    private final HashMap<String, String> presetTimes = new HashMap<>();
 
     /**
      * Constructor for PresetTimerController. It adds the mappings for the different times

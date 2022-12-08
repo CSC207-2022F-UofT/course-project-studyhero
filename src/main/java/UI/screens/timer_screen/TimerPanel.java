@@ -45,8 +45,8 @@ public class TimerPanel extends JPanel {
     /**
      * Constructor for TimerPanel. Sets up various elements on the panel and adds listeners to them using helper method
      * addListeners.
-     * @param card
-     * @param parentPanel
+     * @param card layout that allows switching to different panels
+     * @param parentPanel the panel that TimerPanel belongs to
      */
     public TimerPanel(CardLayout card, JPanel parentPanel) {
         progressBar.setMinimum(0);

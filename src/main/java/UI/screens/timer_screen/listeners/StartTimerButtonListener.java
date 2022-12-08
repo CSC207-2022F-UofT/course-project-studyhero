@@ -2,6 +2,7 @@ package UI.screens.timer_screen.listeners;
 
 import UI.screens.timer_screen.CustomTimerController;
 import UI.screens.timer_screen.PresetTimerController;
+import UI.screens.timer_screen.SetInteractabilityHelper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -63,12 +64,10 @@ public class StartTimerButtonListener implements ActionListener {
             ctController.startTimer();
         }
         timer.start();
-        customTimerConfirmButton.setEnabled(false);
-        presetLongButton.setEnabled(false);
-        presetMediumButton.setEnabled(false);
-        presetShortButton.setEnabled(false);
-        startTimerButton.setEnabled(false);
-        customTimerTextField.setEnabled(false);
-        endTimerButton.setEnabled(true);
+
+        SetInteractabilityHelper setInteractabilityHelper = new SetInteractabilityHelper(customTimerConfirmButton,
+                presetLongButton, presetMediumButton, presetShortButton, startTimerButton, customTimerTextField,
+                endTimerButton);
+        setInteractabilityHelper.setInteractability(false);
     }
 }
