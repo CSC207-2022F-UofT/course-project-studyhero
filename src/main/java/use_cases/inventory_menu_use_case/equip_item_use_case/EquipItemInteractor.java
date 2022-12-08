@@ -9,6 +9,15 @@ import use_cases.save_game.StatSave;
 
 import java.util.Map;
 
+
+import entities.StatsUser;
+import use_cases.errors.ErrorOutputBoundary;
+import use_cases.errors.ErrorPresenter;
+import use_cases.file_checker.ValidStats;
+import use_cases.save_game.StatSave;
+
+import java.util.Map;
+
 public class EquipItemInteractor implements EquipItemInputBoundary{
     final EquipItemDsGateway dsGateway;
     final EquipItemOutputBoundary outputBoundary;
