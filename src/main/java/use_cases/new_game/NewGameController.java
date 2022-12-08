@@ -29,7 +29,7 @@ public class NewGameController implements ActionListener {
             new NewGameConfirmation(card, parentPanel);
         }
         else{
-            new NewGame("stats.csv");
+            new NewGame("stats.csv", presenter);
             new InventoryList("Inventory");
             card.show(parentPanel, "Story");
         }
