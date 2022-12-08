@@ -1,6 +1,6 @@
 package inventoryMenu.inventory_menu_use_case.display_player_inventory_use_case;
 
-import entities.inventoryitem.InventoryItemDsRequestModel;
+import entities.inventoryitem.InventoryItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
@@ -12,23 +12,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerDisplayInventoryDsRequestModelTest {
 
 
-    ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+    ArrayList<InventoryItem> inventoryList = new ArrayList<>();
 
     @BeforeEach
     public void setInventoryList(){
-        InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
+        InventoryItem item1 = new InventoryItem(1,
                 "Weapon",
                 "Sword",
                 13, 10, true);
-        InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
+        InventoryItem item2 = new InventoryItem(2,
                 "AttackPotion",
                 "StrengthPotion",
                 5, 23, false);
-        InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
+        InventoryItem item3 = new InventoryItem(3,
                 "Weapon",
                 "HammerHammer",
                 18, 43, false);
-        InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
+        InventoryItem item4 = new InventoryItem(4,
                 "Shield",
                 "BronzeShield",
                 15, 20, false);
@@ -45,10 +45,10 @@ class PlayerDisplayInventoryDsRequestModelTest {
      */
     @Test
     void getNextCurrentPositionZero () {
-        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(1,"Weapon","Sword",13, 10, true);
+        InventoryItem item = new InventoryItem(1,"Weapon","Sword",13, 10, true);
 
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
-        InventoryItemDsRequestModel referenceItem = referenceModel.getNext();
+        InventoryItem referenceItem = referenceModel.getNext();
 
         assertEquals(item.getId(), referenceItem.getId());
         assertEquals(item.getName(), referenceItem.getName());
@@ -63,13 +63,13 @@ class PlayerDisplayInventoryDsRequestModelTest {
      */
     @Test
     void getNextCurrentPositionOne () {
-        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(2,
+        InventoryItem item = new InventoryItem(2,
                 "AttackPotion",
                 "StrengthPotion",
                 5, 23, false);
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
         referenceModel.getNext();
-        InventoryItemDsRequestModel referenceItem = referenceModel.getNext();
+        InventoryItem referenceItem = referenceModel.getNext();
 
         assertEquals(item.getId(), referenceItem.getId());
         assertEquals(item.getName(), referenceItem.getName());
@@ -85,7 +85,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
      */
     @Test
     void getNextCurrentPositionLast () {
-        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(4,
+        InventoryItem item = new InventoryItem(4,
                 "Shield",
                 "BronzeShield",
                 15, 20, false);
@@ -93,7 +93,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
         referenceModel.getNext();
         referenceModel.getNext();
         referenceModel.getNext();
-        InventoryItemDsRequestModel referenceItem = referenceModel.getNext();
+        InventoryItem referenceItem = referenceModel.getNext();
 
         assertEquals(item.getId(), referenceItem.getId());
         assertEquals(item.getName(), referenceItem.getName());

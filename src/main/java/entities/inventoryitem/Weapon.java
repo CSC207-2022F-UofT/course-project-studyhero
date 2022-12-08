@@ -10,7 +10,7 @@ public class Weapon extends InventoryItem implements Equipable {
      * @param goldValue of the weapon
      */
     public Weapon(String name, int weaponAttack, int goldValue) {
-        super(type, name, weaponAttack, goldValue, false);
+        super(0, type, name, weaponAttack, goldValue, false);
     }
 
     /**

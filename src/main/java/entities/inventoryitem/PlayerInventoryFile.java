@@ -23,7 +23,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-    private final ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+    private final ArrayList<InventoryItem> inventoryList = new ArrayList<>();
 
 
     /**
@@ -81,7 +81,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
                 int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
                 int itemGoldValue = Integer.parseInt(col[headers.get("item_gold_value")]);
                 boolean isEquipped = Boolean.parseBoolean(col[headers.get("item_is_equipped")]);
-                InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId,
+                InventoryItem item = new InventoryItem(itemId,
                         itemType, itemName, itemEffect, itemGoldValue,  isEquipped);
                 inventoryList.add(item);
             }
@@ -101,9 +101,9 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     @Override
     public void save(InventoryItem item) {
         if (!inventoryFull()) {
-            InventoryItemDsRequestModel requestModel = attachId(item);
-            inventoryList.add(requestModel);
+            inventoryList.add(item);
         }
+        reassign();
         this.save();
     }
 
@@ -112,14 +112,10 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      * @return a AddItemDsRequestModel with id as the next available player's inventory slot
      */
     @Override
-    public InventoryItemDsRequestModel attachId(@NotNull InventoryItem item) {
+    public InventoryItem attachId(InventoryItem item) {
         int id = CheckLatestInventoryItemId() + 1;
-
-        return new InventoryItemDsRequestModel(id,
-                item.getType(),
-                item.getName(),
-                item.getEffect(),
-                item.getGoldValue(), item.checkIsEquipped());
+        item.setId(id);
+        return item;
     }
 
 
@@ -147,7 +143,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
                 writer.write(String.join(",", headers.keySet()));
                 writer.newLine();
 
-                for (InventoryItemDsRequestModel item : inventoryList) {
+                for (InventoryItem item : inventoryList) {
                     String line = String.format("%s,%s,%s,%s,%s,%s",
                             item.getId(),
                             item.getType(),
@@ -213,8 +209,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public boolean itemEquipable(int id) {
-        return inventoryList.get(id-1).getType().equals("Weapon") ||
-                inventoryList.get(id-1).getType().equals("Shield");
+        return inventoryList.get(id-1)instanceof Equipable;
     }
 
     /**
@@ -223,7 +218,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public void equipItem(int id) {
-        for(InventoryItemDsRequestModel item : inventoryList){
+        for(InventoryItem item : inventoryList){
             //Unequipped the item with the same type
             if(item.getType().equals(inventoryList.get(id - 1).getType())){
                 item.setEquipped(false);
@@ -256,13 +251,23 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     @Override
     public void deleteItem(int id) {
         inventoryList.remove(id - 1);
+        reassign();
+        save();
+    }
+
+    /**
+     * reassign the id of the inventory
+     */
+    private void reassign(){
         int newId = 1;
-        for (InventoryItemDsRequestModel item : inventoryList) {
+        for (InventoryItem item : inventoryList) {
             item.setId(newId);
             newId++;
         }
-        save();
     }
+
+
+
 
 
     /**
@@ -301,19 +306,19 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     public void initialize() {
         clearInventory();
         InventoryItem item1 = new InventoryItem(
-                "Weapon",
+                0, "Weapon",
                 "Sword",
                 13, 10, true);
         InventoryItem item2 = new InventoryItem(
-                "AttackPotion",
+                0, "AttackPotion",
                 "StrengthPotion",
                 5, 23, false);
         InventoryItem item3 = new InventoryItem(
-                "Weapon",
+                0, "Weapon",
                 "HammerHammer",
                 18, 43, false);
         InventoryItem item4 = new InventoryItem(
-                "Shield",
+                0, "Shield",
                 "BronzeShield",
                 15, 20, false);
         save(item1);

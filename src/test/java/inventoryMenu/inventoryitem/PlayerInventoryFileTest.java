@@ -1,7 +1,6 @@
 package inventoryMenu.inventoryitem;
 
 import entities.inventoryitem.InventoryItem;
-import entities.inventoryitem.InventoryItemDsRequestModel;
 import entities.inventoryitem.PlayerInventoryFile;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,20 +14,20 @@ import java.util.ArrayList;
 class PlayerInventoryFileTest {
     String filePath = "PlayerInventoryTest.csv";
     PlayerInventoryFile inventoryListFile = new PlayerInventoryFile(filePath);
-    ArrayList<InventoryItemDsRequestModel> referenceList = new ArrayList<>();
-    InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
+    ArrayList<InventoryItem> referenceList = new ArrayList<>();
+    InventoryItem item1 = new InventoryItem(1,
             "Weapon",
             "Sword",
             13, 10, true);
-    InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
+    InventoryItem item2 = new InventoryItem(2,
             "AttackPotion",
             "StrengthPotion",
             5, 23, false);
-    InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
+    InventoryItem item3 = new InventoryItem(3,
             "Weapon",
             "HammerHammer",
             18, 43, false);
-    InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
+    InventoryItem item4 = new InventoryItem(4,
             "Shield",
             "BronzeShield",
             15, 20, false);
@@ -47,7 +46,7 @@ class PlayerInventoryFileTest {
     void readInventoryList() {
         inventoryListFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> inventoryList = new ArrayList<>();
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
@@ -63,11 +62,11 @@ class PlayerInventoryFileTest {
 
     @Test
     void saveItem() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999, true);
+        InventoryItem newItem = new InventoryItem(0, "Shield", "UltraShield", 99, 999, true);
         inventoryListFile.save(newItem);
         inventoryListFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> inventoryList = new ArrayList<>();
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
@@ -81,11 +80,11 @@ class PlayerInventoryFileTest {
 
     @Test
     void attachId() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999, true);
+        InventoryItem newItem = new InventoryItem(0, "Shield", "UltraShield", 99, 999, true);
         inventoryListFile.save(newItem);
         inventoryListFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> inventoryList = new ArrayList<>();
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
@@ -99,7 +98,7 @@ class PlayerInventoryFileTest {
 
     @Test
     void inventoryFull() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999, true);
+        InventoryItem newItem = new InventoryItem(0, "Shield", "UltraShield", 99, 999, true);
 
         for(int i = 0; i < 15; i++){
             inventoryListFile.save(newItem);
@@ -121,7 +120,7 @@ class PlayerInventoryFileTest {
         inventoryListFile.deleteItem(1);
         inventoryListFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> inventoryList = new ArrayList<>();
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
@@ -149,7 +148,7 @@ class PlayerInventoryFileTest {
         inventoryListFile.deleteItem(1);
 
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> inventoryList = new ArrayList<>();
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
@@ -175,7 +174,7 @@ class PlayerInventoryFileTest {
     void clearInventory() {
         inventoryListFile.clearInventory();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> inventoryList = new ArrayList<>();
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
@@ -186,7 +185,7 @@ class PlayerInventoryFileTest {
     void initialize() {
         inventoryListFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
-        ArrayList<InventoryItemDsRequestModel> inventoryList = new ArrayList<>();
+        ArrayList<InventoryItem> inventoryList = new ArrayList<>();
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }

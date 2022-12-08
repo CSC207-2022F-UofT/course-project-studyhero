@@ -9,7 +9,7 @@ public class Potion extends InventoryItem implements Consumable{
      * @param goldValue of the Potion
      */
     public Potion(String type, String name, int effect, int goldValue) {
-        super(type, name, effect, goldValue, false);
+        super(0, type, name, effect, goldValue, false);
     }
 
     /**

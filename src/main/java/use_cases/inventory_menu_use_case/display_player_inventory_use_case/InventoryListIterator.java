@@ -1,6 +1,6 @@
 package use_cases.inventory_menu_use_case.display_player_inventory_use_case;
 
-import entities.inventoryitem.InventoryItemDsRequestModel;
+import entities.inventoryitem.InventoryItem;
 
 /**
  * This interface contains method that need to implemented for an iterator class
@@ -11,7 +11,7 @@ public interface InventoryListIterator {
      * Get next item in InventoryList
      * @return an inventory_item on current position of the inventory list
      */
-    InventoryItemDsRequestModel getNext();
+    InventoryItem getNext();
 
 
     /**
