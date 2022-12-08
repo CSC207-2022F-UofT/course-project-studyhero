@@ -192,7 +192,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
                 shopInventory.get(index).checkIsEquipped()
         ));
         System.out.println(-shopInventory.get(index).getGoldValue());
-        statsUser.changeGold(-shopInventory.get(index).getGoldValue());
+        statsUser.updateGold(-shopInventory.get(index).getGoldValue());
         StatSave newStats = new StatSave(statsUser.getUserStats(),presenter);
         newStats.save();
         userGold.setText("Your Gold: " + statsMap.get("gold"));
