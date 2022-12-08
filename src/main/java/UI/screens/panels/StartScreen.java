@@ -13,7 +13,6 @@ import use_cases.game_check.GameCheckInteractor;
 
 import javax.swing.*;
 import java.awt.*;
-
 public class StartScreen extends JPanel{
 
     CardLayout card;
