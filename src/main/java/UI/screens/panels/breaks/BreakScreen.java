@@ -1,5 +1,8 @@
 package UI.screens.panels.breaks;
 
+import use_cases.boss_fight.FightBossButtonController;
+import use_cases.boss_fight.FightBossInteractor;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -7,6 +10,8 @@ import java.awt.*;
 public class BreakScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
+
+    FightBossInteractor fightBossInteractor;
 
     public BreakScreen(CardLayout card, JPanel parentPanel) {
         this.card = card;
@@ -26,7 +31,8 @@ public class BreakScreen extends JPanel {
         shopMenu.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
 
         JButton fightBoss = new JButton("Fight Boss");
-        fightBoss.addActionListener(e -> card.show(parentPanel,"Fight Boss"));
+        FightBossButtonController fightBossButtonController = new FightBossButtonController(this.card, this.parentPanel);
+        fightBoss.addActionListener(fightBossButtonController);
 
         JButton settings = new JButton("Settings");
         settings.addActionListener(e -> card.show(parentPanel, "Break Settings"));

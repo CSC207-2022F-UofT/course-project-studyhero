@@ -75,18 +75,18 @@ public class ValidStats implements ValidFileDsGateway{
 
             Stream<String> lines = Files.lines(path);
             long numLines = lines.count();
-            if (numLines != 2){return "invalid";}
+            if (numLines != 2){return "numLine";}
 
             String[] attributes;
-            if ((attributes = read(br, "attributes")).length == 0){return "invalid";}
+            if ((attributes = read(br, "attributes")).length == 0){return "att";}
             String[] stats;
-            if ((stats = read(br, "stats")).length == 0){return "invalid";}
+            if ((stats = read(br, "stats")).length == 0){return "stats";}
             br.close();
 
             //checking that all stats are type integer
             for (String stat : stats) {
-                try { Integer.parseInt(stat.trim());
-                } catch(NumberFormatException e) { return "invalid";}
+                try { Integer.valueOf(stat.trim());
+                } catch(NumberFormatException e) { return stat + "not integer";}
             }
 
             //checking that there is a stat value for every stat
