@@ -5,6 +5,7 @@ import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.new_game.NewGame;
 import controllers.new_game.NewGameController;
+import use_cases.new_game.NewGameConfirmation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,8 +27,10 @@ public class StartScreen extends JPanel{
         //   ----- Buttons -----
 
         JButton newGameButton = new JButton("New Game");
-        NewGame newGameUseCase = new NewGame("stats.csv", presenter);
-        NewGameController newGameController = new NewGameController(card, parentPanel, newGameUseCase);
+        NewGame newGameUseCase = new NewGame(presenter);
+        NewGameConfirmation newGameConfirmation = new NewGameConfirmation(card, parentPanel, false);
+        NewGameController newGameController =
+                new NewGameController(card, parentPanel, newGameUseCase, newGameConfirmation);
         newGameButton.addActionListener(newGameController);
 
         JButton continueGameButton = new JButton("Continue Game");

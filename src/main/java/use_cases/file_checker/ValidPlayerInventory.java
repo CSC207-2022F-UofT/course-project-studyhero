@@ -44,7 +44,8 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
 
             // check the header is correct and matches
             String[] header = read(br);
-            if (!Arrays.equals(header, new String[]{"item_id", "item_type", "item_name", "item_effect", "item_gold_value"})){
+            if (!Arrays.equals(header, new String[]{"item_id", "item_type", "item_name",
+                    "item_effect", "item_gold_value"})){
                 System.out.println(header[0]);
                 return "header";
             }

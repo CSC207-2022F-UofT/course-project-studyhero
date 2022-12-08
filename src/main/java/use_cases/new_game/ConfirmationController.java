@@ -25,7 +25,7 @@ public class ConfirmationController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new NewGame("stats.csv", presenter);
+        new NewGame(presenter);
         new PlayerInventoryFile("PlayerInventory.csv");
         parentFrame.dispose();
         card.show(parentPanel, "Story");

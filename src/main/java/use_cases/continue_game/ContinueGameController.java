@@ -1,7 +1,6 @@
 package use_cases.continue_game;
 
 import use_cases.errors.ErrorOutputBoundary;
-import use_cases.file_checker.ValidInventory;
 import use_cases.file_checker.ValidPlayerInventory;
 import use_cases.file_checker.ValidStats;
 

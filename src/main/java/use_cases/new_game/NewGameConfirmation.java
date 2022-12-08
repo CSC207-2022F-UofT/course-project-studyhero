@@ -7,10 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class NewGameConfirmation {
+    private final JFrame confirmationWindow;
 
-    public NewGameConfirmation(CardLayout card, JPanel parentPanel){
+    public NewGameConfirmation(CardLayout card, JPanel parentPanel, boolean visible){
         ErrorOutputBoundary presenter = new ErrorPresenter();
-        JFrame confirmationWindow = new JFrame();
+        this.confirmationWindow = new JFrame();
         JPanel confirmationPanel = new JPanel();
         JLabel title = new JLabel("Are you sure? This will overwrite your existing save files.");
 
@@ -28,6 +29,10 @@ public class NewGameConfirmation {
         confirmationWindow.add(confirmationPanel);
         confirmationWindow.pack();
         confirmationWindow.getDefaultCloseOperation();
-        confirmationWindow.setVisible(true);
+        confirmationWindow.setVisible(visible);
+    }
+
+    public void setVisible(boolean visible){
+        confirmationWindow.setVisible(visible);
     }
 }

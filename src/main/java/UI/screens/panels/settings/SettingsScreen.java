@@ -4,6 +4,7 @@ import entities.MusicPlayer;
 import use_cases.errors.ErrorOutputBoundary;
 import controllers.new_game.NewGameController;
 import use_cases.new_game.NewGame;
+import use_cases.new_game.NewGameConfirmation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,8 +26,10 @@ public class SettingsScreen extends JPanel {
         // ===== Main Controls =====
         JPanel mainControls = new JPanel();
         JButton newGameButton = new JButton("New Game");
-        NewGame newGameInteractor = new NewGame("stats.csv", presenter);
-        NewGameController newGameController = new NewGameController(card, parentPanel,newGameInteractor);
+        NewGameConfirmation confirmation = new NewGameConfirmation(card, parentPanel, false);
+        NewGame newGameInteractor = new NewGame( presenter);
+        NewGameController newGameController = new NewGameController(card, parentPanel,
+                newGameInteractor, confirmation);
         newGameButton.addActionListener(newGameController);
 
         JButton goBackButton = new JButton("Back");
