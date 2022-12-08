@@ -73,7 +73,7 @@ class PlayerInventoryFileTest {
         assertEquals("Shield", inventoryList.get(4).getType());
         assertEquals(99, inventoryList.get(4).getEffect());
         assertEquals(999, inventoryList.get(4).getGoldValue());
-        assertEquals(true, inventoryList.get(4).checkIsEquipped());
+        assertTrue(inventoryList.get(4).checkIsEquipped());
     }
 
     @Test
@@ -110,7 +110,7 @@ class PlayerInventoryFileTest {
 
     @Test
     void getInventoryListIterator() {
-        assertTrue(inventoryListFile.getInventoryListIterator() instanceof PlayerDisplayInventoryDsRequestModel);
+        assertNotNull(inventoryListFile.getInventoryListIterator());
     }
 
     @Test
@@ -176,7 +176,7 @@ class PlayerInventoryFileTest {
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
-        assertTrue(inventoryList.size() == 0);
+        assertEquals(0, inventoryList.size());
     }
 
     @Test
