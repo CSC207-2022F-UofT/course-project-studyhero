@@ -15,7 +15,7 @@ public class FightBossScreen extends JPanel {
     public FightBossScreen(CardLayout card, JPanel parentPanel) {
         this.card = card;
         this.parentPanel = parentPanel;
-        //this.fightBossStatsDisplayInteractor = new FightBossStatsDisplayInteractor();
+        this.fightBossStatsDisplayInteractor = new FightBossStatsDisplayInteractor();
         this.fightBossStatsDisplayInteractorInitializer = new FightBossStatsDisplayInteractor("stats.csv");
 
         JPanel mainPanel = new JPanel();
