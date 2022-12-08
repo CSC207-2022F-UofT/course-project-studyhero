@@ -28,7 +28,7 @@ public class StatSave {
      * Returns nothing but saves a csv file representing the
      * current user's stats data
      */
-    public void save(){
+    public void save(String filepath){
         try{
             File statsFile = new File("stats.csv");
             PrintWriter out = new PrintWriter(statsFile);
