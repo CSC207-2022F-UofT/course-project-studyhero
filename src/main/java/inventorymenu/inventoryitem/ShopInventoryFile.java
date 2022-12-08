@@ -51,7 +51,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
     }
 
     private void readInventory(ValidFileDsGateway validFile) {
-        if (validFile.fileExists() && validFile.isValid() && validFile.isPlayable()) {
+        if (validFile.fileExists() && validFile.isPlayable()) {
             BufferedReader reader;
             try {
                 reader = new BufferedReader(new FileReader(csvFile));

@@ -35,7 +35,7 @@ public class ValidStats implements ValidFileDsGateway{
     }
 
     public Map<String, Integer> load(){
-        HashMap<String, Integer> statsMap = new HashMap<>();
+        Map<String, Integer> statsMap = new HashMap<>();
         if (isValid()){
             File statsFile = new File(filename);
             try {
@@ -118,48 +118,14 @@ public class ValidStats implements ValidFileDsGateway{
         switch(result){
             case "exist":
                 presenter.error("There is no existing " + filename + " file.");
+                return false;
             case "invalid":
                 presenter.error("Invalid " + filename + " file.");
+                return false;
             case "other":
                 presenter.error("Error: please start a new game.");
+                return false;
         }
         return false;
-
-//        // checking the file exists
-//        if (!fileExists()){
-//            presenter.error("There is no existing " + filename + " file.");
-//            return false;
-//        }
-//        try {
-//            BufferedReader br = new BufferedReader(new FileReader(statsFile));
-//
-//            String[] attributes;
-//            if ((attributes = read(br, "attributes")).length == 0){return false;}
-//
-//            String[] stats;
-//            if ((stats = read(br, "stats")).length == 0){return false;}
-//
-//            //checking that all stats are type integer
-//            for (String stat : stats) {
-//                try {
-//                    Integer.parseInt(stat.trim());
-//                } catch(NumberFormatException e) {
-//                    presenter.error("Invalid stats in " + filename + " file.");
-//                    return false;
-//                }
-//            }
-//            //checking that there is a stat value for every stat
-//
-//            if (attributes.length != stats.length ||
-//                    attributes.length != new StatsUser().getUserStats().size() ||
-//                    stats.length != new StatsUser().getUserStats().size()) {
-//                presenter.error("Invalid " + filename + " file.");
-//                return false;
-//            } else {return true;}
-//
-//        } catch (FileNotFoundException e)  {
-//            presenter.error("File not found.");
-//            throw new RuntimeException(e);
-//        }
     }
 }

@@ -8,7 +8,6 @@ import UI.screens.panels.breaks.SellMenuScreen;
 import UI.screens.panels.breaks.ShopMenuScreen;
 import UI.screens.panels.settings.SettingsScreen;
 import entities.MusicPlayer;
-import inventorymenu.inventoryitem.PlayerInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 
@@ -24,12 +23,12 @@ public class GameMain {
         mainPanel.setLayout(card);
 
         // ----- Music ------
-        MusicPlayer player = new MusicPlayer("bgm.wav");
-        player.play();
+        ErrorOutputBoundary musicErrorPresenter = new ErrorPresenter();
+        MusicPlayer player = new MusicPlayer("btd1.wav", musicErrorPresenter);
 
         StartScreen startScreen = new StartScreen(card, mainPanel);
         StoryScreen storyScreen = new StoryScreen(card, mainPanel);
-        //TimerPanel timerScreen = new TimerPanel(card,mainPanel);
+        TimerPanel timerScreen = new TimerPanel(card,mainPanel);
         InventoryPanel inventoryScreen = new InventoryPanel(card, mainPanel);
         BreakScreen breakScreen = new BreakScreen(card,mainPanel);
 
@@ -47,12 +46,9 @@ public class GameMain {
         SettingsScreen breakSettingsScreen =
                 new SettingsScreen(card, mainPanel, cGRM, "Break", player);
 
-        new PlayerInventoryFile("PlayerInventory.csv");
-
-
         mainPanel.add(startScreen, "Start");
         mainPanel.add(storyScreen, "Story");
-        mainPanel.add(breakScreen, "Timer");
+        mainPanel.add(timerScreen, "Timer");
         mainPanel.add(breakScreen, "Break");
         mainPanel.add(changeStatsScreen, "Change Stats");
         mainPanel.add(startSettingsScreen, "Start Settings");

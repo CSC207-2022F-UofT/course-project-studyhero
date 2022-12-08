@@ -2,16 +2,25 @@ package UI.screens.panels.settings;
 
 import entities.MusicPlayer;
 import use_cases.errors.ErrorOutputBoundary;
-import controllers.new_game.NewGameController;
-import use_cases.new_game.NewGame;
+import use_cases.errors.ErrorPresenter;
+import use_cases.file_checker.ValidFileDsGateway;
+import use_cases.file_checker.ValidPlayerInventory;
+import use_cases.file_checker.ValidStats;
+import use_cases.new_game.*;
+import use_cases.game_check.GameCheckController;
+import use_cases.game_check.GameCheckInputBoundary;
+import use_cases.game_check.GameCheckInteractor;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SettingsScreen extends JPanel {
-    CardLayout card;
-    JPanel parentPanel;
-    ErrorOutputBoundary presenter;
+    private CardLayout card;
+    private JPanel parentPanel;
+    private ErrorOutputBoundary presenter;
+    private final static String statsFilepath = "stats.csv";
+    private final static String inventoryFilepath = "PlayerInventory.csv";
+    private final static String fightStatsFilepath = "fightStats.csv";
     public SettingsScreen(CardLayout card, JPanel parentPanel,
                           ErrorOutputBoundary presenter, String prevPanel,
                           MusicPlayer player) {
@@ -24,10 +33,21 @@ public class SettingsScreen extends JPanel {
 
         // ===== Main Controls =====
         JPanel mainControls = new JPanel();
+
+
         JButton newGameButton = new JButton("New Game");
-        NewGame newGameInteractor = new NewGame("stats.csv", presenter);
-        NewGameController newGameController = new NewGameController(card, parentPanel,newGameInteractor);
-        newGameButton.addActionListener(newGameController);
+        ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
+        ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
+        ValidFileDsGateway inventoryChecker = new ValidPlayerInventory(inventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
+        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker,
+                fightStatsChecker, presenter);
+        GameCheckInputBoundary gameCheckUseCase =
+                new GameCheckInteractor(statsChecker, inventoryChecker, fightStatsChecker);
+        GameCheckController gameCheckController = new GameCheckController(card, parentPanel, gameCheckUseCase,
+                newGameUseCase, presenter);
+
+        newGameButton.addActionListener(gameCheckController);
 
         JButton goBackButton = new JButton("Back");
         goBackButton.addActionListener(e -> card.show(parentPanel, prevPanel));

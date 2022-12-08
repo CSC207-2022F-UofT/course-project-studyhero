@@ -1,18 +1,21 @@
 package controllers.music;
 
 import entities.MusicPlayer;
+import use_cases.music_controls.PlayMusicInputBoundary;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PlayController implements ActionListener {
-    MusicPlayer player;
-    public PlayController(MusicPlayer player){
-        this.player = player;
+
+    PlayMusicInputBoundary useCase;
+    public PlayController(PlayMusicInputBoundary useCase){
+        this.useCase = useCase;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        player.play();
+
+        useCase.playMusic();
     }
 }

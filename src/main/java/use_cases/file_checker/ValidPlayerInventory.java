@@ -37,7 +37,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
             if (file.length() == 0){return "empty";}
 
             // check the label is correct and matches
-            String label = String.valueOf(read(br));
+            String label = Arrays.toString(read(br));
             if(label.equals("Player Inventory")){
                 return "label";
             }
@@ -103,24 +103,32 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
         switch(result){
             case "exist":
                 presenter.error("There is no existing " + filename + " file.");
+                return false;
             case "label":
-                presenter.error("Invalid " + filename + " file.");
             case "header":
                 presenter.error("Invalid " + filename + " file.");
+                return false;
             case "empty":
                 presenter.error("There are no items in " + filename);
+                return false;
             case "index":
                 presenter.error("Item IDs are invalid.");
+                return false;
             case "type":
                 presenter.error("Items are of invalid types.");
+                return false;
             case "effect":
                 presenter.error("Items have invalid effects.");
+                return false;
             case "goldValue":
                 presenter.error("Items have invalid gold value.");
+                return false;
             case "isEquipped":
                 presenter.error("Items have invalid equip information.");
+                return false;
             case "other":
                 presenter.error("Error: please start a new game.");
+                return false;
         }
         return false;
     }

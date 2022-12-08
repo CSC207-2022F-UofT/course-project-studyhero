@@ -3,8 +3,13 @@ package UI.screens.panels;
 import use_cases.continue_game.ContinueGameController;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
-import use_cases.new_game.NewGame;
-import controllers.new_game.NewGameController;
+import use_cases.file_checker.ValidFileDsGateway;
+import use_cases.file_checker.ValidPlayerInventory;
+import use_cases.file_checker.ValidStats;
+import use_cases.new_game.*;
+import use_cases.game_check.GameCheckController;
+import use_cases.game_check.GameCheckInputBoundary;
+import use_cases.game_check.GameCheckInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +19,9 @@ public class StartScreen extends JPanel{
     CardLayout card;
     JPanel parentPanel;
     ErrorOutputBoundary presenter;
+    private final static String statsFilepath = "stats.csv";
+    private final static String inventoryFilepath = "PlayerInventory.csv";
+    private final static String fightStatsFilepath = "fightStats.csv";
 
     public StartScreen(CardLayout card, JPanel parent){
 
@@ -25,15 +33,27 @@ public class StartScreen extends JPanel{
 
         //   ----- Buttons -----
 
+        // 1. New Game -> checks to see if there are existing valid game files and
+        // either gives you a confirmation window or starts a new game
         JButton newGameButton = new JButton("New Game");
-        NewGame newGameUseCase = new NewGame("stats.csv", presenter);
-        NewGameController newGameController = new NewGameController(card, parentPanel, newGameUseCase);
-        newGameButton.addActionListener(newGameController);
+        ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
+        ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
+        ValidFileDsGateway inventoryChecker = new ValidPlayerInventory(inventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
+        NewGameInputBoundary newGameUseCase =
+                new NewGame(statsChecker, inventoryChecker, fightStatsChecker, presenter);
+        GameCheckInputBoundary gameCheckUseCase =
+                new GameCheckInteractor(statsChecker, inventoryChecker, fightStatsChecker);
+        GameCheckController gameCheckController = new GameCheckController(card, parent, gameCheckUseCase,
+                newGameUseCase, presenter);
+        newGameButton.addActionListener(gameCheckController);
 
+
+        // 2. Continue Game -> checks to see if there are existing valid game files
+        // and will move to timer screen if so
         JButton continueGameButton = new JButton("Continue Game");
-        ContinueGameController continueGameController = new ContinueGameController(card, parent, presenter);
+        ContinueGameController continueGameController = new ContinueGameController(card, parent, gameCheckUseCase, presenter);
         continueGameButton.addActionListener(continueGameController);
-
 
         JButton goToSettingsButton = new JButton("Settings");
         goToSettingsButton.addActionListener(e -> card.show(parent, "Start Settings"));
@@ -48,7 +68,6 @@ public class StartScreen extends JPanel{
         this.add(quitGameButton);
 
         this.setSize(800,500);
-        BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
         GridBagLayout gridBagLayout = new GridBagLayout();
         this.setLayout(gridBagLayout);
     }
