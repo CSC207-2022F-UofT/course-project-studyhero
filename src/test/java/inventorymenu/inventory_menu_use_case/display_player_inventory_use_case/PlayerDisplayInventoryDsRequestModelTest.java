@@ -122,7 +122,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
         referenceModel.getNext();
         referenceModel.getNext();
         referenceModel.getNext();
-        assertTrue(!referenceModel.hasNext());
+        assertFalse(referenceModel.hasNext());
     }
 
 }

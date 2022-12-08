@@ -45,7 +45,7 @@ class DeleteItemInteractorTest {
         };
         DeleteItemInputBoundary interactor = new DeleteItemInteractor(inventoryRepo, presenter);
         assertTrue(inventoryRepo.itemExist(id));
-        assertEquals("BronzeShield", inventoryRepo.getName(id).getName());
+        assertEquals("BronzeShield", inventoryRepo.getDeletionName(id).getName());
         DeleteItemRequestModel inputData = new DeleteItemRequestModel(id);
         interactor.delete(inputData);
     }
@@ -71,7 +71,7 @@ class DeleteItemInteractorTest {
         };
         DeleteItemInputBoundary interactor = new DeleteItemInteractor(inventoryRepo, presenter);
         assertTrue(inventoryRepo.itemExist(id));
-        assertEquals("Sword", inventoryRepo.getName(id).getName());
+        assertEquals("Sword", inventoryRepo.getDeletionName(id).getName());
         DeleteItemRequestModel inputData = new DeleteItemRequestModel(id);
         interactor.delete(inputData);
     }
@@ -97,7 +97,7 @@ class DeleteItemInteractorTest {
         };
         DeleteItemInputBoundary interactor = new DeleteItemInteractor(inventoryRepo, presenter);
         assertTrue(inventoryRepo.itemExist(id));
-        assertEquals("Hammer", inventoryRepo.getName(id).getName());
+        assertEquals("Hammer", inventoryRepo.getDeletionName(id).getName());
         DeleteItemRequestModel inputData = new DeleteItemRequestModel(id);
         interactor.delete(inputData);
     }

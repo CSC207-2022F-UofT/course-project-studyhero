@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 class PlayerInventoryFileTest {
     String filePath = "PlayerInventoryTest.csv";
-    InventoryList inventoryListFile = new PlayerInventoryFile(filePath);
+    PlayerInventoryFile inventoryListFile = new PlayerInventoryFile(filePath);
     ArrayList<InventoryItemDsRequestModel> referenceList = new ArrayList<>();
     InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
             "Weapon",
@@ -73,7 +73,7 @@ class PlayerInventoryFileTest {
         assertEquals("Shield", inventoryList.get(4).getType());
         assertEquals(99, inventoryList.get(4).getEffect());
         assertEquals(999, inventoryList.get(4).getGoldValue());
-        assertEquals(true, inventoryList.get(4).checkIsEquipped());
+        assertTrue(inventoryList.get(4).checkIsEquipped());
     }
 
     @Test
@@ -110,7 +110,7 @@ class PlayerInventoryFileTest {
 
     @Test
     void getInventoryListIterator() {
-        assertTrue(inventoryListFile.getInventoryListIterator() instanceof PlayerDisplayInventoryDsRequestModel);
+        assertNotNull(inventoryListFile.getInventoryListIterator());
     }
 
     @Test
@@ -163,7 +163,7 @@ class PlayerInventoryFileTest {
     @Test
     void getName() {
         for(int i = 1; i < 5; i++){
-            assertEquals(referenceList.get(i-1).getName(), inventoryListFile.getName(i).getName());
+            assertEquals(referenceList.get(i-1).getName(), inventoryListFile.getEquipName(i).getName());
         }
 
     }
@@ -176,7 +176,7 @@ class PlayerInventoryFileTest {
         while(iterator.hasNext()){
             inventoryList.add(iterator.getNext());
         }
-        assertTrue(inventoryList.size() == 0);
+        assertEquals(0, inventoryList.size());
     }
 
     @Test

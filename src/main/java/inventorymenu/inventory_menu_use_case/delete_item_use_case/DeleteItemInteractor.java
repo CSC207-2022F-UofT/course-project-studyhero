@@ -26,7 +26,7 @@ public class DeleteItemInteractor implements DeleteItemInputBoundary{
             return outputBoundary.prepareFailView("Item does not exist on the slot");
         }
 
-        DeleteItemDsRequestModel name = dsGateway.getName(requestModel.getId());
+        DeleteItemDsRequestModel name = dsGateway.getDeletionName(requestModel.getId());
         DeleteItemResponseModel deleteItemResponseModel = new DeleteItemResponseModel(name.getName(),
                 requestModel.getId());
         dsGateway.deleteItem(requestModel.getId());
