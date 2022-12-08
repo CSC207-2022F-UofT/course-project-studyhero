@@ -9,26 +9,26 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 
-class InventoryListTest {
+class PlayerInventoryFileTest {
     String filePath = "PlayerInventoryTest.csv";
     InventoryList inventoryListFile = new PlayerInventoryFile(filePath);
     ArrayList<InventoryItemDsRequestModel> referenceList = new ArrayList<>();
     InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
             "Weapon",
             "Sword",
-            13, 10);
+            13, 10, true);
     InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
             "AttackPotion",
             "StrengthPotion",
-            5, 23);
+            5, 23, false);
     InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
             "Weapon",
             "HammerHammer",
-            18, 43);
+            18, 43, false);
     InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
             "Shield",
             "BronzeShield",
-            15, 20);
+            15, 20, false);
 
 
     @BeforeEach
@@ -54,12 +54,13 @@ class InventoryListTest {
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i).getEffect());
             assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i).getGoldValue());
+            assertEquals(referenceList.get(i).checkIsEquipped(), inventoryList.get(i).checkIsEquipped());
         }
     }
 
     @Test
     void saveItem() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999);
+        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999, true);
         inventoryListFile.save(newItem);
         inventoryListFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
@@ -72,11 +73,12 @@ class InventoryListTest {
         assertEquals("Shield", inventoryList.get(4).getType());
         assertEquals(99, inventoryList.get(4).getEffect());
         assertEquals(999, inventoryList.get(4).getGoldValue());
+        assertEquals(true, inventoryList.get(4).checkIsEquipped());
     }
 
     @Test
     void attachId() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999);
+        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999, true);
         inventoryListFile.save(newItem);
         inventoryListFile.readInventoryList();
         PlayerDisplayInventoryDsRequestModel iterator = inventoryListFile.getInventoryListIterator();
@@ -94,7 +96,7 @@ class InventoryListTest {
 
     @Test
     void inventoryFull() {
-        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999);
+        InventoryItem newItem = new InventoryItem("Shield", "UltraShield", 99, 999, true);
 
         for(int i = 0; i < 15; i++){
             inventoryListFile.save(newItem);
@@ -126,6 +128,7 @@ class InventoryListTest {
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i - 1).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i - 1).getEffect());
             assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i - 1).getGoldValue());
+            assertEquals(referenceList.get(i).checkIsEquipped(), inventoryList.get(i - 1).checkIsEquipped());
         }
     }
 
@@ -153,6 +156,7 @@ class InventoryListTest {
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i - 1).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i - 1).getEffect());
             assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i - 1).getGoldValue());
+            assertEquals(referenceList.get(i).checkIsEquipped(), inventoryList.get(i - 1).checkIsEquipped());
         }
     }
 
@@ -189,6 +193,7 @@ class InventoryListTest {
             assertEquals(referenceList.get(i).getType(), inventoryList.get(i).getType());
             assertEquals(referenceList.get(i).getEffect(), inventoryList.get(i).getEffect());
             assertEquals(referenceList.get(i).getGoldValue(), inventoryList.get(i).getGoldValue());
+            assertEquals(referenceList.get(i).checkIsEquipped(), inventoryList.get(i).checkIsEquipped());
         }
     }
 }

@@ -5,6 +5,7 @@ public class InventoryItem {
     private final String type;
     private final int effect;
     private final int goldValue;
+    private final boolean isEquipped;
 
     /**
      * Constructor for InventoryItem
@@ -13,12 +14,14 @@ public class InventoryItem {
      * @param name      of the inventoryItem
      * @param effect    of the inventoryItem that will be added on player in some way
      * @param goldValue of the inventoryItem
+     * @param isEquipped ,whether the inventory is being equipped or not
      */
-    public InventoryItem(String type, String name, int effect, int goldValue) {
+    public InventoryItem(String type, String name, int effect, int goldValue, boolean isEquipped) {
         this.name = name;
         this.type = type;
         this.effect = effect;
         this.goldValue = goldValue;
+        this.isEquipped = isEquipped;
     }
 
     /**
@@ -51,5 +54,14 @@ public class InventoryItem {
      */
     public int getGoldValue(){
         return goldValue;
+    }
+
+
+    /**
+     * Check if the inventory item is equipped
+     * @return true if the player is equipping the inventory item
+     */
+    public boolean checkIsEquipped() {
+        return isEquipped;
     }
 }

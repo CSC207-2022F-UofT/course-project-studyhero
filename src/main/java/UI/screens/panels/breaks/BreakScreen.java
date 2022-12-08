@@ -31,6 +31,9 @@ public class BreakScreen extends JPanel {
         JButton settings = new JButton("Settings");
         settings.addActionListener(e -> card.show(parentPanel, "Break Settings"));
 
+        JButton inventoryMenu = new JButton("Inventory Menu");
+        inventoryMenu.addActionListener(e -> card.show(parentPanel, "Inventory Menu"));
+
         // Add Layouts
         BoxLayout mainBox = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
         mainPanel.setLayout(mainBox);
@@ -47,6 +50,7 @@ public class BreakScreen extends JPanel {
         tabsPanel.add(shopMenu);
         tabsPanel.add(fightBoss);
         tabsPanel.add(settings);
+        tabsPanel.add(inventoryMenu);
 
         mainPanel.add(tabsPanel, Component.CENTER_ALIGNMENT);
 

@@ -35,7 +35,7 @@ public class PlayerDisplayInventoryDsRequestModel implements InventoryListIterat
                 inventoryList.get(currentPosition).getType(),
                 inventoryList.get(currentPosition).getName(),
                 inventoryList.get(currentPosition).getEffect(),
-                inventoryList.get(currentPosition).getGoldValue());
+                inventoryList.get(currentPosition).getGoldValue(), inventoryList.get(currentPosition).checkIsEquipped());
 
         currentPosition += 1;
         return item;

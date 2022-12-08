@@ -7,6 +7,10 @@ import java.awt.event.KeyListener;
 public class CustomTimerTextFieldKeyListener implements KeyListener {
     private JFormattedTextField customTimerTextField;
 
+    public CustomTimerTextFieldKeyListener(JFormattedTextField customTimerTextField) {
+        this.customTimerTextField = customTimerTextField;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 

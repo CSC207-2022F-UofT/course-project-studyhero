@@ -9,8 +9,8 @@ public class Weapon extends InventoryItem implements Equipable {
      * @param weaponAttack that will be added to unit's attack
      * @param goldValue of the weapon
      */
-    public Weapon(String name, int weaponAttack, int goldValue) {
-        super(type, name, weaponAttack, goldValue);
+    public Weapon(String name, int weaponAttack, int goldValue, boolean isEquipped) {
+        super(type, name, weaponAttack, goldValue, isEquipped);
     }
 
     /**

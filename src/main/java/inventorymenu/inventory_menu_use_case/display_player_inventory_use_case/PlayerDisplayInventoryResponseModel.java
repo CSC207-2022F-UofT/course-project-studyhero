@@ -44,7 +44,8 @@ public class PlayerDisplayInventoryResponseModel {
                     " Type: " + item.getType() +
                     " Name: " + item.getName() +
                     " Effect: " + item.getEffect() +
-                    " Gold " + item.getGoldValue());
+                    " Gold: " + item.getGoldValue() +
+                    " Item: " + item.checkIsEquipped());
 
         }
         return response;

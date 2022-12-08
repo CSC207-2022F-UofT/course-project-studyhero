@@ -7,9 +7,8 @@ import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.P
 
 /** The public class for adding inventory. AddItemToInventory stores all the
  * inventory information which includes item_type, item_name and item_effect.
- *
  */
-public interface InventoryList extends AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway {
+public interface InventoryList extends AddItemDsGateway, PlayerDisplayInventoryDsGateway, DeleteItemDsGateway, InitializePlayerInventoryGateway, InitializeShopInventoryGateway{
 
     /**
      * Read the inventory File and record the information to inventory list
