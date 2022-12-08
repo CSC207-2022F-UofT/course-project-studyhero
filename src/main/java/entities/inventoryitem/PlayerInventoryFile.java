@@ -209,7 +209,8 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public boolean itemEquipable(int id) {
-        return inventoryList.get(id-1)instanceof Equipable;
+        return inventoryList.get(id-1).getType().equals("Weapon")||
+                inventoryList.get(id-1).getType().equals("Shield");
     }
 
     /**
@@ -217,16 +218,19 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      * @param id of the item wants to be equipped from inventory
      */
     @Override
-    public void equipItem(int id) {
+    public int equipItem(int id) {
+        int diff = 0;
         for(InventoryItem item : inventoryList){
             //Unequipped the item with the same type
             if(item.getType().equals(inventoryList.get(id - 1).getType())){
+                diff -= item.getEffect();
                 item.setEquipped(false);
             }
         }
-
+        diff += inventoryList.get(id - 1).getEffect();
         inventoryList.get(id - 1).setEquipped(true);
         save();
+        return diff;
     }
 
     /**
@@ -237,7 +241,8 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     @Override
     public EquipItemDsRequestModel getEquipName(int id) {
         if (itemExist(id)) {
-            return new EquipItemDsRequestModel(inventoryList.get(id - 1).getName());
+            return new EquipItemDsRequestModel(inventoryList.get(id - 1).getName(),
+                    inventoryList.get(id - 1).getType());
         }
         return null;
     }

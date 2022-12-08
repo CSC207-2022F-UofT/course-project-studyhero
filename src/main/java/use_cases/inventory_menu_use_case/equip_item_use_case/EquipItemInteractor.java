@@ -45,15 +45,19 @@ public class EquipItemInteractor implements EquipItemInputBoundary{
         EquipItemDsRequestModel name = dsGateway.getEquipName(requestModel.getId());
         EquipItemResponseModel equipItemResponseModel = new EquipItemResponseModel(name.getName(),
                 requestModel.getId());
-        dsGateway.equipItem(requestModel.getId());
+        int diff = dsGateway.equipItem(requestModel.getId());
 
         ErrorOutputBoundary errorPresenter;
         errorPresenter = new ErrorPresenter();
         ValidStats stats = new ValidStats("stats.csv", errorPresenter);
         Map<String, Integer> statsMap = stats.load();
         StatsUser intermediateUser = new StatsUser(statsMap);
-        int difference = intermediateUser.getTempDamage() - intermediateUser.updateBaselineDamage(0);
-        intermediateUser.updateTempDamage(-difference);
+
+        if(name.getType().equals("Weapon")){
+            intermediateUser.updateBaselineDamage(diff);
+        }else{
+            intermediateUser.updateDefence(diff);
+        }
         StatSave saver = new StatSave(intermediateUser.getUserStats(), errorPresenter);
         saver.save("stats.csv");
 
