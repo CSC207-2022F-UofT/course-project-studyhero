@@ -1,6 +1,5 @@
 package UI.screens.panels.breaks;
 
-import entities.Stats;
 import entities.StatsUser;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
@@ -9,7 +8,6 @@ import inventorymenu.inventoryitem.PlayerInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidStats;
 import inventorymenu.inventoryitem.InventoryItem;
-import stats_update_use_case.StatsUpdateInteractor;
 import use_cases.save_game.StatSave;
 
 import javax.swing.*;
@@ -18,17 +16,21 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+//import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
 
 public class BuyMenuScreen extends JPanel implements ListSelectionListener, ActionListener {
+    /**
+     * Elements of the BuyMenuScreen.
+     */
     CardLayout card;
     JPanel parentPanel;
 
     Frame frame;
 
-    static JList list;
+    static JList<String> list;
     static int index;
     static JLabel selectedItem;
     static JLabel cost;
@@ -46,6 +48,10 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
     static ArrayList<InventoryItemDsRequestModel> playerInventory;
 
 
+    /**
+     * Card where the user is able to buy items from a list of
+     * ShopInventoryFile items in exchange for the user's gold.
+     */
     public BuyMenuScreen(CardLayout card, JPanel parentPanel) {
 
         // ----- Initialize Panels -----
@@ -63,7 +69,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
 
         // ----- Initialize Files for List Generation -----
-        // NOTE: MOVE THIS TO SHOP MENU THESE ARE INTERACTORS
+        // NOTE: MOVE THIS TO SHOP MENU THESE ARE INTERACT
         // Shop Inventory
         ShopInventoryFile shopInventoryFile = new ShopInventoryFile("ShopInventory.csv");
         shopInventoryFile.initialize();
@@ -86,8 +92,8 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
         // Displays shop items
         ArrayList<String> displayShopItems = new ArrayList<>();
-        for (int item = 0; item < shopInventory.size(); item ++) {
-            displayShopItems.add(shopInventory.get(item).getName());
+        for (InventoryItemDsRequestModel inventoryItemDsRequestModel : shopInventory) {
+            displayShopItems.add(inventoryItemDsRequestModel.getName());
         }
 
 
@@ -165,7 +171,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
     // ----- Changes the displayed text for the selected item -----
     public void valueChanged(ListSelectionEvent e) {
-        selectedItem.setText("Selected: " + list.getSelectedValue().toString());
+        selectedItem.setText("Selected: " + list.getSelectedValue());
         index = list.getSelectedIndex();
         cost.setText("Cost: " + shopInventory.get(index).getGoldValue() + " Gold");
     }
@@ -192,9 +198,15 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
                 shopInventory.get(index).checkIsEquipped()
         ));
         System.out.println(-shopInventory.get(index).getGoldValue());
-        statsUser.updateGold(-shopInventory.get(index).getGoldValue());
-        StatSave newStats = new StatSave(statsUser.getUserStats(),presenter);
-        newStats.save();
+        statsUser.updateGold(shopInventory.get(index).getGoldValue());
+        StatSave newStats = new StatSave(statsUser.getUserStats(), presenter);
+        newStats.save("stats.csv");
+
+
+        statsMap = stats.load();
+        statSave = new StatSave(statsMap, presenter);
+        statsUser = new StatsUser(statsMap);
+
         userGold.setText("Your Gold: " + statsMap.get("gold"));
     }
 }

@@ -58,7 +58,7 @@ public class TimerPanel extends JPanel {
         endTimerButton.addActionListener(new EndTimerButtonListener(ptController, ctController, timer, timerText, breakMenuButton, customTimerConfirmButton, presetLongButton, presetMediumButton, presetShortButton, startTimerButton, customTimerTextField));
         presetShortButton.addActionListener(new PresetShortButtonListener(ptController, ctController, timerText, progressBar));
         presetMediumButton.addActionListener(new PresetMediumButtonListener(ptController, ctController, timerText, progressBar));
-        presetLongButton.addActionListener(new PresetLongButtonListener(ptController, ctController, timerText, progressBar));
+//        presetLongButton.addActionListener(new PresetLongButtonListener(ptController, ctController, timerText, progressBar));
         customTimerConfirmButton.addActionListener(new CustomTimerConfirmButtonListener(ctController, customTimerTextField, timerText, progressBar, errorLabel));
         customTimerTextField.addKeyListener(new CustomTimerTextFieldKeyListener(customTimerTextField));
         customTimerTextField.addCaretListener(new CustomTimerTextFieldCaretListener(customTimerTextField));
