@@ -1,2 +1,2 @@
-playerDamage, maxHP, bossHP, playerDefence, playerHP, bossDamage
+playerDamage, playerDefence, maxHealth, playerHealth, bossDamage, bossHealth
 0, 0, 0, 0, 0, 0
