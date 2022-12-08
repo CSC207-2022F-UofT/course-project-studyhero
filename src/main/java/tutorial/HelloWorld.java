@@ -1,15 +1,15 @@
 package tutorial;
 
-import inventory_menu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
-import inventory_menu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInputBoundary;
-import inventory_menu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInteractor;
-import inventory_menu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryOutputBoundary;
-import inventory_menu.inventory_item.*;
-import inventory_menu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsGateway;
-import inventory_menu.inventory_menu_use_case.delete_item_use_case.DeleteItemInputBoundary;
-import inventory_menu.inventory_menu_use_case.delete_item_use_case.DeleteItemInteractor;
-import inventory_menu.inventory_menu_use_case.delete_item_use_case.DeleteItemOutputBoundary;
-import inventory_menu.inventoryscreens.*;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInputBoundary;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInteractor;
+import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryOutputBoundary;
+import inventorymenu.inventoryitem.*;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsGateway;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemInputBoundary;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemInteractor;
+import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemOutputBoundary;
+import inventorymenu.inventoryscreens.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,35 +22,6 @@ public class HelloWorld {
         for (int i = 1; i <= 100; i++) {
             System.out.println(convert(i));
         }
-        InitializePlayerInventory.InitializePlayerInventory(playerInventory);
-
-        JFrame application = new JFrame("Inventory Example");
-        CardLayout cardLayout = new CardLayout();
-        JPanel screens = new JPanel(cardLayout);
-        application.add(screens);
-
-        PlayerDisplayInventoryDsGateway playerDisplayInventoryDsGateway;
-        playerDisplayInventoryDsGateway = new InventoryList(playerInventory);
-
-
-        PlayerDisplayInventoryOutputBoundary playerDisplayInventoryPresenter = new PlayerDisplayInventoryPresenter();
-        PlayerDisplayInventoryInputBoundary playerDisplayInventoryInteractor = new PlayerDisplayInventoryInteractor(playerDisplayInventoryDsGateway, playerDisplayInventoryPresenter);
-        PlayerDisplayInventoryController displayInventoryController = new PlayerDisplayInventoryController(playerDisplayInventoryInteractor);
-
-        DeleteItemOutputBoundary deleteItemPresenter = new DeleteItemPresenter();
-        DeleteItemDsGateway deleteItemDsGateway;
-        deleteItemDsGateway = new InventoryList(playerInventory);
-        DeleteItemInputBoundary deleteItemInputBoundary = new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
-        //DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
-
-
-
-        //inventoryPanel inventoryScreen = new inventoryPanel(displayInventoryController, deleteItemController);
-        //screens.add(inventoryScreen, "welcome");
-        cardLayout.show(screens, "inventory");
-        application.pack();
-        application.setVisible(true);
-
     }
 
     public static String convert(int decide) {

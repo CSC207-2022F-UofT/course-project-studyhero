@@ -1,3 +1,4 @@
+
 package use_cases.errors;
 
 import javax.swing.*;

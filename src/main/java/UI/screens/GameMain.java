@@ -1,4 +1,5 @@
 package UI.screens;
+import UI.screens.inventory_screen.InventoryPanel;
 import UI.screens.timer_screen.TimerPanel;
 import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
@@ -19,6 +20,8 @@ public class GameMain {
         JPanel mainPanel = new JPanel();
         CardLayout card = new CardLayout();
         ErrorOutputBoundary cGRM = new ErrorPresenter();
+
+
         mainPanel.setLayout(card);
 
         // ----- Music ------
@@ -28,7 +31,7 @@ public class GameMain {
         StartScreen startScreen = new StartScreen(card, mainPanel);
         StoryScreen storyScreen = new StoryScreen(card, mainPanel);
         TimerPanel timerScreen = new TimerPanel(card,mainPanel);
-
+        InventoryPanel inventoryScreen = new InventoryPanel(card, mainPanel);
         BreakScreen breakScreen = new BreakScreen(card,mainPanel);
 
         SellMenuScreen sellMenuScreen = new SellMenuScreen(card, mainPanel);
@@ -56,6 +59,7 @@ public class GameMain {
         mainPanel.add(buyMenuScreen, "Buy Menu");
         mainPanel.add(shopMenuScreen, "Shop Menu");
         mainPanel.add(fightBossScreen, "Fight Boss");
+        mainPanel.add(inventoryScreen, "Inventory Menu");
 
         mainFrame.add(mainPanel);
         card.show(mainPanel, "Start");
@@ -63,8 +67,5 @@ public class GameMain {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         mainFrame.setSize(800, 500);
-
-
-
     }
 }
