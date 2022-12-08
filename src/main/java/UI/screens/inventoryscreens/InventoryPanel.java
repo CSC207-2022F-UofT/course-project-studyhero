@@ -1,10 +1,10 @@
-package UI.screens.inventory_screen;
+package UI.screens.inventoryscreens;
 
-import inventorymenu.inventory_menu_use_case.delete_item_use_case.*;
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.*;
-import inventorymenu.inventory_menu_use_case.equip_item_use_case.*;
-import inventorymenu.inventoryitem.PlayerInventoryFile;
-import inventorymenu.inventoryscreens.*;
+import UI.screens.inventoryscreens.*;
+import entities.inventoryitem.PlayerInventoryFile;
+import use_cases.inventory_menu_use_case.delete_item_use_case.*;
+import use_cases.inventory_menu_use_case.display_player_inventory_use_case.*;
+import use_cases.inventory_menu_use_case.equip_item_use_case.*;
 
 import javax.swing.*;
 import java.awt.*;

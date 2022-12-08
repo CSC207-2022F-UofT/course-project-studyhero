@@ -1,9 +1,9 @@
-package inventorymenu.inventoryitem;
-import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
-import inventorymenu.inventory_menu_use_case.equip_item_use_case.EquipItemDsGateway;
-import inventorymenu.inventory_menu_use_case.equip_item_use_case.EquipItemDsRequestModel;
+package entities.inventoryitem;
+import use_cases.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
+import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
+import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+import use_cases.inventory_menu_use_case.equip_item_use_case.EquipItemDsGateway;
+import use_cases.inventory_menu_use_case.equip_item_use_case.EquipItemDsRequestModel;
 import org.jetbrains.annotations.NotNull;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
@@ -174,32 +174,6 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     public boolean inventoryFull() {
         return CheckLatestInventoryItemId() >= 20;
     }
-
-    @Override
-    public void addNewWeapon(int level) {
-
-    }
-
-    @Override
-    public void addNewShield(int level) {
-
-    }
-
-    @Override
-    public void addNewAttackPotion(int level) {
-
-    }
-
-    @Override
-    public void addNewHealthPotion(int level) {
-
-    }
-
-    @Override
-    public void addPoisonPotion(int level) {
-
-    }
-
 
     /**
      * Create an iterator object on InventoryList for this file
