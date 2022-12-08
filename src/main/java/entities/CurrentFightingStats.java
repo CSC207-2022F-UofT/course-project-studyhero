@@ -34,11 +34,8 @@ public class CurrentFightingStats implements FightingStats{
         this.bossDamage = statsMap.get("bossDamage");
     }
 
-    public CurrentFightingStats(String newFile){
-        initializeFight(newFile);
-    }
-    public void initializeFight(String newFile){
-        Map<String, Integer> userStats = getPlayerStats(newFile);
+    public void initializeFight(){
+        Map<String, Integer> userStats = getPlayerStats();
         BossClass bossClass = new BossClass(userStats.get("level"));
         this.maxHP = userStats.get("hp");
         this.playerHP = userStats.get("hp");
@@ -49,9 +46,9 @@ public class CurrentFightingStats implements FightingStats{
     }
 
 
-    public Map<String, Integer> getPlayerStats(String newFile){
+    public Map<String, Integer> getPlayerStats(){
         ErrorPresenter presenter = new ErrorPresenter();
-        ValidStats playerStats = new ValidStats(newFile, presenter);
+        ValidStats playerStats = new ValidStats("stats.csv", presenter);
         Map<String, Integer> statsMap = playerStats.load();
         StatsUser player = new StatsUser(statsMap);
         return player.getUserStats();
@@ -82,28 +79,31 @@ public class CurrentFightingStats implements FightingStats{
     }
 
 
-    public int getPlayerHP(){ return this.playerHP; }
+    public int getPlayerDamage() {
+        return this.playerDamage;
+    }
 
-    public int getBossHP(){ return this.bossHP; }
+    public int getBossDamage() {
+        return (this.bossDamage - this.playerDefence);
+    }
 
-    public int getPlayerDamage() { return this.playerDamage; }
+    public void changePlayerHP(int by) {
+        this.playerHP = Math.min((this.playerHP + by), this.maxHP);
+    }
 
-    public int getBossDamage() { return (this.bossDamage - this.playerDefence); }
+    public void changePlayerDamage(int by) {
+        this.playerDamage = this.playerDamage + by;
+    }
 
-    public void changePlayerHP(int by) { this.playerHP = Math.min((this.playerHP + by), this.maxHP); }
+    public void changePlayerDefence(int by) {
+        this.playerDefence = this.playerDefence + by;
+    }
 
-    public void changePlayerDamage(int by) { this.playerDamage = this.playerDamage + by; }
+    public void changeBossHP(int by) {
+        this.bossHP = this.bossHP + by;
+    }
 
-    public void changePlayerDefence(int by) { this.playerDefence = this.playerDefence + by; }
-
-    public void changeBossHP(int by) { this.bossHP = this.bossHP + by; }
-
-    public int winCondition(){
-        if (this.playerHP <= 0){
-            return 2;
-        } else if (this.bossHP <= 0){
-            return 1;
-        } else{
-            return 0; }
+    public boolean winCondition(){
+        return (this.playerHP <= 0 || this.bossHP <= 0);
     }
 }
