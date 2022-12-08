@@ -35,6 +35,7 @@ public class TimerPanel extends JPanel {
      * The panel that contains TimerPanel.
      */
     JPanel parentPanel;
+
     TimerRequestModel timerRequestModel = new TimerRequestModel();
     TimerResponseModel timerResponseModel = new TimerResponseModel();
     CustomTimerController customTimerController = new CustomTimerController(timerRequestModel, timerResponseModel);
@@ -64,17 +65,6 @@ public class TimerPanel extends JPanel {
         this.add(mainPanel);
 
         addListeners();
-    }
-
-    /**
-     * Helper method that converts String time into the number of seconds that it equals.
-     * @param time the time with format (00:00:00)
-     * @return the number of seconds time equals
-     */
-    public static int convertTimeToSeconds(String time) {
-        String[] times = time.split(":", 3);
-        int timeSeconds = Integer.parseInt(times[0])*3600 + Integer.parseInt(times[1])*60 + Integer.parseInt(times[2]);
-        return timeSeconds;
     }
 
     /**
