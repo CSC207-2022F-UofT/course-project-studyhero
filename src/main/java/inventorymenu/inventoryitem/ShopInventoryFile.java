@@ -15,7 +15,7 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class ShopInventoryFile implements InventoryList {
+public class ShopInventoryFile implements InventoryList, InitializeShopInventoryGateway{
 
     private final File csvFile;
     private final String label = "Shop Inventory";
@@ -47,10 +47,10 @@ public class ShopInventoryFile implements InventoryList {
         ErrorOutputBoundary error = new ErrorPresenter();
         ValidFileDsGateway validFile = new ValidShopInventory(csvFile.getName(), error);
 
-        readInventory(validFile, csvFile, headers, inventoryList);
+        readInventory(validFile);
     }
 
-    static void readInventory(ValidFileDsGateway validFile, File csvFile, Map<String, Integer> headers, ArrayList<InventoryItemDsRequestModel> inventoryList) {
+    private void readInventory(ValidFileDsGateway validFile) {
         if (validFile.fileExists() && validFile.isValid() && validFile.isPlayable()) {
             BufferedReader reader;
             try {
@@ -79,7 +79,7 @@ public class ShopInventoryFile implements InventoryList {
                 int itemEffect = Integer.parseInt(col[headers.get("item_effect")]);
                 int itemGoldValue = Integer.parseInt(col[headers.get("item_gold_value")]);
                 InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(itemId,
-                        itemType, itemName, itemEffect, itemGoldValue);
+                        itemType, itemName, itemEffect, itemGoldValue,  false);
                 inventoryList.add(item);
             }
             try {
@@ -116,7 +116,7 @@ public class ShopInventoryFile implements InventoryList {
                 item.getType(),
                 item.getName(),
                 item.getEffect(),
-                item.getGoldValue());
+                item.getGoldValue(), false);
     }
 
 
@@ -131,18 +131,15 @@ public class ShopInventoryFile implements InventoryList {
         return inventoryList.size();
     }
 
-
     /**
      * Rewrite the inventory file with the added inventoryItem
      */
-    public void save() {
-        saveInventory(csvFile, label, headers, inventoryList);
-    }
-
-    static void saveInventory(File csvFile, String label, Map<String, Integer> headers, ArrayList<InventoryItemDsRequestModel> inventoryList) {
+    @Override
+    public void save(){
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(csvFile));
+            String label = "Player Inventory";
             writer.write(label);
             writer.newLine();
             writer.write(String.join(",", headers.keySet()));
@@ -260,19 +257,19 @@ public class ShopInventoryFile implements InventoryList {
         InventoryItem item1 = new InventoryItem(
                 "Weapon",
                 "Sword",
-                3, 6);
+                3, 6, false);
         InventoryItem item2 = new InventoryItem(
                 "AttackPotion",
                 "StrengthPotion",
-                4, 2);
+                4, 2, false);
         InventoryItem item3 = new InventoryItem(
                 "Weapon",
                 "HammerHammer",
-                5, 8);
+                5, 8, false);
         InventoryItem item4 = new InventoryItem(
                 "Shield",
                 "BronzeShield",
-                12, 23);
+                12, 23, false);
         save(item1);
         save(item2);
         save(item3);

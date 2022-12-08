@@ -20,7 +20,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
     private JButton equipEquipment;
     private JTextField deleteItemTextField;
     private JTextField equipItemTextField;
-    private JButton goToBreakMenuButton = new JButton("Back to Break Menu");
+    private JButton goToBreakMenuButton = new JButton("Go back to break menu");
 
     CardLayout card;
     JPanel parentPanel;
@@ -46,7 +46,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
         PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
         ArrayList<String> response = displayInventoryResponseModel.showItem();
-        goToBreakMenuButton.addActionListener(e -> card.show(parentPanel, "Break"));
+        goToBreakMenuButton.addActionListener(e -> card.show(parentPanel, "Go back to break menu"));
 
         inventoryInfo = new JTextArea(20, 1);
         inventoryInfo.setEditable(false);
@@ -70,9 +70,9 @@ public class InventoryPanel extends JPanel implements ActionListener {
         this.add(inventoryInfo);
         this.add(deleteItem);
         this.add(deleteItemTextField);
-
         this.add(equipEquipment);
         this.add(equipItemTextField);
+        this.add(goToBreakMenuButton);
 
     }
 

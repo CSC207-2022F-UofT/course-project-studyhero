@@ -44,7 +44,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
 
             // check the header is correct and matches
             String[] header = read(br);
-            if (!Arrays.equals(header, new String[]{"item_id", "item_type", "item_name", "item_effect", "item_gold_value"})){
+            if (!Arrays.equals(header, new String[]{"item_id", "item_type", "item_name", "item_effect", "item_gold_value", "item_is_equipped"})){
                 System.out.println(header[0]);
                 return "header";
             }
@@ -55,7 +55,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
                 // check id is integer
                 String index = item[0], type = item[1],
                         name = item[2], effect = item[3],
-                        goldValue = item[4];
+                        goldValue = item[4], isEquipped = item[5];
 
                 try {Integer.valueOf(index);
                 }catch(NumberFormatException e){return "index";}
@@ -75,6 +75,10 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
                 // check goldValue is integer
                 try {Integer.valueOf(goldValue);}
                 catch(NumberFormatException e){return "goldValue";}
+
+                // check isEquipped is boolean
+                try {Boolean.valueOf(isEquipped);}
+                catch(NumberFormatException e){return "isEquipped";}
             }
             br.close();
             return null;
@@ -113,6 +117,8 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
                 presenter.error("Items have invalid effects.");
             case "goldValue":
                 presenter.error("Items have invalid gold value.");
+            case "isEquipped":
+                presenter.error("Items have invalid equip information.");
             case "other":
                 presenter.error("Error: please start a new game.");
         }

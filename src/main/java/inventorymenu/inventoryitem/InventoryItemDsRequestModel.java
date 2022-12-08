@@ -7,6 +7,7 @@ public class InventoryItemDsRequestModel {
     private final int effect;
     private int id;
     private final int goldValue;
+    private final boolean isEquipped;
 
     /**
      * @param id        of the inventory item in player's inventory.
@@ -14,13 +15,15 @@ public class InventoryItemDsRequestModel {
      * @param name      of the inventory item
      * @param effect    of the inventory item that will be added on a unit in some way
      * @param goldValue of the inventory item that will be added
+     * @param isEquipped ,whether the inventory is being equipped or not
      */
-    public InventoryItemDsRequestModel(int id, String type, String name, int effect, int goldValue) {
+    public InventoryItemDsRequestModel(int id, String type, String name, int effect, int goldValue, boolean isEquipped) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.effect = effect;
         this.goldValue = goldValue;
+        this.isEquipped = isEquipped;
     }
 
     /**
@@ -69,6 +72,14 @@ public class InventoryItemDsRequestModel {
      */
     public int getGoldValue() {
         return goldValue;
+    }
+
+    /**
+     * check if the item is equipped by the player
+     * @return true if player is equipping the item
+     */
+    public boolean checkIsEquipped() {
+        return isEquipped;
     }
 
 }
