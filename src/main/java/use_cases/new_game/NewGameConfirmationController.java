@@ -1,6 +1,5 @@
 package use_cases.new_game;
 
-import inventorymenu.inventoryitem.PlayerInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 
 import javax.swing.*;

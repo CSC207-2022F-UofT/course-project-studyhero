@@ -2,7 +2,6 @@ package UI.screens.panels;
 
 import use_cases.change_stats.ChangeStatsController;
 import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
 
 import javax.swing.*;
 import java.awt.*;

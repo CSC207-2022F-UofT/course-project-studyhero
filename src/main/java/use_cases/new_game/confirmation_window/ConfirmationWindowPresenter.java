@@ -4,6 +4,7 @@ import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;
 import use_cases.file_checker.ValidPlayerInventory;
+import use_cases.file_checker.ValidShopInventory;
 import use_cases.file_checker.ValidStats;
 import use_cases.new_game.NewGame;
 import use_cases.new_game.NewGameConfirmationController;
@@ -16,8 +17,9 @@ public class ConfirmationWindowPresenter extends JFrame implements
         ConfirmationWindowOutputBoundary {
 
     private final static String statsFilepath = "stats.csv";
-    private final static String inventoryFilepath = "PlayerInventory.csv";
+    private final static String playerInventoryFilepath = "PlayerInventory.csv";
     private final static String fightStatsFilepath = "fightStats.csv";
+    private final static String shopInventoryFilepath = "ShopInventory.csv";
 
     public ConfirmationWindowPresenter(String confirmation, CardLayout card, JPanel parentPanel,
                                        ErrorOutputBoundary presenter){
@@ -27,10 +29,13 @@ public class ConfirmationWindowPresenter extends JFrame implements
 
         ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
         ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
-        ValidFileDsGateway inventoryChecker = new ValidPlayerInventory(inventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway playerInventoryChecker = new ValidPlayerInventory(playerInventoryFilepath,
+                fileCheckerPresenter);
+        ValidFileDsGateway shopInventoryChecker = new ValidShopInventory(shopInventoryFilepath,
+                fileCheckerPresenter);
         ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
-        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker,
-                fightStatsChecker, presenter);
+        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, playerInventoryChecker, shopInventoryChecker,
+                fightStatsChecker,presenter);
         NewGameConfirmationController newGameConfirmationController =
                 new NewGameConfirmationController(card, parentPanel, this,
                         newGameUseCase, presenter);

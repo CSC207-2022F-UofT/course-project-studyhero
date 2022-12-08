@@ -5,6 +5,7 @@ import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;
 import use_cases.file_checker.ValidPlayerInventory;
+import use_cases.file_checker.ValidShopInventory;
 import use_cases.file_checker.ValidStats;
 import use_cases.new_game.*;
 import use_cases.game_check.GameCheckController;
@@ -15,18 +16,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SettingsScreen extends JPanel {
-    private CardLayout card;
-    private JPanel parentPanel;
-    private ErrorOutputBoundary presenter;
     private final static String statsFilepath = "stats.csv";
-    private final static String inventoryFilepath = "PlayerInventory.csv";
+    private final static String playerInventoryFilepath = "PlayerInventory.csv";
+    private final static String shopInventoryFilepath = "ShopInventory.csv";
     private final static String fightStatsFilepath = "fightStats.csv";
     public SettingsScreen(CardLayout card, JPanel parentPanel,
                           ErrorOutputBoundary presenter, String prevPanel,
                           MusicPlayer player) {
-        this.card = card;
-        this.parentPanel = parentPanel;
-        this.presenter = presenter;
 
         JLabel title = new JLabel("Settings");
         this.add(title);
@@ -38,12 +34,14 @@ public class SettingsScreen extends JPanel {
         JButton newGameButton = new JButton("New Game");
         ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
         ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
-        ValidFileDsGateway inventoryChecker = new ValidPlayerInventory(inventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway playerInventoryChecker = new ValidPlayerInventory(playerInventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway shopInventoryChecker = new ValidShopInventory(shopInventoryFilepath, fileCheckerPresenter);
+
         ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
-        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, inventoryChecker,
-                fightStatsChecker, presenter);
+        NewGameInputBoundary newGameUseCase = new NewGame(statsChecker, playerInventoryChecker,
+                shopInventoryChecker, fightStatsChecker, presenter);
         GameCheckInputBoundary gameCheckUseCase =
-                new GameCheckInteractor(statsChecker, inventoryChecker, fightStatsChecker);
+                new GameCheckInteractor(statsChecker, playerInventoryChecker, fightStatsChecker);
         GameCheckController gameCheckController = new GameCheckController(card, parentPanel, gameCheckUseCase,
                 newGameUseCase, presenter);
 

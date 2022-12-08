@@ -1,5 +1,5 @@
 package UI.screens;
-import UI.screens.inventory_screen.InventoryPanel;
+import UI.screens.inventoryscreens.InventoryPanel;
 import UI.screens.timer_screen.TimerPanel;
 import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
@@ -36,7 +36,7 @@ public class GameMain {
         BuyMenuScreen buyMenuScreen = new BuyMenuScreen(card, mainPanel);
         ShopMenuScreen shopMenuScreen = new ShopMenuScreen(card,mainPanel);
 
-        FightBossScreen fightBossScreen = new FightBossScreen(card, mainPanel);
+        //FightBossScreen fightBossScreen = new FightBossScreen(card, mainPanel);
 
         ChangeStatsScreen changeStatsScreen = new ChangeStatsScreen(card,mainPanel, cGRM);
 
@@ -56,7 +56,7 @@ public class GameMain {
         mainPanel.add(sellMenuScreen, "Sell Menu");
         mainPanel.add(buyMenuScreen, "Buy Menu");
         mainPanel.add(shopMenuScreen, "Shop Menu");
-        mainPanel.add(fightBossScreen, "Fight Boss");
+        //mainPanel.add(fightBossScreen, "Fight Boss");
         mainPanel.add(inventoryScreen, "Inventory Menu");
 
         mainFrame.add(mainPanel);
