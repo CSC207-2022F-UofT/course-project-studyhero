@@ -4,9 +4,16 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Class for the KeyListener of CustomTimerTextField.
+ */
 public class CustomTimerTextFieldKeyListener implements KeyListener {
     private JFormattedTextField customTimerTextField;
 
+    /**
+     * Constructor for CustomTimerTextFieldKeyListener.
+     * @param customTimerTextField
+     */
     public CustomTimerTextFieldKeyListener(JFormattedTextField customTimerTextField) {
         this.customTimerTextField = customTimerTextField;
     }
@@ -16,6 +23,10 @@ public class CustomTimerTextFieldKeyListener implements KeyListener {
 
     }
 
+    /**
+     * Ensures that only numbers are entered into customTimerTextField.
+     * @param ke the event to be processed
+     */
     @Override
     public void keyPressed(KeyEvent ke) {
         if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' || ke.getKeyCode() == KeyEvent.VK_BACK_SPACE) {

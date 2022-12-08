@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
+/**
+ * Class for the ActionListener of CustomTimerConfirmButton.
+ */
 public class CustomTimerConfirmButtonListener implements ActionListener {
     private CustomTimerController ctController;
     private JFormattedTextField customTimerTextField;
@@ -16,7 +19,17 @@ public class CustomTimerConfirmButtonListener implements ActionListener {
     private JProgressBar progressBar;
     private JLabel errorLabel;
 
-    public CustomTimerConfirmButtonListener(CustomTimerController ctController, JFormattedTextField customTimerTextField, JLabel timerText, JProgressBar progressBar, JLabel errorLabel) {
+    /**
+     * Constructor for CustomTimerConfirmButtonListener.
+     * @param ctController
+     * @param customTimerTextField
+     * @param timerText
+     * @param progressBar
+     * @param errorLabel
+     */
+    public CustomTimerConfirmButtonListener(CustomTimerController ctController,
+                                            JFormattedTextField customTimerTextField, JLabel timerText,
+                                            JProgressBar progressBar, JLabel errorLabel) {
         this.ctController = ctController;
         this.customTimerTextField = customTimerTextField;
         this.timerText = timerText;
@@ -25,6 +38,11 @@ public class CustomTimerConfirmButtonListener implements ActionListener {
     }
 
 
+    /**
+     * Makes the timer use the entered time if the entered time matches the regex, otherwise "Invalid Time" will be
+     * displayed, when the button is clicked.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String inputTime = customTimerTextField.getText();

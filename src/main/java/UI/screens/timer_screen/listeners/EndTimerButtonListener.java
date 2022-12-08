@@ -7,20 +7,52 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class for the ActionListener of EndTimerButton.
+ */
 public class EndTimerButtonListener implements ActionListener {
+    /**
+     * Controller for the preset portion of timer.
+     */
     private PresetTimerController ptController;
+    /**
+     * Controller for the custom portion of timer.
+     */
     private CustomTimerController ctController;
-    private Timer timer;
-    private JLabel timerText;
-    private JButton goToBreakMenuButton;
-    private JButton customTimerConfirmButton;
-    private JButton presetLongButton;
-    private JButton presetMediumButton;
-    private JButton presetShortButton;
-    private JButton startTimerButton;
-    private JFormattedTextField customTimerTextField;
+    /**
+     * Elements that will be affected.
+     */
+    private final Timer timer;
+    private final JLabel timerText;
+    private final JButton goToBreakMenuButton;
+    private final JButton customTimerConfirmButton;
+    private final JButton presetLongButton;
+    private final JButton presetMediumButton;
+    private final JButton presetShortButton;
+    private final JButton startTimerButton;
+    private final JFormattedTextField customTimerTextField;
+    private final JButton endTimerButton;
 
-    public EndTimerButtonListener(PresetTimerController ptController, CustomTimerController ctController, Timer timer, JLabel timerText, JButton goToBreakMenuButton, JButton customTimerConfirmButton, JButton presetLongButton, JButton presetMediumButton, JButton presetShortButton, JButton startTimerButton, JFormattedTextField customTimerTextField) {
+    /**
+     * Constructor for EndTimerButtonListener.
+     * @param ptController
+     * @param ctController
+     * @param timer
+     * @param timerText
+     * @param goToBreakMenuButton
+     * @param customTimerConfirmButton
+     * @param presetLongButton
+     * @param presetMediumButton
+     * @param presetShortButton
+     * @param startTimerButton
+     * @param customTimerTextField
+     * @param endTimerButton
+     */
+    public EndTimerButtonListener(PresetTimerController ptController, CustomTimerController ctController, Timer timer,
+                                  JLabel timerText, JButton goToBreakMenuButton, JButton customTimerConfirmButton,
+                                  JButton presetLongButton, JButton presetMediumButton, JButton presetShortButton,
+                                  JButton startTimerButton, JFormattedTextField customTimerTextField,
+                                  JButton endTimerButton) {
         this.ptController = ptController;
         this.ctController = ctController;
         this.timer = timer;
@@ -32,8 +64,13 @@ public class EndTimerButtonListener implements ActionListener {
         this.presetShortButton = presetShortButton;
         this.startTimerButton = startTimerButton;
         this.customTimerTextField = customTimerTextField;
+        this.endTimerButton = endTimerButton;
     }
 
+    /**
+     * Ends the timer, sets the time to 00:00:00, and changes the interactability of some elements.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (ctController.getCustomTime().equals("-1")) {
@@ -51,5 +88,6 @@ public class EndTimerButtonListener implements ActionListener {
         presetShortButton.setEnabled(true);
         startTimerButton.setEnabled(true);
         customTimerTextField.setEnabled(true);
+        endTimerButton.setEnabled(false);
     }
 }
