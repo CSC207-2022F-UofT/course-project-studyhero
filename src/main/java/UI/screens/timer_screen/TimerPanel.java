@@ -37,7 +37,7 @@ public class TimerPanel extends JPanel {
 
         timerText.setFont(new Font("Verdana", Font.PLAIN, 48));
 
-        timer = new Timer(100, new UITimerListener(timerText, tPresenter, progressBar, breakMenuButton));
+        timer = new Timer(100, new UITimerListener(timerText, tPresenter, progressBar, breakMenuButton, customTimerConfirmButton, presetLongButton, presetMediumButton, presetShortButton, startTimerButton, customTimerTextField));
 
         this.card = card;
         this.parentPanel = parentPanel;
@@ -54,14 +54,15 @@ public class TimerPanel extends JPanel {
     }
 
     public void addListeners() {
-        startTimerButton.addActionListener(new StartTimerButtonListener(ptController, ctController, timer));
-        endTimerButton.addActionListener(new EndTimerButtonListener(ptController, ctController, timer, timerText, breakMenuButton));
+        startTimerButton.addActionListener(new StartTimerButtonListener(ptController, ctController, timer, customTimerConfirmButton, presetLongButton, presetMediumButton, presetShortButton, startTimerButton, customTimerTextField));
+        endTimerButton.addActionListener(new EndTimerButtonListener(ptController, ctController, timer, timerText, breakMenuButton, customTimerConfirmButton, presetLongButton, presetMediumButton, presetShortButton, startTimerButton, customTimerTextField));
         presetShortButton.addActionListener(new PresetShortButtonListener(ptController, ctController, timerText, progressBar));
         presetMediumButton.addActionListener(new PresetMediumButtonListener(ptController, ctController, timerText, progressBar));
         presetLongButton.addActionListener(new PresetLongButtonListener(ptController, ctController, timerText, progressBar));
         customTimerConfirmButton.addActionListener(new CustomTimerConfirmButtonListener(ctController, customTimerTextField, timerText, progressBar, errorLabel));
-        customTimerTextField.addKeyListener(new CustomTimerTextFieldKeyListener());
+        customTimerTextField.addKeyListener(new CustomTimerTextFieldKeyListener(customTimerTextField));
         customTimerTextField.addCaretListener(new CustomTimerTextFieldCaretListener(customTimerTextField));
+        customTimerTextField.addFocusListener(new CustomTimerTextFieldFocusListener(customTimerTextField));
         breakMenuButton.addActionListener(new BreakMenuButtonListener(card, parentPanel));
     }
 }
