@@ -1,6 +1,6 @@
 package use_cases.new_game;
 
-import entities.CurrentFightingStats;
+import entities.FightingStatsInitializer;
 import entities.StatsUser;
 import inventorymenu.inventoryitem.*;
 import use_cases.errors.ErrorOutputBoundary;
@@ -51,12 +51,11 @@ public class NewGame implements NewGameInputBoundary{
         InitializeShopInventoryGateway shopInventoryList = new ShopInventoryFile("ShopInventory.csv");
         shopInventoryList.initialize();
 
-        // initialise a new fightingStats object and saves it
-
-        //CurrentFightingStats fightingStats = new CurrentFightingStats();
-        //fightingStats.initializeFight();
-        //System.out.println(fightingStats.getUpdatedFightStats());
-        //fightingStats.saveFightStats();
+        // initialise a new fighting stats file and saves it
+        FightingStatsInitializer fightingStatsInitializer = new FightingStatsInitializer();
+        Map<String, Integer> fightStats = fightingStatsInitializer.initialize();
+        StatSave saver = new StatSave(fightStats, presenter);
+        saver.save("fightStats.csv");
 
     }
 }

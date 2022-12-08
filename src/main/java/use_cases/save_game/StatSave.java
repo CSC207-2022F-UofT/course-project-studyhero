@@ -15,8 +15,8 @@ public class StatSave {
      * Returns a StatsSave object with stats represented as a
      * Hashmap
      *
-     * @param stats
-     * @param presenter
+     * @param stats a map with a player's stats (gold, health, level, damage, defence)
+     * @param presenter helps create a new JFrame with an error message if any occurs whilst saving the file
      */
     public StatSave(Map<String, Integer> stats, ErrorOutputBoundary presenter){
 
@@ -30,7 +30,7 @@ public class StatSave {
      */
     public void save(String filepath){
         try{
-            File statsFile = new File("stats.csv");
+            File statsFile = new File(filepath);
             PrintWriter out = new PrintWriter(statsFile);
 
             StringBuilder keyString = new StringBuilder();
@@ -44,7 +44,7 @@ public class StatSave {
 
             out.close();
 
-            System.out.println("Saved. Stats: " + stats);
+            System.out.println("Saved to "+ filepath + ": "+ stats);
 
         } catch (IOException e){
             presenter.error(e.toString());
