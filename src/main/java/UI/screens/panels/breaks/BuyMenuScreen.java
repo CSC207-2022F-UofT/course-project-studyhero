@@ -20,7 +20,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Map;
 
-
+/**
+ * The screen for displaying the Buy Menu from the Shop Menu.
+ * The user is able to buy items from a list of ShopInventoryFile items
+ * in exchange for the user's gold from Stats, which are sent to their
+ * PlayerInventoryFile.
+ */
 public class BuyMenuScreen extends JPanel implements ListSelectionListener, ActionListener {
     /**
      * Elements of the BuyMenuScreen.
@@ -49,8 +54,8 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
 
     /**
-     * Card where the user is able to buy items from a list of
-     * ShopInventoryFile items in exchange for the user's gold.
+     * Card where all the visual panels, labels, lists, etc.
+     * are stored to be viewed by the user.
      */
     public BuyMenuScreen(CardLayout card, JPanel parentPanel) {
 
@@ -60,10 +65,18 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         JPanel shopPanel = new JPanel();
         JPanel topPanel = new JPanel();
 
+        this.presenter = presenter;
+
 
         // ----- Initialize Gold Values -----
         stats = new ValidStats("stats.csv", presenter);
-        statsMap = stats.load();
+
+        if (stats.isPlayable()) {
+            statsMap = stats.load();
+        } else {
+            presenter.error("File doesn't exist.");
+        }
+
         statSave = new StatSave(statsMap, presenter);
         statsUser = new StatsUser(statsMap);
 
@@ -187,26 +200,26 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
                     "You do not have enough gold!",
                     "Purchase Error", JOptionPane.WARNING_MESSAGE);
         } else {
-            System.out.println("Item " + shopInventory.get(index).getName() + " successfully added.");
+            System.out.println("Item " + shopInventory.get(index).getName() +
+                    " successfully added.");
+
+            playerInventoryFile.save(new InventoryItem(
+                    shopInventory.get(index).getType(),
+                    shopInventory.get(index).getName(),
+                    shopInventory.get(index).getEffect(),
+                    shopInventory.get(index).getGoldValue(),
+                    shopInventory.get(index).checkIsEquipped()
+            ));
+
+            statsUser.updateGold(-shopInventory.get(index).getGoldValue());
+            StatSave newStats = new StatSave(statsUser.getUserStats(), presenter);
+            newStats.save("stats.csv");
+
+            statsMap = stats.load();
+            statSave = new StatSave(statsMap, presenter);
+            statsUser = new StatsUser(statsMap);
+
+            userGold.setText("Your Gold: " + statsMap.get("gold"));
         }
-
-        playerInventoryFile.save(new InventoryItem(
-                shopInventory.get(index).getType(),
-                shopInventory.get(index).getName(),
-                shopInventory.get(index).getEffect(),
-                shopInventory.get(index).getGoldValue(),
-                shopInventory.get(index).checkIsEquipped()
-        ));
-        System.out.println(-shopInventory.get(index).getGoldValue());
-        statsUser.updateGold(-shopInventory.get(index).getGoldValue());
-        StatSave newStats = new StatSave(statsUser.getUserStats(), presenter);
-        newStats.save("stats.csv");
-
-
-        statsMap = stats.load();
-        statSave = new StatSave(statsMap, presenter);
-        statsUser = new StatsUser(statsMap);
-
-        userGold.setText("Your Gold: " + statsMap.get("gold"));
     }
 }
