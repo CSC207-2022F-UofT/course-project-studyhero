@@ -1,9 +1,7 @@
-package use_cases.new_game;
+package use_cases.game_check;
 
 import use_cases.errors.ErrorOutputBoundary;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidStats;
+import use_cases.new_game.NewGameInputBoundary;
 import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
 import use_cases.new_game.confirmation_window.ConfirmationWindowOutputBoundary;
 
@@ -15,19 +13,20 @@ import java.awt.event.ActionListener;
 public class GameCheckController implements ActionListener {
     CardLayout card;
     JPanel parentPanel;
+    GameCheckInputBoundary gameCheckUseCase;
 
-    NewGameInputBoundary useCase;
-    ValidFileDsGateway statsFile;
-    ValidFileDsGateway inventoryFile;
+    NewGameInputBoundary newGameUseCase;
     ErrorOutputBoundary presenter;
+    private static final String confirmationMsg = "Are you sure? This will overwrite your existing save files.";
 
 
-    public GameCheckController(CardLayout card, JPanel parentPanel, String stats,
-                               String inventory, NewGameInputBoundary newGameInteractor,
+
+    public GameCheckController(CardLayout card, JPanel parentPanel,
+                               GameCheckInputBoundary gameCheckUseCase,
+                               NewGameInputBoundary newGameUseCase,
                                ErrorOutputBoundary presenter){
-        this.statsFile = new ValidStats("stats.csv",presenter);
-        this.inventoryFile = new ValidPlayerInventory("PlayerInventory.csv", presenter);
-        this.useCase = newGameInteractor;
+        this.gameCheckUseCase = gameCheckUseCase;
+        this.newGameUseCase = newGameUseCase;
         this.card = card;
         this.parentPanel = parentPanel;
         this.presenter = presenter;
@@ -35,17 +34,15 @@ public class GameCheckController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (statsFile.isPlayable() && inventoryFile.isPlayable()){
+        if (gameCheckUseCase.check()){
             ConfirmationWindowInteractor confirmationWindowInteractor =
-                    new ConfirmationWindowInteractor(
-                            "Are you sure? This will overwrite your existing save files.",
-                            card, parentPanel,presenter);
+                    new ConfirmationWindowInteractor( confirmationMsg,card, parentPanel,presenter);
             ConfirmationWindowOutputBoundary window = confirmationWindowInteractor.createWindow();
             window.viewWindow();
 
         }
         else{
-            useCase.newGame();
+            newGameUseCase.newGame();
             card.show(parentPanel, "Story");
         }
     }
