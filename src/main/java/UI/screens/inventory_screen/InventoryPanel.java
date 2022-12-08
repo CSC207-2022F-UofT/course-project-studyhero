@@ -2,29 +2,23 @@ package UI.screens.inventory_screen;
 
 import inventorymenu.inventory_menu_use_case.delete_item_use_case.*;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.*;
+import inventorymenu.inventory_menu_use_case.equip_item_use_case.*;
 import inventorymenu.inventoryitem.PlayerInventoryFile;
-import inventorymenu.inventoryscreens.DeleteItemController;
-import inventorymenu.inventoryscreens.DeleteItemPresenter;
-import inventorymenu.inventoryscreens.PlayerDisplayInventoryController;
-import inventorymenu.inventoryscreens.PlayerDisplayInventoryPresenter;
+import inventorymenu.inventoryscreens.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class InventoryPanel extends JPanel implements ActionListener {
-    private JTextArea inventoryInfo;
-    private JButton deleteItem;
-    private JButton equipEquipment;
-    private JTextField deleteItemTextField;
-    private JTextField equipItemTextField;
-    private JButton goToBreakMenuButton = new JButton("Go back to break menu");
-
-    CardLayout card;
-    JPanel parentPanel;
-
+    private final JTextArea inventoryInfo;
+    private final JButton deleteItem;
+    private final JButton equipEquipment;
+    private final JTextField deleteItemTextField;
+    private final JTextField equipItemTextField;
     private final static String newline = "\n";
     static final String playerInventory = "PlayerInventory.csv";
 
@@ -40,7 +34,10 @@ public class InventoryPanel extends JPanel implements ActionListener {
             new DeleteItemInteractor(deleteItemDsGateway,deleteItemPresenter);
     DeleteItemController deleteItemController = new DeleteItemController(deleteItemInputBoundary);
 
-
+    EquipItemOutputBoundary equipItemPresenter = new EquipItemPresenter();
+    EquipItemDsGateway equipItemDsGateway = new PlayerInventoryFile(playerInventory);
+    EquipItemInputBoundary equipItemInputBoundary = new EquipItemInteractor(equipItemDsGateway, equipItemPresenter);
+    EquipItemController equipItemController = new EquipItemController(equipItemInputBoundary);
 
 
     public InventoryPanel(CardLayout card, JPanel parentPanel) {
@@ -49,7 +46,8 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
         PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
         ArrayList<String> response = displayInventoryResponseModel.showItem();
-        goToBreakMenuButton.addActionListener(e -> card.show(parentPanel, "Go back to break menu"));
+        JButton goToBreakMenuButton = new JButton("Go back to break menu");
+        goToBreakMenuButton.addActionListener(e -> card.show(parentPanel, "Break"));
 
         inventoryInfo = new JTextArea(20, 1);
         inventoryInfo.setEditable(false);
@@ -82,22 +80,23 @@ public class InventoryPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        if(evt.getSource() == deleteItem){
+        if(Objects.equals(evt.getSource(), deleteItem)){
             try{
-                DeleteItemRequestModel deleteItemRequestModel = new DeleteItemRequestModel(Integer.parseInt(deleteItemTextField.getText()));
+                DeleteItemRequestModel deleteItemRequestModel = new DeleteItemRequestModel(Integer.parseInt(
+                        deleteItemTextField.getText()));
 
-                DeleteItemResponseModel deleteItemResponseModel = deleteItemController.delete(deleteItemRequestModel);
+                DeleteItemResponseModel deleteItemResponseModel =
+                        deleteItemController.delete(deleteItemRequestModel);
 
 
                 JOptionPane.showMessageDialog(this, deleteItemResponseModel.getName() +
                         " is deleted at slot " + deleteItemResponseModel.getId());
 
-                PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
+                PlayerDisplayInventoryResponseModel displayInventoryResponseModel =
+                        displayInventoryController.display();
                 ArrayList<String> response = displayInventoryResponseModel.showItem();
                 inventoryInfo.setText("");
-                for(String line : response){
-                    inventoryInfo.append(line + newline);
-                }
+                for(String line : response) inventoryInfo.append(line + newline);
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
@@ -105,7 +104,29 @@ public class InventoryPanel extends JPanel implements ActionListener {
         }
 
         if(evt.getSource() == equipEquipment){
+            try{
+                EquipItemRequestModel equipItemRequestModel;
 
+                equipItemRequestModel = new EquipItemRequestModel(Integer.parseInt(
+                        equipItemTextField.getText()));
+                EquipItemResponseModel equipItemResponseModel;
+
+                equipItemResponseModel = equipItemController.delete(equipItemRequestModel);
+
+
+                JOptionPane.showMessageDialog(this,
+                        equipItemResponseModel.getName() +
+                                " is equipped at slot " + equipItemResponseModel.getId());
+
+                PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
+                ArrayList<String> response;
+                response = displayInventoryResponseModel.showItem();
+                inventoryInfo.setText("");
+                for(String line : response) inventoryInfo.append(line + newline);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
     }
 

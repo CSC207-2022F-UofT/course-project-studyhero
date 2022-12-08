@@ -44,11 +44,11 @@ public class NewGame implements NewGameInputBoundary{
         StatSave newSave = new StatSave(newUser.getUserStats(), presenter);
         newSave.save("stats.csv");
 
-        // initialise a new inventory list and saves it
+        // initialise a new player inventory list and saves it
         InitializePlayerInventoryGateway playerInventoryList = new PlayerInventoryFile("PlayerInventory.csv");
         playerInventoryList.initialize();
 
-        // initialise a new inventory list and saves it
+        // initialise a new shop inventory list and saves it
         InitializeShopInventoryGateway shopInventoryList = new ShopInventoryFile("ShopInventory.csv");
         shopInventoryList.initialize();
 
