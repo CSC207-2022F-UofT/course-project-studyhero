@@ -4,12 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EndTimerButtonListener implements ActionListener {
+public class StartTimerButtonListener implements ActionListener {
     private PresetTimerController ptController;
     private CustomTimerController ctController;
     private Timer timer;
-    private JLabel timerText;
-    private JButton goToBreakMenuButton;
     private JButton customTimerConfirmButton;
     private JButton presetLongButton;
     private JButton presetMediumButton;
@@ -17,12 +15,10 @@ public class EndTimerButtonListener implements ActionListener {
     private JButton startTimerButton;
     private JFormattedTextField customTimerTextField;
 
-    public EndTimerButtonListener(PresetTimerController ptController, CustomTimerController ctController, Timer timer, JLabel timerText, JButton goToBreakMenuButton, JButton customTimerConfirmButton, JButton presetLongButton, JButton presetMediumButton, JButton presetShortButton, JButton startTimerButton, JFormattedTextField customTimerTextField) {
+    public StartTimerButtonListener(PresetTimerController ptController, CustomTimerController ctController, Timer timer, JButton customTimerConfirmButton, JButton presetLongButton, JButton presetMediumButton, JButton presetShortButton, JButton startTimerButton, JFormattedTextField customTimerTextField) {
         this.ptController = ptController;
         this.ctController = ctController;
         this.timer = timer;
-        this.timerText = timerText;
-        this.goToBreakMenuButton = goToBreakMenuButton;
         this.customTimerConfirmButton = customTimerConfirmButton;
         this.presetLongButton = presetLongButton;
         this.presetMediumButton = presetMediumButton;
@@ -34,19 +30,16 @@ public class EndTimerButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (ctController.getCustomTime().equals("-1")) {
-            ptController.endTimer();
+            ptController.startTimer();
+        } else {
+            ctController.startTimer();
         }
-        else {
-            ctController.endTimer();
-        }
-        timer.stop();
-        timerText.setText("00:00:00");
-        goToBreakMenuButton.setVisible(true);
-        customTimerConfirmButton.setEnabled(true);
-        presetLongButton.setEnabled(true);
-        presetMediumButton.setEnabled(true);
-        presetShortButton.setEnabled(true);
-        startTimerButton.setEnabled(true);
-        customTimerTextField.setEnabled(true);
+        timer.start();
+        customTimerConfirmButton.setEnabled(false);
+        presetLongButton.setEnabled(false);
+        presetMediumButton.setEnabled(false);
+        presetShortButton.setEnabled(false);
+        startTimerButton.setEnabled(false);
+        customTimerTextField.setEnabled(false);
     }
 }

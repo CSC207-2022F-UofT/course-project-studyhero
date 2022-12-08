@@ -18,19 +18,19 @@ class PlayerDisplayInventoryDsRequestModelTest {
         InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
                 "Weapon",
                 "Sword",
-                13, 10);
+                13, 10, true);
         InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
                 "AttackPotion",
                 "StrengthPotion",
-                5, 23);
+                5, 23, false);
         InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
                 "Weapon",
                 "HammerHammer",
-                18, 43);
+                18, 43, false);
         InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
                 "Shield",
                 "BronzeShield",
-                15, 20);
+                15, 20, false);
 
         inventoryList.add(item1);
         inventoryList.add(item2);
@@ -44,7 +44,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
      */
     @Test
     void getNextCurrentPositionZero () {
-        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(1,"Weapon","Sword",13, 10);
+        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(1,"Weapon","Sword",13, 10, true);
 
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
         InventoryItemDsRequestModel referenceItem = referenceModel.getNext();
@@ -53,6 +53,8 @@ class PlayerDisplayInventoryDsRequestModelTest {
         assertEquals(item.getName(), referenceItem.getName());
         assertEquals(item.getEffect(), referenceItem.getEffect());
         assertEquals(item.getType(), referenceItem.getType());
+        assertEquals(item.getGoldValue(), referenceItem.getGoldValue());
+        assertEquals(item.checkIsEquipped(), referenceItem.checkIsEquipped());
     }
 
     /**
@@ -63,7 +65,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
         InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(2,
                 "AttackPotion",
                 "StrengthPotion",
-                5, 23);
+                5, 23, false);
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
         referenceModel.getNext();
         InventoryItemDsRequestModel referenceItem = referenceModel.getNext();
@@ -72,6 +74,9 @@ class PlayerDisplayInventoryDsRequestModelTest {
         assertEquals(item.getName(), referenceItem.getName());
         assertEquals(item.getEffect(), referenceItem.getEffect());
         assertEquals(item.getType(), referenceItem.getType());
+        assertEquals(item.getGoldValue(), referenceItem.getGoldValue());
+        assertEquals(item.checkIsEquipped(), referenceItem.checkIsEquipped());
+
     }
 
     /**
@@ -82,7 +87,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
         InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(4,
                 "Shield",
                 "BronzeShield",
-                15, 20);
+                15, 20, false);
         PlayerDisplayInventoryDsRequestModel referenceModel = new PlayerDisplayInventoryDsRequestModel(inventoryList);
         referenceModel.getNext();
         referenceModel.getNext();
@@ -94,6 +99,7 @@ class PlayerDisplayInventoryDsRequestModelTest {
         assertEquals(item.getEffect(), referenceItem.getEffect());
         assertEquals(item.getType(), referenceItem.getType());
         assertEquals(item.getGoldValue(), referenceItem.getGoldValue());
+        assertEquals(item.checkIsEquipped(), referenceItem.checkIsEquipped());
     }
 
     @Test

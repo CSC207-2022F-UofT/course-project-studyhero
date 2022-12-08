@@ -17,19 +17,19 @@ class PlayerDisplayInventoryInteractorTest {
     InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1,
             "Weapon",
             "Sword",
-            13, 10);
+            13, 10, true);
     InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2,
             "AttackPotion",
             "StrengthPotion",
-            5, 23);
+            5, 23, false);
     InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3,
             "Weapon",
             "Hammer",
-            18, 43);
+            18, 43, false);
     InventoryItemDsRequestModel item4 = new InventoryItemDsRequestModel(4,
             "Shield",
             "BronzeShield",
-            15, 20);
+            15, 20, false);
 
     @Test
     void displayInventoryListWithItem() {
@@ -53,6 +53,7 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item1.getId(),referenceModel1.getId());
             assertEquals(item1.getEffect(),referenceModel1.getEffect());
             assertEquals(item1.getGoldValue(),referenceModel1.getGoldValue());
+            assertEquals(item1.checkIsEquipped(), referenceModel1.checkIsEquipped());
 
             assertTrue(dsRequestModel.hasNext());
 
@@ -62,6 +63,7 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item3.getId(),referenceModel2.getId());
             assertEquals(item3.getEffect(),referenceModel2.getEffect());
             assertEquals(item3.getGoldValue(),referenceModel2.getGoldValue());
+            assertEquals(item3.checkIsEquipped(), referenceModel2.checkIsEquipped());
 
             assertFalse(dsRequestModel.hasNext());
 
@@ -91,6 +93,7 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item1.getId(),referenceModel1.getId());
             assertEquals(item1.getEffect(),referenceModel1.getEffect());
             assertEquals(item1.getGoldValue(),referenceModel1.getGoldValue());
+            assertEquals(item1.checkIsEquipped(), referenceModel1.checkIsEquipped());
 
             assertTrue(dsRequestModel.hasNext());
 
@@ -100,6 +103,8 @@ class PlayerDisplayInventoryInteractorTest {
             assertEquals(item3.getId(),referenceModel2.getId());
             assertEquals(item3.getEffect(),referenceModel2.getEffect());
             assertEquals(item3.getGoldValue(),referenceModel2.getGoldValue());
+            assertEquals(item3.checkIsEquipped(), referenceModel2.checkIsEquipped());
+
 
             assertFalse(dsRequestModel.hasNext());
 

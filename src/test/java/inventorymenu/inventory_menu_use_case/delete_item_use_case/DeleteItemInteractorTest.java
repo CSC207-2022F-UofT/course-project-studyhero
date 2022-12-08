@@ -16,9 +16,9 @@ class DeleteItemInteractorTest {
     @BeforeEach
     void setup(){
 
-        InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1, "Shield", "BronzeShield", 4, 10);
-        InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2, "Weapon", "Sword", 18, 10);
-        InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3, "Weapon", "Hammer", 15, 43);
+        InventoryItemDsRequestModel item1 = new InventoryItemDsRequestModel(1, "Shield", "BronzeShield", 4, 10, true);
+        InventoryItemDsRequestModel item2 = new InventoryItemDsRequestModel(2, "Weapon", "Sword", 18, 10, false);
+        InventoryItemDsRequestModel item3 = new InventoryItemDsRequestModel(3, "Weapon", "Hammer", 15, 43, false);
         inventoryList.add(item1);
         inventoryList.add(item2);
         inventoryList.add(item3);
