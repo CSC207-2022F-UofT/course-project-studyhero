@@ -1,6 +1,6 @@
 package use_cases.new_game;
 
-import entities.CurrentFightingStats;
+//import entities.CurrentFightingStats;
 import entities.StatsUser;
 import inventorymenu.inventoryitem.InventoryList;
 import inventorymenu.inventoryitem.PlayerInventoryFile;
