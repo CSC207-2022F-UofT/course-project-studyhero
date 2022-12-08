@@ -1,21 +1,11 @@
-package dialogue;
+package dialogue.dialogue_screen_firstattempt;
+
+import dialogue.DialoguePresenter;
 
 import javax.swing.*;
 import java.awt.*;
 /*
 Creates the panel for the dialogue.
- */
-
-/*
-TODO:
-- Add ActionListener/KeyHandler
-- Figure out how it goes to the "next screen"
-- Should interact with: RequestModel, ResponseModel, DialogueController, DialoguePresenter
-What the classes should do:
-- RequestModel: Should there be a req. model?
-- ResponseModel: ???
-- DialogueController: Use an interactor to get dialogue.
-- DialoguePresenter: Use an interactor to show dialogue.
  */
 
 public class DialoguePanel extends JPanel {

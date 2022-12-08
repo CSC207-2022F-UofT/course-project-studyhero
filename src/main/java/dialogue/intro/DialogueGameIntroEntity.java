@@ -2,7 +2,7 @@ package dialogue.intro;
 
 import dialogue.DialogueEntity;
 
-public final class DialogueGameIntroEntity extends DialogueEntity {
+public class DialogueGameIntroEntity extends DialogueEntity {
 
     static String dialogue1 = "You are a hero set on killing The Bad Monster(tm) \n " +
             "After countless defeats, you've decided to put away your sword in its sheath, " +
@@ -20,6 +20,6 @@ public final class DialogueGameIntroEntity extends DialogueEntity {
             dialogue1 = newDialogue;
         } else if (oldDialogue.equals("dialogue2")) {
             dialogue2 = newDialogue;
-        };
+        }
     }
 }

@@ -1,14 +1,13 @@
-package dialogue.intro2;
+package dialogue.dialogue_screen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /*
-Game screen for the Introduction of the Game
+Game screen for the Introduction Story/Dialogue of the Game
  */
 
-public class DialogueGame {
+public class DialogueGameScreen {
 
-    // -------------- Initializers ---------------------- //
     ChoiceHandler cHandler = new ChoiceHandler();
     UI ui = new UI();
     VisibilityManager vm = new VisibilityManager(ui);
@@ -17,9 +16,9 @@ public class DialogueGame {
 
 
 
-    public static void main(String[] args) {new DialogueGame();}
+    public static void main(String[] args) {new DialogueGameScreen();}
 
-    public DialogueGame(){
+    public DialogueGameScreen(){
         ui.createUI(cHandler);
         vm.showTitleScreen();
     }

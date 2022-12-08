@@ -1,4 +1,4 @@
-package dialogue;
+package dialogue.dialogue_screen_firstattempt;
 
 import javax.swing.*;
 import java.awt.*;

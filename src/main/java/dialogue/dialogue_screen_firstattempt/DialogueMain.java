@@ -1,4 +1,4 @@
-package dialogue;
+package dialogue.dialogue_screen_firstattempt;
 /*
 The file where I will be testing whether Dialogue runs or not. This is the equivalent of "Main".
 

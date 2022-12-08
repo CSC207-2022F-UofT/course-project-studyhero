@@ -1,4 +1,4 @@
-package dialogue.intro2;
+package dialogue.dialogue_screen;
 
 /*
 Disables the start screen after the player presses "start".

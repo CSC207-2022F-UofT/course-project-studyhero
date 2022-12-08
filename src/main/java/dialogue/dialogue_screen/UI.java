@@ -1,7 +1,11 @@
-package dialogue.intro2;
+package dialogue.dialogue_screen;
 
 import javax.swing.*;
 import java.awt.*;
+
+/*
+Creates UI Window to for the start screen/dialogue to appear.
+ */
 
 public class UI {
     JFrame window;
@@ -12,7 +16,7 @@ public class UI {
     JButton startButton, choice1, choice2, choice3, choice4;
     JTextArea storyTextArea;
 
-    public void createUI(DialogueGame.ChoiceHandler cHandler) {
+    public void createUI(DialogueGameScreen.ChoiceHandler cHandler) {
 
         // WINDOW
         window = new JFrame();
@@ -23,7 +27,7 @@ public class UI {
 
         // TITLE CONTAINER
         titlePanel = new JPanel();
-        titlePanel.setBounds(100, 100, 600, 150);
+        titlePanel.setBounds(100, 100, 600, 100);
         titlePanel.setBackground(Color.blue);
 
         // TITLE LABEL
@@ -42,12 +46,12 @@ public class UI {
         // ACTUAL BUTTON
         startButton = new JButton("START");
         startButton.setBackground(Color.black);
-        startButton.setForeground(Color.black); // "Foreground" is the colour of the font
+        startButton.setForeground(Color.black);
         startButton.setFont(normalFont);
-        startButton.setFocusPainted(false); // Makes the borders of the button blink!
+        startButton.setFocusPainted(false);
         startButton.addActionListener(cHandler);
         startButton.setActionCommand("start");
-        startButtonPanel.add(startButton); // Add Button to Button Panel
+        startButtonPanel.add(startButton);
 
         // ADD EVERYTHING TO WINDOW
         window.add(titlePanel);
@@ -71,13 +75,13 @@ public class UI {
         storyTextArea.setLineWrap(true);
         storyTextArea.setEditable(false);
 
-        mainTextPanel.add(storyTextArea); // Add Text to the Dialogue Panel
+        mainTextPanel.add(storyTextArea);
 
         // PANEL FOR CHOICE BUTTONS
         choiceButtonPanel = new JPanel();
         choiceButtonPanel.setBounds(250, 350, 300, 100);
         choiceButtonPanel.setBackground(Color.black);
-        choiceButtonPanel.setLayout(new GridLayout(4, 1)); // makes choices vertical instead of 2x2
+        choiceButtonPanel.setLayout(new GridLayout(4, 1));
         window.add(choiceButtonPanel);
 
         // CHOICE BUTTONS: C1
@@ -85,7 +89,7 @@ public class UI {
         choice1.setFont(normalFont);
         choice1.addActionListener(cHandler);
         choice1.setActionCommand("c1");
-        choiceButtonPanel.add(choice1); // add choice1 button to the panel
+        choiceButtonPanel.add(choice1);
         choice1.addActionListener(cHandler);
 
         // CHOICE BUTTONS: C2
@@ -93,7 +97,7 @@ public class UI {
         choice2.setFont(normalFont);
         choice2.addActionListener(cHandler);
         choice2.setActionCommand("c2");
-        choiceButtonPanel.add(choice2); // add choice1 button to the panel
+        choiceButtonPanel.add(choice2);
         choice2.addActionListener(cHandler);
 
         // CHOICE BUTTONS: C3
@@ -101,7 +105,7 @@ public class UI {
         choice3.setFont(normalFont);
         choice3.addActionListener(cHandler);
         choice3.setActionCommand("c3");
-        choiceButtonPanel.add(choice3); // add choice1 button to the panel
+        choiceButtonPanel.add(choice3);
         choice3.addActionListener(cHandler);
 
         // CHOICE BUTTONS: C4
@@ -109,7 +113,7 @@ public class UI {
         choice4.setFont(normalFont);
         choice4.addActionListener(cHandler);
         choice4.setActionCommand("c4");
-        choiceButtonPanel.add(choice4); // add choice1 button to the panel
+        choiceButtonPanel.add(choice4);
         choice4.addActionListener(cHandler);
 
         // RANDOM PANEL
@@ -117,7 +121,7 @@ public class UI {
         randomPanel.setBounds(100, 15, 600, 50);
         randomPanel.setBackground(Color.black);
         randomPanel.setLayout(new GridLayout(1, 4));
-        window.add(randomPanel); // Why do my buttons stop working if I remove this help,,,
+        window.add(randomPanel); // If I remove this, the buttons stop working.
 
 
         window.setVisible(true);

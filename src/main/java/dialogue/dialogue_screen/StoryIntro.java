@@ -1,22 +1,21 @@
-package dialogue.intro2;
+package dialogue.dialogue_screen;
 
 /*
-Contains the Introduction Story to the Game.
+Contains the Introduction Story and options to the Game.
  */
 
 public class StoryIntro {
-    DialogueGame gameScreen;
+    DialogueGameScreen gameScreen;
     UI ui;
     VisibilityManager vm;
 
-    public StoryIntro(DialogueGame g, UI userInterface, VisibilityManager vManager) {
+    public StoryIntro(DialogueGameScreen g, UI userInterface, VisibilityManager vManager) {
         gameScreen = g;
         ui = userInterface;
         vm = vManager;
     }
 
     public void selectPosition(String nextPosition) {
-
         if ("secondScreen".equals(nextPosition)) { secondScreen();}
 
     }
@@ -28,7 +27,7 @@ public class StoryIntro {
                 "\n\nWhat better way for success, \n other than to meticulously study your enemy's weaknesses?");
 
         ui.choice1.setText("Yes");
-        ui.choice2.setText("Ok but, consider: violence.");
+        ui.choice2.setText("Ok but, consider: Violence.");
         ui.choice3.setText("Actually-");
         ui.choice4.setText("...");
 
@@ -41,6 +40,9 @@ public class StoryIntro {
         ui.choice2.setText("");
         ui.choice3.setText("");
         ui.choice4.setText("");
+
+        gameScreen.nextPosition = "timer";
+        // Missing: make it so that pressing c1 leads to the timer screen.
     }
 
 
