@@ -1,26 +1,27 @@
 package bossfight;
 
+import entities.CurrentFightingStats;
+
 import java.util.ArrayList;
 
 public class FightBossInteractor {
     FightWinner fightWinner;
     int playerTempDamage;
     int bossTempDamage;
-    StatsUpdateInteractor statsUpdateInteractor;
+
+    CurrentFightingStats currentFightingStats;
 
     public FightBossInteractor() {
         this.fightWinner = new FightWinner();
-        this.statsUpdateInteractor = new StatsUpdateInteractor();
-        this.playerTempDamage = statsUpdateInteractor.getPlayerDamage();
-        this.bossTempDamage = statsUpdateInteractor.getBossDamage();
+        currentFightingStats = new CurrentFightingStats();
     }
 
     public void fighter(int value){
         int bossInput = bossMoveMaker();
         ArrayList<Integer> winner = fightWinner.winner(value, bossInput);
-        statsUpdateInteractor.changePlayerHp(-(winner.get(0) * bossTempDamage +));
-        statsUpdateInteractor.changeBossHp(-(winner.get(1) * playerTempDamage));
-        WinCondition(statsUpdateInteractor.getPlayerHp, statsUpdateInteractor.getBossHp);
+        currentFightingStats.changePlayerHP(-(winner.get(0) * bossTempDamage));
+        currentFightingStats.changeBossHP(-(winner.get(1) * playerTempDamage));
+        // WinCondition(currentFightingStats.getPlayerHP, currentFightingStats.getBossHP);
     }
 
     public int bossMoveMaker() {

@@ -6,6 +6,10 @@ package entities;
  */
 public interface FightingStats {
 
+    public int getPlayerDamage();
+
+    public int getBossDamage();
+
     public void changePlayerHP(int by);
 
     public void changePlayerDamage(int by);
