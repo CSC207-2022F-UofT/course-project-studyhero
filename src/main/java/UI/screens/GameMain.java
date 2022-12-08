@@ -8,6 +8,7 @@ import UI.screens.panels.breaks.SellMenuScreen;
 import UI.screens.panels.breaks.ShopMenuScreen;
 import UI.screens.panels.settings.SettingsScreen;
 import entities.MusicPlayer;
+import inventorymenu.inventoryitem.PlayerInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 
@@ -46,9 +47,12 @@ public class GameMain {
         SettingsScreen breakSettingsScreen =
                 new SettingsScreen(card, mainPanel, cGRM, "Break", player);
 
+        new PlayerInventoryFile("PlayerInventory.csv");
+
+
         mainPanel.add(startScreen, "Start");
         mainPanel.add(storyScreen, "Story");
-        //mainPanel.add(timerScreen, "Timer");
+        mainPanel.add(breakScreen, "Timer");
         mainPanel.add(breakScreen, "Break");
         mainPanel.add(changeStatsScreen, "Change Stats");
         mainPanel.add(startSettingsScreen, "Start Settings");

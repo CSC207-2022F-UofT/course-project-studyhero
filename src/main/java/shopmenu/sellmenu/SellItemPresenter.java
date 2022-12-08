@@ -1,6 +1,4 @@
-package shopmenu;
+package shopmenu.sellmenu;
 
 public interface SellItemPresenter {
 }
-
-// test

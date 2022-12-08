@@ -1,4 +1,4 @@
-package shopmenu;
+package shopmenu.sellmenu;
 
 public class SellItemInteractor {
 }

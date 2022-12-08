@@ -19,7 +19,7 @@ public class StoryScreen extends JPanel {
         this.add(textArea);
 
         JButton startNewGame = new JButton("Start your quest");
-        startNewGame.addActionListener(e -> card.show(parentPanel, "Timer"));
+        startNewGame.addActionListener(e -> card.show(parentPanel, "Break"));
         this.add(startNewGame);
     }
 

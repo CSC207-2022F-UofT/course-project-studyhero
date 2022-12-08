@@ -1,4 +1,4 @@
-package shopmenu;
+package shopmenu.buymenu;
 
 public class BuyItemButtonInteractor {
 }
