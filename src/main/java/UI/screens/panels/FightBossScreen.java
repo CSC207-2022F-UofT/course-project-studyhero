@@ -1,5 +1,7 @@
 package UI.screens.panels;
 
+import use_cases.boss_fight.FightBossInteractor;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,6 +36,7 @@ public class FightBossScreen extends JPanel {
 
         //bottom panel including buttons to use consumable, stab, block, slash
         JPanel bottomPanel = new JPanel();
+        FightBossInteractor fightBossInteractor = new FightBossInteractor();
         JButton useConsumableButton = new JButton("Use Consumable");
         JButton slashButton = new JButton("Slash");
         JButton stabButton = new JButton("Stab");

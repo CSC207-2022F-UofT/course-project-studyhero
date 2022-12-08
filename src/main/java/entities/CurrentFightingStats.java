@@ -84,13 +84,7 @@ public class CurrentFightingStats implements FightingStats{
         this.bossHP = this.bossHP + by;
     }
 
-    public int findWinner(){
-        if(this.playerHP <= 0){
-            return 2;
-        } else if(this.bossHP <= 0){
-            return 1;
-        } else{
-            return 0;
-        }
+    public boolean winCondition(){
+        return (this.playerHP <= 0 || this.bossHP <= 0);
     }
 }

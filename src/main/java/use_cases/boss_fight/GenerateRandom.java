@@ -1,4 +1,4 @@
-package bossfight;
+package use_cases.boss_fight;
 
 import java.util.Random;
 

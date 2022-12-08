@@ -1,6 +1,5 @@
-package bossfight;
+package use_cases.boss_fight;
 
-import java.io.*;
 import java.util.*;
 
 public class FightWinner {
