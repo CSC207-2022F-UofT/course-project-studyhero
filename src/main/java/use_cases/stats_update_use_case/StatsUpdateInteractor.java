@@ -62,7 +62,7 @@ public class StatsUpdateInteractor implements StatsUpdateInterface {
      */
     private void saveStatsToStorage() {
         StatSave statSave = new StatSave(this.stats.getUserStats(), this.statsErrorOutputBoundary);
-        statSave.save();
+        statSave.save("stats.csv");
     }
 
 }

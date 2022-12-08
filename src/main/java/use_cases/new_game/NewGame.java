@@ -37,7 +37,7 @@ public class NewGame {
         }
         StatsUser newUser = new StatsUser();
         StatSave newSave = new StatSave(newUser.getUserStats(), presenter);
-        newSave.save();
+        newSave.save("stats.csv");
     }
     public void newGame(){
         this.createNewStatsFile();

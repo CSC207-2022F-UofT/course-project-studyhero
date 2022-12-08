@@ -29,9 +29,9 @@ public class StatSave implements SaveGameOutputBoundary{
      * current user's stats data
      */
     @Override
-    public void save(){
+    public void save(String filepath){
         try{
-            File statsFile = new File("stats.csv");
+            File statsFile = new File(filepath);
             PrintWriter out = new PrintWriter(statsFile);
 
             StringBuilder keyString = new StringBuilder();

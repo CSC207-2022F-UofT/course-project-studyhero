@@ -22,6 +22,6 @@ public class ChangeStats {
         StatsUser intermediateUser = new StatsUser(statsMap);
         intermediateUser.updateLevel();
         StatSave saver = new StatSave(intermediateUser.getUserStats(), presenter);
-        saver.save();
+        saver.save("stats.csv");
     }
 }

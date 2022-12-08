@@ -2,8 +2,10 @@ package entities;
 
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;
+import use_cases.save_game.StatSave;
 import use_cases.stats_update_use_case.StatsUpdateInteractor;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CurrentFightingStats implements FightingStats{
@@ -57,6 +59,25 @@ public class CurrentFightingStats implements FightingStats{
         ValidStats fightStats = new ValidStats("fightStats.csv", presenter);
         Map<String, Integer> statsMap = fightStats.load();
         return statsMap;
+    }
+
+    public Map<String, Integer> getUpdatedFightStats(){
+        Map<String, Integer> updatedStatsMap = new HashMap<>();
+        updatedStatsMap.put("maxHealth", this.maxHP);
+        updatedStatsMap.put("playerHealth", this.maxHP);
+        updatedStatsMap.put("playerDamage", this.playerDamage);
+        updatedStatsMap.put("playerDefence", this.playerDefence);
+        updatedStatsMap.put("bossHealth", this.bossHP);
+        updatedStatsMap.put("bossDamage", this.bossDamage);
+        return updatedStatsMap;
+    }
+
+    public void saveFightStats(){
+        ErrorPresenter presenter = new ErrorPresenter();
+        StatSave statSave = new StatSave(getUpdatedFightStats(), presenter);
+        statSave.save("fightStats.csv");
+
+
     }
 
 

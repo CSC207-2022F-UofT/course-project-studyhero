@@ -1,6 +1,7 @@
 package use_cases.new_game;
 
 import InventoryMenu.InventoryItem.InventoryList;
+import inventorymenu.inventoryitem.InventoryList;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidInventory;
 import use_cases.file_checker.ValidStats;
