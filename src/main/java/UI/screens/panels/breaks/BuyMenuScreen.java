@@ -1,5 +1,7 @@
 package UI.screens.panels.breaks;
 
+import entities.Stats;
+import entities.StatsUser;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
 import inventorymenu.inventoryitem.ShopInventoryFile;
@@ -7,6 +9,8 @@ import inventorymenu.inventoryitem.PlayerInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidStats;
 import inventorymenu.inventoryitem.InventoryItem;
+import stats_update_use_case.StatsUpdateInteractor;
+import use_cases.save_game.StatSave;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -31,6 +35,9 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
     static JLabel userGold;
 
+    static ValidStats stats;
+    static StatSave statSave;
+    static StatsUser statsUser;
     static Map<String, Integer> statsMap;
     ErrorOutputBoundary presenter;
     static ArrayList<InventoryItemDsRequestModel> shopInventory;
@@ -49,8 +56,10 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
 
         // ----- Initialize Gold Values -----
-        ValidStats stats = new ValidStats("stats.csv", presenter);
+        stats = new ValidStats("stats.csv", presenter);
         statsMap = stats.load();
+        statSave = new StatSave(statsMap, presenter);
+        statsUser = new StatsUser(statsMap);
 
 
         // ----- Initialize Files for List Generation -----
@@ -149,7 +158,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
         this.add(backToBreak);
 
-        frame = new JFrame("TEST");
+        frame = new JFrame("Pop-Up Frame");
 
     }
 
@@ -165,20 +174,27 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
     public void actionPerformed(ActionEvent e) {
         if (playerInventoryFile.inventoryFull()) {
             JOptionPane.showMessageDialog(frame,
-                    "You do not have enough space in your inventory!");
+                    "You do not have enough space in your inventory!",
+                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
         } else if (statsMap.get("gold") < shopInventory.get(index).getGoldValue() ) {
-            JOptionPane.showMessageDialog(frame, "You do not have enough gold!");
+            JOptionPane.showMessageDialog(frame,
+                    "You do not have enough gold!",
+                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+            System.out.println("Item " + shopInventory.get(index).getName() + " successfully added.");
         }
-        System.out.println("Item " + shopInventory.get(index).getName() + " successfully added.");
+
         playerInventoryFile.save(new InventoryItem(
                 shopInventory.get(index).getType(),
                 shopInventory.get(index).getName(),
                 shopInventory.get(index).getEffect(),
-                shopInventory.get(index).getGoldValue()
+                shopInventory.get(index).getGoldValue(),
+                shopInventory.get(index).checkIsEquipped()
         ));
-        if (statsMap.get("gold") < shopInventory.get(index).getGoldValue()) {
-            System.out.println("Not enough gold!");
-        }
-
+        System.out.println(-shopInventory.get(index).getGoldValue());
+        statsUser.changeGold(-shopInventory.get(index).getGoldValue());
+        StatSave newStats = new StatSave(statsUser.getUserStats(),presenter);
+        newStats.save();
+        userGold.setText("Your Gold: " + statsMap.get("gold"));
     }
 }
