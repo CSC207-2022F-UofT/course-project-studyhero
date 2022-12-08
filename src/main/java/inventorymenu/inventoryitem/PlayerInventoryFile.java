@@ -137,8 +137,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     /**
      * Rewrite the inventory file with the added inventoryItem
      */
-    @Override
-    public void save(){
+    private void save(){
             BufferedWriter writer;
             try {
                 writer = new BufferedWriter(new FileWriter(csvFile));
@@ -177,29 +176,30 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     }
 
     @Override
-    public void addNewWeapon() {
+    public void addNewWeapon(int level) {
 
     }
 
     @Override
-    public void addNewShield() {
+    public void addNewShield(int level) {
 
     }
 
     @Override
-    public void addNewAttackPotion() {
+    public void addNewAttackPotion(int level) {
 
     }
 
     @Override
-    public void addNewHealthPotion() {
+    public void addNewHealthPotion(int level) {
 
     }
 
     @Override
-    public void addPoisonPotion() {
+    public void addPoisonPotion(int level) {
 
     }
+
 
     /**
      * Create an iterator object on InventoryList for this file

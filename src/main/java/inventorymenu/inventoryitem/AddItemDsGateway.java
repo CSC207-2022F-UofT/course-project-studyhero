@@ -11,28 +11,28 @@ public interface AddItemDsGateway {
      boolean inventoryFull();
 
      /**
-      * Generate a new weapon item
+      * Generate a new weapon item based on player's level
       */
-     void addNewWeapon();
+     void addNewWeapon(int level);
 
      /**
-      * Generate a new shield in the inventory
+      * Generate a new shield in the inventory based on player's level
       */
-     void addNewShield();
+     void addNewShield(int level);
 
      /**
-      * Generate a new attack potion in the inventory
+      * Generate a new attack potion in the inventory based on player's level
       */
-     void addNewAttackPotion();
+     void addNewAttackPotion(int level);
      /**
-      * Generate a new health potion in the inventory
+      * Generate a new health potion in the inventory based on player's level
       */
-     void addNewHealthPotion();
+     void addNewHealthPotion(int level);
 
      /**
-      * Generate a new poison potion in the inventory
+      * Generate a new poison potion in the inventory based on player's level
       */
-     void addPoisonPotion();
+     void addPoisonPotion(int level);
 
      /**
       * Add the inventoryItem to the inventoryList
