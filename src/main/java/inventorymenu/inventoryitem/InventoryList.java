@@ -69,6 +69,6 @@ public interface InventoryList extends AddItemDsGateway, DeleteItemDsGateway{
      * @return the name of the item that wants to be removed from inventory
      */
     @Override
-    DeleteItemDsRequestModel getName(int id);
+    DeleteItemDsRequestModel getDeletionName(int id);
 
 }

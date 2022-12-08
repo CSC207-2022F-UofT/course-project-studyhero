@@ -163,7 +163,7 @@ class PlayerInventoryFileTest {
     @Test
     void getName() {
         for(int i = 1; i < 5; i++){
-            assertEquals(referenceList.get(i-1).getName(), inventoryListFile.getName(i).getName());
+            assertEquals(referenceList.get(i-1).getName(), inventoryListFile.getEquipName(i).getName());
         }
 
     }

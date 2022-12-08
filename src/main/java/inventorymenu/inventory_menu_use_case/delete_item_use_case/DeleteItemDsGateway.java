@@ -22,5 +22,5 @@ public interface DeleteItemDsGateway {
       * @param id of the item wants to be removed from inventory
       * @return the name of the item that wants to be removed from inventory
       */
-     DeleteItemDsRequestModel getName(int id);
+     DeleteItemDsRequestModel getDeletionName(int id);
 }

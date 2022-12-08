@@ -7,7 +7,7 @@ public class InventoryItemDsRequestModel {
     private final int effect;
     private int id;
     private final int goldValue;
-    private final boolean isEquipped;
+    private boolean isEquipped;
 
     /**
      * @param id        of the inventory item in player's inventory.
@@ -80,6 +80,14 @@ public class InventoryItemDsRequestModel {
      */
     public boolean checkIsEquipped() {
         return isEquipped;
+    }
+
+    /**
+     * Set equip status for the inventory item
+     * @param equipped indicates whether the player is equipping the inventory item or not
+     */
+    public void setEquipped(boolean equipped) {
+        isEquipped = equipped;
     }
 
 }

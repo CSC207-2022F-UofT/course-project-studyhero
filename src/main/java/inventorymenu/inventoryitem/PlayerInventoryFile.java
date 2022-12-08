@@ -2,6 +2,8 @@ package inventorymenu.inventoryitem;
 import inventorymenu.inventory_menu_use_case.delete_item_use_case.DeleteItemDsRequestModel;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
 import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+import inventorymenu.inventory_menu_use_case.equip_item_use_case.EquipItemDsGateway;
+import inventorymenu.inventory_menu_use_case.equip_item_use_case.EquipItemDsRequestModel;
 import org.jetbrains.annotations.NotNull;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
@@ -17,7 +19,7 @@ import java.util.Map;
  * inventory information which includes item_type, item_name and item_effect.
  *
  */
-public class PlayerInventoryFile implements InventoryList, InitializePlayerInventoryGateway , PlayerDisplayInventoryDsGateway {
+public class PlayerInventoryFile implements InventoryList, InitializePlayerInventoryGateway , PlayerDisplayInventoryDsGateway, EquipItemDsGateway {
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -222,13 +224,54 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
 
     /**
      * Check if the item is in the inventory
-     *
+     * @param id is the position of the item in player's inventory starting from 1
      * @return true if the item is in the inventory
      */
     @Override
     public boolean itemExist(int id) {
         return id <= inventoryList.size() && id >= 1;
     }
+
+    /**
+     * Check if the item is Equipable
+     * @param id is the position of the item in player's inventory starting from 1
+     * @return true if the inventory item is equipable
+     */
+    @Override
+    public boolean itemEquipable(int id) {
+        return inventoryList.get(id - 1)instanceof Equipable;
+    }
+
+    /**
+     *
+     * @param id of the item wants to be equipped from inventory
+     */
+    @Override
+    public void equipItem(int id) {
+        for(InventoryItemDsRequestModel item : inventoryList){
+            //Unequipped the item with the same type
+            if(item.getType().equals(inventoryList.get(id - 1).getType())){
+                item.setEquipped(false);
+            }
+        }
+
+        inventoryList.get(id - 1).setEquipped(true);
+
+    }
+
+    /**
+     *
+     * @param id of the item that the player wants to be equipped from inventory
+     * @return the name of the item that the player wants to be equipped from inventory
+     */
+    @Override
+    public EquipItemDsRequestModel getEquipName(int id) {
+        if (itemExist(id)) {
+            return new EquipItemDsRequestModel(inventoryList.get(id - 1).getName());
+        }
+        return null;
+    }
+
 
     /**
      * Delete the item from inventory
@@ -246,6 +289,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
         save();
     }
 
+
     /**
      * get the item's name associated with inventory id
      *
@@ -253,7 +297,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      * @return the name of the item that wants to be removed from inventory
      */
     @Override
-    public DeleteItemDsRequestModel getName(int id) {
+    public DeleteItemDsRequestModel getDeletionName(int id) {
         if (itemExist(id)) {
             return new DeleteItemDsRequestModel(inventoryList.get(id - 1).getName());
         }

@@ -1,7 +1,5 @@
 package inventorymenu.inventory_menu_use_case.equip_item_use_case;
 
-import inventorymenu.inventory_menu_use_case.delete_item_use_case.*;
-
 public class EquipItemInteractor implements EquipItemInputBoundary{
     final EquipItemDsGateway dsGateway;
     final EquipItemOutputBoundary outputBoundary;
@@ -33,7 +31,7 @@ public class EquipItemInteractor implements EquipItemInputBoundary{
             return outputBoundary.prepareFailView("The item that you select is not equipable");
         }
 
-        EquipItemDsRequestModel name = dsGateway.getName(requestModel.getId());
+        EquipItemDsRequestModel name = dsGateway.getEquipName(requestModel.getId());
         EquipItemResponseModel equipItemResponseModel = new EquipItemResponseModel(name.getName(),
                 requestModel.getId());
         dsGateway.equipItem(requestModel.getId());

@@ -251,7 +251,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
      * @return the name of the item that wants to be removed from inventory
      */
     @Override
-    public DeleteItemDsRequestModel getName(int id) {
+    public DeleteItemDsRequestModel getDeletionName(int id) {
         if (itemExist(id)) {
             return new DeleteItemDsRequestModel(inventoryList.get(id - 1).getName());
         }

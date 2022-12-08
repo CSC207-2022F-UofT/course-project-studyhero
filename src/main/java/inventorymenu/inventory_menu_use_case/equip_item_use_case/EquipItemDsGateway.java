@@ -15,7 +15,7 @@ public interface EquipItemDsGateway {
 
     /**
      * Equip the item from inventory
-     * @param id of the item wants to be removed from inventory
+     * @param id of the item wants to be equipped from inventory
      */
     void equipItem(int id);
 
@@ -24,5 +24,5 @@ public interface EquipItemDsGateway {
      * @param id of the item wants to be equipped from inventory
      * @return the name of the item that wants to be equipped from inventory
      */
-    EquipItemDsRequestModel getName(int id);
+    EquipItemDsRequestModel getEquipName(int id);
 }
