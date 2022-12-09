@@ -64,7 +64,6 @@ public class CurrentFightingStats implements FightingStats{
     public Map<String, Integer> getFightStats(){
         ErrorPresenter presenter = new ErrorPresenter();
         ValidStats fightStats = new ValidStats("fightStats.csv", presenter);
-        System.out.println("Error: " + fightStats.checkError());
         if (fightStats.isPlayable()) {
             return fightStats.load();
         } else{

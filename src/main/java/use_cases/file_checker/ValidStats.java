@@ -10,16 +10,34 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 public class ValidStats implements ValidFileDsGateway{
-    String filename;
-    File file;
-    ErrorOutputBoundary presenter;
+    private final String filename;
+    private final File file;
+    private final ErrorOutputBoundary presenter;
+
+    /**
+     * Creates a ValidStats object that can check for whether the file
+     * with filename is a valid stats file that can be read, and if so,
+     * can load the file.
+     *
+     * @param filename      filename of file to check
+     * @param presenter     output boundary for displaying errors
+     */
     public ValidStats(String filename,ErrorOutputBoundary presenter){
         this.filename = filename;
         this.file = new File(filename);
         this.presenter = presenter;
     }
 
-    public String[] read(BufferedReader br, String str){
+    /**
+     * Helper function that reads the next line of a buffered
+     * reader and returns a string array representation of it.
+     *
+     * @param br    buffered reader
+     * @param str   next line's attribute name
+     * @return String array form of the next line of the buffered
+     * reader. If there is no line, display the error.
+     */
+    private String[] read(BufferedReader br, String str){
         String line;
         String[] array = new String[0];
         try {
@@ -32,6 +50,10 @@ public class ValidStats implements ValidFileDsGateway{
         }
     }
 
+    /**
+     * @return A Map with String keys and integer values representing
+     * the stats stored in the file with filename.
+     */
     public Map<String, Integer> load(){
         Map<String, Integer> statsMap = new HashMap<>();
         if (isValid()){
@@ -55,14 +77,17 @@ public class ValidStats implements ValidFileDsGateway{
         return statsMap;
     }
 
-    public String checkError(){
-        /* returns a string representing the error
-         * null - no error
-         * exist - file does not exist
-         * invalid - the attributes and stats are not in the correct format
-         * other - any other error
-         */
-
+    /**
+     * Helper function that checks all stats attributes
+     * are of correct type and format
+     *
+     * @return
+     * - null           if there is no error
+     * - "exist"        if the file does not exist
+     * - "invalid"      if the file exists but has any error
+     * - "other"        if there is an IOException
+     */
+    private String checkError(){
         // checking the file exists
         if (!fileExists()){
             return "exist";
@@ -71,14 +96,15 @@ public class ValidStats implements ValidFileDsGateway{
             BufferedReader br = new BufferedReader(new FileReader(file));
             Path path = Paths.get(filename);
 
+            // only one row of values
             Stream<String> lines = Files.lines(path);
             long numLines = lines.count();
             if (numLines != 2){return "invalid";}
 
-            // read first line as attributes
+            // read first line as attributes and check it is non-empty
             if ((read(br, "attributes")).length == 0){return "invalid";}
 
-            // read second line as stats
+            // read second line as stats and check it is non-empty
             String[] stats;
             if ((stats = read(br, "stats")).length == 0){return "invalid";}
             br.close();
@@ -103,19 +129,30 @@ public class ValidStats implements ValidFileDsGateway{
         }
     }
 
+    /**
+     * @return true if the file with filename path exists and isn't a
+     * directory, else false
+     */
     @Override
     public boolean fileExists(){
         File file = new File(filename);
         return (file.exists() && !file.isDirectory());
     }
+
+    /**
+     * @return true if checkError returns a null value, ie the stat file
+     * in memory is valid and readable
+     */
     @Override
     public boolean isPlayable(){
         return (checkError() == null);
     }
 
-
+    /**
+     * @return true if it is playable, else false along with a
+     * window (JFrame) displaying the error.
+     */
     @Override
-    // returns a boolean for if the stats file exists and is valid
     public boolean isValid() {
         String result = checkError();
         if (result == null){return true;}
