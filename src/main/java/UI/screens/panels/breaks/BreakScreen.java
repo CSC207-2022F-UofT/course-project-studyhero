@@ -37,10 +37,6 @@ public class BreakScreen extends JPanel {
         FightBossButtonController fightBossButtonController =
                 new FightBossButtonController(card, parentPanel);
         fightBoss.addActionListener(fightBossButtonController);
-//        fightBoss.addActionListener(e ->
-//            {FightBossScreen fightBossScreen = new FightBossScreen(newCard, newPanel);
-//                newPanel.add(fightBossScreen, "Fight Boss");
-//                newCard.show(newPanel, "Fight Boss");});
 
         JButton settings = new JButton("Settings");
         settings.addActionListener(e -> card.show(parentPanel, "Break Settings"));
