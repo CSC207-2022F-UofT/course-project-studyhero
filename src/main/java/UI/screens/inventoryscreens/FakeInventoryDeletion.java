@@ -15,7 +15,7 @@ public class FakeInventoryDeletion implements DeleteItemDsGateway {
     }
 
 
-    private ArrayList<InventoryItem> inventoryList;
+    private final ArrayList<InventoryItem> inventoryList;
 
 
     /**

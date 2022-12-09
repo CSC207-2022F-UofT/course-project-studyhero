@@ -21,7 +21,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-    private ArrayList<InventoryItem> inventoryList = new ArrayList<>();
+    private final ArrayList<InventoryItem> inventoryList = new ArrayList<>();
 
 
     /**
@@ -105,17 +105,6 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         }
         reassign();
         this.save();
-    }
-
-    /**
-     * @param item The inventory item you want to add to the inventory
-     * @return a AddItemDsRequestModel with id as the next available player's inventory slot
-     */
-    @Override
-    public InventoryItem attachId(InventoryItem item) {
-        int id = CheckLatestInventoryItemId() + 1;
-        item.setId(id);
-        return item;
     }
 
 

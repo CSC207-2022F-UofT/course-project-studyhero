@@ -20,13 +20,6 @@ public interface InventoryList extends AddItemDsGateway, DeleteItemDsGateway{
     @Override
     void save(InventoryItem item);
 
-    /**
-     * @param item The inventory item you want to add to the inventory
-     * @return a AddItemDsRequestModel with id as the next available player's inventory slot
-     */
-    @Override
-    InventoryItem attachId(InventoryItem item);
-
 
     /**
      * Check how many InventoryItem are in the inventory

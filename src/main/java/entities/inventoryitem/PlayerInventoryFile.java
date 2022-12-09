@@ -106,17 +106,6 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
         this.save();
     }
 
-    /**
-     * @param item The inventory item you want to add to the inventory
-     * @return a AddItemDsRequestModel with id as the next available player's inventory slot
-     */
-    @Override
-    public InventoryItem attachId(InventoryItem item) {
-        int id = CheckLatestInventoryItemId() + 1;
-        item.setId(id);
-        return item;
-    }
-
 
     /**
      * Check how many InventoryItem are in the inventory
