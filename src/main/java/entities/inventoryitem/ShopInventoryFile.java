@@ -170,6 +170,10 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         return CheckLatestInventoryItemId() >= 20;
     }
 
+    /**
+     * Generate a weapon in shop inventory associates to player's level
+     * @param level is player's level
+     */
     @Override
     public void addNewWeapon(int level) {
         int weaponAttack = level * 8 - 3;
@@ -178,6 +182,10 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         save(item);
     }
 
+    /**
+     * Generate a shield in shop inventory associates to player's level
+     * @param level is player's level
+     */
     @Override
     public void addNewShield(int level) {
         int shieldDefence = level * 8 - 3;
@@ -186,6 +194,10 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         save(item);
     }
 
+    /**
+     * Generate an AttackPotion in shop inventory associates to player's level
+     * @param level is player's level
+     */
     @Override
     public void addNewAttackPotion(int level) {
         int effect = 15;
@@ -194,6 +206,10 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         save(item);
     }
 
+    /**
+     * Generate a HealthPotion in shop inventory associates to player's level
+     * @param level is player's level
+     */
     @Override
     public void addNewHealthPotion(int level) {
         int effect = 15;
@@ -202,6 +218,10 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         save(item);
     }
 
+    /**
+     * Generate an PoisonPotion in shop inventory associates to player's level
+     * @param level is player's level
+     */
     @Override
     public void addPoisonPotion(int level) {
         int effect = 5;

@@ -7,6 +7,9 @@ public class PlayerDisplayInventoryController {
 
     private final PlayerDisplayInventoryInputBoundary inputBoundary;
 
+    /**
+     * @param inventoryGateway is an interface containing method of dealing user input data
+     */
     public PlayerDisplayInventoryController(PlayerDisplayInventoryInputBoundary inventoryGateway) {
         this.inputBoundary = inventoryGateway;
     }

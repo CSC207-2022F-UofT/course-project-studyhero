@@ -45,6 +45,7 @@ public class EquipItemInteractor implements EquipItemInputBoundary{
         EquipItemDsRequestModel name = dsGateway.getEquipName(requestModel.getId());
         EquipItemResponseModel equipItemResponseModel = new EquipItemResponseModel(name.getName(),
                 requestModel.getId());
+
         int diff = dsGateway.equipItem(requestModel.getId());
 
         ErrorOutputBoundary errorPresenter;

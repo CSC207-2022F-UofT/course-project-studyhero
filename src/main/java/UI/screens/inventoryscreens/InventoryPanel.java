@@ -38,7 +38,11 @@ public class InventoryPanel extends JPanel implements ActionListener {
     EquipItemInputBoundary equipItemInputBoundary = new EquipItemInteractor(equipItemDsGateway, equipItemPresenter);
     EquipItemController equipItemController = new EquipItemController(equipItemInputBoundary);
 
-
+    /**
+     * Generates the inventory menu UI
+     * @param card is card layout
+     * @param parentPanel is the break menu
+     */
     public InventoryPanel(CardLayout card, JPanel parentPanel) {
         JLabel title = new JLabel("Your Inventory");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
