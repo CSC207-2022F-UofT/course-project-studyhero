@@ -2,7 +2,6 @@ package UI.screens.panels.breaks;
 
 import javax.swing.*;
 import java.awt.*;
-
 public class ShopMenuScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
@@ -13,29 +12,47 @@ public class ShopMenuScreen extends JPanel {
         this.card = card;
         this.parentPanel = parentPanel;
         JLabel title = new JLabel("Shop Menu");
-        this.add(title);
 
-        frame = new Frame("Sell Menu Warning");
+        //frame = new Frame("Sell Menu Warning");
+        CardLayout newCard = new CardLayout();
+        JPanel newPanel = new JPanel();
+        newPanel.setLayout(newCard);
+        JPanel menuPanel = new JPanel();
 
-        //        SellMenuScreen sellMenuScreen = new SellMenuScreen(card, mainPanel);
-        //        mainPanel.add(sellMenuScreen, "Sell Menu");
-
-
-
+        // ===== Initialise A Buy Menu =====
         JButton buyMenu = new JButton("Buy Items");
-        buyMenu.addActionListener(e -> card.show(parentPanel, "Buy Menu"));
+        BuyMenuScreenController buyMenuScreenController =
+                new BuyMenuScreenController(newCard, newPanel);
+        buyMenu.addActionListener(buyMenuScreenController);
 
+        // ===== Initialise A Sell Menu =====
         JButton sellMenu = new JButton("Sell Items");
-        sellMenu.addActionListener(e -> JOptionPane.showMessageDialog(
-                frame, "The shop is currently not willing to buy your items!",
-                "Sell Menu Warning", JOptionPane.ERROR_MESSAGE));
+        SellMenuScreenController sellMenuScreenController
+                = new SellMenuScreenController(newCard, newPanel);
+        sellMenu.addActionListener(sellMenuScreenController);
+
+//         SellMenuScreen sellMenuScreen = new SellMenuScreen(card, mainPanel);
+//         mainPanel.add(sellMenuScreen, "Sell Menu");
+
+//         JButton buyMenu = new JButton("Buy Items");
+//         buyMenu.addActionListener(e -> card.show(parentPanel, "Buy Menu"));
+//
+//        JButton sellMenu = new JButton("Sell Items");
+//        sellMenu.addActionListener(e -> JOptionPane.showMessageDialog(
+//                frame, "The shop is currently not willing to buy your items!",
+//                "Sell Menu Warning", JOptionPane.ERROR_MESSAGE));
 
         JButton backToBreak = new JButton("Back");
         backToBreak.addActionListener(e -> card.show(parentPanel, "Break"));
 
-        this.add(buyMenu);
-        this.add(sellMenu);
-        this.add(backToBreak);
+        menuPanel.add(title);
+        menuPanel.add(buyMenu);
+        menuPanel.add(sellMenu);
+        menuPanel.add(backToBreak);
+        newPanel.add(menuPanel, "Shop Menu");
+
+        newCard.show(newPanel, "Shop Menu");
+        this.add(newPanel);
 
     }
 }

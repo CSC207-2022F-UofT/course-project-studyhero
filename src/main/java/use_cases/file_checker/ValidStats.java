@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
-
 public class ValidStats implements ValidFileDsGateway{
     String filename;
     File file;

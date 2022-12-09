@@ -3,7 +3,6 @@ package UI.screens.panels.breaks;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-
 public class BreakScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
@@ -15,6 +14,10 @@ public class BreakScreen extends JPanel {
         // Initialize Panels
         JPanel mainPanel = new JPanel();
         JPanel tabsPanel = new JPanel();
+
+        CardLayout newCard = new CardLayout();
+        JPanel newPanel = new JPanel();
+        newPanel.setLayout(newCard);
 
 
         JLabel title = new JLabel("Time to take a break...");
@@ -31,8 +34,11 @@ public class BreakScreen extends JPanel {
         JButton settings = new JButton("Settings");
         settings.addActionListener(e -> card.show(parentPanel, "Break Settings"));
 
+        // ===== Initialise An Inventory Menu =====
         JButton inventoryMenu = new JButton("Inventory Menu");
-        inventoryMenu.addActionListener(e -> card.show(parentPanel, "Inventory Menu"));
+        InventoryPanelController inventoryPanelController =
+                new InventoryPanelController(newCard, newPanel);
+        inventoryMenu.addActionListener(inventoryPanelController);
 
         // Add Layouts
         BoxLayout mainBox = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
@@ -54,6 +60,10 @@ public class BreakScreen extends JPanel {
 
         mainPanel.add(tabsPanel, Component.CENTER_ALIGNMENT);
 
-        this.add(mainPanel);
+        newPanel.add(mainPanel,"Main Break");
+
+        newCard.show(newPanel,"Main Break");
+        this.add(newPanel);
+        //this.add(mainPanel);
     }
 }

@@ -1,6 +1,5 @@
 package UI.screens.inventoryscreens;
 
-import UI.screens.inventoryscreens.*;
 import entities.inventoryitem.PlayerInventoryFile;
 import use_cases.inventory_menu_use_case.delete_item_use_case.*;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.*;
@@ -47,7 +46,7 @@ public class InventoryPanel extends JPanel implements ActionListener {
         PlayerDisplayInventoryResponseModel displayInventoryResponseModel = displayInventoryController.display();
         ArrayList<String> response = displayInventoryResponseModel.showItem();
         JButton goToBreakMenuButton = new JButton("Go back to break menu");
-        goToBreakMenuButton.addActionListener(e -> card.show(parentPanel, "Break"));
+        goToBreakMenuButton.addActionListener(e -> card.show(parentPanel, "Main Break"));
 
         inventoryInfo = new JTextArea(20, 1);
         inventoryInfo.setEditable(false);
