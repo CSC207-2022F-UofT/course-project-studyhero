@@ -1,7 +1,7 @@
 package UI.screens.panels.breaks;
 
 import UI.screens.inventoryscreens.InventoryPanel;
-import UI.screens.panels.FightBossScreen;
+import use_cases.boss_fight.FightBossButtonController;
 
 
 import javax.swing.*;
@@ -32,12 +32,15 @@ public class BreakScreen extends JPanel {
         JButton shopMenu = new JButton("Shop");
         shopMenu.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
 
-        // ===== Initialise A FightBoss Screen =====
+        // ===== FightBoss Screen =====
         JButton fightBoss = new JButton("Fight Boss");
-        fightBoss.addActionListener(e ->
-            {FightBossScreen fightBossScreen = new FightBossScreen(newCard, newPanel);
-                newPanel.add(fightBossScreen, "Fight Boss");
-                newCard.show(newPanel, "Fight Boss");});
+        FightBossButtonController fightBossButtonController =
+                new FightBossButtonController(card, parentPanel);
+        fightBoss.addActionListener(fightBossButtonController);
+//        fightBoss.addActionListener(e ->
+//            {FightBossScreen fightBossScreen = new FightBossScreen(newCard, newPanel);
+//                newPanel.add(fightBossScreen, "Fight Boss");
+//                newCard.show(newPanel, "Fight Boss");});
 
         JButton settings = new JButton("Settings");
         settings.addActionListener(e -> card.show(parentPanel, "Break Settings"));

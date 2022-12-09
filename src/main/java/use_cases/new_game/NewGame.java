@@ -12,7 +12,6 @@ import use_cases.save_game.StatSave;
 
 import java.util.Map;
 
-
 public class NewGame implements NewGameInputBoundary{
     private final ValidFileDsGateway statsFile;
     private final ValidFileDsGateway playerInventoryFile;
@@ -38,7 +37,7 @@ public class NewGame implements NewGameInputBoundary{
 
     public void newGame(){
         if (statsFile.fileExists() && playerInventoryFile.fileExists()
-                && fightStatsFile.fileExists()){
+                && shopInventoryFile.fileExists() && fightStatsFile.fileExists()){
             System.out.println("Files exist. Overwriting...");
         }else{
             System.out.println("New save.");

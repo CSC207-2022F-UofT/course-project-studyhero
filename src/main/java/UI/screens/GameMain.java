@@ -4,12 +4,18 @@ import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
 import UI.screens.panels.breaks.ShopMenuScreen;
 import UI.screens.panels.settings.SettingsScreen;
+import entities.FightingStatsInitializer;
 import entities.MusicPlayer;
+import entities.StatsUser;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
+import use_cases.file_checker.ValidFileDsGateway;
+import use_cases.file_checker.ValidStats;
+import use_cases.save_game.StatSave;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class GameMain {
     public static void main(String[] args){
@@ -29,6 +35,24 @@ public class GameMain {
         BreakScreen breakScreen = new BreakScreen(card, mainPanel);
         ShopMenuScreen shopMenuScreen = new ShopMenuScreen(card, mainPanel);
 
+        // ===== Initialize fight boss screen =====
+        // ===== Create new stats file if !exists =====
+        ErrorOutputBoundary presenter = new ErrorPresenter();
+        ValidFileDsGateway validStats = new ValidStats("stats.csv", presenter);
+        if (!validStats.isPlayable()){
+            StatsUser newUser = new StatsUser();
+            StatSave newSave = new StatSave(newUser.getUserStats(), presenter);
+            newSave.save("stats.csv");
+
+        }
+        // ===== Create/ overwrite fightStats files =====
+        FightingStatsInitializer fightingStatsInitializer = new FightingStatsInitializer();
+        Map<String, Integer> fightStats = fightingStatsInitializer.initialize();
+        StatSave saver = new StatSave(fightStats, presenter);
+        saver.save("fightStats.csv");
+
+        FightBossScreen fightBossScreen = new FightBossScreen(card, mainPanel);
+
         // ===== all settings =====
         SettingsScreen startSettingsScreen =
                 new SettingsScreen(card, mainPanel, cGRM, "Start", player);
@@ -43,6 +67,8 @@ public class GameMain {
         mainPanel.add(breakSettingsScreen, "Break Settings");
         mainPanel.add(shopMenuScreen, "Shop Menu");
         mainPanel.add(startScreen, "Start");
+
+        mainPanel.add(fightBossScreen, "Fight Boss");
 
         mainFrame.add(mainPanel);
         card.show(mainPanel, "Start");
