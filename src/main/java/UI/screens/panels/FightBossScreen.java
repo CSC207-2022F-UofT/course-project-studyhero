@@ -56,7 +56,7 @@ public class FightBossScreen extends JPanel {
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         JButton backToTimer = new JButton("Back");
-        backToTimer.addActionListener(e -> card.show(parentPanel,"Timer"));
+        backToTimer.addActionListener(e -> card.show(parentPanel,"Main Break"));
 
         this.add(title);
         this.add(mainPanel);

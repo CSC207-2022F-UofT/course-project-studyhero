@@ -28,7 +28,6 @@ public class GameMain {
         TimerPanel timerScreen = new TimerPanel(card, mainPanel);
         BreakScreen breakScreen = new BreakScreen(card, mainPanel);
         ShopMenuScreen shopMenuScreen = new ShopMenuScreen(card, mainPanel);
-        FightBossScreen fightBossScreen = new FightBossScreen(card, mainPanel);
 
         // ===== all settings =====
         SettingsScreen startSettingsScreen =
@@ -43,7 +42,6 @@ public class GameMain {
         mainPanel.add(startSettingsScreen, "Start Settings");
         mainPanel.add(breakSettingsScreen, "Break Settings");
         mainPanel.add(shopMenuScreen, "Shop Menu");
-        mainPanel.add(fightBossScreen, "Fight Boss");
         mainPanel.add(startScreen, "Start");
 
         mainFrame.add(mainPanel);

@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
+
 public class ValidStats implements ValidFileDsGateway{
     private final String filename;
     private final File file;
@@ -114,14 +115,6 @@ public class ValidStats implements ValidFileDsGateway{
                 try { Integer.parseInt(stat.trim());
                 } catch(NumberFormatException e) { return "invalid";}
             }
-
-            //checking that there is a stat value for every stat
-//            if (attributes.length != stats.length ||
-//                    attributes.length != new StatsUser().getUserStats().size() ||
-//                    stats.length != new StatsUser().getUserStats().size()) {
-//                return "invalid";
-//            }
-//            else {return null;}
 
             return null;
         } catch (IOException e)  {

@@ -17,7 +17,7 @@ public class ErrorWindow extends JFrame{
 
         this.add(errorLabel);
         this.pack();
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 

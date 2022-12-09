@@ -21,7 +21,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-    private final ArrayList<InventoryItem> inventoryList = new ArrayList<>();
+    private ArrayList<InventoryItem> inventoryList = new ArrayList<>();
 
 
     /**
@@ -82,6 +82,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
                 InventoryItem item = new InventoryItem(itemId,
                         itemType, itemName, itemEffect, itemGoldValue,  false);
                 inventoryList.add(item);
+                System.out.println("added " + item.getName());
             }
             try {
                 reader.close();
@@ -215,7 +216,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
      */
     @Override
     public PlayerDisplayInventoryDsRequestModel getInventoryListIterator() {
-        updateInventoryList();
+        // updateInventoryList();
         return new PlayerDisplayInventoryDsRequestModel(inventoryList);
     }
 

@@ -83,10 +83,12 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         // ----- Initialize Files for List Generation -----
         // NOTE: MOVE THIS TO SHOP MENU THESE ARE INTERACT
         // Shop Inventory
-        ShopInventoryFile shopInventoryFile = new ShopInventoryFile("ShopInventory.csv");
+        ShopInventoryFile shopInventoryFile =
+                new ShopInventoryFile("ShopInventory.csv");
         shopInventoryFile.initialize();
         shopInventoryFile.readInventoryList();
-        PlayerDisplayInventoryDsRequestModel shopIterator = shopInventoryFile.getInventoryListIterator();
+        PlayerDisplayInventoryDsRequestModel shopIterator =
+                shopInventoryFile.getInventoryListIterator();
         shopInventory = new ArrayList<>();
         while (shopIterator.hasNext()) {
             shopInventory.add(shopIterator.getNext());
@@ -95,7 +97,8 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         // Player Inventory
         playerInventoryFile =  new PlayerInventoryFile("PlayerInventory.csv");
         playerInventoryFile.readInventoryList();
-        PlayerDisplayInventoryDsRequestModel playerIterator = playerInventoryFile.getInventoryListIterator();
+        PlayerDisplayInventoryDsRequestModel playerIterator =
+                playerInventoryFile.getInventoryListIterator();
         playerInventory = new ArrayList<>();
         while (playerIterator.hasNext()) {
             playerInventory.add(playerIterator.getNext());
