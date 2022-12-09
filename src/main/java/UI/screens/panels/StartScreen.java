@@ -8,9 +8,11 @@ import use_cases.file_checker.ValidPlayerInventory;
 import use_cases.file_checker.ValidShopInventory;
 import use_cases.file_checker.ValidStats;
 import use_cases.new_game.*;
-import use_cases.game_check.GameCheckController;
+import use_cases.new_game.NewGameController;
 import use_cases.game_check.GameCheckInputBoundary;
 import use_cases.game_check.GameCheckInteractor;
+import use_cases.new_game.confirmation_window.ConfirmationWindowInputBoundary;
+import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,17 +41,23 @@ public class StartScreen extends JPanel{
         JButton newGameButton = new JButton("New Game");
         ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
         ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
-        ValidFileDsGateway playerInventoryChecker = new ValidPlayerInventory(playerInventoryFilepath, fileCheckerPresenter);
-        ValidFileDsGateway shopInventoryChecker = new ValidShopInventory(shopInventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway playerInventoryChecker =
+                new ValidPlayerInventory(playerInventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway shopInventoryChecker =
+                new ValidShopInventory(shopInventoryFilepath, fileCheckerPresenter);
 
         ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
         NewGameInputBoundary newGameUseCase =
                 new NewGame(statsChecker, playerInventoryChecker, shopInventoryChecker, fightStatsChecker, presenter);
         GameCheckInputBoundary gameCheckUseCase =
                 new GameCheckInteractor(statsChecker, playerInventoryChecker, fightStatsChecker);
-        GameCheckController gameCheckController = new GameCheckController(card, parent, gameCheckUseCase,
-                newGameUseCase, presenter);
-        newGameButton.addActionListener(gameCheckController);
+
+        String confirmationMsg = "Are you sure? This will overwrite your existing save files.";
+        ConfirmationWindowInputBoundary confirmationUseCase =
+                new ConfirmationWindowInteractor( confirmationMsg,card, parentPanel,presenter);
+        NewGameController newGameController = new NewGameController(card, parent, gameCheckUseCase,
+                newGameUseCase, confirmationUseCase);
+        newGameButton.addActionListener(newGameController);
 
 
         // 2. Continue Game -> checks to see if there are existing valid game files

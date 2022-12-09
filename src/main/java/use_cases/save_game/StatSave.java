@@ -12,11 +12,13 @@ public class StatSave {
     private final ErrorOutputBoundary presenter;
 
     /**
-     * Returns a StatsSave object with stats represented as a
+     * Creates a StatsSave object with stats represented as a
      * Hashmap
      *
-     * @param stats a map with a player's stats (gold, health, level, damage, defence)
-     * @param presenter helps create a new JFrame with an error message if any occurs whilst saving the file
+     * @param stats         Map with a player's stats (gold, health, level,
+     *                      damage, defence)
+     * @param presenter     Output boundary to display an error message if
+     *                      any occurs whilst saving the file
      */
     public StatSave(Map<String, Integer> stats, ErrorOutputBoundary presenter){
 
@@ -25,8 +27,7 @@ public class StatSave {
     }
 
     /**
-     * Returns nothing but saves a csv file representing the
-     * current user's stats data
+     * Saves a csv file representing the current user's stats data
      */
     public void save(String filepath){
         try{

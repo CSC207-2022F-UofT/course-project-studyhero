@@ -5,7 +5,6 @@ import use_cases.boss_fight.*;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class FightBossScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
