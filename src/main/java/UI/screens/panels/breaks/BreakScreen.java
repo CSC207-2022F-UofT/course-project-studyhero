@@ -1,5 +1,7 @@
 package UI.screens.panels.breaks;
 
+import controllers.breaks.InventoryPanelController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;

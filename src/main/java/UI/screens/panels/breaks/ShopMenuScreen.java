@@ -1,12 +1,15 @@
 package UI.screens.panels.breaks;
 
+import controllers.breaks.BuyMenuScreenController;
+import controllers.breaks.SellMenuScreenController;
+
 import javax.swing.*;
 import java.awt.*;
 public class ShopMenuScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
 
-    Frame frame;
+    //Frame frame;
 
     public ShopMenuScreen(CardLayout card, JPanel parentPanel) {
         this.card = card;

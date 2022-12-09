@@ -21,7 +21,7 @@ public class GameMain {
 
         // ----- Music ------
         ErrorOutputBoundary musicErrorPresenter = new ErrorPresenter();
-        MusicPlayer player = new MusicPlayer("bgm.wav", musicErrorPresenter);
+        MusicPlayer player = new MusicPlayer("btd2.wav", musicErrorPresenter);
 
         StartScreen startScreen = new StartScreen(card, mainPanel);
         StoryScreen storyScreen = new StoryScreen(card, mainPanel);
