@@ -13,7 +13,6 @@ public class StoryScreen extends JPanel {
         this.parentPanel = parentPanel;
 
         JLabel title = new JLabel("Welcome to StudyHero (Story)");
-        JTextArea textArea = new JTextArea("The story goes here");
         JLabel story = new JLabel("You are a hero set on killing The Bad Monster(tm)");
         JLabel story3 = new JLabel("After countless defeats, you've decided to put away your sword in its sheath, " +
                 "and embark on a journey of study. ");
@@ -23,7 +22,6 @@ public class StoryScreen extends JPanel {
                 "\n Your dignity is on the line.");
 
         this.add(title);
-        //this.add(textArea);
         this.add(story);
         this.add(story3);
         this.add(story1);

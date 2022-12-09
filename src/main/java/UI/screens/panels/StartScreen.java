@@ -52,7 +52,6 @@ public class StartScreen extends JPanel{
         newGameButton.addActionListener(gameCheckController);
 
 
-
         // 2. Continue Game -> checks to see if there are existing valid game files
         // and will move to timer screen if so
         JButton continueGameButton = new JButton("Continue Game");
