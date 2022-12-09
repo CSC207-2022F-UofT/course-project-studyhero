@@ -18,8 +18,8 @@ The character should have stats the user can access that see how strong they are
 
 ## Running the Code
 ~~The program can not currently be run as an executable. However, for testing purposes, there are two parts of the program that are currently runnable:
-1. The Timer Menu - The UI is available to look at, however, the Timer itself is not currently working (see Issues).
-2. The Menus with skeletons for the Shop Menu, Break Menu, and Main Menu screens.~~
+~1. The Timer Menu - The UI is available to look at, however, the Timer itself is not currently working (see Issues).
+~2. The Menus with skeletons for the Shop Menu, Break Menu, and Main Menu screens.~~
 The program can be run from the class GameMain.java (this does not exist in the main branch yet, check GUI branch to find it. TODO: merge branches to main so the game can be played from there.)
 
 Both features can be run by clicking "Run" on the "main" functions in TimerScreen.java for the Timer Menu, and mainPanel.java for the Main Menus.
