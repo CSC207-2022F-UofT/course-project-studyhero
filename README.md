@@ -17,12 +17,13 @@ The character should have stats the user can access that see how strong they are
 - Boss Fights: The user can fight bosses during their breaks, which goes into a Rock/Paper/Scissors-type gamemode. If the user completes the boss fight successfully, then their stats are affected and the user "progresses" in the game.
 
 ## Running the Code
-~~The program can not currently be run as an executable. However, for testing purposes, there are two parts of the program that are currently runnable:
-~1. The Timer Menu - The UI is available to look at, however, the Timer itself is not currently working (see Issues).
-~2. The Menus with skeletons for the Shop Menu, Break Menu, and Main Menu screens.~~
-The program can be run from the class GameMain.java (this does not exist in the main branch yet, check GUI branch to find it. TODO: merge branches to main so the game can be played from there.)
+~~The program can not currently be run as an executable. However, for testing purposes, there are two parts of the program that are currently runnable:~~
+~~1. The Timer Menu - The UI is available to look at, however, the Timer itself is not currently working (see Issues).~~
+~~2. The Menus with skeletons for the Shop Menu, Break Menu, and Main Menu screens.~~~~
 
-Both features can be run by clicking "Run" on the "main" functions in TimerScreen.java for the Timer Menu, and mainPanel.java for the Main Menus.
+~~Both features can be run by clicking "Run" on the "main" functions in TimerScreen.java for the Timer Menu, and mainPanel.java for the Main Menus.~~
+
+The program can be run from the class GameMain.java (this does not exist in the main branch yet, check GUI branch to find it. TODO: merge branches to main so the game can be played from there.)
 
 ## Issues
 Some of the features of the program are not yet complete due to the core mechanics of the game (i.e., stats, timer, inventory, save data, GUI). Since our program is turning out to be a lot more ambitious than anticipated, some of these features took longer than expected, and thus delaying the implementation of some of our other features as well. Namely:
