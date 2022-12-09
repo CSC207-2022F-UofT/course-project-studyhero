@@ -25,7 +25,6 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final ArrayList<InventoryItem> inventoryList = new ArrayList<>();
 
-
     /**
      * It read a file that stores the inventory information
      *
@@ -209,7 +208,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public boolean itemEquipable(int id) {
-        return inventoryList.get(id-1).getType().equals("Weapon")||
+        return inventoryList.get(id-1).getType().equals("Weapon") ||
                 inventoryList.get(id-1).getType().equals("Shield");
     }
 
@@ -310,22 +309,18 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     @Override
     public void initialize() {
         clearInventory();
-        InventoryItem item1 = new InventoryItem(
-                0, "Weapon",
+        InventoryItem item1 = new Weapon(
                 "Sword",
-                13, 10, true);
-        InventoryItem item2 = new InventoryItem(
-                0, "AttackPotion",
+                13, 10);
+        InventoryItem item2 = new AttackPotion(
                 "StrengthPotion",
-                5, 23, false);
-        InventoryItem item3 = new InventoryItem(
-                0, "Weapon",
-                "HammerHammer",
-                18, 43, false);
-        InventoryItem item4 = new InventoryItem(
-                0, "Shield",
+                5, 23);
+        InventoryItem item3 = new Weapon(
+                "Hammer",
+                18, 43);
+        InventoryItem item4 = new Shield(
                 "BronzeShield",
-                15, 20, false);
+                15, 20);
         save(item1);
         save(item2);
         save(item3);

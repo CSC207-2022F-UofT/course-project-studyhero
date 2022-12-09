@@ -58,6 +58,7 @@ public class EquipItemInteractor implements EquipItemInputBoundary{
         }else{
             intermediateUser.updateDefence(diff);
         }
+
         StatSave saver = new StatSave(intermediateUser.getUserStats(), errorPresenter);
         saver.save("stats.csv");
 

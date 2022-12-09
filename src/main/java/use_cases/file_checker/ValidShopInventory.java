@@ -4,6 +4,7 @@ import use_cases.errors.ErrorOutputBoundary;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class ValidShopInventory implements ValidInventory{
@@ -13,7 +14,7 @@ public class ValidShopInventory implements ValidInventory{
     private final ErrorOutputBoundary presenter;
     private final String[] valid_types = {"Weapon","Shield","AttackPotion","HealthPotion","PoisonPotion"};
     private final String[] valid_header =
-            {"item_id", "item_type", "item_name", "item_effect", "item_gold_value", "item_is_equipped"};
+            {"item_id", "item_type", "item_name", "item_effect", "item_gold_value"};
 
     /**
      * Creates a ValidShopInventory object that can check for whether the file
@@ -70,8 +71,8 @@ public class ValidShopInventory implements ValidInventory{
             if (file.length() == 0){return "empty";}
 
             // check the label is correct and matches
-            String label = Arrays.toString(read(br));
-            if(label.equals("Shop Inventory")){
+           String label = Arrays.toString(read(br));
+            if(Objects.equals(label, "Shop Inventory")){
                 return "label";
             }
 

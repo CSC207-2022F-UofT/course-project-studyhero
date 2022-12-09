@@ -4,6 +4,7 @@ import use_cases.errors.ErrorOutputBoundary;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class ValidPlayerInventory implements ValidFileDsGateway{
@@ -73,7 +74,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
 
             // check the label is correct and matches
             String label = Arrays.toString(read(br));
-            if(label.equals("Player Inventory")){
+            if(Objects.equals(label, "Player Inventory")){
                 return "label";
             }
 
@@ -109,8 +110,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
                 catch(NumberFormatException e){return "goldValue";}
 
                 // check isEquipped is boolean
-                try {Boolean.valueOf(isEquipped);}
-                catch(NumberFormatException e){return "isEquipped";}
+                if(!(isEquipped.equals("true")||isEquipped.equals("false"))){return "isEquipped";}
             }
             br.close();
             return null;

@@ -59,6 +59,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
+
             try {
                 reader.readLine();
                 reader.readLine();
@@ -136,7 +137,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(csvFile));
-            String label = "Player Inventory";
+            String label = "Shop Inventory";
             writer.write(label);
             writer.newLine();
             writer.write(String.join(",", headers.keySet()));
@@ -216,7 +217,7 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
      */
     @Override
     public PlayerDisplayInventoryDsRequestModel getInventoryListIterator() {
-        // updateInventoryList();
+        updateInventoryList();
         return new PlayerDisplayInventoryDsRequestModel(inventoryList);
     }
 
@@ -298,22 +299,18 @@ public class ShopInventoryFile implements InventoryList, InitializeShopInventory
     @Override
     public void initialize() {
         clearInventory();
-        InventoryItem item1 = new InventoryItem(
-                0, "Weapon",
+        InventoryItem item1 = new Weapon(
                 "Sword",
-                3, 6, false);
-        InventoryItem item2 = new InventoryItem(0
-                , "AttackPotion",
+                3, 6);
+        InventoryItem item2 = new AttackPotion(
                 "StrengthPotion",
-                4, 2, false);
-        InventoryItem item3 = new InventoryItem(
-                0, "Weapon",
-                "HammerHammer",
-                5, 8, false);
-        InventoryItem item4 = new InventoryItem(
-                0, "Shield",
+                4, 2);
+        InventoryItem item3 = new Weapon(
+                "Hammer",
+                5, 8);
+        InventoryItem item4 = new Shield(
                 "BronzeShield",
-                12, 23, false);
+                12, 23);
         save(item1);
         save(item2);
         save(item3);
