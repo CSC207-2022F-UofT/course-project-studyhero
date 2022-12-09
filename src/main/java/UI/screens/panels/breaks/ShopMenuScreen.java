@@ -1,8 +1,5 @@
 package UI.screens.panels.breaks;
 
-import controllers.breaks.BuyMenuScreenController;
-import controllers.breaks.SellMenuScreenController;
-
 import javax.swing.*;
 import java.awt.*;
 public class ShopMenuScreen extends JPanel {
@@ -24,15 +21,17 @@ public class ShopMenuScreen extends JPanel {
 
         // ===== Initialise A Buy Menu =====
         JButton buyMenu = new JButton("Buy Items");
-        BuyMenuScreenController buyMenuScreenController =
-                new BuyMenuScreenController(newCard, newPanel);
-        buyMenu.addActionListener(buyMenuScreenController);
+        buyMenu.addActionListener(e ->
+            {BuyMenuScreen buyMenuScreen = new BuyMenuScreen(newCard, newPanel);
+            newPanel.add(buyMenuScreen, "Buy Menu");
+            newCard.show(newPanel, "Buy Menu");});
 
         // ===== Initialise A Sell Menu =====
         JButton sellMenu = new JButton("Sell Items");
-        SellMenuScreenController sellMenuScreenController
-                = new SellMenuScreenController(newCard, newPanel);
-        sellMenu.addActionListener(sellMenuScreenController);
+        sellMenu.addActionListener(e ->
+            {SellMenuScreen sellMenuScreen = new SellMenuScreen(newCard, newPanel);
+            newPanel.add(sellMenuScreen, "Sell Menu");
+            newCard.show(newPanel, "Sell Menu");}  );
 
 //         SellMenuScreen sellMenuScreen = new SellMenuScreen(card, mainPanel);
 //         mainPanel.add(sellMenuScreen, "Sell Menu");

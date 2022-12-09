@@ -1,7 +1,8 @@
 package UI.screens.panels.breaks;
 
-import controllers.breaks.FightBossScreenController;
-import controllers.breaks.InventoryPanelController;
+import UI.screens.inventoryscreens.InventoryPanel;
+import UI.screens.panels.FightBossScreen;
+
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -33,18 +34,20 @@ public class BreakScreen extends JPanel {
 
         // ===== Initialise A FightBoss Screen =====
         JButton fightBoss = new JButton("Fight Boss");
-        FightBossScreenController fightBossScreenController =
-                new FightBossScreenController(newCard, newPanel);
-        fightBoss.addActionListener(fightBossScreenController);
+        fightBoss.addActionListener(e ->
+            {FightBossScreen fightBossScreen = new FightBossScreen(newCard, newPanel);
+                newPanel.add(fightBossScreen, "Fight Boss");
+                newCard.show(newPanel, "Fight Boss");});
 
         JButton settings = new JButton("Settings");
         settings.addActionListener(e -> card.show(parentPanel, "Break Settings"));
 
         // ===== Initialise An Inventory Menu =====
         JButton inventoryMenu = new JButton("Inventory Menu");
-        InventoryPanelController inventoryPanelController =
-                new InventoryPanelController(newCard, newPanel);
-        inventoryMenu.addActionListener(inventoryPanelController);
+        inventoryMenu.addActionListener(e ->
+            {InventoryPanel inventoryPanel = new InventoryPanel(newCard, newPanel);
+            newPanel.add(inventoryPanel, "Inventory");
+            newCard.show(newPanel, "Inventory");});
 
         // Add Layouts
         BoxLayout mainBox = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
