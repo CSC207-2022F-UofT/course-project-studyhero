@@ -17,10 +17,10 @@ The character should have stats the user can access that see how strong they are
 - Boss Fights: The user can fight bosses during their breaks, which goes into a Rock/Paper/Scissors-type gamemode. If the user completes the boss fight successfully, then their stats are affected and the user "progresses" in the game.
 
 ## Running the Code
-The program can not currently be run as an executable. However, for testing purposes, there are two parts of the program that are currently runnable:
+~~The program can not currently be run as an executable. However, for testing purposes, there are two parts of the program that are currently runnable:
 1. The Timer Menu - The UI is available to look at, however, the Timer itself is not currently working (see Issues).
-2. The Menus with skeletons for the Shop Menu, Break Menu, and Main Menu screens.
-
+2. The Menus with skeletons for the Shop Menu, Break Menu, and Main Menu screens.~~
+The program can be run from the class GameMain.java (this does not exist in the main branch yet, check GUI branch to find it. TODO: merge branches to main so the game can be played from there.)
 
 Both features can be run by clicking "Run" on the "main" functions in TimerScreen.java for the Timer Menu, and mainPanel.java for the Main Menus.
 
@@ -39,3 +39,5 @@ However, since most of the implementations for the dependencies are now complete
 
 There are also issues with naming conventions, especially with packages, however, this will be fixed by the time the program is finally handed in.
 
+## Test Coverage
+(include coverage reports + explanations of what hasn't been tested here)
