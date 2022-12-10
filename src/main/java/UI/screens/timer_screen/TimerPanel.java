@@ -1,7 +1,6 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.TimerRequestModel;
-import Timer.timer_use_cases.TimerResponseModel;
+import Timer.timer_use_cases.TimerInteractor;
 import UI.screens.timer_screen.listeners.*;
 
 import javax.swing.*;
@@ -36,11 +35,9 @@ public class TimerPanel extends JPanel {
      */
     JPanel parentPanel;
 
-    TimerRequestModel timerRequestModel = new TimerRequestModel();
-    TimerResponseModel timerResponseModel = new TimerResponseModel();
-    CustomTimerController customTimerController = new CustomTimerController(timerRequestModel, timerResponseModel);
-    PresetTimerController presetTimerController = new PresetTimerController(timerRequestModel, timerResponseModel);
-    TimerPresenter timerPresenter = new TimerPresenter(timerResponseModel);
+    CustomTimerController customTimerController;
+    PresetTimerController presetTimerController;
+    TimerPresenter timerPresenter;
 
     /**
      * Constructor for TimerPanel. Sets up various elements on the panel and adds listeners to them using helper method
@@ -49,6 +46,11 @@ public class TimerPanel extends JPanel {
      * @param parentPanel the panel that TimerPanel belongs to
      */
     public TimerPanel(CardLayout card, JPanel parentPanel) {
+        TimerInteractor timerInteractor = new TimerInteractor();
+        customTimerController = new CustomTimerController(timerInteractor);
+        presetTimerController = new PresetTimerController(timerInteractor);
+        timerPresenter = new TimerPresenter(timerInteractor.timerResponseModel);
+
         progressBar.setMinimum(0);
         progressBar.setValue(0);
         endTimerButton.setEnabled(false);

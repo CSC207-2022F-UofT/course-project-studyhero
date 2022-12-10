@@ -18,5 +18,5 @@ public interface TimerInputBoundary {
      * Method to set the starting time of timer.
      * @param time the starting time
      */
-    void setTimer(int[] time);
+    void setTimer(String time);
 }

@@ -10,7 +10,7 @@ public class TimerEntity {
     /**
      * The time that the timer starts at.
      */
-    int[] startingTime = new int[3];
+    public int[] startingTime = new int[3];
     /**
      * The amount of time left.
      */
@@ -18,17 +18,22 @@ public class TimerEntity {
     /**
      * Initialize a new timer.
      */
-    Timer timer  = new Timer();
+    public Timer timer  = new Timer();
     /**
      * The total time that has elapsed.
      */
-    private int elapsedTime = 0;
+    public int elapsedTime = 0;
+    /**
+     * The state of the timer.
+     */
+    public boolean isRunning = false;
 
     /**
      * Starts the timer using timerTask. The elapsed time is updated every second and the timer will end automatically
      * when the time reaches 00:00:00.
      */
     public void startTimer() {
+        isRunning = true;
         TimerTask timerTask = new TimerTask() {
             int seconds = startingTime[2];
             int minutes = startingTime[1];
@@ -44,6 +49,7 @@ public class TimerEntity {
                         hours--;
                         if (hours < 0) {
                             timer.cancel();
+                            isRunning = false;
                         }
                         minutes = 59;
                     }
@@ -70,6 +76,7 @@ public class TimerEntity {
     public void endTimer() {
         timer.cancel();
         timer.purge();
+        isRunning = false;
     }
 
     /**
