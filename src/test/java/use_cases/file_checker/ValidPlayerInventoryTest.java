@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
