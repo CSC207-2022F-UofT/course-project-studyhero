@@ -161,33 +161,32 @@ public class ValidStats implements ValidFileDsGateway{
     public boolean isValid() {
         String result = checkError();
         if (result == null){return true;}
-        try{
-            switch(result){
-                case "exist":
-                    presenter.error("There is no existing " + filename + " file.");
-                    return false;
-                case "numLines":
-                    presenter.error("There are too many rows in " + filename + ".");
-                    return false;
-                case "attributes":
-                    presenter.error("There are no attributes in " + filename + ".");
-                    return false;
-                case "stats":
-                    presenter.error("There are no stats in " + filename + ".");
-                    return false;
-                case "invalid":
-                    presenter.error("The number of attributes and stats are not equal in "
-                            + filename + ".");
-                    return false;
-                case "type":
-                    presenter.error("The stats in " + filename + " are not of valid type.");
-                    return false;
-                case "other":
-                    presenter.error("Error: please start a new game.");
-                    return false;
-            }
-        }catch (HeadlessException e){
-            return false;}
+        switch(result){
+            case "exist":
+                presenter.setError("There is no existing " + filename + " file.");
+                return false;
+            case "numLines":
+                presenter.setError("There are too many rows in " + filename + ".");
+                return false;
+            case "attributes":
+                presenter.setError("There are no attributes in " + filename + ".");
+                return false;
+            case "stats":
+                presenter.setError("There are no stats in " + filename + ".");
+                return false;
+            case "invalid":
+                presenter.setError("The number of attributes and stats are not equal in "
+                        + filename + ".");
+                return false;
+            case "type":
+                presenter.setError("The stats in " + filename + " are not of valid type.");
+                return false;
+            case "other":
+                presenter.setError("Error: please start a new game.");
+                return false;
+        }
+        try{presenter.error(presenter.getError()); }
+        catch (HeadlessException e){return false;}
 
         return false;
     }

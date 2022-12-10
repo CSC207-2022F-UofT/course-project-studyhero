@@ -11,8 +11,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 public class ValidStatsTest {
     private ErrorOutputBoundary presenter;
     private static final String filepath = "statsTest.csv";
