@@ -95,7 +95,7 @@ public class ValidStats implements ValidFileDsGateway{
      * - "type"         if the stats are not of integer type
      * - "other"        if there is an IOException
      */
-    public String checkError(){
+    private String checkError(){
         // checking the file exists
         if (!fileExists()){
             return "exist";
