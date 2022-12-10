@@ -7,31 +7,21 @@ import use_cases.music_controls.PauseMusic;
 import use_cases.music_controls.PlayMusic;
 import use_cases.music_controls.RestartMusic;
 
-import java.util.concurrent.TimeUnit;
-
 public class MusicControlTest {
     private final ErrorOutputBoundary presenter = new ErrorPresenter();
     private MusicPlayer player;
 
-    public void checkPlaying(MusicPlayer player) {
+    public void checkPlaying(MusicPlayer player) throws InterruptedException {
         long t1 = player.getClip().getMicrosecondPosition();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Thread.sleep(1000);
         long t2 = player.getClip().getMicrosecondPosition();
         Assertions.assertEquals("play", player.getStatus());
         Assertions.assertNotEquals(t1, t2);
     }
 
-    public void checkPaused(MusicPlayer player) {
+    public void checkPaused(MusicPlayer player) throws InterruptedException {
         long t1 = player.getClip().getMicrosecondPosition();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Thread.sleep(1000);
         long t2 = player.getClip().getMicrosecondPosition();
         Assertions.assertEquals("paused", player.getStatus());
         Assertions.assertEquals(t1, t2);
@@ -39,14 +29,14 @@ public class MusicControlTest {
 
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws InterruptedException {
         player = new MusicPlayer("btd1.wav", presenter);
         // assert initially playing
         checkPlaying(player);
     }
 
     @Test
-    public void PauseMusicWhenPlayingOrPaused(){
+    public void PauseMusicWhenPlayingOrPaused() throws InterruptedException {
         // assert pause when playing
         PauseMusic pauseMusic = new PauseMusic(player);
         pauseMusic.pauseMusic();
@@ -62,7 +52,7 @@ public class MusicControlTest {
     }
 
     @Test
-    public void PlayMusicWhenPlayingOrPaused() {
+    public void PlayMusicWhenPlayingOrPaused() throws InterruptedException {
         // assert play when already playing does nothing
         PlayMusic playMusic = new PlayMusic(player);
         playMusic.playMusic();
@@ -83,7 +73,7 @@ public class MusicControlTest {
     }
 
     @Test
-    public void RestartMusicWhenPlayingOrPaused() {
+    public void RestartMusicWhenPlayingOrPaused() throws InterruptedException {
         RestartMusic restartMusic = new RestartMusic(player);
         // assert restarting when playing moves position to 0
         long t1 = player.getClip().getMicrosecondPosition();

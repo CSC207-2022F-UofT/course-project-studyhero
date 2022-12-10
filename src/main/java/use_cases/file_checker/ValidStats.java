@@ -57,7 +57,7 @@ public class ValidStats implements ValidFileDsGateway{
      */
     public Map<String, Integer> load(){
         Map<String, Integer> statsMap = new HashMap<>();
-        if (isValid()){
+        if (isPlayable()){
             File statsFile = new File(filename);
             try {
                 BufferedReader br = new BufferedReader(new FileReader(statsFile));
