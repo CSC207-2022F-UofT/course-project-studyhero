@@ -11,4 +11,6 @@ public interface ErrorOutputBoundary {
      */
     boolean error(String error);
     String getError();
+    void setError(String s);
+
 }

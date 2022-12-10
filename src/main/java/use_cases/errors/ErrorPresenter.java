@@ -2,7 +2,8 @@ package use_cases.errors;
 
 public class ErrorPresenter implements ErrorOutputBoundary{
 
-    String error;
+    private String error;
+    public void setError(String error){this.error = error;}
 
     /**
      * @return error message of presenter
@@ -17,10 +18,11 @@ public class ErrorPresenter implements ErrorOutputBoundary{
      *
      * @param error     error message
      */
+
     @Override
     public boolean error(String error){
         new ErrorWindow(error);
-        this.error = error;
+        setError(error);
         return true;
     }
 }

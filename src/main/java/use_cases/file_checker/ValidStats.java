@@ -2,6 +2,7 @@ package use_cases.file_checker;
 
 import use_cases.errors.ErrorOutputBoundary;
 
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -57,7 +58,7 @@ public class ValidStats implements ValidFileDsGateway{
      */
     public Map<String, Integer> load(){
         Map<String, Integer> statsMap = new HashMap<>();
-        if (isPlayable()){
+        if (isValid()){
             File statsFile = new File(filename);
             try {
                 BufferedReader br = new BufferedReader(new FileReader(statsFile));
@@ -94,7 +95,7 @@ public class ValidStats implements ValidFileDsGateway{
      * - "type"         if the stats are not of integer type
      * - "other"        if there is an IOException
      */
-    public String checkError(){
+    private String checkError(){
         // checking the file exists
         if (!fileExists()){
             return "exist";
@@ -162,19 +163,31 @@ public class ValidStats implements ValidFileDsGateway{
         if (result == null){return true;}
         switch(result){
             case "exist":
-                presenter.error("There is no existing " + filename + " file.");
+                presenter.setError("There is no existing " + filename + " file.");
+                return false;
+            case "numLines":
+                presenter.setError("There are too many rows in " + filename + ".");
+                return false;
+            case "attributes":
+                presenter.setError("There are no attributes in " + filename + ".");
+                return false;
+            case "stats":
+                presenter.setError("There are no stats in " + filename + ".");
                 return false;
             case "invalid":
-            case "numLines":
-            case "attributes":
-            case "stats":
+                presenter.setError("The number of attributes and stats are not equal in "
+                        + filename + ".");
+                return false;
             case "type":
-                presenter.error("Invalid " + filename + " file.");
+                presenter.setError("The stats in " + filename + " are not of valid type.");
                 return false;
             case "other":
-                presenter.error("Error: please start a new game.");
+                presenter.setError("Error: please start a new game.");
                 return false;
         }
+        try{presenter.error(presenter.getError()); }
+        catch (HeadlessException e){return false;}
+
         return false;
     }
 }

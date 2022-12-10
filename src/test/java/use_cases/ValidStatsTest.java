@@ -54,7 +54,6 @@ public class ValidStatsTest {
     public void clearFile(){
         statsTestFile.deleteOnExit();
     }
-
     @Test
         public void ValidPlayerStats(){
             String header = "gold, damage, level, defence, hp";
@@ -96,13 +95,15 @@ public class ValidStatsTest {
     }
 
     @Test
-    public void NonexistentFile(){
+    public void NonexistentFile() {
         if (statsTestFile.exists()){
             Assertions.assertTrue(statsTestFile.delete());
         }
         ValidStats testFile = new ValidStats(filepath, presenter);
         Assertions.assertFalse(testFile.isPlayable());
-        Assertions.assertEquals("exist", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("There is no existing " + filepath + " file.",
+                presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
 
         // generates a new file to be cleared
@@ -110,7 +111,6 @@ public class ValidStatsTest {
         String stats = "";
         statsTestFile = generateFile(filepath, header, stats);
     }
-
     @Test
     public void StringsStats(){
         String header = "gold, damage, level, defence, hp";
@@ -120,11 +120,12 @@ public class ValidStatsTest {
 
         Assertions.assertTrue(testFile.fileExists());
         Assertions.assertFalse(testFile.isPlayable());
-        Assertions.assertEquals("type", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("The stats in " + filepath +
+                        " are not of valid type.", presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
 
     }
-
     @Test
     public void MoreStatsThanHeaders(){
         String header = "damage, level, defence, hp";
@@ -134,9 +135,10 @@ public class ValidStatsTest {
 
         Assertions.assertTrue(testFile.fileExists());
         Assertions.assertFalse(testFile.isPlayable());
-        Assertions.assertEquals("invalid", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("The number of attributes and stats " +
+                "are not equal in " + filepath + ".", presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
-
     }
 
     @Test
@@ -148,7 +150,9 @@ public class ValidStatsTest {
 
         Assertions.assertTrue(testFile.fileExists());
         Assertions.assertFalse(testFile.isPlayable());
-        Assertions.assertEquals("invalid", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("The number of attributes and stats " +
+                "are not equal in " + filepath + ".", presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
     }
     @Test
@@ -160,7 +164,9 @@ public class ValidStatsTest {
 
         Assertions.assertTrue(testFile.fileExists());
         Assertions.assertFalse(testFile.isPlayable());
-        Assertions.assertEquals("attributes", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("There are no attributes in " +
+                filepath + ".", presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
     }
 
@@ -173,7 +179,9 @@ public class ValidStatsTest {
 
         Assertions.assertTrue(testFile.fileExists());
         Assertions.assertFalse(testFile.isPlayable());
-        Assertions.assertEquals("type", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("The stats in " +
+                filepath + " are not of valid type.", presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
     }
 
