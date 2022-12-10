@@ -94,7 +94,7 @@ class ValidPlayerInventoryTest {
 
     @BeforeEach
     void setUp(){
-
+        System.setProperty("java.awt.headless","false");
         testValidPlayerInventoryFile = new File("testValidPlayerInventoryFile.csv");
         filename = testValidPlayerInventoryFile.getName();
         validFileDsGateway = new ValidPlayerInventory(testValidPlayerInventoryFile.getName(), error);

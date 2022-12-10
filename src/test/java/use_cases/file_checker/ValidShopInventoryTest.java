@@ -82,7 +82,7 @@ class ValidShopInventoryTest {
 
     @BeforeEach
     void setUp(){
-
+        System.setProperty("java.awt.headless","false");
         testValidShopInventoryFile = new File("testValidShopInventoryFile.csv");
         filename = testValidShopInventoryFile.getName();
         validFileDsGateway = new ValidShopInventory(testValidShopInventoryFile.getName(), error);

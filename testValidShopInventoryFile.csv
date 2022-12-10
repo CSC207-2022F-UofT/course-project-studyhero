@@ -1,0 +1,6 @@
+Shop Inventory
+item_id,item_type,item_name,item_effect,item_gold_value
+1,Weapon,a,13,invalid
+2,AttackPotion,StrengthPotion,5,23
+3,Weapon,Hammer,18,43
+4,Shield,BronzeShield,15,20
