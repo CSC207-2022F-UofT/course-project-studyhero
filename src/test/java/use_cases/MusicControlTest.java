@@ -5,6 +5,7 @@ import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.music_controls.PauseMusic;
 import use_cases.music_controls.PlayMusic;
+import use_cases.music_controls.RestartMusic;
 
 public class MusicControlTest {
     private final ErrorOutputBoundary presenter = new ErrorPresenter();
@@ -76,6 +77,30 @@ public class MusicControlTest {
         long t6 = player.getClip().getMicrosecondPosition();
         checkPlaying(player);
         Assertions.assertTrue(((t6-t3)/1000000) < 1);
+    }
+
+    @Test
+    public void RestartMusicWhenPlayingOrPaused(){
+        RestartMusic restartMusic = new RestartMusic(player);
+        // assert restarting when playing moves position to 0
+        long t1 = player.getClip().getMicrosecondPosition();
+        restartMusic.restartMusic();
+        long t2 = player.getClip().getMicrosecondPosition();
+        Assertions.assertNotEquals(t1, t2);
+        Assertions.assertTrue(t2 < 10000);
+        checkPlaying(player);
+
+        // pause from restart
+        PauseMusic pauseMusic = new PauseMusic(player);
+        pauseMusic.pauseMusic();
+        checkPaused(player);
+
+        long t3 = player.getClip().getMicrosecondPosition();
+        restartMusic.restartMusic();
+        long t4 = player.getClip().getMicrosecondPosition();
+        Assertions.assertNotEquals(t3,t4);
+        Assertions.assertTrue(t4 < 10000);
+        checkPlaying(player);
     }
 
 }

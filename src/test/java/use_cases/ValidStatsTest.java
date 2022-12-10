@@ -5,11 +5,14 @@ import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 public class ValidStatsTest {
     private ErrorOutputBoundary presenter;
@@ -96,13 +99,16 @@ public class ValidStatsTest {
     }
 
     @Test
-    public void NonexistentFile(){
+    public void NonexistentFile() throws HeadlessException {
         if (statsTestFile.exists()){
             Assertions.assertTrue(statsTestFile.delete());
         }
         ValidStats testFile = new ValidStats(filepath, presenter);
         Assertions.assertFalse(testFile.isPlayable());
         Assertions.assertEquals("exist", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("Invalid " + filepath + " file.",
+                presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
 
         // generates a new file to be cleared
@@ -112,7 +118,7 @@ public class ValidStatsTest {
     }
 
     @Test
-    public void StringsStats(){
+    public void StringsStats() throws HeadlessException{
         String header = "gold, damage, level, defence, hp";
         String stats = "a, 5, 1, 0, 100";
         statsTestFile = generateFile(filepath, header, stats);
