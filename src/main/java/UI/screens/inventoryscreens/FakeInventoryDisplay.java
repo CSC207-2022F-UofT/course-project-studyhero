@@ -14,8 +14,8 @@ public class FakeInventoryDisplay implements PlayerDisplayInventoryDsGateway {
         this.newInventoryList = newInventoryList;
     }
 
-    private ArrayList<InventoryItem> oldInventoryList;
-    private ArrayList<InventoryItem> newInventoryList;
+    private final ArrayList<InventoryItem> oldInventoryList;
+    private final ArrayList<InventoryItem> newInventoryList;
 
     /**
      * create the inventoryList iterator
@@ -33,8 +33,6 @@ public class FakeInventoryDisplay implements PlayerDisplayInventoryDsGateway {
     @Override
     public void updateInventoryList() {
         oldInventoryList.clear();
-        for(InventoryItem item : newInventoryList){
-            oldInventoryList.add(item);
-        }
+        oldInventoryList.addAll(newInventoryList);
     }
 }

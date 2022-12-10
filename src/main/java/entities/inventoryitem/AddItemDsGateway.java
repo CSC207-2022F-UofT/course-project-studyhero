@@ -18,12 +18,6 @@ public interface AddItemDsGateway {
      void save(InventoryItem requestModel);
 
      /**
-      * Create a new AddItemDsRequestModel with every attributes on inventory_item and an inventory id.
-      * @return the new AddItemDsRequestModel created
-      */
-     InventoryItem attachId(InventoryItem newItem);
-
-     /**
       * Checks how many items are in the inventory
       * @return number of item in the inventory
       */
