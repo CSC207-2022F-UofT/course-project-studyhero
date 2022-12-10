@@ -1,6 +1,7 @@
 package use_cases.errors;
 
 public interface ErrorOutputBoundary {
+
     /**
      * Output boundary for use cases that do not output
      * data for the user but may need to show the user
@@ -8,5 +9,6 @@ public interface ErrorOutputBoundary {
      *
      * @param error     error message
      */
-    void error(String error);
+    boolean error(String error);
+    String getError();
 }

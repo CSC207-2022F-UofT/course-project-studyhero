@@ -25,7 +25,7 @@ public class PauseMusic implements PauseMusicInputBoundary{
     @Override
     public void pauseMusic(){
         if (!player.getStatus().equals("paused")){
-            player.setCurrentPos(player.getClip().getMicrosecondPosition());
+            //player.setCurrentPos(player.getClip().getMicrosecondPosition());
             player.getClip().stop();
             player.setStatus("paused");
         }

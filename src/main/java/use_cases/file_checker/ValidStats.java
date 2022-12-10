@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -103,12 +104,17 @@ public class ValidStats implements ValidFileDsGateway{
             if (numLines != 2){return "invalid";}
 
             // read first line as attributes and check it is non-empty
-            if ((read(br, "attributes")).length == 0){return "invalid";}
+            String[] attributes;
+            String[] empty = new String[0];
+            if (Arrays.equals(attributes = read(br, "attributes"), empty)){return "invalid";}
 
             // read second line as stats and check it is non-empty
             String[] stats;
-            if ((stats = read(br, "stats")).length == 0){return "invalid";}
+            if ((stats = read(br, "stats")) == empty){return "invalid";}
             br.close();
+
+            // check a stat exists for every corresponding attribute and vice versa
+            if (attributes.length != stats.length){return "invalid";}
 
             //checking that all stats are type integer
             for (String stat : stats) {

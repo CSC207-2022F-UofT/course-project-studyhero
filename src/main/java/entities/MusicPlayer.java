@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class MusicPlayer {
-    Long currentPos;
     private Clip clip;
     private String status;
     private AudioInputStream inputStream;
@@ -21,7 +20,6 @@ public class MusicPlayer {
      * @param presenter output boundary if error occurs
      */
     public MusicPlayer(String filepath, ErrorOutputBoundary presenter){
-        this.currentPos = 0L;
 
         try {
             this.filepath = filepath;
@@ -40,7 +38,6 @@ public class MusicPlayer {
 
     public String getStatus(){return status;}
     public void setStatus(String newStatus){status = newStatus;}
-    public void setCurrentPos(Long Pos){currentPos = Pos;}
     public Clip getClip(){return clip;}
 
     /**

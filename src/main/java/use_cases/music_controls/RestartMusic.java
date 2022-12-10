@@ -27,7 +27,6 @@ public class RestartMusic implements RestartMusicInputBoundary{
         this.player.getClip().stop();
         this.player.getClip().close();
         this.player.resetAudioStream();
-        this.player.setCurrentPos(0L);
         this.player.getClip().setMicrosecondPosition(0);
         this.player.play();
     }
