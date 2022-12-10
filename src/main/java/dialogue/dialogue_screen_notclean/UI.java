@@ -1,4 +1,4 @@
-package dialogue.dialogue_screen;
+package dialogue.dialogue_screen_notclean;
 
 import javax.swing.*;
 import java.awt.*;
@@ -90,7 +90,6 @@ public class UI {
         choice1.addActionListener(cHandler);
         choice1.setActionCommand("c1");
         choiceButtonPanel.add(choice1);
-        choice1.addActionListener(cHandler);
 
         // CHOICE BUTTONS: C2
         choice2 = new JButton();
@@ -98,7 +97,6 @@ public class UI {
         choice2.addActionListener(cHandler);
         choice2.setActionCommand("c2");
         choiceButtonPanel.add(choice2);
-        choice2.addActionListener(cHandler);
 
         // CHOICE BUTTONS: C3
         choice3 = new JButton();
@@ -106,7 +104,6 @@ public class UI {
         choice3.addActionListener(cHandler);
         choice3.setActionCommand("c3");
         choiceButtonPanel.add(choice3);
-        choice3.addActionListener(cHandler);
 
         // CHOICE BUTTONS: C4
         choice4 = new JButton();
@@ -114,7 +111,6 @@ public class UI {
         choice4.addActionListener(cHandler);
         choice4.setActionCommand("c4");
         choiceButtonPanel.add(choice4);
-        choice4.addActionListener(cHandler);
 
         // RANDOM PANEL
         randomPanel = new JPanel();

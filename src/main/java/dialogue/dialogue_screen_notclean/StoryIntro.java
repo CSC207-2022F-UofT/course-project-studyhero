@@ -1,7 +1,10 @@
-package dialogue.dialogue_screen;
+package dialogue.dialogue_screen_notclean;
 
 /*
 Contains the Introduction Story and options to the Game.
+
+I think this would be the equivalent to the interactor?
+It uses the UI and vm though (frameworks layer), so that's a no-no.
  */
 
 public class StoryIntro {
@@ -17,6 +20,7 @@ public class StoryIntro {
 
     public void selectPosition(String nextPosition) {
         if ("secondScreen".equals(nextPosition)) { secondScreen();}
+        else if (nextPosition.equals("introStory")) { introStory();}
 
     }
 
@@ -32,16 +36,18 @@ public class StoryIntro {
         ui.choice4.setText("...");
 
         gameScreen.nextPosition = "secondScreen";
+        gameScreen.nextPosition2 = "secondScreen";
     }
 
     public void secondScreen() {
         ui.storyTextArea.setText("Now, now. Go forth, and try your best to focus. \n Your dignity is on the line.");
         ui.choice1.setText("Start studying!");
-        ui.choice2.setText("");
+        ui.choice2.setText("Go back");
         ui.choice3.setText("");
         ui.choice4.setText("");
 
-        gameScreen.nextPosition = "timer";
+        gameScreen.nextPosition = "";
+        gameScreen.nextPosition2 = "introStory";
         // Missing: make it so that pressing c1 leads to the timer screen.
     }
 

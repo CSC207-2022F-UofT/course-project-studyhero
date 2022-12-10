@@ -1,6 +1,11 @@
 package dialogue.intro;
-
 import dialogue.DialogueEntity;
+
+/*
+Contains the Dialogue to appear in the game introduction.
+
+Note: Gives warning because this has not been implemented yet.
+ */
 
 public class DialogueGameIntroEntity extends DialogueEntity {
 
@@ -14,12 +19,4 @@ public class DialogueGameIntroEntity extends DialogueEntity {
     public static String getDialogue1() {return dialogue1;}
 
     public static String getDialogue2() {return dialogue2;}
-
-    public void changeDialogue(String newDialogue, String oldDialogue) {
-        if (oldDialogue.equals("dialogue1")){
-            dialogue1 = newDialogue;
-        } else if (oldDialogue.equals("dialogue2")) {
-            dialogue2 = newDialogue;
-        }
-    }
 }

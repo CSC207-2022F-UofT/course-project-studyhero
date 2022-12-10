@@ -1,7 +1,9 @@
 package dialogue;
 
 /*
-Storse the dialogue that appears after the Player has lost the battle in the Boss fight.
+Dialogue that appears after the Player has lost the battle in the Boss fight.
+
+Note: Gives warning because this has not been implemented yet.
  */
 
 public class DialoguePlayerDefeatedEntity extends DialogueEntity{
@@ -9,8 +11,6 @@ public class DialoguePlayerDefeatedEntity extends DialogueEntity{
     static String dialogue = "Try again later!";
 
     public String getDialogue() {return dialogue;}
-
-    public void changeDialogue(String newDialogue) { dialogue = newDialogue;}
 
 
 }

@@ -1,9 +1,11 @@
-package dialogue.dialogue_screen;
+package dialogue.dialogue_screen_notclean;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /*
 Game screen for the Introduction Story/Dialogue of the Game
+
+Outermost layer of CA.
  */
 
 public class DialogueGameScreen {
@@ -12,7 +14,7 @@ public class DialogueGameScreen {
     UI ui = new UI();
     VisibilityManager vm = new VisibilityManager(ui);
     StoryIntro story = new StoryIntro(this, ui, vm);
-    String nextPosition;
+    String nextPosition, nextPosition2;
 
 
 
@@ -31,10 +33,10 @@ public class DialogueGameScreen {
 
             switch(yourChoice){
                 case "start": vm.initialScreen(); story.introStory(); break;
-                case "c1": story.selectPosition(nextPosition);
-                case "c2": story.selectPosition(nextPosition);
-                case "c3": story.selectPosition(nextPosition);
-                case "c4": story.selectPosition(nextPosition);
+                case "c1": story.selectPosition(nextPosition); break;
+                case "c2": story.selectPosition(nextPosition2); break;
+                case "c3": story.selectPosition(nextPosition); break;
+                case "c4": story.selectPosition(nextPosition); break;
             }
         }
     }
