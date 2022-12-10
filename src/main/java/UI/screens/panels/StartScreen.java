@@ -3,17 +3,28 @@ package UI.screens.panels;
 import use_cases.continue_game.ContinueGameController;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
-import use_cases.new_game.NewGame;
-import controllers.new_game.NewGameController;
+import use_cases.file_checker.ValidFileDsGateway;
+import use_cases.file_checker.ValidPlayerInventory;
+import use_cases.file_checker.ValidShopInventory;
+import use_cases.file_checker.ValidStats;
+import use_cases.new_game.*;
+import use_cases.new_game.NewGameController;
+import use_cases.game_check.GameCheckInputBoundary;
+import use_cases.game_check.GameCheckInteractor;
+import use_cases.new_game.confirmation_window.ConfirmationWindowInputBoundary;
+import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
 
 import javax.swing.*;
 import java.awt.*;
-
 public class StartScreen extends JPanel{
 
     CardLayout card;
     JPanel parentPanel;
     ErrorOutputBoundary presenter;
+    private final static String statsFilepath = "stats.csv";
+    private final static String playerInventoryFilepath = "PlayerInventory.csv";
+    private final static String shopInventoryFilepath = "ShopInventory.csv";
+    private final static String fightStatsFilepath = "fightStats.csv";
 
     public StartScreen(CardLayout card, JPanel parent){
 
@@ -25,15 +36,35 @@ public class StartScreen extends JPanel{
 
         //   ----- Buttons -----
 
+        // 1. New Game -> checks to see if there are existing valid game files and
+        // either gives you a confirmation window or starts a new game
         JButton newGameButton = new JButton("New Game");
-        NewGame newGameUseCase = new NewGame("stats.csv", presenter);
-        NewGameController newGameController = new NewGameController(card, parentPanel, newGameUseCase);
+        ErrorOutputBoundary fileCheckerPresenter = new ErrorPresenter();
+        ValidFileDsGateway statsChecker = new ValidStats(statsFilepath, fileCheckerPresenter);
+        ValidFileDsGateway playerInventoryChecker =
+                new ValidPlayerInventory(playerInventoryFilepath, fileCheckerPresenter);
+        ValidFileDsGateway shopInventoryChecker =
+                new ValidShopInventory(shopInventoryFilepath, fileCheckerPresenter);
+
+        ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
+        NewGameInputBoundary newGameUseCase =
+                new NewGame(statsChecker, playerInventoryChecker, shopInventoryChecker, fightStatsChecker, presenter);
+        GameCheckInputBoundary gameCheckUseCase =
+                new GameCheckInteractor(statsChecker, playerInventoryChecker, fightStatsChecker);
+
+        String confirmationMsg = "Are you sure? This will overwrite your existing save files.";
+        ConfirmationWindowInputBoundary confirmationUseCase =
+                new ConfirmationWindowInteractor( confirmationMsg,card, parentPanel,presenter);
+        NewGameController newGameController = new NewGameController(card, parent, gameCheckUseCase,
+                newGameUseCase, confirmationUseCase);
         newGameButton.addActionListener(newGameController);
 
-        JButton continueGameButton = new JButton("Continue Game");
-        ContinueGameController continueGameController = new ContinueGameController(card, parent, presenter);
-        continueGameButton.addActionListener(continueGameController);
 
+        // 2. Continue Game -> checks to see if there are existing valid game files
+        // and will move to timer screen if so
+        JButton continueGameButton = new JButton("Continue Game");
+        ContinueGameController continueGameController = new ContinueGameController(card, parent, gameCheckUseCase);
+        continueGameButton.addActionListener(continueGameController);
 
         JButton goToSettingsButton = new JButton("Settings");
         goToSettingsButton.addActionListener(e -> card.show(parent, "Start Settings"));
@@ -48,7 +79,6 @@ public class StartScreen extends JPanel{
         this.add(quitGameButton);
 
         this.setSize(800,500);
-        BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
         GridBagLayout gridBagLayout = new GridBagLayout();
         this.setLayout(gridBagLayout);
     }

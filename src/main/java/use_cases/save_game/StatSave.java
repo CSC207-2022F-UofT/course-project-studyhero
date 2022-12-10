@@ -7,16 +7,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-public class StatSave implements SaveGameOutputBoundary{
-    Map<String, Integer> stats;
-    ErrorOutputBoundary presenter;
+public class StatSave {
+    private final Map<String, Integer> stats;
+    private final ErrorOutputBoundary presenter;
 
     /**
-     * Returns a StatsSave object with stats represented as a
+     * Creates a StatsSave object with stats represented as a
      * Hashmap
      *
-     * @param stats
-     * @param presenter
+     * @param stats         Map with a player's stats (gold, health, level,
+     *                      damage, defence)
+     * @param presenter     Output boundary to display an error message if
+     *                      any occurs whilst saving the file
      */
     public StatSave(Map<String, Integer> stats, ErrorOutputBoundary presenter){
 
@@ -25,13 +27,11 @@ public class StatSave implements SaveGameOutputBoundary{
     }
 
     /**
-     * Returns nothing but saves a csv file representing the
-     * current user's stats data
+     * Saves a csv file representing the current user's stats data
      */
-    @Override
-    public void save(){
+    public void save(String filepath){
         try{
-            File statsFile = new File("stats.csv");
+            File statsFile = new File(filepath);
             PrintWriter out = new PrintWriter(statsFile);
 
             StringBuilder keyString = new StringBuilder();
@@ -45,7 +45,7 @@ public class StatSave implements SaveGameOutputBoundary{
 
             out.close();
 
-            System.out.println("Saved. Stats: " + stats);
+            System.out.println("Saved to "+ filepath + ": "+ stats);
 
         } catch (IOException e){
             presenter.error(e.toString());

@@ -1,9 +1,17 @@
 package UI.screens.panels.breaks;
 
+import entities.Stats;
+import entities.inventoryitem.InventoryItem;
+import entities.inventoryitem.PlayerInventoryFile;
+import entities.inventoryitem.ShopInventoryFile;
+import use_cases.errors.ErrorOutputBoundary;
+import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SellMenuScreen extends JPanel implements ListSelectionListener {
     CardLayout card;
@@ -13,13 +21,59 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
     static JLabel selectedItem;
     static JLabel cost;
 
+    static Stats stats;
+    ErrorOutputBoundary presenter;
+    static ArrayList<InventoryItem> shopInventory;
+    static ArrayList<InventoryItem> playerInventory;
+
+
     public SellMenuScreen(CardLayout card, JPanel parentPanel) {
-        // Initialize Panels
+        // ----- Initialize Panels -----
         JPanel sellPanel = new JPanel();
         JPanel userPanel = new JPanel();
         JPanel shopPanel = new JPanel();
         JPanel topPanel = new JPanel();
 
+        // ----- Initialize Files for List Generation -----
+        // NOTE: MOVE THIS TO SHOP MENU
+        // Shop Inventory
+        ShopInventoryFile shopInventoryFile = new ShopInventoryFile("ShopInventory.csv");
+        shopInventoryFile.initialize();
+        shopInventoryFile.readInventoryList();
+        PlayerDisplayInventoryDsRequestModel shopIterator = shopInventoryFile.getInventoryListIterator();
+        shopInventory = new ArrayList<>();
+        while (shopIterator.hasNext()) {
+            shopInventory.add(shopIterator.getNext());
+        }
+
+        // Player Inventory
+        PlayerInventoryFile playerInventoryFile =  new PlayerInventoryFile("PlayerInventory.csv");
+        playerInventoryFile.readInventoryList();
+        PlayerDisplayInventoryDsRequestModel playerIterator = playerInventoryFile.getInventoryListIterator();
+        playerInventory = new ArrayList<>();
+        while (playerIterator.hasNext()) {
+            playerInventory.add(playerIterator.getNext());
+        }
+
+
+        // Displays user items
+        ArrayList<String> displayUserItems = new ArrayList<>();
+        for (int item = 0; item < playerInventory.size(); item++) {
+            displayUserItems.add(playerInventory.get(item).getName());
+        }
+
+        // Temporary: Add list
+        list = new JList(displayUserItems.toArray());
+
+        list.clearSelection();
+        list.addListSelectionListener(this);
+        list.setMaximumSize(new Dimension(200, 200));
+
+        selectedItem = new JLabel("Selected: ");
+        cost = new JLabel("Sell Cost: ");
+
+
+        // ----- Initialize Components -----
         this.card = card;
         this.parentPanel = parentPanel;
 
@@ -30,16 +84,6 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
         JButton backToBreak = new JButton("Back");
         backToBreak.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
 
-        // Temporary: Add list
-        String week[] = { "One", "Two", "Three", "Four" };
-        list = new JList(week);
-
-        list.clearSelection();
-        list.addListSelectionListener(this);
-        list.setMaximumSize(new Dimension(400, 300));
-
-        selectedItem = new JLabel("Selected: ");
-        cost = new JLabel("Sell Cost: ");
 
         // Layouts
         BoxLayout mainBox = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -57,7 +101,7 @@ public class SellMenuScreen extends JPanel implements ListSelectionListener {
         BoxLayout topBox = new BoxLayout(topPanel, BoxLayout.Y_AXIS);
         topPanel.setLayout(topBox);
 
-        // Add to panels
+        // ----- Add Components to Panels -----
         topPanel.add(title);
 
         userPanel.add(userInv);

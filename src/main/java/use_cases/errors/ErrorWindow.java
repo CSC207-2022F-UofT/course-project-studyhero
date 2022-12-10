@@ -1,17 +1,24 @@
+
 package use_cases.errors;
 
 import javax.swing.*;
 
-public class ErrorWindow{
+public class ErrorWindow extends JFrame{
+
+    /**
+     * Creates a new ErrorWindow (JFrame object) displaying an
+     * error message.
+     *
+     * @param error     error message
+     */
     public ErrorWindow(String error){
-        JFrame errorWindow = new JFrame("Error");
-        JPanel errorPanel = new JPanel();
+        this.setTitle("Error");
         JLabel errorLabel = new JLabel(error);
 
-        errorPanel.add(errorLabel);
-        errorWindow.add(errorPanel);
-        errorWindow.pack();
-        errorWindow.getDefaultCloseOperation();
-        errorWindow.setVisible(true);
+        this.add(errorLabel);
+        this.pack();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
     }
+
 }
