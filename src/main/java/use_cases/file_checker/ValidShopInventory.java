@@ -2,12 +2,13 @@ package use_cases.file_checker;
 
 import use_cases.errors.ErrorOutputBoundary;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;
 
 
-public class ValidShopInventory implements ValidInventory{
+public class ValidShopInventory implements ValidFileDsGateway{
 
     private final String filename;
     private final File file;
@@ -72,7 +73,7 @@ public class ValidShopInventory implements ValidInventory{
 
             // check the label is correct and matches
            String label = Arrays.toString(read(br));
-            if(Objects.equals(label, "Shop Inventory")){
+            if(!Objects.equals(label, "[Shop Inventory]")){
                 return "label";
             }
 
@@ -145,6 +146,7 @@ public class ValidShopInventory implements ValidInventory{
     public boolean isValid() {
         String result = checkError();
         if (result == null){return true;}
+
         switch(result){
             case "exist":
                 presenter.error("There is no existing " + filename + " file.");
@@ -172,6 +174,8 @@ public class ValidShopInventory implements ValidInventory{
                 presenter.error("Error: please start a new game.");
                 return false;
         }
+        try{presenter.error(presenter.getError()); }
+        catch (HeadlessException e){return false;}
         return false;
     }
 }
