@@ -125,7 +125,6 @@ public class GameCheckTest {
                 validPlayerInv, validFightStats);
 
         Assertions.assertFalse(gameCheck.check());
-        Assertions.assertFalse(gameCheck.valid());
     }
 
     @Test
@@ -151,7 +150,6 @@ public class GameCheckTest {
         GameCheckInteractor gameCheck = new GameCheckInteractor(validStats,
                 validPlayerInv, validFightStats);
 
-        Assertions.assertFalse(gameCheck.valid());
         Assertions.assertFalse(gameCheck.check());
     }
 
@@ -173,7 +171,6 @@ public class GameCheckTest {
         GameCheckInteractor gameCheck = new GameCheckInteractor(validStats,
                 validPlayerInv, validFightStats);
 
-        Assertions.assertFalse(gameCheck.valid());
         Assertions.assertFalse(gameCheck.check());
     }
 
