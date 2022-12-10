@@ -59,21 +59,15 @@ public class NewGameTest {
         }
 
     }
-
-    @BeforeEach
-    public void setUp(){
-        if (stats.exists()){stats.deleteOnExit();}
-        if (plyrInv.exists()){plyrInv.deleteOnExit();}
-        if (shpInv.exists()){shpInv.deleteOnExit();}
-        if (fightStats.exists()){fightStats.deleteOnExit();}
-    }
-
-    @AfterEach
     public void deleteFiles(){
         stats.deleteOnExit();
         plyrInv.deleteOnExit();
         shpInv.deleteOnExit();
         fightStats.deleteOnExit();
+    }
+    @BeforeEach
+    public void setUp(){
+        deleteFiles();
     }
 
     @Test
@@ -90,6 +84,7 @@ public class NewGameTest {
         Assertions.assertTrue(shpInv.exists());
         Assertions.assertTrue(fightStats.exists());
 
+        deleteFiles();
     }
 
     @Test
@@ -122,8 +117,7 @@ public class NewGameTest {
         Assertions.assertNotEquals(invShpCont, read(shpInv));
         Assertions.assertNotEquals(invFightCont, read(fightStats));
 
+        deleteFiles();
     }
-
-
 
 }
