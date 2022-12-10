@@ -4,7 +4,7 @@ public class CustomTimerRequestModel {
     /**
      * The time that the user entered.
      */
-    private String inputTime;
+    private String inputTime = "-1";
 
     /**
      * Gets the time that the user entered.

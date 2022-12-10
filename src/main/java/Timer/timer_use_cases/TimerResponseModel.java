@@ -26,7 +26,7 @@ public class TimerResponseModel {
      * Sets the time that will be displayed to the user.
      * @param outputTime display time
      */
-    void setOutputTime(String outputTime) {
+    public void setOutputTime(String outputTime) {
         this.outputTime = outputTime;
     }
 

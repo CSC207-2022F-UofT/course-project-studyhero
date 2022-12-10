@@ -14,17 +14,17 @@ public class TimerPanel extends JPanel {
      * The elements on TimerPanel.
      */
     JPanel mainPanel;
-    JLabel timerText;
+    public JLabel timerText;
     JProgressBar progressBar;
-    JButton presetShortButton;
-    JButton customTimerConfirmButton;
-    JButton presetLongButton;
-    JButton presetMediumButton;
-    JButton startTimerButton;
-    JButton endTimerButton;
-    JFormattedTextField customTimerTextField;
-    JLabel errorLabel;
-    JButton breakMenuButton;
+    public JButton presetShortButton;
+    public JButton customTimerConfirmButton;
+    public JButton presetLongButton;
+    public JButton presetMediumButton;
+    public JButton startTimerButton;
+    public JButton endTimerButton;
+    public JFormattedTextField customTimerTextField;
+    public JLabel errorLabel;
+    public JButton breakMenuButton;
     public Timer timer;
     /**
      * Layout that allows the user to switch between panels.
@@ -49,7 +49,7 @@ public class TimerPanel extends JPanel {
         TimerInteractor timerInteractor = new TimerInteractor();
         customTimerController = new CustomTimerController(timerInteractor);
         presetTimerController = new PresetTimerController(timerInteractor);
-        timerPresenter = new TimerPresenter(timerInteractor.timerResponseModel);
+        timerPresenter = new TimerPresenter(timerInteractor.getTimerResponseModel());
 
         progressBar.setMinimum(0);
         progressBar.setValue(0);

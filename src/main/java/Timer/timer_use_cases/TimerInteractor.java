@@ -17,11 +17,11 @@ public class TimerInteractor implements TimerInputBoundary {
     /**
      * The Entity class for the timer.
      */
-    TimerEntity timerEntity = new TimerEntity();
+    public TimerEntity timerEntity = new TimerEntity();
     /**
      * The time that the timer will start at.
      */
-    String time;
+    public String time;
     Timer timer = new Timer();
 
     /**
@@ -61,6 +61,14 @@ public class TimerInteractor implements TimerInputBoundary {
     @Override
     public void setTimer(String time) {
         this.time = time;
+    }
+
+    /**
+     * Gets the timerResponseModel.
+     * @return the timerResponseModel
+     */
+    public TimerResponseModel getTimerResponseModel() {
+        return timerResponseModel;
     }
 
     /**

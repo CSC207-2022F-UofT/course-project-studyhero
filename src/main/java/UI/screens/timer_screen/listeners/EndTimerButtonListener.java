@@ -74,12 +74,7 @@ public class EndTimerButtonListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (ctController.getCustomTime().equals("-1")) {
-            ptController.endTimer();
-        }
-        else {
-            ctController.endTimer();
-        }
+        ctController.endTimer();
         timer.stop();
         timerText.setText("00:00:00");
         goToBreakMenuButton.setVisible(true);

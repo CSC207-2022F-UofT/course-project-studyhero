@@ -10,11 +10,7 @@ public class TimerPresenter implements TimerOutputBoundary {
     /**
      * Class that contains the information that will be displayed to the user.
      */
-    final TimerResponseModel timerResponseModel;
-    /**
-     * The time that will be displayed to the user.
-     */
-    String outputTime;
+    TimerResponseModel timerResponseModel;
 
     /**
      * Constructor for TimerPresenter.
@@ -30,7 +26,6 @@ public class TimerPresenter implements TimerOutputBoundary {
      */
     @Override
     public String getOutputTime() {
-        this.outputTime = timerResponseModel.getOutputTime();
-        return outputTime;
+        return timerResponseModel.getOutputTime();
     }
 }

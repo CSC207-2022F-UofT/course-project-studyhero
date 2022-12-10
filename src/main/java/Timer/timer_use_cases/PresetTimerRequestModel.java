@@ -7,7 +7,7 @@ public class PresetTimerRequestModel {
     /**
      * The time that the user selected from the preset times.
      */
-    private String selectedTime;
+    private String selectedTime = "00:00:00";
 
     /**
      * Gets the time that the user selected.
