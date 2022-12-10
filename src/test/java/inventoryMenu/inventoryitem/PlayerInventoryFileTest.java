@@ -43,6 +43,10 @@ class PlayerInventoryFileTest {
         referenceList.add(item3);
         referenceList.add(item4);
     }
+    @AfterEach
+    public void deleteFiles(){
+        new File(filePath).deleteOnExit();
+    }
 
     @Test
     void readInventoryList() {

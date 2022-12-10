@@ -2,7 +2,7 @@ package use_cases.errors;
 
 public class ErrorPresenter implements ErrorOutputBoundary{
 
-    private String error;
+    private String error = "";
     public void setError(String error){this.error = error;}
 
     /**

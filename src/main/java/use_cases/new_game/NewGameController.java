@@ -9,11 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NewGameController implements ActionListener {
-    CardLayout card;
-    JPanel parentPanel;
-    GameCheckInputBoundary gameCheckUseCase;
-    NewGameInputBoundary newGameUseCase;
-    ConfirmationWindowInputBoundary confirmationUseCase;
+    private final CardLayout card;
+    private final JPanel parentPanel;
+    private final GameCheckInputBoundary gameCheckUseCase;
+    private final NewGameInputBoundary newGameUseCase;
+    private final ConfirmationWindowInputBoundary confirmationUseCase;
+
+    private String statsPath = "stats.csv";
+    private String plyrInvPath = "PlayerInventory.csv";
+    private String shpInvPath =  "ShopInventory.csv";
+    private String fightStatsPath = "fightStats.csv";
 
     /**
      * Creates a GameCheckController object that handles all use cases
@@ -40,6 +45,19 @@ public class NewGameController implements ActionListener {
         this.confirmationUseCase = confirmationUseCase;
     }
 
+    public String getStatsPath() {return statsPath;}
+    public void setStatsPath(String newStatsPath){statsPath = newStatsPath;}
+    public String getPlyrInvPath() {return plyrInvPath;}
+    public void setPlyrInvPath(String newPlyrInvPath){
+        this.plyrInvPath = newPlyrInvPath;}
+    public String getShpInvPath() {return shpInvPath;}
+    public void setShpInvPath(String newShpInvPath){
+        this.shpInvPath = newShpInvPath;}
+    public String getFightStatsPath(){return fightStatsPath;}
+    public void setFightStatsPath(String fightStatsPath) {
+        this.fightStatsPath = fightStatsPath;
+    }
+
     /**
      * In the event of a button click, if all necessary game files are valid and
      * creating a new game will overwrite them, a confirmation window will be
@@ -55,7 +73,8 @@ public class NewGameController implements ActionListener {
             confirmationUseCase.createWindow();
         }
         else{
-            newGameUseCase.newGame();
+            newGameUseCase.newGame(statsPath, plyrInvPath,
+                    shpInvPath, fightStatsPath);
             card.show(parentPanel, "Story");
         }
     }

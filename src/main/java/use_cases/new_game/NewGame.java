@@ -51,7 +51,8 @@ public class NewGame implements NewGameInputBoundary{
      * and fight stats and saves them in memory.
      */
     @Override
-    public void newGame(){
+    public void newGame(String statsPath, String playerInvPath,
+                        String shopInvPath, String fightStatsPath){
         //if any file exists, will print that files are being overwritten
         if (statsFile.fileExists() || playerInventoryFile.fileExists()
                 || shopInventoryFile.fileExists() || fightStatsFile.fileExists()){
@@ -62,16 +63,16 @@ public class NewGame implements NewGameInputBoundary{
         // initialise a new player and saves it
         StatsUser newUser = new StatsUser();
         StatSave newSave = new StatSave(newUser.getUserStats(), presenter);
-        newSave.save("stats.csv");
+        newSave.save(statsPath);
 
         // initialise a new player inventory list and saves it
         InitializePlayerInventoryGateway playerInventoryList =
-                new PlayerInventoryFile("PlayerInventory.csv");
+                new PlayerInventoryFile(playerInvPath);
         playerInventoryList.initialize();
 
         // initialise a new shop inventory list and saves it
         InitializeShopInventoryGateway shopInventoryList =
-                new ShopInventoryFile("ShopInventory.csv");
+                new ShopInventoryFile(shopInvPath);
         shopInventoryList.initialize();
 
         // initialise a new fighting stats file and saves it
@@ -79,7 +80,7 @@ public class NewGame implements NewGameInputBoundary{
                 new FightingStatsInitializer();
         Map<String, Integer> fightStats = fightingStatsInitializer.initialize();
         StatSave saver = new StatSave(fightStats, presenter);
-        saver.save("fightStats.csv");
+        saver.save(fightStatsPath);
 
     }
 }
