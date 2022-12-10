@@ -74,7 +74,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
 
             // check the label is correct and matches
             String label = Arrays.toString(read(br));
-            if(Objects.equals(label, "Player Inventory")){
+            if(!Objects.equals(label, "[Player Inventory]")){
                 return "label";
             }
 

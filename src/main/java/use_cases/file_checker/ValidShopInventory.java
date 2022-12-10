@@ -72,7 +72,7 @@ public class ValidShopInventory implements ValidInventory{
 
             // check the label is correct and matches
            String label = Arrays.toString(read(br));
-            if(Objects.equals(label, "Shop Inventory")){
+            if(!Objects.equals(label, "[Shop Inventory]")){
                 return "label";
             }
 
