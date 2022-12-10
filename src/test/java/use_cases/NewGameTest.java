@@ -67,7 +67,10 @@ public class NewGameTest {
     }
     @BeforeEach
     public void setUp(){
-        deleteFiles();
+        if(stats.exists()){Assertions.assertTrue(stats.delete());}
+        if(plyrInv.exists()){Assertions.assertTrue(plyrInv.delete());}
+        if(shpInv.exists()){Assertions.assertTrue(shpInv.delete());}
+        if(fightStats.exists()){Assertions.assertTrue(fightStats.delete());}
     }
 
     @Test
