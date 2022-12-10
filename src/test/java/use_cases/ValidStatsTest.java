@@ -99,7 +99,7 @@ public class ValidStatsTest {
     }
 
     @Test
-    public void NonexistentFile() throws HeadlessException {
+    public void NonexistentFile() throws java.awt.HeadlessException {
         if (statsTestFile.exists()){
             Assertions.assertTrue(statsTestFile.delete());
         }

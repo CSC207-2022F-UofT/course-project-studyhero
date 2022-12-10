@@ -2,6 +2,7 @@ package use_cases.file_checker;
 
 import use_cases.errors.ErrorOutputBoundary;
 
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -160,21 +161,25 @@ public class ValidStats implements ValidFileDsGateway{
     public boolean isValid() {
         String result = checkError();
         if (result == null){return true;}
-        switch(result){
-            case "exist":
-                presenter.error("There is no existing " + filename + " file.");
-                return false;
-            case "invalid":
-            case "numLines":
-            case "attributes":
-            case "stats":
-            case "type":
-                presenter.error("Invalid " + filename + " file.");
-                return false;
-            case "other":
-                presenter.error("Error: please start a new game.");
-                return false;
-        }
+        try{
+            switch(result){
+                case "exist":
+                    presenter.error("There is no existing " + filename + " file.");
+                    return false;
+                case "invalid":
+                case "numLines":
+                case "attributes":
+                case "stats":
+                case "type":
+                    presenter.error("Invalid " + filename + " file.");
+                    return false;
+                case "other":
+                    presenter.error("Error: please start a new game.");
+                    return false;
+            }
+        }catch (HeadlessException e){
+            return false;}
+
         return false;
     }
 }
