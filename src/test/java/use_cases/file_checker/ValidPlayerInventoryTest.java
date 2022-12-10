@@ -1,6 +1,7 @@
 package use_cases.file_checker;
 
 import entities.inventoryitem.ObjectTestInventoryItem;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.errors.ErrorOutputBoundary;
@@ -93,7 +94,6 @@ class ValidPlayerInventoryTest {
 
     @BeforeEach
     void setUp(){
-        System.setProperty("java.awt.headless","false");
         testValidPlayerInventoryFile = new File("testValidPlayerInventoryFile.csv");
         filename = testValidPlayerInventoryFile.getName();
         validFileDsGateway = new ValidPlayerInventory(testValidPlayerInventoryFile.getName(), error);
@@ -275,5 +275,10 @@ class ValidPlayerInventoryTest {
         writeFile(label, validHeader, inValidInventoryListEquipped);
         validFileDsGateway.isValid();
         assertEquals("Items have invalid equip information.", error.getError());
+    }
+
+    @AfterEach
+    public void clearFile(){
+        testValidPlayerInventoryFile.deleteOnExit();
     }
 }

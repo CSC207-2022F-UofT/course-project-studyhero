@@ -1,6 +1,7 @@
 package use_cases.file_checker;
 
 import entities.inventoryitem.ObjectTestInventoryItem;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.errors.ErrorOutputBoundary;
@@ -82,7 +83,6 @@ class ValidShopInventoryTest {
 
     @BeforeEach
     void setUp(){
-        System.setProperty("java.awt.headless","false");
         testValidShopInventoryFile = new File("testValidShopInventoryFile.csv");
         filename = testValidShopInventoryFile.getName();
         validFileDsGateway = new ValidShopInventory(testValidShopInventoryFile.getName(), error);
@@ -252,5 +252,10 @@ class ValidShopInventoryTest {
         validFileDsGateway.isValid();
         assertEquals("Items have invalid gold value.", error.getError());
 
+    }
+
+    @AfterEach
+    public void clearFile(){
+        testValidShopInventoryFile.deleteOnExit();
     }
 }

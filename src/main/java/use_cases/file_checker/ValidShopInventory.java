@@ -37,7 +37,7 @@ public class ValidShopInventory implements ValidFileDsGateway{
      * @param br            BufferedReader
      * @return String array representation of the next line
      */
-    public String[] read(BufferedReader br){
+    private String[] read(BufferedReader br){
         String line;
         try {
             line = br.readLine();
@@ -62,7 +62,7 @@ public class ValidShopInventory implements ValidFileDsGateway{
      * - "goldValue"    if any item's gold value is not an integer
      * - "other"        if there is any IOException
      */
-    public String checkError(){
+    private String checkError(){
         if (!fileExists()){return "exist";}
         try{
             BufferedReader br = new BufferedReader(
