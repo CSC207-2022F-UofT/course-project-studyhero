@@ -85,16 +85,18 @@ class ValidPlayerInventoryTest {
 
     //An invalid inventoryList with incorrect inventory isEquipped
     ArrayList<ObjectTestInventoryItem> inValidInventoryListEquipped = new ArrayList<>();
-    ObjectTestInventoryItem invalidItemEquipped1 = new ObjectTestInventoryItem("invalid",
+    ObjectTestInventoryItem invalidItemEquipped1 = new ObjectTestInventoryItem(1,
             "Weapon",
             "Sword",
-            13, 10, false);
+            13, 10, "invalid");
 
 
 
 
     @BeforeEach
     void setUp(){
+        System.setProperty("java.awt.headless", "false");
+
         testValidPlayerInventoryFile = new File("testValidPlayerInventoryFile.csv");
         filename = testValidPlayerInventoryFile.getName();
         validFileDsGateway = new ValidPlayerInventory(testValidPlayerInventoryFile.getName(), error);
