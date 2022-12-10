@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -81,15 +80,21 @@ public class ValidStats implements ValidFileDsGateway{
 
     /**
      * Helper function that checks all stats attributes
-     * are of correct type and format
+     * are of correct type and format. Returns the first of
+     * error in the following list.
      *
      * @return
      * - null           if there is no error
      * - "exist"        if the file does not exist
-     * - "invalid"      if the file exists but has any error
+     * - "numLines"     if there is more than one row of stats
+     * - "attributes"   if the header is empty
+     * - "stats"        if the stats are empty
+     * - "invalid"      if the number of attributes and stats are
+     *                  different
+     * - "type"         if the stats are not of integer type
      * - "other"        if there is an IOException
      */
-    private String checkError(){
+    public String checkError(){
         // checking the file exists
         if (!fileExists()){
             return "exist";
@@ -101,25 +106,25 @@ public class ValidStats implements ValidFileDsGateway{
             // only one row of values
             Stream<String> lines = Files.lines(path);
             long numLines = lines.count();
-            if (numLines != 2){return "invalid";}
+            if (numLines != 2){return "numLines";}
 
             // read first line as attributes and check it is non-empty
             String[] attributes;
-            String[] empty = new String[0];
-            if (Arrays.equals(attributes = read(br, "attributes"), empty)){return "invalid";}
+            if ((attributes = read(br, "attributes")).length == 1){return "attributes";}
 
             // read second line as stats and check it is non-empty
             String[] stats;
-            if ((stats = read(br, "stats")) == empty){return "invalid";}
+            if ((stats = read(br, "stats")).length == 1){return "stats";}
             br.close();
 
             // check a stat exists for every corresponding attribute and vice versa
-            if (attributes.length != stats.length){return "invalid";}
+            if ((attributes.length != stats.length)){
+                return "invalid";}
 
             //checking that all stats are type integer
             for (String stat : stats) {
                 try { Integer.parseInt(stat.trim());
-                } catch(NumberFormatException e) { return "invalid";}
+                } catch(NumberFormatException e) { return "type";}
             }
 
             return null;
@@ -160,6 +165,10 @@ public class ValidStats implements ValidFileDsGateway{
                 presenter.error("There is no existing " + filename + " file.");
                 return false;
             case "invalid":
+            case "numLines":
+            case "attributes":
+            case "stats":
+            case "type":
                 presenter.error("Invalid " + filename + " file.");
                 return false;
             case "other":
