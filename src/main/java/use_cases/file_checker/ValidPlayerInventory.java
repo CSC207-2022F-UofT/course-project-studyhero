@@ -2,6 +2,7 @@ package use_cases.file_checker;
 
 import use_cases.errors.ErrorOutputBoundary;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;
@@ -138,6 +139,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
     public boolean isValid() {
         String result = checkError();
         if (result == null){return true;}
+
         switch(result){
             case "exist":
                 presenter.error("There is no existing " + filename + " file.");
@@ -168,6 +170,8 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
                 presenter.error("Error: please start a new game.");
                 return false;
         }
+        try{presenter.error(presenter.getError()); }
+        catch (HeadlessException e){return false;}
         return false;
     }
 }

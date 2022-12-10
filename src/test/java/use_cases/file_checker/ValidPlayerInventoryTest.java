@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 
-import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -95,7 +94,6 @@ class ValidPlayerInventoryTest {
 
     @BeforeEach
     void setUp(){
-        System.setProperty("java.awt.headless", "false");
 
         testValidPlayerInventoryFile = new File("testValidPlayerInventoryFile.csv");
         filename = testValidPlayerInventoryFile.getName();
@@ -184,7 +182,7 @@ class ValidPlayerInventoryTest {
     }
 
     @Test
-    void isPlayable() throws IOException, HeadlessException {
+    void isPlayable() throws IOException{
         FileWriter writer = new FileWriter(testValidPlayerInventoryFile);
         writer.write("1");
         assertFalse(validFileDsGateway.isPlayable());
