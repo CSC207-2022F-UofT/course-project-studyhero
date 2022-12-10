@@ -22,7 +22,7 @@ public class ErrorPresenter implements ErrorOutputBoundary{
     @Override
     public boolean error(String error){
         new ErrorWindow(error);
-        this.error = error;
+        setError(error);
         return true;
     }
 }
