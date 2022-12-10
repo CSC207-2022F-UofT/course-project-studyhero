@@ -166,12 +166,21 @@ public class ValidStats implements ValidFileDsGateway{
                 case "exist":
                     presenter.error("There is no existing " + filename + " file.");
                     return false;
-                case "invalid":
                 case "numLines":
+                    presenter.error("There are too many rows in " + filename + ".");
+                    return false;
                 case "attributes":
+                    presenter.error("There are no attributes in " + filename + ".");
+                    return false;
                 case "stats":
+                    presenter.error("There are no stats in " + filename + ".");
+                    return false;
+                case "invalid":
+                    presenter.error("The number of attributes and stats are not equal in "
+                            + filename + ".");
+                    return false;
                 case "type":
-                    presenter.error("Invalid " + filename + " file.");
+                    presenter.error("The stats in " + filename + " are not of valid type.");
                     return false;
                 case "other":
                     presenter.error("Error: please start a new game.");

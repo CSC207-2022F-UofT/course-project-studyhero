@@ -5,7 +5,6 @@ import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -99,7 +98,7 @@ public class ValidStatsTest {
     }
 
     @Test
-    public void NonexistentFile() throws java.awt.HeadlessException {
+    public void NonexistentFile() {
         if (statsTestFile.exists()){
             Assertions.assertTrue(statsTestFile.delete());
         }
@@ -107,7 +106,7 @@ public class ValidStatsTest {
         Assertions.assertFalse(testFile.isPlayable());
         Assertions.assertEquals("exist", testFile.checkError());
         Assertions.assertFalse(testFile.isValid());
-        Assertions.assertEquals("Invalid " + filepath + " file.",
+        Assertions.assertEquals("There is no existing " + filepath + " file.",
                 presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
 
@@ -118,7 +117,7 @@ public class ValidStatsTest {
     }
 
     @Test
-    public void StringsStats() throws HeadlessException{
+    public void StringsStats(){
         String header = "gold, damage, level, defence, hp";
         String stats = "a, 5, 1, 0, 100";
         statsTestFile = generateFile(filepath, header, stats);
@@ -127,6 +126,9 @@ public class ValidStatsTest {
         Assertions.assertTrue(testFile.fileExists());
         Assertions.assertFalse(testFile.isPlayable());
         Assertions.assertEquals("type", testFile.checkError());
+        Assertions.assertFalse(testFile.isValid());
+        Assertions.assertEquals("The stats in " + filepath +
+                        " are not of valid type.", presenter.getError());
         Assertions.assertEquals(new HashMap<>(), testFile.load());
 
     }
