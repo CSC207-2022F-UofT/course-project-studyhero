@@ -142,32 +142,32 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
 
         switch(result){
             case "exist":
-                presenter.error("There is no existing " + filename + " file.");
+                presenter.setError("There is no existing " + filename + " file.");
                 return false;
             case "label":
             case "header":
-                presenter.error("Invalid " + filename + " file.");
+                presenter.setError("Invalid " + filename + " file.");
                 return false;
             case "empty":
-                presenter.error("There are no items in " + filename);
+                presenter.setError("There are no items in " + filename);
                 return false;
             case "index":
-                presenter.error("Item IDs are invalid.");
+                presenter.setError("Item IDs are invalid.");
                 return false;
             case "type":
-                presenter.error("Items are of invalid types.");
+                presenter.setError("Items are of invalid types.");
                 return false;
             case "effect":
-                presenter.error("Items have invalid effects.");
+                presenter.setError("Items have invalid effects.");
                 return false;
             case "goldValue":
-                presenter.error("Items have invalid gold value.");
+                presenter.setError("Items have invalid gold value.");
                 return false;
             case "isEquipped":
-                presenter.error("Items have invalid equip information.");
+                presenter.setError("Items have invalid equip information.");
                 return false;
             case "other":
-                presenter.error("Error: please start a new game.");
+                presenter.setError("Error: please start a new game.");
                 return false;
         }
         try{presenter.error(presenter.getError()); }
