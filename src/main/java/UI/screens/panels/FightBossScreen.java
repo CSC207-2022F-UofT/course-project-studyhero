@@ -5,13 +5,23 @@ import use_cases.boss_fight.*;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * This is the JPanel class for the BossFight which is initialized from the BreakScreen when the user decides to play the boss
+ * fight mini-game. It displays the temporary health of both the player and the boss, and has 3 buttons consisting of
+ * moves that the player can make, and a button to return the player to the BreakScreen should they wish to leave the
+ * fight.
+ */
 public class FightBossScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
     FightBossStatsDisplayInteractor fightBossStatsDisplayInteractorInitializer;
     FightBossStatsDisplayInteractor fightBossStatsDisplayInteractor;
 
+    /**
+     * This is the constructor for the FightBossScreen which uses different JLabels and JButtons to display the
+     * @param card
+     * @param parentPanel
+     */
     public FightBossScreen(CardLayout card, JPanel parentPanel) {
         this.card = card;
         this.parentPanel = parentPanel;
