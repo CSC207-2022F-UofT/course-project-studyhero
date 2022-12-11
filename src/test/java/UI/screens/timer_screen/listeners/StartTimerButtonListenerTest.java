@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StartTimerButtonListenerTest {
 
     @Test
-    void actionPerformed() {
+    void startTimerTest() {
         CardLayout card = new CardLayout();
         JPanel panel = new JPanel();
         panel.setLayout(card);
@@ -23,7 +23,6 @@ class StartTimerButtonListenerTest {
                 tp.presetMediumButton, tp.presetShortButton, tp.startTimerButton, tp.customTimerTextField,
                 tp.endTimerButton);
         startTimerButtonListener.actionPerformed(e);
-        //assertDoesNotThrow(() -> startTimerButtonListener.actionPerformed(e));
         assertTrue(tp.timer.isRunning());
         assertFalse(tp.customTimerConfirmButton.isEnabled());
         assertFalse(tp.presetLongButton.isEnabled());

@@ -1,21 +1,22 @@
 package UI.screens.timer_screen.listeners;
 
-import UI.screens.timer_screen.TimerPanel;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BreakMenuButtonListenerTest {
 
     @Test
-    void actionPerformed() {
+    void actionPerformedTest() {
         CardLayout card = new CardLayout();
         JPanel panel = new JPanel();
         panel.setLayout(card);
-        TimerPanel timerPanel = new TimerPanel(card, panel);
-        assertDoesNotThrow(() -> timerPanel.breakMenuButton.doClick());
+        ActionEvent e = new ActionEvent(new Object(), 1, "break");
+        BreakMenuButtonListener breakMenuButtonListener = new BreakMenuButtonListener(card, panel);
+        assertDoesNotThrow(() -> breakMenuButtonListener.actionPerformed(e));
     }
 }
