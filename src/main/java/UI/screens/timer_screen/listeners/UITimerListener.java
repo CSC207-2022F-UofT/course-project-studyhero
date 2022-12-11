@@ -19,7 +19,7 @@ public class UITimerListener implements ActionListener {
     JLabel timerText;
     TimerPresenter tPresenter;
     JProgressBar progressBar;
-    JButton goToBreakMenuButton;
+    JButton breakMenuButton;
     JButton customTimerConfirmButton;
     JButton presetLongButton;
     JButton presetMediumButton;
@@ -35,7 +35,7 @@ public class UITimerListener implements ActionListener {
      * @param timerText the label displaying the time
      * @param tPresenter the presenter for timer
      * @param progressBar the progress bar on the timer screen
-     * @param goToBreakMenuButton the break menu button on the timer screen
+     * @param breakMenuButton the break menu button on the timer screen
      * @param customTimerConfirmButton the confirm button on the timer screen
      * @param presetLongButton the long preset button on the timer screen
      * @param presetMediumButton the medium preset button on the timer screen
@@ -47,7 +47,7 @@ public class UITimerListener implements ActionListener {
      */
     public UITimerListener(PresetTimerController presetTimerController, CustomTimerController customTimerController,
                            JLabel timerText, TimerPresenter tPresenter, JProgressBar progressBar,
-                           JButton goToBreakMenuButton, JButton customTimerConfirmButton, JButton presetLongButton,
+                           JButton breakMenuButton, JButton customTimerConfirmButton, JButton presetLongButton,
                            JButton presetMediumButton, JButton presetShortButton, JButton startTimerButton,
                            JFormattedTextField customTimerTextField, JButton endTimerButton, TimerPanel timerPanel) {
         this.presetTimerController = presetTimerController;
@@ -55,7 +55,7 @@ public class UITimerListener implements ActionListener {
         this.timerText = timerText;
         this.tPresenter = tPresenter;
         this.progressBar = progressBar;
-        this.goToBreakMenuButton = goToBreakMenuButton;
+        this.breakMenuButton = breakMenuButton;
         this.customTimerConfirmButton = customTimerConfirmButton;
         this.presetLongButton = presetLongButton;
         this.presetMediumButton = presetMediumButton;
@@ -84,7 +84,7 @@ public class UITimerListener implements ActionListener {
                 customTimerController.endTimer();
             }
             timerPanel.timer.stop();
-            goToBreakMenuButton.setVisible(true);
+            breakMenuButton.setVisible(true);
             customTimerConfirmButton.setEnabled(true);
             presetLongButton.setEnabled(true);
             presetMediumButton.setEnabled(true);
@@ -94,7 +94,7 @@ public class UITimerListener implements ActionListener {
             endTimerButton.setEnabled(false);
         }
         else {
-            goToBreakMenuButton.setVisible(false);
+            breakMenuButton.setVisible(false);
         }
     }
 }

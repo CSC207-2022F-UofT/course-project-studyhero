@@ -25,7 +25,7 @@ public class EndTimerButtonListener implements ActionListener {
      */
     Timer timer;
     JLabel timerText;
-    JButton goToBreakMenuButton;
+    JButton breakMenuButton;
     JButton customTimerConfirmButton;
     JButton presetLongButton;
     JButton presetMediumButton;
@@ -40,7 +40,7 @@ public class EndTimerButtonListener implements ActionListener {
      * @param ctController the CustomTimerController
      * @param timer the timer being stopped
      * @param timerText the label displaying the time
-     * @param goToBreakMenuButton the break menu button on the timer screen
+     * @param breakMenuButton the break menu button on the timer screen
      * @param customTimerConfirmButton the confirm button on the timer screen
      * @param presetLongButton the long preset button on the timer screen
      * @param presetMediumButton the medium preset button on the timer screen
@@ -50,7 +50,7 @@ public class EndTimerButtonListener implements ActionListener {
      * @param endTimerButton the end timer button on the timer screen
      */
     public EndTimerButtonListener(PresetTimerController ptController, CustomTimerController ctController, Timer timer,
-                                  JLabel timerText, JButton goToBreakMenuButton, JButton customTimerConfirmButton,
+                                  JLabel timerText, JButton breakMenuButton, JButton customTimerConfirmButton,
                                   JButton presetLongButton, JButton presetMediumButton, JButton presetShortButton,
                                   JButton startTimerButton, JFormattedTextField customTimerTextField,
                                   JButton endTimerButton) {
@@ -58,7 +58,7 @@ public class EndTimerButtonListener implements ActionListener {
         this.ctController = ctController;
         this.timer = timer;
         this.timerText = timerText;
-        this.goToBreakMenuButton = goToBreakMenuButton;
+        this.breakMenuButton = breakMenuButton;
         this.customTimerConfirmButton = customTimerConfirmButton;
         this.presetLongButton = presetLongButton;
         this.presetMediumButton = presetMediumButton;
@@ -77,7 +77,7 @@ public class EndTimerButtonListener implements ActionListener {
         ctController.endTimer();
         timer.stop();
         timerText.setText("00:00:00");
-        goToBreakMenuButton.setVisible(true);
+        breakMenuButton.setVisible(true);
         SetInteractabilityHelper setInteractabilityHelper = new SetInteractabilityHelper(customTimerConfirmButton,
                 presetLongButton, presetMediumButton, presetShortButton, startTimerButton, customTimerTextField,
                 endTimerButton);

@@ -15,7 +15,7 @@ public class TimerPanel extends JPanel {
      */
     JPanel mainPanel;
     public JLabel timerText;
-    JProgressBar progressBar;
+    public JProgressBar progressBar;
     public JButton presetShortButton;
     public JButton customTimerConfirmButton;
     public JButton presetLongButton;
