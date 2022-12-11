@@ -1,4 +1,5 @@
 package UI.screens;
+import UI.screens.panels.StatsDisplayScreen;
 import UI.screens.timer_screen.TimerPanel;
 import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
@@ -7,11 +8,16 @@ import UI.screens.panels.settings.SettingsScreen;
 import entities.FightingStatsInitializer;
 import entities.MusicPlayer;
 import entities.StatsUser;
+import screens.StatsDisplayController;
+import screens.StatsDisplayPresenter;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;
 import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;
+import use_cases.stats_display_use_case.StatsDisplayInputBoundary;
+import use_cases.stats_display_use_case.StatsDisplayInteractor;
+import use_cases.stats_display_use_case.StatsDisplayOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +59,8 @@ public class GameMain {
 
         FightBossScreen fightBossScreen = new FightBossScreen(card, mainPanel);
 
+        StatsDisplayScreen statsScreen = new StatsDisplayScreen(card, mainPanel);
+
         // ===== all settings =====
         SettingsScreen startSettingsScreen =
                 new SettingsScreen(card, mainPanel, cGRM, "Start", player);
@@ -69,6 +77,8 @@ public class GameMain {
         mainPanel.add(startScreen, "Start");
 
         mainPanel.add(fightBossScreen, "Fight Boss");
+
+        mainPanel.add(statsScreen, "Stats");
 
         mainFrame.add(mainPanel);
         card.show(mainPanel, "Start");
