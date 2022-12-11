@@ -1,12 +1,11 @@
 package UI.screens.panels.breaks;
 
 import entities.StatsUser;
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
-import inventorymenu.inventoryitem.ShopInventoryFile;
-import inventorymenu.inventoryitem.PlayerInventoryFile;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.file_checker.ValidStats;
+import use_cases.buy_menu.BuyMenuButtonController;
+import use_cases.buy_menu.BuyMenuGoldUpdater;
+import use_cases.buy_menu.BuyMenuPlayerInvUpdater;
+import use_cases.buy_menu.BuyMenuShopInvInitializer;
 import inventorymenu.inventoryitem.InventoryItem;
 import use_cases.save_game.StatSave;
 
@@ -18,7 +17,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * The screen for displaying the Buy Menu from the Shop Menu.
@@ -26,31 +24,27 @@ import java.util.Map;
  * in exchange for the user's gold from Stats, which are sent to their
  * PlayerInventoryFile.
  */
-public class BuyMenuScreen extends JPanel implements ListSelectionListener, ActionListener {
+public class BuyMenuScreen extends JPanel implements ListSelectionListener {
     /**
      * Elements of the BuyMenuScreen.
      */
     CardLayout card;
     JPanel parentPanel;
-
     Frame frame;
 
-    static JList<String> list;
-    static int index;
-    static JLabel selectedItem;
-    static JLabel cost;
+    int index;
+    JLabel userGold;
 
-    static JLabel userGold;
+    JList<String> list;
+    JLabel selectedItem;
+    JLabel cost;
 
-    static ValidStats stats;
-    static StatSave statSave;
-    static StatsUser statsUser;
-    static Map<String, Integer> statsMap;
-    ErrorOutputBoundary presenter;
-    static ArrayList<InventoryItemDsRequestModel> shopInventory;
+    ArrayList<InventoryItemDsRequestModel> shopInventory;
+    ArrayList<InventoryItemDsRequestModel> playerInventory;
 
-    static PlayerInventoryFile playerInventoryFile;
-    static ArrayList<InventoryItemDsRequestModel> playerInventory;
+    BuyMenuPlayerInvUpdater buyMenuPlayerInvUpdater;
+    BuyMenuGoldUpdater buyMenuGoldUpdater;
+    BuyMenuShopInvInitializer buyMenuShopInvInitializer;
 
 
     /**
@@ -65,53 +59,15 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         JPanel shopPanel = new JPanel();
         JPanel topPanel = new JPanel();
 
-        this.presenter = presenter;
+        buyMenuShopInvInitializer = new BuyMenuShopInvInitializer();
+        buyMenuPlayerInvUpdater = new BuyMenuPlayerInvUpdater();
+        buyMenuGoldUpdater = new BuyMenuGoldUpdater();
 
-
-        // ----- Initialize Gold Values -----
-        stats = new ValidStats("stats.csv", presenter);
-
-        if (stats.isPlayable()) {
-            statsMap = stats.load();
-        } else {
-            presenter.error("File doesn't exist.");
-        }
-
-        statSave = new StatSave(statsMap, presenter);
-        statsUser = new StatsUser(statsMap);
-
-
-        // ----- Initialize Files for List Generation -----
-        // NOTE: MOVE THIS TO SHOP MENU THESE ARE INTERACT
-        // Shop Inventory
-        ShopInventoryFile shopInventoryFile = new ShopInventoryFile("ShopInventory.csv");
-        shopInventoryFile.initialize();
-        shopInventoryFile.readInventoryList();
-        PlayerDisplayInventoryDsRequestModel shopIterator = shopInventoryFile.getInventoryListIterator();
-        shopInventory = new ArrayList<>();
-        while (shopIterator.hasNext()) {
-            shopInventory.add(shopIterator.getNext());
-        }
-
-        // Player Inventory
-        playerInventoryFile =  new PlayerInventoryFile("PlayerInventory.csv");
-        playerInventoryFile.readInventoryList();
-        PlayerDisplayInventoryDsRequestModel playerIterator = playerInventoryFile.getInventoryListIterator();
-        playerInventory = new ArrayList<>();
-        while (playerIterator.hasNext()) {
-            playerInventory.add(playerIterator.getNext());
-        }
-
-
-        // Displays shop items
-        ArrayList<String> displayShopItems = new ArrayList<>();
-        for (InventoryItemDsRequestModel inventoryItemDsRequestModel : shopInventory) {
-            displayShopItems.add(inventoryItemDsRequestModel.getName());
-        }
-
+        shopInventory = buyMenuShopInvInitializer.getShopInventory();
+        playerInventory = buyMenuPlayerInvUpdater.getPlayerInventory();
 
         // ----- List Selection -----
-        list = new JList(displayShopItems.toArray());
+        list = new JList(buyMenuShopInvInitializer.DisplayShopItems().toArray());
 
         list.clearSelection();
         list.addListSelectionListener(this);
@@ -120,7 +76,10 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
         // ----- Buy Button -----
         JButton buyButton = new JButton("Buy Selected Item");
-        buyButton.addActionListener(this);
+        BuyMenuButtonController buyMenuButtonController = new BuyMenuButtonController(card,
+                parentPanel, index, userGold);
+        buyButton.addActionListener(buyMenuButtonController);
+//        buyButton.addActionListener(indexGetter);
 
 
         // ---- Initialize Components -----
@@ -137,7 +96,7 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
 
         selectedItem = new JLabel("Selected: ");
         cost = new JLabel("Cost: ");
-        userGold = new JLabel("Your Gold: " + statsMap.get("gold"));
+        userGold = new JLabel("Your Gold: " + buyMenuGoldUpdater.getUserGold());
 
 
         // ----- Initialize Layouts -----
@@ -187,39 +146,38 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener, Acti
         selectedItem.setText("Selected: " + list.getSelectedValue());
         index = list.getSelectedIndex();
         cost.setText("Cost: " + shopInventory.get(index).getGoldValue() + " Gold");
+        repaint();
     }
 
     // ----- Button -----
-    public void actionPerformed(ActionEvent e) {
-        if (playerInventoryFile.inventoryFull()) {
-            JOptionPane.showMessageDialog(frame,
-                    "You do not have enough space in your inventory!",
-                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
-        } else if (statsMap.get("gold") < shopInventory.get(index).getGoldValue() ) {
-            JOptionPane.showMessageDialog(frame,
-                    "You do not have enough gold!",
-                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
-        } else {
-            System.out.println("Item " + shopInventory.get(index).getName() +
-                    " successfully added.");
-
-            playerInventoryFile.save(new InventoryItem(
-                    shopInventory.get(index).getType(),
-                    shopInventory.get(index).getName(),
-                    shopInventory.get(index).getEffect(),
-                    shopInventory.get(index).getGoldValue(),
-                    shopInventory.get(index).checkIsEquipped()
-            ));
-
-            statsUser.updateGold(-shopInventory.get(index).getGoldValue());
-            StatSave newStats = new StatSave(statsUser.getUserStats(), presenter);
-            newStats.save("stats.csv");
-
-            statsMap = stats.load();
-            statSave = new StatSave(statsMap, presenter);
-            statsUser = new StatsUser(statsMap);
-
-            userGold.setText("Your Gold: " + statsMap.get("gold"));
-        }
-    }
+//    public void actionPerformed(ActionEvent e) {
+//        if (playerInventoryFile.inventoryFull()) {
+//            JOptionPane.showMessageDialog(frame,
+//                    "You do not have enough space in your inventory!",
+//                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
+//        } else if (statsMap.get("gold") < shopInventory.get(index).getGoldValue() ) {
+//            JOptionPane.showMessageDialog(frame,
+//                    "You do not have enough gold!",
+//                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
+//        } else {
+//            // call interactor
+//            playerInventoryFile.save(new InventoryItem(
+//                    shopInventory.get(index).getType(),
+//                    shopInventory.get(index).getName(),
+//                    shopInventory.get(index).getEffect(),
+//                    shopInventory.get(index).getGoldValue(),
+//                    shopInventory.get(index).checkIsEquipped()
+//            ));
+//
+//            statsUser.updateGold(-shopInventory.get(index).getGoldValue());
+//            StatSave newStats = new StatSave(statsUser.getUserStats(), presenter);
+//            newStats.save("stats.csv");
+//
+//            statsMap = stats.load();
+//            statSave = new StatSave(statsMap, presenter);
+//            statsUser = new StatsUser(statsMap);
+//            // controller
+//            userGold.setText("Your Gold: " + statsMap.get("gold"));
+//        }
+//    }
 }
