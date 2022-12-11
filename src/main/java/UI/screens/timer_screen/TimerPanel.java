@@ -35,9 +35,9 @@ public class TimerPanel extends JPanel {
      */
     JPanel parentPanel;
 
-    CustomTimerController customTimerController;
-    PresetTimerController presetTimerController;
-    TimerPresenter timerPresenter;
+    public CustomTimerController customTimerController;
+    public PresetTimerController presetTimerController;
+    public TimerPresenter timerPresenter;
 
     /**
      * Constructor for TimerPanel. Sets up various elements on the panel and adds listeners to them using helper method
