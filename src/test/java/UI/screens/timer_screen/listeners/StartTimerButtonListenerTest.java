@@ -23,7 +23,7 @@ class StartTimerButtonListenerTest {
                 tp.presetMediumButton, tp.presetShortButton, tp.startTimerButton, tp.customTimerTextField,
                 tp.endTimerButton);
         startTimerButtonListener.actionPerformed(e);
-        assertDoesNotThrow(() -> startTimerButtonListener.actionPerformed(e));
+        //assertDoesNotThrow(() -> startTimerButtonListener.actionPerformed(e));
         assertTrue(tp.timer.isRunning());
         assertFalse(tp.customTimerConfirmButton.isEnabled());
         assertFalse(tp.presetLongButton.isEnabled());
