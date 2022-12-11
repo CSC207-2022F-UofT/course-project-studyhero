@@ -1,10 +1,7 @@
 package controllers;
 
 import UI.screens.panels.ConfirmationWindowView;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;
@@ -31,15 +28,15 @@ public class NewGameControllerTest {
     JPanel panel = new JPanel();
     JPanel storyPanel = new JPanel();
     ErrorOutputBoundary presenter = new ErrorPresenter();
-    String statsFilepath = "statsTest.csv";
-    String plyrInvFilepath = "PlayerInventoryTest.csv";
-    String shpInvFilepath = "ShopInventoryTest.csv";
-    String fightStatsFilepath = "fightStatsTest.csv";
+    static String statsFilepath = "statsTest.csv";
+    static String plyrInvFilepath = "PlayerInventoryTest.csv";
+    static String shpInvFilepath = "ShopInventoryTest.csv";
+    static String fightStatsFilepath = "fightStatsTest.csv";
 
-    private File statsFile = new File(statsFilepath);
-    private File plyrInvFile = new File(plyrInvFilepath);
-    private final File shpInvFile = new File(shpInvFilepath);
-    private File fightStatsFile = new File(fightStatsFilepath);
+    private static File statsFile = new File(statsFilepath);
+    private static File plyrInvFile = new File(plyrInvFilepath);
+    private static final File shpInvFile = new File(shpInvFilepath);
+    private static File fightStatsFile = new File(fightStatsFilepath);
     ValidFileDsGateway statsUC =
             new ValidStats(statsFilepath, presenter);
     ValidFileDsGateway plyrInvUC =
@@ -155,21 +152,15 @@ public class NewGameControllerTest {
         write(shpInvFilepath, invShpCont);
         write(fightStatsFilepath, invFightCont);
     }
-
     @BeforeEach
     public void SetUp(){
         confirmationWindow = new ConfirmationWindowView("confirm",
                 card, panel, presenter);
         panel.setLayout(card);
         panel.add(storyPanel, "Story");
-        if(statsFile.exists()){Assertions.assertTrue(statsFile.delete());}
-        if(plyrInvFile.exists()){Assertions.assertTrue(plyrInvFile.delete());}
-        if(shpInvFile.exists()){Assertions.assertTrue(shpInvFile.delete());}
-        if(fightStatsFile.exists()){Assertions.assertTrue(fightStatsFile.delete());}
     }
-
     @AfterEach
-    public void deleteFiles(){
+    public void cleanUp(){
         statsFile.deleteOnExit();
         plyrInvFile.deleteOnExit();
         shpInvFile.deleteOnExit();
@@ -210,31 +201,6 @@ public class NewGameControllerTest {
         Assertions.assertTrue(gameCheck.check());
         controller.actionPerformed(e1);
         Assertions.assertTrue(confirmationWindow.isVisible());
-    }
-    @Test
-    public void NewFilesCreatedFromNonExistentFiles(){
-        Assertions.assertTrue((!statsFile.exists() && !plyrInvFile.exists()
-                && !fightStatsFile.exists()));
-        GameCheckInputBoundary gameCheck =
-                new GameCheckInteractor(statsUC, plyrInvUC, fightStatsUC);
-        NewGameInputBoundary newGame =
-                new NewGame(statsUC, plyrInvUC, shpInvUC, fightStatsUC, presenter);
-
-        NewGameController controller = new NewGameController(card, panel,
-                gameCheck, newGame, confirmationWindow);
-        controller.setStatsPath(statsFilepath);
-        controller.setPlyrInvPath(plyrInvFilepath);
-        controller.setShpInvPath(shpInvFilepath);
-        controller.setFightStatsPath(fightStatsFilepath);
-        ActionEvent e1 = new ActionEvent(new Object(), 1, "confirm");
-
-        Assertions.assertFalse(gameCheck.check());
-        controller.actionPerformed(e1);
-        Assertions.assertFalse(confirmationWindow.isVisible());
-
-        Assertions.assertTrue((shpInvFile.exists()&& plyrInvFile.exists()
-                && shpInvFile.exists() && fightStatsFile.exists()));
-        Assertions.assertEquals(panel.getComponent(0), storyPanel);
     }
 
     @Test
