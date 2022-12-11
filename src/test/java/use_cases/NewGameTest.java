@@ -57,7 +57,6 @@ public class NewGameTest {
         } catch (IOException e){
             presenter.error(e.toString());
         }
-
     }
     public void deleteFiles(){
         stats.deleteOnExit();

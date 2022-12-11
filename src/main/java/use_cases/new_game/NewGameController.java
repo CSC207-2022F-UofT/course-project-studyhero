@@ -75,7 +75,8 @@ public class NewGameController implements ActionListener {
         else{
             newGameUseCase.newGame(statsPath, plyrInvPath,
                     shpInvPath, fightStatsPath);
-            card.show(parentPanel, "Story");
+            try{card.show(parentPanel, "Story");}
+            catch(HeadlessException ignored){}
         }
     }
 }
