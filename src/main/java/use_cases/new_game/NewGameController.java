@@ -1,7 +1,7 @@
 package use_cases.new_game;
 
 import use_cases.game_check.GameCheckInputBoundary;
-import use_cases.new_game.confirmation_window.ConfirmationWindowInputBoundary;
+import UI.screens.panels.ConfirmationWindowView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class NewGameController implements ActionListener {
     private final JPanel parentPanel;
     private final GameCheckInputBoundary gameCheckUseCase;
     private final NewGameInputBoundary newGameUseCase;
-    private final ConfirmationWindowInputBoundary confirmationUseCase;
+    private final ConfirmationWindowView confirmationView;
 
     private String statsPath = "stats.csv";
     private String plyrInvPath = "PlayerInventory.csv";
@@ -32,17 +32,17 @@ public class NewGameController implements ActionListener {
      *                              contains the next screen
      * @param gameCheckUseCase      Checks for valid game files
      * @param newGameUseCase        Generates all necessary game files
-     * @param confirmationUseCase   Presents to the user a confirmation window
+     * @param confirmationView   Presents to the user a confirmation window
      */
     public NewGameController(CardLayout card, JPanel parentPanel,
                              GameCheckInputBoundary gameCheckUseCase,
                              NewGameInputBoundary newGameUseCase,
-                             ConfirmationWindowInputBoundary confirmationUseCase){
+                             ConfirmationWindowView confirmationView){
         this.gameCheckUseCase = gameCheckUseCase;
         this.newGameUseCase = newGameUseCase;
         this.card = card;
         this.parentPanel = parentPanel;
-        this.confirmationUseCase = confirmationUseCase;
+        this.confirmationView = confirmationView;
     }
 
     public String getStatsPath() {return statsPath;}
@@ -70,7 +70,7 @@ public class NewGameController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameCheckUseCase.check()){
-            confirmationUseCase.createWindow();
+            confirmationView.viewWindow();
         }
         else{
             newGameUseCase.newGame(statsPath, plyrInvPath,
