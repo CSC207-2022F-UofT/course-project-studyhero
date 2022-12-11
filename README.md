@@ -5,7 +5,7 @@ The program is a productivity timer with an adventure game aspect, letting a use
 The character should have stats the user can access that see how strong they are and what equipment they have. These stats determine their ability to defeat bosses. The user should be able to change the timer settings to match how much time they want to study and save their progress if they want to keep how long they’ve studied for using the program.
 
 ## Features
-- Timer: Start, pause, or early end a timer. After the timer is complete, it should go to the break menu. There is also the ability to change the timer duration to be different from the default 25 minutes.
+- Timer: Start, pause, or end the timer early. After the timer is complete, the user can click a button to go to the break menu. The user can select from three different preset timer durations or set their own duration.
 - Inventory: Have access to different types of items, including equippable items and consumables, that the user can equip or use.
 - Stats: Stats that the user has and can level up as they continue to study and progress with the bosses. This also includes things like the user's gold and the stats for the Boss that the user can fight during their breaks.
 - Dialogue: A series of dialogue options that the user can see during their breaks, study times, boss fights, etc.
@@ -34,7 +34,8 @@ Some of the features of the program are not yet complete due to the core mechani
 
 - The Boss Fight Menu relies on the Stats and Inventory Menu in order to function, since the Boss and Player has different stats that needed to be accounted for in the combat. Similar to the Shop Menu, since the implementations for the two features are almost complete, once the final commits and merges are made, then the feature can be fully completed.
 
-- The Timer is also currently having issues between the interactor and the controller and thus the Start Timer button does not work. However, all other implementations of the feature have been tested and seem to function correctly, so once the bug has been fixed the Timer will be fully completed.
+~~- The Timer is also currently having issues between the interactor and the controller and thus the Start Timer button does not work. However, all other implementations of the feature have been tested and seem to function correctly, so once the bug has been fixed the Timer will be fully completed.~~
+The code for the timer has been refactored and updated so that there are no dependence violations and the timer is now working.
 
 However, since most of the implementations for the dependencies are now completed for the most part, these features can definitely be implemented by the final deadline for the project.
 
