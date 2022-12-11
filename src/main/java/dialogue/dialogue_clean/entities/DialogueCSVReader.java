@@ -13,12 +13,12 @@ Adding <String, String> to the declaration still gives a warning.
  */
 
 public class DialogueCSVReader {
-    String path = "DialogueText.csv";
+    // String path = "DialogueText.csv";
     String line;
     BufferedReader br;
     public HashMap<String, String> dialogueMap = new HashMap<>();
 
-    public DialogueCSVReader() {
+    public DialogueCSVReader(String path) {
 
         try {
             br = new BufferedReader(new FileReader(path));
@@ -32,6 +32,5 @@ public class DialogueCSVReader {
         }
     }
 
-    public HashMap getDialogues() {
-        return dialogueMap;}
+    public HashMap getDialogues() {return dialogueMap;}
 }

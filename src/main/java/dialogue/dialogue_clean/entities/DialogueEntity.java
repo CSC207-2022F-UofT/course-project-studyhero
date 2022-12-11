@@ -2,7 +2,7 @@ package dialogue.dialogue_clean.entities;
 import java.util.HashMap;
 
 /*
-Entities for dialogue, keeps track of which dialogue screen the player is in,
+Entities for the default dialogue, keeps track of which dialogue screen the player is in,
 and has DialogueText.csv as a HashMap.
 
 About Warnings:
@@ -10,11 +10,13 @@ About Warnings:
 Adding <String, String> to the declaration still gives a warning.
  */
 
-public class DialogueEntity {
+public class DialogueEntity extends DialogueEntityAbstract {
 
     String playerPosition;
-    DialogueCSVReader csvReader = new DialogueCSVReader();
+    DialogueCSVReader csvReader = new DialogueCSVReader("DialogueText.csv");
     HashMap dialogueMap;
+
+    public DialogueEntity() {dialogueMap = getDialogueMap();}
 
     public String getPlayerPosition() { return this.playerPosition; }
 
