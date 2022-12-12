@@ -1,29 +1,57 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.TimerRequestModel;
+import Timer.timer_use_cases.CustomTimerRequestModel;
 import Timer.timer_use_cases.TimerInteractor;
-import Timer.timer_use_cases.TimerResponseModel;
 
+/**
+ * Controller class for the custom portion of the timer.
+ */
 public class CustomTimerController {
-    private TimerRequestModel tRequestModel;
-    private TimerInteractor tInteractor;
+    /**
+     * The class that stores the inputs from the user.
+     */
+    CustomTimerRequestModel customTimerRequestModel = new CustomTimerRequestModel();
+    /**
+     * The TimerInteractor class.
+     */
+    TimerInteractor timerInteractor;
 
-    public CustomTimerController(TimerRequestModel tRequestModel, TimerResponseModel tResponseModel) {
-        this.tRequestModel = tRequestModel;
-        this.tInteractor = new TimerInteractor(tRequestModel, tResponseModel);
+    /**
+     * Constructor for CustomTimerController.
+     * @param timerInteractor the Interactor that is used by the controller
+     */
+    public CustomTimerController(TimerInteractor timerInteractor) {
+        this.timerInteractor = timerInteractor;
     }
 
-    public void setCustomTime(String time) {
-        tRequestModel.setCustomTime(time);
-    }
-    public String getCustomTime() {
-        return tRequestModel.getCustomTime();
-    }
-
+    /**
+     * Starts the timer using the startTimer method of timerInteractor.
+     */
     public void startTimer() {
-        tInteractor.startTimer();
+        timerInteractor.setTimer(customTimerRequestModel.getCustomTime());
+        timerInteractor.startTimer();
     }
+
+    /**
+     * End the timer using the startTimer method of timerInteractor.
+     */
     public void endTimer() {
-        tInteractor.endTimer();
+        timerInteractor.endTimer();
+    }
+
+    /**
+     * Sets the customTime in timerRequestModel to time.
+     * @param time the time that the user entered
+     */
+    public void setCustomTime(String time) {
+        customTimerRequestModel.setCustomTime(time);
+    }
+
+    /**
+     * Gets the customTime from timerRequestModel.
+     * @return the customTime from timerRequestModel
+     */
+    public String getCustomTime() {
+        return customTimerRequestModel.getCustomTime();
     }
 }
