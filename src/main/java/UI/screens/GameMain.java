@@ -1,4 +1,5 @@
 package UI.screens;
+import UI.screens.panels.StatsDisplayScreen;
 import UI.screens.timer_screen.TimerPanel;
 import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
@@ -54,6 +55,8 @@ public class GameMain {
 
         FightBossScreen fightBossScreen = new FightBossScreen(card, mainPanel);
 
+        StatsDisplayScreen statsScreen = new StatsDisplayScreen(card, mainPanel);
+
         // ===== all settings =====
         SettingsScreen startSettingsScreen =
                 new SettingsScreen(card, mainPanel, cGRM, "Start", player);
@@ -70,6 +73,8 @@ public class GameMain {
         mainPanel.add(startScreen, "Start");
 
         mainPanel.add(fightBossScreen, "Fight Boss");
+
+        mainPanel.add(statsScreen, "Stats");
 
         mainFrame.add(mainPanel);
         card.show(mainPanel, "Start");

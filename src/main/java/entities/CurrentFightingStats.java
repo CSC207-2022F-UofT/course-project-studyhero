@@ -39,9 +39,9 @@ public class CurrentFightingStats implements FightingStats{
         System.out.println("cock");
         Map<String, Integer> userStats = getPlayerStats(newFile);
         BossClass bossClass = new BossClass(userStats.get("level"));
-        this.maxHP = userStats.get("hp");
-        this.playerHP = userStats.get("hp");
-        this.playerDamage = userStats.get("damage");
+        this.maxHP = userStats.get("maxHp");
+        this.playerHP = userStats.get("maxHp");
+        this.playerDamage = userStats.get("baselineDamage");
         this.playerDefence = userStats.get("defence");
         this.bossHP = bossClass.maxHp;
         this.bossDamage = bossClass.damage;
