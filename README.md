@@ -19,7 +19,7 @@ The character should have stats the user can access that see how strong they are
 **For more info on gameplay, check out [our wiki](https://github.com/CSC207-2022F-UofT/course-project-studyhero/wiki)!**
 
 ## Running the Code
-The program can be run from the class GameMain.java.
+The program can be run from the class GameMain.java. This class is currently found in the "UI/screens" package. 
 
 ## Design
 See our [Design Wiki](https://github.com/CSC207-2022F-UofT/course-project-studyhero/wiki/Design) for info on our major design decisions (Clean Architecture, SOLID, packaging etc.).
