@@ -7,15 +7,19 @@ import java.io.File;
 import java.io.IOException;
 
 public class MusicPlayer {
-    private Long currentPos;
     private Clip clip;
-    String status;
-    AudioInputStream inputStream;
-    String filepath;
-    ErrorOutputBoundary presenter;
+    private String status;
+    private AudioInputStream inputStream;
+    private String filepath;
 
+    /**
+     * Creates a MusicPlayer object that plays music of wav file with
+     * filepath name, and presents an error if the file is invalid.
+     *
+     * @param filepath filepath of .wav file
+     * @param presenter output boundary if error occurs
+     */
     public MusicPlayer(String filepath, ErrorOutputBoundary presenter){
-        this.presenter = presenter;
 
         try {
             this.filepath = filepath;
@@ -34,16 +38,20 @@ public class MusicPlayer {
 
     public String getStatus(){return status;}
     public void setStatus(String newStatus){status = newStatus;}
-    public Long getCurrentPos(){return currentPos;}
-    public void setCurrentPos(Long Pos){currentPos = Pos;}
     public Clip getClip(){return clip;}
 
+    /**
+     *  Starts playing the music of the filepath.
+     */
 
     public void play(){
         clip.start();
         status = "play";
     }
 
+    /**
+     * Resets the music to the beginning of the file.
+     */
     public void resetAudioStream()
     {
         try {

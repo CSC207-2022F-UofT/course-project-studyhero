@@ -13,18 +13,32 @@ public class ShopMenuScreen extends JPanel {
         JLabel title = new JLabel("Shop Menu");
         this.add(title);
 
-        JButton buyMenu = new JButton("Buy Items");
-        buyMenu.addActionListener(e -> card.show(parentPanel, "Buy Menu"));
+        //frame = new Frame("Sell Menu Warning");
+        CardLayout newCard = new CardLayout();
+        JPanel newPanel = new JPanel();
+        newPanel.setLayout(newCard);
+        JPanel menuPanel = new JPanel();
 
-        JButton sellMenu = new JButton("Sell Items");
-        sellMenu.addActionListener(e -> card.show(parentPanel, "Sell Menu"));
+        // ===== Initialise A Buy Menu =====
+
+        JButton buyMenu = new JButton("Buy Items");
+
+        buyMenu.addActionListener(e ->
+            {BuyMenuScreen buyMenuScreen = new BuyMenuScreen(newCard, newPanel);
+            newPanel.add(buyMenuScreen, "Buy Menu");
+            newCard.show(newPanel, "Buy Menu");});
 
         JButton backToBreak = new JButton("Back");
         backToBreak.addActionListener(e -> card.show(parentPanel, "Break"));
 
-        this.add(buyMenu);
-        this.add(sellMenu);
-        this.add(backToBreak);
+        menuPanel.add(title);
+        menuPanel.add(buyMenu);
+        menuPanel.add(sellMenu);
+        menuPanel.add(backToBreak);
+        newPanel.add(menuPanel, "Shop Menu");
+
+        newCard.show(newPanel, "Shop Menu");
+        this.add(newPanel);
 
     }
 }

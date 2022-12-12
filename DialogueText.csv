@@ -1,0 +1,5 @@
+player-position,dialogue-text
+intro-story,You are a hero set on killing The Bad Monster(tm). \n After countless defeats you've decided to put away your sword in its sheath to embark on a journey of study.\n\nWhat better way for success \n than to meticulously study your enemy's weaknesses?
+intro-story2,Go forth and try your best to focus. \n Your dignity is on the line.
+boss-fight-victory,Victory! \n\n Congratulations! You defeated this monster. \n\n What do you wish to do next?
+boss-fight-defeat,Defeat \n\n You failed to defeat this monster. Try again after another study session!

@@ -16,6 +16,11 @@ public class FightingStatsInitializer {
 
     private final int bossDamage;
 
+    /**
+     * creates a FightingStatsInitializer object that has 0 base stats
+     * for each parameter maxHealth, playerHealth, playerDamage,
+     * playerDefence,bossHealth, and bossDamage
+     */
     public FightingStatsInitializer(){
         this.maxHealth = 0;
         this.playerHealth= 0;
@@ -25,6 +30,10 @@ public class FightingStatsInitializer {
         this.bossDamage = 0;
     }
 
+    /**
+     * @return Map of integers with String keys that represent the
+     * stats of the FightingStatsInitializer object
+     */
     public Map<String, Integer> initialize(){
         Map<String, Integer> fightStatsMap = new HashMap<>();
         fightStatsMap.put("maxHealth", this.maxHealth);
