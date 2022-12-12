@@ -99,6 +99,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public void save(InventoryItem item) {
+        updateInventoryList();
         if (!inventoryFull()) {
             inventoryList.add(item);
         }
@@ -156,6 +157,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public boolean inventoryFull() {
+        updateInventoryList();
         return CheckLatestInventoryItemId() >= 20;
     }
 
@@ -197,6 +199,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
      */
     @Override
     public boolean itemEquipable(int id) {
+        updateInventoryList();
         return inventoryList.get(id-1).getType().equals("Weapon") ||
                 inventoryList.get(id-1).getType().equals("Shield");
     }
@@ -208,6 +211,7 @@ public class PlayerInventoryFile implements InventoryList, InitializePlayerInven
     @Override
     public int equipItem(int id) {
         int diff = 0;
+        updateInventoryList();
         for(InventoryItem item : inventoryList){
             //Unequipped the item with the same type
             if(item.getType().equals(inventoryList.get(id - 1).getType())){
