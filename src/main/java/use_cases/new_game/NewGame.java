@@ -1,7 +1,6 @@
 package use_cases.new_game;
 
-import entities.CurrentFightingStats;
-import entities.FightingStatsInitializer;
+import use_cases.boss_fight.FightingStatsInitializer;
 import entities.StatsUser;
 import inventorymenu.inventoryitem.*;
 import use_cases.errors.ErrorOutputBoundary;

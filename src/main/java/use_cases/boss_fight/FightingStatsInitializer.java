@@ -1,8 +1,11 @@
-package entities;
+package use_cases.boss_fight;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * An initializer interactor for the fightStats.csv file that creates a new file and sets all the values for it to zero
+ */
 public class FightingStatsInitializer {
     private final int maxHealth;
 
@@ -16,6 +19,9 @@ public class FightingStatsInitializer {
 
     private final int bossDamage;
 
+    /**
+     * A constructor that sets all the values to zero
+     */
     public FightingStatsInitializer(){
         this.maxHealth = 0;
         this.playerHealth= 0;
@@ -25,6 +31,10 @@ public class FightingStatsInitializer {
         this.bossDamage = 0;
     }
 
+    /**
+     * Takes all the values of zero and adds them to a hashmap that it then returns
+     * @return HashMap of the fightStats.csv file set to all zero's
+     */
     public Map<String, Integer> initialize(){
         Map<String, Integer> fightStatsMap = new HashMap<>();
         fightStatsMap.put("maxHealth", this.maxHealth);
