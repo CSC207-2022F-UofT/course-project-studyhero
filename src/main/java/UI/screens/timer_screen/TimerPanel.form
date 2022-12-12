@@ -72,7 +72,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="End Timer"/>
+          <text value="End timer"/>
         </properties>
       </component>
       <hspacer id="db574">
@@ -106,7 +106,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Start Timer"/>
+          <text value="Start timer"/>
         </properties>
       </component>
       <grid id="15382" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

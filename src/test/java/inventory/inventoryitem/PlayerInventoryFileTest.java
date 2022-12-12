@@ -1,9 +1,9 @@
 package inventory.inventoryitem;
 
-import inventory.inventory_item.entities.InventoryItem;
-import inventory.inventory_item.entities.PlayerInventoryFile;
+import inventory.entities.InventoryItem;
+import inventory.entities.PlayerInventoryFile;
 import org.junit.jupiter.api.AfterEach;
-import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+import inventory.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

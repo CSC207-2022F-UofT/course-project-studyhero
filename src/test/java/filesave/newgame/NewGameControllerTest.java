@@ -2,17 +2,17 @@ package filesave.newgame;
 
 import UI.screens.panels.ConfirmationWindowView;
 import org.junit.jupiter.api.*;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidShopInventory;
-import use_cases.file_checker.ValidStats;
-import use_cases.game_check.GameCheckInputBoundary;
-import use_cases.game_check.GameCheckInteractor;
-import use_cases.new_game.NewGame;
-import use_cases.new_game.NewGameController;
-import use_cases.new_game.NewGameInputBoundary;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidPlayerInventory;
+import filesaver.usecases.file_checker.ValidShopInventory;
+import filesaver.usecases.file_checker.ValidStats;
+import filesaver.usecases.game_check.GameCheckInputBoundary;
+import filesaver.usecases.game_check.GameCheckInteractor;
+import filesaver.usecases.new_game.NewGame;
+import filesaver.usecases.new_game.NewGameController;
+import filesaver.usecases.new_game.NewGameInputBoundary;
 
 import javax.swing.*;
 import java.awt.*;

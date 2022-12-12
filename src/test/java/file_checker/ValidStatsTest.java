@@ -1,9 +1,9 @@
 package file_checker;
 
 import org.junit.jupiter.api.*;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidStats;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidStats;
 
 import java.io.File;
 import java.io.FileNotFoundException;

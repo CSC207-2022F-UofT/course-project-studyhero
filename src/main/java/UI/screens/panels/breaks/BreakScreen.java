@@ -1,6 +1,6 @@
 package UI.screens.panels.breaks;
 
-import UI.screens.inventoryscreens.InventoryPanel;
+import inventory.inventoryscreens.InventoryPanel;
 import UI.screens.panels.StatsDisplayScreen;
 import bossfight.*;
 
@@ -27,7 +27,7 @@ public class BreakScreen extends JPanel {
         JLabel title = new JLabel("Time to take a break...");
 
         JButton studyMenu = new JButton("To Another Adventure!");
-        studyMenu.addActionListener(e -> card.show(parentPanel, "Timer"));
+        studyMenu.addActionListener(e -> card.show(parentPanel, "timer"));
 
         JButton shopMenu = new JButton("Shop");
         shopMenu.addActionListener(e -> card.show(parentPanel, "Shop Menu"));

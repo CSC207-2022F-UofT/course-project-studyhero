@@ -1,13 +1,13 @@
 package file_checker;
 
 import org.junit.jupiter.api.*;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidShopInventory;
-import use_cases.file_checker.ValidStats;
-import use_cases.new_game.NewGame;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidPlayerInventory;
+import filesaver.usecases.file_checker.ValidShopInventory;
+import filesaver.usecases.file_checker.ValidStats;
+import filesaver.usecases.new_game.NewGame;
 
 import java.io.*;
 
@@ -35,7 +35,7 @@ public class NewGameTest {
             new ValidStats(fightStatsFilepath, presenter);
 
     NewGame newGame = new NewGame(statsFile, playerInventoryFile,
-            shopInventoryFile, fightStatsFile, presenter);
+            fightStatsFile, presenter);
 
     public String read(File file){
         try {

@@ -8,11 +8,11 @@ import UI.screens.panels.settings.SettingsScreen;
 import bossfight.FightingStatsInitializer;
 import settings.music.entities.MusicPlayer;
 import stats.entities.StatsUser;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidStats;
-import use_cases.save_game.StatSave;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidStats;
+import filesaver.usecases.save_game.StatSave;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,7 +65,7 @@ public class GameMain {
 
 
         mainPanel.add(storyScreen, "Story");
-        mainPanel.add(timerScreen, "Timer");
+        mainPanel.add(timerScreen, "timer");
         mainPanel.add(breakScreen, "Break");
 //        mainPanel.add(changeStatsScreen, "Change Stats");
         mainPanel.add(startSettingsScreen, "Start Settings");

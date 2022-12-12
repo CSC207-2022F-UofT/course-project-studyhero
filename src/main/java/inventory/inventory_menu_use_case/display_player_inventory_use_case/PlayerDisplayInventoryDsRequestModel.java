@@ -1,6 +1,6 @@
 package inventory.inventory_menu_use_case.display_player_inventory_use_case;
 
-import inventory.inventory_item.InventoryItemDsRequestModel;
+import inventory.entities.InventoryItem;
 
 import java.util.ArrayList;
 
@@ -13,28 +13,29 @@ public class PlayerDisplayInventoryDsRequestModel implements InventoryListIterat
     /**
      * @param inventoryList is a list containing inventoryList
      */
-    public PlayerDisplayInventoryDsRequestModel(ArrayList<InventoryItemDsRequestModel> inventoryList) {
+    public PlayerDisplayInventoryDsRequestModel(ArrayList<InventoryItem> inventoryList) {
 
         this.inventoryList = inventoryList;
     }
 
 
-    private ArrayList<InventoryItemDsRequestModel> inventoryList;
+    private ArrayList<InventoryItem> inventoryList;
 
     /**
      * This will update currentPosition by one if hasNext() is true
      * @return inventory_item in the InventoryList[currentPosition]
      */
     @Override
-    public InventoryItemDsRequestModel getNext() {
+    public InventoryItem getNext() {
         if(!hasNext()){
             return null;
         }
 
-        InventoryItemDsRequestModel item = new InventoryItemDsRequestModel(inventoryList.get(currentPosition).getId(),
+        InventoryItem item = new InventoryItem(inventoryList.get(currentPosition).getId(),
                 inventoryList.get(currentPosition).getType(),
                 inventoryList.get(currentPosition).getName(),
-                inventoryList.get(currentPosition).getEffect());
+                inventoryList.get(currentPosition).getEffect(),
+                inventoryList.get(currentPosition).getGoldValue(), inventoryList.get(currentPosition).checkIsEquipped());
 
         currentPosition += 1;
         return item;

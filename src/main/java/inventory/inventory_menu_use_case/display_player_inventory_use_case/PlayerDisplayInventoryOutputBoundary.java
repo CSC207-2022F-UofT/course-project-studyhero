@@ -5,7 +5,6 @@ package inventory.inventory_menu_use_case.display_player_inventory_use_case;
  */
 public interface PlayerDisplayInventoryOutputBoundary {
      /**
-      *
       * @param dsRequestModel is the iterator that will be used to access inventory list
       * @return inventory information using arraylist
       */

@@ -1,6 +1,6 @@
 package stats.usecases.stats_display_use_case;
 
-import use_cases.file_checker.ValidStats;
+import filesaver.usecases.file_checker.ValidStats;
 
 import java.util.Map;
 

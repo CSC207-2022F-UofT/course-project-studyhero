@@ -1,7 +1,7 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.PresetTimerRequestModel;
-import Timer.timer_use_cases.TimerInteractor;
+import timer.timer_use_cases.PresetTimerRequestModel;
+import timer.timer_use_cases.TimerInteractor;
 
 import java.util.HashMap;
 

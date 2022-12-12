@@ -2,9 +2,9 @@
 //
 //import stats.entities.Stats;
 //import stats.entities.StatsUser;
-//import use_cases.errors.ErrorOutputBoundary;
-//import use_cases.file_checker.ValidStats;
-//import use_cases.save_game.StatSave;
+//import errors.usecases.ErrorOutputBoundary;
+//import filesaver.usecases.file_checker.ValidStats;
+//import filesaver.usecases.save_game.StatSave;
 //
 //import java.util.Map;
 //

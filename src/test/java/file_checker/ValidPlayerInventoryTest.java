@@ -1,12 +1,12 @@
 package file_checker;
 
-import inventory.inventory_item.entities.ObjectTestInventoryItem;
+import inventory.entities.ObjectTestInventoryItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidPlayerInventory;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,7 +1,7 @@
 package inventory.inventory_menu_use_case.delete_item_use_case;
 
-import inventory.inventory_item.entities.InventoryItem;
-import UI.screens.inventoryscreens.FakeInventoryDeletion;
+import inventory.entities.InventoryItem;
+import inventory.inventoryscreens.FakeInventoryDeletion;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.TimerResponseModel;
+import timer.timer_use_cases.TimerResponseModel;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

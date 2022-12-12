@@ -1,6 +1,5 @@
 package timer.timer_use_cases;
 
-import Timer.timer_use_cases.TimerInteractor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

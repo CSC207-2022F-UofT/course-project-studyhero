@@ -1,9 +1,9 @@
 package stats.statsave;
 
 import org.junit.jupiter.api.*;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.save_game.StatSave;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.save_game.StatSave;
 
 import java.io.File;
 import java.util.HashMap;

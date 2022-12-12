@@ -1,12 +1,12 @@
 package filesave.continuegame;
 
 import org.junit.jupiter.api.*;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidStats;
-import use_cases.game_check.GameCheckInteractor;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidPlayerInventory;
+import filesaver.usecases.file_checker.ValidStats;
+import filesaver.usecases.game_check.GameCheckInteractor;
 
 import java.io.File;
 import java.io.FileNotFoundException;

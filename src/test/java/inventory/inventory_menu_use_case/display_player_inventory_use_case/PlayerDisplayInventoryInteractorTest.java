@@ -1,13 +1,9 @@
 package inventory.inventory_menu_use_case.display_player_inventory_use_case;
 
-import inventory.inventory_item.entities.InventoryItem;
-import UI.screens.inventoryscreens.FakeInventoryDisplay;
+import inventory.entities.InventoryItem;
+import inventory.inventoryscreens.FakeInventoryDisplay;
 
 import org.junit.jupiter.api.Test;
-import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsGateway;
-import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInputBoundary;
-import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryInteractor;
-import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryOutputBoundary;
 
 import java.util.ArrayList;
 

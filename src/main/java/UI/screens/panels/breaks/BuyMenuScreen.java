@@ -1,7 +1,7 @@
 package UI.screens.panels.breaks;
 
-import inventory.inventory_item.entities.InventoryItem;
-import use_cases.buy_menu.*;
+import inventory.entities.InventoryItem;
+import shopmenu.usecases.buy_menu.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;

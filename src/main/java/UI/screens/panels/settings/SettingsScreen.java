@@ -1,16 +1,17 @@
 package UI.screens.panels.settings;
 
+import filesaver.usecases.new_game.NewGame;
+import filesaver.usecases.new_game.NewGameInputBoundary;
 import settings.music.entities.MusicPlayer;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidShopInventory;
-import use_cases.file_checker.ValidStats;
-import use_cases.new_game.*;
-import use_cases.new_game.NewGameController;
-import use_cases.game_check.GameCheckInputBoundary;
-import use_cases.game_check.GameCheckInteractor;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidPlayerInventory;
+import filesaver.usecases.file_checker.ValidShopInventory;
+import filesaver.usecases.file_checker.ValidStats;
+import filesaver.usecases.new_game.NewGameController;
+import filesaver.usecases.game_check.GameCheckInputBoundary;
+import filesaver.usecases.game_check.GameCheckInteractor;
 import UI.screens.panels.ConfirmationWindowView;
 
 import javax.swing.*;

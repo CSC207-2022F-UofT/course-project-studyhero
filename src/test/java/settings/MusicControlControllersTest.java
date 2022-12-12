@@ -1,14 +1,12 @@
 package settings;
 
-import controllers.music.PauseController;
-import controllers.music.PlayController;
-import controllers.music.RestartController;
 import settings.music.entities.MusicPlayer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.music_controls.*;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import settings.music.usecases.*;
+import settings.music.controllers.*;
 
 import java.awt.event.ActionEvent;
 import java.util.Objects;

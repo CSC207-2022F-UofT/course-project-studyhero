@@ -1,6 +1,6 @@
 package settings.music.entities;
 
-import use_cases.errors.ErrorOutputBoundary;
+import errors.usecases.ErrorOutputBoundary;
 
 import javax.sound.sampled.*;
 import java.io.File;

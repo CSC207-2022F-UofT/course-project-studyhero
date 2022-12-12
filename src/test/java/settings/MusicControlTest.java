@@ -1,10 +1,10 @@
 package settings;
 import settings.music.entities.MusicPlayer;
 import org.junit.jupiter.api.*;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.music_controls.PauseMusic;
-import use_cases.music_controls.PlayMusic;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import settings.music.usecases.PauseMusic;
+import settings.music.usecases.PlayMusic;
 
 public class MusicControlTest {
     private final ErrorOutputBoundary presenter = new ErrorPresenter();

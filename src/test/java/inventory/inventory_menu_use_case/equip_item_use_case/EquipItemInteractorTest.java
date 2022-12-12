@@ -1,11 +1,10 @@
 package inventory.inventory_menu_use_case.equip_item_use_case;
 
-import UI.screens.inventoryscreens.FakeInventoryEquip;
-import inventory.inventory_item.entities.AttackPotion;
-import inventory.inventory_item.entities.InventoryItem;
+import inventory.inventoryscreens.FakeInventoryEquip;
+import inventory.entities.AttackPotion;
+import inventory.entities.InventoryItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_cases.inventory_menu_use_case.equip_item_use_case.*;
 
 import java.util.ArrayList;
 
