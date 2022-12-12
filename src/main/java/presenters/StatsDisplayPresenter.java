@@ -1,4 +1,4 @@
-package screens;
+package presenters;
 
 import use_cases.stats_display_use_case.StatsDisplayOutputBoundary;
 

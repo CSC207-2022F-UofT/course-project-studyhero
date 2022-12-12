@@ -1,5 +1,6 @@
-package screens;
+package controllers;
 
+import presenters.StatsDisplayViewModel;
 import use_cases.stats_display_use_case.StatsDisplayInputBoundary;
 import use_cases.stats_display_use_case.StatsDisplayOutputBoundary;
 

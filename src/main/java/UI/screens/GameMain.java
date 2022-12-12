@@ -8,16 +8,11 @@ import UI.screens.panels.settings.SettingsScreen;
 import entities.FightingStatsInitializer;
 import entities.MusicPlayer;
 import entities.StatsUser;
-import screens.StatsDisplayController;
-import screens.StatsDisplayPresenter;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;
 import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;
-import use_cases.stats_display_use_case.StatsDisplayInputBoundary;
-import use_cases.stats_display_use_case.StatsDisplayInteractor;
-import use_cases.stats_display_use_case.StatsDisplayOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;

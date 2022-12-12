@@ -1,4 +1,4 @@
-package screens;
+package presenters;
 
 import java.util.HashMap;
 import java.util.Map;

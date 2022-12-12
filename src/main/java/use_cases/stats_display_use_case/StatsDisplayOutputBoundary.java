@@ -1,6 +1,6 @@
 package use_cases.stats_display_use_case;
 
-import screens.StatsDisplayViewModel;
+import presenters.StatsDisplayViewModel;
 
 import java.util.Map;
 

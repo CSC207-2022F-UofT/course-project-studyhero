@@ -1,8 +1,8 @@
 package UI.screens.panels;
 
-import screens.StatsDisplayController;
-import screens.StatsDisplayPresenter;
-import screens.StatsDisplayViewModel;
+import controllers.StatsDisplayController;
+import presenters.StatsDisplayPresenter;
+import presenters.StatsDisplayViewModel;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;
 import use_cases.stats_display_use_case.StatsDisplayInputBoundary;
@@ -11,8 +11,6 @@ import use_cases.stats_display_use_case.StatsDisplayOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class StatsDisplayScreen extends JPanel {
