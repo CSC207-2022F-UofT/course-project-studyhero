@@ -20,6 +20,7 @@ The character should have stats the user can access that see how strong they are
 
 ## Running the Code
 The program can be run from the class GameMain.java. This class is currently found in the "UI/screens" package. 
+(The first time the code is run, it may say java: package org.jetbrains.annotations does not exist. If that happens, scroll down to the readInventory method and "Add 'annotations' to classpath." then run again) 
 
 ## Design
 See our [Design Wiki](https://github.com/CSC207-2022F-UofT/course-project-studyhero/wiki/Design) for info on our major design decisions (Clean Architecture, SOLID, packaging etc.).
