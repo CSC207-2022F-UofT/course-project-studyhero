@@ -1,21 +1,9 @@
 package UI.screens.panels.breaks;
 
-import entities.StatsUser;
 import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
-import use_cases.buy_menu.BuyMenuButtonController;
-import use_cases.buy_menu.BuyMenuGoldUpdater;
-import use_cases.buy_menu.BuyMenuPlayerInvUpdater;
-import use_cases.buy_menu.BuyMenuShopInvInitializer;
-import inventorymenu.inventoryitem.InventoryItem;
-import use_cases.save_game.StatSave;
-
+import use_cases.buy_menu.*;
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-//import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +12,7 @@ import java.util.ArrayList;
  * in exchange for the user's gold from Stats, which are sent to their
  * PlayerInventoryFile.
  */
-public class BuyMenuScreen extends JPanel implements ListSelectionListener {
+public class BuyMenuScreen extends JPanel {
     /**
      * Elements of the BuyMenuScreen.
      */
@@ -32,7 +20,6 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener {
     JPanel parentPanel;
     Frame frame;
 
-    int index;
     JLabel userGold;
 
     JList<String> list;
@@ -59,28 +46,6 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener {
         JPanel shopPanel = new JPanel();
         JPanel topPanel = new JPanel();
 
-        buyMenuShopInvInitializer = new BuyMenuShopInvInitializer();
-        buyMenuPlayerInvUpdater = new BuyMenuPlayerInvUpdater();
-        buyMenuGoldUpdater = new BuyMenuGoldUpdater();
-
-        shopInventory = buyMenuShopInvInitializer.getShopInventory();
-        playerInventory = buyMenuPlayerInvUpdater.getPlayerInventory();
-
-        // ----- List Selection -----
-        list = new JList(buyMenuShopInvInitializer.DisplayShopItems().toArray());
-
-        list.clearSelection();
-        list.addListSelectionListener(this);
-        list.setMaximumSize(new Dimension(200, 200));
-
-
-        // ----- Buy Button -----
-        JButton buyButton = new JButton("Buy Selected Item");
-        BuyMenuButtonController buyMenuButtonController = new BuyMenuButtonController(card,
-                parentPanel, index, userGold);
-        buyButton.addActionListener(buyMenuButtonController);
-//        buyButton.addActionListener(indexGetter);
-
 
         // ---- Initialize Components -----
         this.card = card;
@@ -94,9 +59,34 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener {
         JButton backToBreak = new JButton("Back to Shop");
         backToBreak.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
 
+        buyMenuShopInvInitializer = new BuyMenuShopInvInitializer();
+        buyMenuPlayerInvUpdater = new BuyMenuPlayerInvUpdater();
+        buyMenuGoldUpdater = new BuyMenuGoldUpdater();
+
+        shopInventory = buyMenuShopInvInitializer.getShopInventory();
+        playerInventory = buyMenuPlayerInvUpdater.getPlayerInventory();
+
         selectedItem = new JLabel("Selected: ");
         cost = new JLabel("Cost: ");
         userGold = new JLabel("Your Gold: " + buyMenuGoldUpdater.getUserGold());
+
+
+        // ----- List Selection -----
+        list = new JList(buyMenuShopInvInitializer.DisplayShopItems().toArray());
+
+        list.clearSelection();
+        BuyMenuListController buyMenuListController = new BuyMenuListController(card,
+                parentPanel, list, shopInventory, selectedItem, cost);
+        list.addListSelectionListener(buyMenuListController);
+        list.setMaximumSize(new Dimension(200, 200));
+
+
+        // ----- Buy Button -----
+        JButton buyButton = new JButton("Buy Selected Item");
+        BuyMenuButtonController buyMenuButtonController = new BuyMenuButtonController(card,
+                parentPanel, userGold,
+                cost, selectedItem, list, buyMenuListController);
+        buyButton.addActionListener(buyMenuButtonController);
 
 
         // ----- Initialize Layouts -----
@@ -140,44 +130,4 @@ public class BuyMenuScreen extends JPanel implements ListSelectionListener {
 
     }
 
-
-    // ----- Changes the displayed text for the selected item -----
-    public void valueChanged(ListSelectionEvent e) {
-        selectedItem.setText("Selected: " + list.getSelectedValue());
-        index = list.getSelectedIndex();
-        cost.setText("Cost: " + shopInventory.get(index).getGoldValue() + " Gold");
-        repaint();
-    }
-
-    // ----- Button -----
-//    public void actionPerformed(ActionEvent e) {
-//        if (playerInventoryFile.inventoryFull()) {
-//            JOptionPane.showMessageDialog(frame,
-//                    "You do not have enough space in your inventory!",
-//                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
-//        } else if (statsMap.get("gold") < shopInventory.get(index).getGoldValue() ) {
-//            JOptionPane.showMessageDialog(frame,
-//                    "You do not have enough gold!",
-//                    "Purchase Error", JOptionPane.WARNING_MESSAGE);
-//        } else {
-//            // call interactor
-//            playerInventoryFile.save(new InventoryItem(
-//                    shopInventory.get(index).getType(),
-//                    shopInventory.get(index).getName(),
-//                    shopInventory.get(index).getEffect(),
-//                    shopInventory.get(index).getGoldValue(),
-//                    shopInventory.get(index).checkIsEquipped()
-//            ));
-//
-//            statsUser.updateGold(-shopInventory.get(index).getGoldValue());
-//            StatSave newStats = new StatSave(statsUser.getUserStats(), presenter);
-//            newStats.save("stats.csv");
-//
-//            statsMap = stats.load();
-//            statSave = new StatSave(statsMap, presenter);
-//            statsUser = new StatsUser(statsMap);
-//            // controller
-//            userGold.setText("Your Gold: " + statsMap.get("gold"));
-//        }
-//    }
 }

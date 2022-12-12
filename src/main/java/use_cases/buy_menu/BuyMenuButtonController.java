@@ -1,9 +1,5 @@
 package use_cases.buy_menu;
 
-import entities.StatsUser;
-import inventorymenu.inventoryitem.InventoryItem;
-import use_cases.save_game.StatSave;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +9,9 @@ public class BuyMenuButtonController implements ActionListener {
 
     Frame frame;
     JLabel userGold;
+    JList<String> list;
+    JLabel selectedItem;
+    JLabel cost;
 
     BuyMenuPlayerInvUpdater buyMenuPlayerInvUpdater;
     BuyMenuGoldUpdater buyMenuGoldUpdater;
@@ -22,25 +21,37 @@ public class BuyMenuButtonController implements ActionListener {
     int index;
     CardLayout card;
     JPanel parentPanel;
+    BuyMenuListController buyMenuListController;
 
     public BuyMenuButtonController(CardLayout card,
                                    JPanel parentPanel,
-                                   int index,
-                                   JLabel userGold) {
+                                   JLabel userGold,
+                                   JLabel cost,
+                                   JLabel selectedItem,
+                                   JList<String> list,
+                                   BuyMenuListController buyMenuListController
+                                   ) {
+
         this.card = card;
         this.parentPanel = parentPanel;
-        this.index = index;
         this.userGold = userGold;
+
+        this.cost = cost;
+        this.selectedItem = selectedItem;
+        this.list = list;
 
         this.buyMenuPlayerInvUpdater = new BuyMenuPlayerInvUpdater();
         this.buyMenuGoldUpdater = new BuyMenuGoldUpdater();
         this.buyMenuShopInvInitializer = new BuyMenuShopInvInitializer();
-
+        this.buyMenuListController = buyMenuListController;
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        parentPanel.repaint();
+        index = buyMenuListController.getIndex();
+
         if (this.buyMenuPlayerInvUpdater.getPlayerInventoryFile().inventoryFull()) {
             JOptionPane.showMessageDialog(frame,
                     "You do not have enough space in your inventory!",
@@ -55,9 +66,9 @@ public class BuyMenuButtonController implements ActionListener {
         } else {
             buyMenuButtonInteractor = new BuyMenuButtonInteractor(buyMenuShopInvInitializer, index);
 
-//            System.out.println(this.buyMenuGoldUpdater.getUserGold());
+            System.out.println(this.buyMenuGoldUpdater.getUserGold());
             // controller
-//            this.userGold.setText("Your Gold: " + this.buyMenuGoldUpdater.getUserGold());
+            this.userGold.setText("Your Gold: " + this.buyMenuGoldUpdater.getUserGold());
             parentPanel.repaint();
         }
     }
