@@ -26,6 +26,7 @@ See our [Design Wiki](https://github.com/CSC207-2022F-UofT/course-project-studyh
 
 ## Test Coverage
 (include coverage reports + explanations of what hasn't been tested here)
+- The dialogue system was not completed to a working degree, so there are no tests available for this feature. If it had been finished, the test coverage would have covered tests for: making sure the dialogue gets mapped correctly from an external .csv file, buttons redirecting to the correct scene, and correct text showing up. 
 
 ## Issues
 - The Shop Menu did not manage to have complete implementations for the Sell Menu screen, so it was omitted from the final project.
