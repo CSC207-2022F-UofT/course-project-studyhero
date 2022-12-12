@@ -13,6 +13,6 @@ public class PauseController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        player.pause();
+        player.setStatus("pause");
     }
 }

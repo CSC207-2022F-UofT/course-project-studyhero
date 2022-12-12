@@ -13,6 +13,6 @@ public class RestartController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        player.restart();
+        player.resetAudioStream();
     }
 }

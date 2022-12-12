@@ -2,23 +2,21 @@ package shopmenu;
 
 
 import entities.inventoryitem.InventoryItem;
-import org.junit.After;
-import org.junit.Before;
+
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import use_cases.buy_menu.BuyMenuShopInvInitializer;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
-import use_cases.save_game.StatSave;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-class BuyMenuTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class BuyMenuTest {
 
     static Map<String, Integer> noGoldStatsMap, withGoldStatsMap;
     static ArrayList<InventoryItem> emptyInventoryList, fullInventoryList, shopInventory;
@@ -82,44 +80,48 @@ class BuyMenuTest {
         noGoldStatsMap = generateMap(noGoldStatsHeader, noGoldStatsStats);
     }
 
-    @AfterEach
-    public void testSaved() {
-    }
+//    @AfterEach
+//    public void testSaved() {
+//    }
 
     @Test
     void checkShopInventory() {
-
+        assertEquals(4, shopInventory.size());
+        assertEquals("Sword", shopInventory.get(0).getName());
+        assertEquals("StrengthPotion", shopInventory.get(1).getName());
+        assertEquals("Hammer", shopInventory.get(2).getName());
+        assertEquals("BronzeShield", shopInventory.get(3).getName());
     }
-
-    @Test
-    void checkItemInListDisplay() {
-
-    }
-
-    @Test
-    void buyItemErrorFullInventory() {
-        StatSave withGold = new StatSave(withGoldStatsMap, presenter);
-        withGold.save(filepath);
-
-        File stats = new File(filepath);
-        stats.deleteOnExit();
-    }
-
-    @Test
-    void buyItemErrorNoGold() {
-        StatSave noGold = new StatSave(noGoldStatsMap, presenter);
-        noGold.save(filepath);
-
-
-
-        File stats = new File(filepath);
-        stats.deleteOnExit();
-    }
-
-    @Test
-    void buyItemButtonSuccess() {
-
-    }
+//
+//    @Test
+//    void checkItemInListDisplay() {
+//
+//    }
+//
+//    @Test
+//    void buyItemErrorFullInventory() {
+//        StatSave withGold = new StatSave(withGoldStatsMap, presenter);
+//        withGold.save(filepath);
+//
+//        File stats = new File(filepath);
+//        stats.deleteOnExit();
+//    }
+//
+//    @Test
+//    void buyItemErrorNoGold() {
+//        StatSave noGold = new StatSave(noGoldStatsMap, presenter);
+//        noGold.save(filepath);
+//
+//
+//
+//        File stats = new File(filepath);
+//        stats.deleteOnExit();
+//    }
+//
+//    @Test
+//    void buyItemButtonSuccess() {
+//
+//    }
 
 
 
