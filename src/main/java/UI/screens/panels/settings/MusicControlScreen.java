@@ -4,6 +4,7 @@ import entities.MusicPlayer;
 import controllers.music.PauseController;
 import controllers.music.PlayController;
 import controllers.music.RestartController;
+import use_cases.music_controls.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,15 +23,18 @@ public class MusicControlScreen extends JPanel {
 
         JLabel title = new JLabel("Music");
         JButton playButton = new JButton("Play");
-        PlayController playController = new PlayController(player);
+        PlayMusicInputBoundary playMusic = new PlayMusic(player);
+        PlayController playController = new PlayController(playMusic);
         playButton.addActionListener(playController);
 
         JButton pauseButton = new JButton("Pause");
-        PauseController pauseController = new PauseController(player);
+        PauseMusicInputBoundary pauseMusic = new PauseMusic(player);
+        PauseController pauseController = new PauseController(pauseMusic);
         pauseButton.addActionListener(pauseController);
 
         JButton restartButton = new JButton("Restart");
-        RestartController restartController = new RestartController(player);
+        RestartMusicInputBoundary restartMusic = new RestartMusic(player);
+        RestartController restartController = new RestartController(restartMusic);
         restartButton.addActionListener(restartController);
 
         JButton backToSettingsButton = new JButton("Back to Settings");

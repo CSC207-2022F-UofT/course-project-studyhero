@@ -12,7 +12,7 @@ public class TimerPresenter implements TimerOutputBoundary {
     }
 
     @Override
-    public String updateTimer() {
+    public String getOutputTime() {
         this.outputTime = tResponseModel.getOutputTime();
         return outputTime;
     }

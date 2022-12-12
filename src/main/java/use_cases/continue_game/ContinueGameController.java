@@ -1,9 +1,6 @@
 package use_cases.continue_game;
 
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.file_checker.ValidInventory;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidStats;
+import use_cases.game_check.GameCheckInputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,27 +8,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ContinueGameController implements ActionListener {
-    CardLayout card;
-    JPanel parent;
-    ErrorOutputBoundary presenter;
+    private final CardLayout card;
+    private final JPanel parent;
+    private final GameCheckInputBoundary gameCheckUseCase;
 
-    public ContinueGameController(CardLayout card, JPanel parent, ErrorOutputBoundary presenter){
+    /**
+     * Creates a ContinueGameController object that handles the use case
+     * relating to continuing the game from the start screen.
+     *
+     * @param card      layout of the panel with the next screen (timer)
+     *                  to direct the user to if the game is continuable
+     * @param parent    parent panel where all main screens are stored in
+     *                  the main game
+     * @param useCase   input boundary that checks if the game is can be
+     *                  continued
+     */
+    public ContinueGameController(CardLayout card, JPanel parent,
+                                  GameCheckInputBoundary useCase){
         this.card = card;
         this.parent = parent;
-        this.presenter = presenter;
+        this.gameCheckUseCase = useCase;
     }
 
+    /**
+     * When a button is pressed (i.e. event e occurs), the input boundary
+     * will check for whether existing data files are valid for continuing.
+     * If so, the card will show the next screen (timer).
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        ValidStats statsChecker = new ValidStats("stats.csv", presenter);
-        ValidPlayerInventory inventoryChecker = new ValidPlayerInventory("PlayerInventory.csv", presenter);
-
-        System.out.println(statsChecker.isValid());
-
-        if (statsChecker.isValid() && inventoryChecker.isValid()){
+        if (gameCheckUseCase.valid()){
             System.out.println("Game exists. Continuing to next game...");
-            System.out.println("Current stats: " + statsChecker.load());
             card.show(parent, "Timer");
         }
     }

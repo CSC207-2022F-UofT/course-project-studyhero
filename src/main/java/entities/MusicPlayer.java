@@ -1,27 +1,34 @@
 package entities;
 
-import use_cases.errors.ErrorPresenter;
+import use_cases.errors.ErrorOutputBoundary;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
 public class MusicPlayer {
-    Long currentPos;
-    Clip clip;
-    String status;
-    AudioInputStream inputStream;
-    String filepath;
-    ErrorPresenter presenter;
+    private Clip clip;
+    private String status;
+    private AudioInputStream inputStream;
+    private String filepath;
 
-    public MusicPlayer(String filepath){
-        this.presenter = new ErrorPresenter();
+    /**
+     * Creates a MusicPlayer object that plays music of wav file with
+     * filepath name, and presents an error if the file is invalid.
+     *
+     * @param filepath filepath of .wav file
+     * @param presenter output boundary if error occurs
+     */
+    public MusicPlayer(String filepath, ErrorOutputBoundary presenter){
+
         try {
             this.filepath = filepath;
             this.inputStream = AudioSystem.getAudioInputStream(new File(filepath));
             this.clip = AudioSystem.getClip();
             clip.open(inputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+            this.play();
+            this.status = "play";
 
         } catch (UnsupportedAudioFileException | LineUnavailableException
                  | IOException e) {
@@ -29,27 +36,22 @@ public class MusicPlayer {
         }
     }
 
+    public String getStatus(){return status;}
+    public void setStatus(String newStatus){status = newStatus;}
+    public Clip getClip(){return clip;}
+
+    /**
+     *  Starts playing the music of the filepath.
+     */
+
     public void play(){
         clip.start();
         status = "play";
     }
-    public void pause(){
-        if (!status.equals("paused")){
-            this.currentPos = this.clip.getMicrosecondPosition();
-            clip.stop();
-            status = "paused";
-        }
-    }
 
-    public void restart(){
-        clip.stop();
-        clip.close();
-        resetAudioStream();
-        currentPos = 0L;
-        clip.setMicrosecondPosition(0);
-        this.play();
-    }
-
+    /**
+     * Resets the music to the beginning of the file.
+     */
     public void resetAudioStream()
     {
         try {
@@ -62,6 +64,5 @@ public class MusicPlayer {
             throw new RuntimeException(e);
         }
     }
-
 
 }

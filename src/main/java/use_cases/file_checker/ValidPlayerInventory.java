@@ -2,22 +2,43 @@ package use_cases.file_checker;
 
 import use_cases.errors.ErrorOutputBoundary;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class ValidPlayerInventory implements ValidFileDsGateway{
 
-    String filename;
-    File file;
-    ErrorOutputBoundary presenter;
+    private final String filename;
+    private final File file;
+    private final ErrorOutputBoundary presenter;
+    private final String[] valid_types = {"Weapon","Shield","AttackPotion","HealthPotion","PoisonPotion"};
+    private final String[] valid_header =
+            {"item_id", "item_type", "item_name", "item_effect", "item_gold_value", "item_is_equipped"};
+
+
+    /**
+     * Creates a ValidPlayerInventory use case object that is capable of
+     * checking the validity of files for reading
+     *
+     * @param filename      filepath of file to check
+     * @param presenter     output boundary to display any error
+     */
     public ValidPlayerInventory(String filename, ErrorOutputBoundary presenter){
         this.filename = filename;
         this.file = new File(filename);
         this.presenter = presenter;
     }
 
-    public String[] read(BufferedReader br){
+    /**
+     * Helper function that reads the next line of the buffered
+     * reader and turns it into a string array
+     *
+     * @param br            BufferedReader
+     * @return String array representation of the next line
+     */
+    private String[] read(BufferedReader br){
         String line;
         try {
             line = br.readLine();
@@ -27,7 +48,23 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
         }
     }
 
-    public String checkError(){
+    /**
+     * Helper function that checks all PlayerInventory attributes
+     * are of correct type and format
+     *
+     * @return
+     * - null           if there is no error
+     * - "exist"        if the file does not exist
+     * - "empty"        if the file exists but is empty
+     * - "label"        if the label is not correct
+     * - "header"       if the attributes do not match the valid_headers array
+     * - "type"         if any item's type cannot be found in the valid_types array
+     * - "effect"       if any item's effect is not an integer
+     * - "goldValue"    if any item's gold value is not an integer
+     * - "isEquipped"   if any item's equipped attribute is not a boolean
+     * - "other"        if there is any IOException or RuntimeException
+     */
+    private String checkError(){
         if (!fileExists()){return "exist";}
         try{
             BufferedReader br = new BufferedReader(
@@ -37,14 +74,14 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
             if (file.length() == 0){return "empty";}
 
             // check the label is correct and matches
-            String label = String.valueOf(read(br));
-            if(label.equals("Player Inventory")){
+            String label = Arrays.toString(read(br));
+            if(!Objects.equals(label, "[Player Inventory]")){
                 return "label";
             }
 
             // check the header is correct and matches
             String[] header = read(br);
-            if (!Arrays.equals(header, new String[]{"item_id", "item_type", "item_name", "item_effect", "item_gold_value"})){
+            if (!Arrays.equals(header, valid_header)){
                 System.out.println(header[0]);
                 return "header";
             }
@@ -54,19 +91,16 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
                 String[] item = line.trim().split(",");
                 // check id is integer
                 String index = item[0], type = item[1],
-                        name = item[2], effect = item[3],
-                        goldValue = item[4];
+                        effect = item[3],
+                        goldValue = item[4], isEquipped = item[5];
 
                 try {Integer.valueOf(index);
                 }catch(NumberFormatException e){return "index";}
 
                 // check type is valid
-                String[] valid_types = {"Weapon","Shield","AttackPotion","HealthPotion","PoisonPotion"};
-                // not so good as this is primitive
                 if (!(Arrays.asList(valid_types).contains(type))){
                     return "type";
                 }
-                // check if weapon name is correct?
 
                 // check effect is integer
                 try {Integer.valueOf(effect);}
@@ -75,6 +109,9 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
                 // check goldValue is integer
                 try {Integer.valueOf(goldValue);}
                 catch(NumberFormatException e){return "goldValue";}
+
+                // check isEquipped is boolean
+                if(!(isEquipped.equals("true")||isEquipped.equals("false"))){return "isEquipped";}
             }
             br.close();
             return null;
@@ -84,6 +121,7 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
         } catch(NumberFormatException e){return "other";}
     }
 
+
     @Override
     public boolean fileExists() {
         return (file.exists() && !file.isDirectory());    }
@@ -92,30 +130,48 @@ public class ValidPlayerInventory implements ValidFileDsGateway{
     public boolean isPlayable(){
         return (checkError() == null);
     }
+
+    /**
+     * @return true if it is playable, else false along with a
+     * window (JFrame) displaying the error.
+     */
     @Override
     public boolean isValid() {
         String result = checkError();
         if (result == null){return true;}
+
         switch(result){
             case "exist":
-                presenter.error("There is no existing " + filename + " file.");
+                presenter.setError("There is no existing " + filename + " file.");
+                return false;
             case "label":
-                presenter.error("Invalid " + filename + " file.");
             case "header":
-                presenter.error("Invalid " + filename + " file.");
+                presenter.setError("Invalid " + filename + " file.");
+                return false;
             case "empty":
-                presenter.error("There are no items in " + filename);
+                presenter.setError("There are no items in " + filename);
+                return false;
             case "index":
-                presenter.error("Item IDs are invalid.");
+                presenter.setError("Item IDs are invalid.");
+                return false;
             case "type":
-                presenter.error("Items are of invalid types.");
+                presenter.setError("Items are of invalid types.");
+                return false;
             case "effect":
-                presenter.error("Items have invalid effects.");
+                presenter.setError("Items have invalid effects.");
+                return false;
             case "goldValue":
-                presenter.error("Items have invalid gold value.");
+                presenter.setError("Items have invalid gold value.");
+                return false;
+            case "isEquipped":
+                presenter.setError("Items have invalid equip information.");
+                return false;
             case "other":
-                presenter.error("Error: please start a new game.");
+                presenter.setError("Error: please start a new game.");
+                return false;
         }
+        try{presenter.error(presenter.getError()); }
+        catch (HeadlessException e){return false;}
         return false;
     }
 }
