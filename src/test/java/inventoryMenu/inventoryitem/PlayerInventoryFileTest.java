@@ -1,4 +1,4 @@
-package inventoryMenu.inventoryitem;
+package inventorymenu.inventoryitem;
 
 import entities.inventoryitem.InventoryItem;
 import entities.inventoryitem.PlayerInventoryFile;

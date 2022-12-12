@@ -1,4 +1,4 @@
-package inventoryMenu.inventory_menu_use_case.delete_item_use_case;
+package inventorymenu.inventory_menu_use_case.delete_item_use_case;
 
 import entities.inventoryitem.InventoryItem;
 import UI.screens.inventoryscreens.FakeInventoryDeletion;
