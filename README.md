@@ -28,17 +28,7 @@ See our [Design Wiki](https://github.com/CSC207-2022F-UofT/course-project-studyh
 (include coverage reports + explanations of what hasn't been tested here)
 
 ## Issues
-Some of the features of the program are not yet complete due to the core mechanics of the game (i.e., stats, timer, inventory, save data, GUI). Since our program is turning out to be a lot more ambitious than anticipated, some of these features took longer than expected, and thus delaying the implementation of some of our other features as well. Namely:
+- The Shop Menu did not manage to have complete implementations for the Sell Menu screen, so it was omitted from the final project.
 
-- The Settings Menu relies heavily on the GUI and Save Data in order to function. Additionally, the Pause Music feature we wanted to implement has still not been added, as the music is more of a quality of life feature we are hoping to add in the final product. It is possible that this music feature may not be implemented in the end in favour of time.
+- The Dialogue system did not manage to be completed on time, so some parts of the dialogue and cutscenes were not included in the final project when committing to our main branch.
 
-- The Shop Menu uses the Inventory and Stats Menu, and is also heavily dependent on the GUI in order to run. Because of how we wanted to set up the Buy and Sell menus, it is difficult to implement concrete features using dummy values and instead requires the different classes from the Inventory and Stats in order to assure that the feature is able to work correctly. The Shop Menu will definitely finish implementation by the end of the final deadline now that the implementations for Stats and Inventory are almost fully complete.
-
-- The Boss Fight Menu relies on the Stats and Inventory Menu in order to function, since the Boss and Player has different stats that needed to be accounted for in the combat. Similar to the Shop Menu, since the implementations for the two features are almost complete, once the final commits and merges are made, then the feature can be fully completed.
-
-~~- The Timer is also currently having issues between the interactor and the controller and thus the Start Timer button does not work. However, all other implementations of the feature have been tested and seem to function correctly, so once the bug has been fixed the Timer will be fully completed.~~
-The code for the timer has been refactored and updated so that there are no dependence violations and the timer is now working.
-
-However, since most of the implementations for the dependencies are now completed for the most part, these features can definitely be implemented by the final deadline for the project.
-
-There are also issues with naming conventions, especially with packages, however, this will be fixed by the time the program is finally handed in.
