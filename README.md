@@ -33,3 +33,5 @@ See our [Design Wiki](https://github.com/CSC207-2022F-UofT/course-project-studyh
 
 - The Dialogue system did not manage to be completed on time, so some parts of the dialogue and cutscenes were not included in the final project when committing to our main branch.
 
+- The Music player experienced some issues after merging from the different branches to Main and we weren't sure how to fix this in time for submission, so the music currently is not being played.
+
