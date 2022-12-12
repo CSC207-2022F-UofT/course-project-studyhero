@@ -3,6 +3,7 @@ import UI.screens.panels.StatsDisplayScreen;
 import UI.screens.timer_screen.TimerPanel;
 import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
+import UI.screens.panels.breaks.BuyMenuScreen;
 import UI.screens.panels.breaks.ShopMenuScreen;
 import UI.screens.panels.settings.SettingsScreen;
 import entities.FightingStatsInitializer;
@@ -67,6 +68,7 @@ public class GameMain {
         mainPanel.add(storyScreen, "Story");
         mainPanel.add(timerScreen, "Timer");
         mainPanel.add(breakScreen, "Break");
+        mainPanel.add(changeStatsScreen, "Change Stats");
         mainPanel.add(startSettingsScreen, "Start Settings");
         mainPanel.add(breakSettingsScreen, "Break Settings");
         mainPanel.add(shopMenuScreen, "Shop Menu");
@@ -82,6 +84,8 @@ public class GameMain {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         mainFrame.setSize(800, 500);
+
+
 
     }
 }
