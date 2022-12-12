@@ -49,11 +49,7 @@ public class TimerPanel extends JPanel {
         TimerInteractor timerInteractor = new TimerInteractor();
         customTimerController = new CustomTimerController(timerInteractor);
         presetTimerController = new PresetTimerController(timerInteractor);
-        timerPresenter = new TimerPresenter(timerInteractor.getTimerResponseModel());
-
-        progressBar = new JProgressBar();
-        endTimerButton = new JButton();
-
+        timerPresenter = new TimerPresenter(timerInteractor.getTimerResponseModel()); 
 
         progressBar.setMinimum(0);
         progressBar.setValue(0);
