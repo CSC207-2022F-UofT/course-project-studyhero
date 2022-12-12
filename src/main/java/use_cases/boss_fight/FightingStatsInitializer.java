@@ -3,6 +3,9 @@ package entities;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * An initializer interactor for the fightStats.csv file that creates a new file and sets all the values for it to zero
+ */
 public class FightingStatsInitializer {
     private final int maxHealth;
 
