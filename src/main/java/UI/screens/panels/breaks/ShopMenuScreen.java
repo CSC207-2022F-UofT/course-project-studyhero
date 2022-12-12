@@ -33,7 +33,6 @@ public class ShopMenuScreen extends JPanel {
 
         menuPanel.add(title);
         menuPanel.add(buyMenu);
-        menuPanel.add(sellMenu);
         menuPanel.add(backToBreak);
         newPanel.add(menuPanel, "Shop Menu");
 

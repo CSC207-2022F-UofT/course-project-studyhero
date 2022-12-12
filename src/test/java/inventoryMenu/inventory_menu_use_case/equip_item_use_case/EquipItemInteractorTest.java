@@ -1,4 +1,4 @@
-package inventoryMenu.inventory_menu_use_case.equip_item_use_case;
+package inventorymenu.inventory_menu_use_case.equip_item_use_case;
 
 import UI.screens.inventoryscreens.FakeInventoryEquip;
 import entities.inventoryitem.AttackPotion;

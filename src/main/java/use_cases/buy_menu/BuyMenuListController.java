@@ -1,7 +1,6 @@
 package use_cases.buy_menu;
 
-import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
-
+import entities.inventoryitem.InventoryItem;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,7 +15,7 @@ public class BuyMenuListController extends ListSelectionEvent implements BuyMenu
     JLabel cost;
 
     JList<String> list;
-    ArrayList<InventoryItemDsRequestModel> shopInventory;
+    ArrayList<InventoryItem> shopInventory;
 
     /**
      * The BuyMenuListController that acts as the Action Listener from the BuyMenuScreen when the user
@@ -37,7 +36,7 @@ public class BuyMenuListController extends ListSelectionEvent implements BuyMenu
     public BuyMenuListController(CardLayout card,
                                  JPanel parentPanel,
                                  JList<String> list,
-                                 ArrayList<InventoryItemDsRequestModel> shopInventory,
+                                 ArrayList<InventoryItem> shopInventory,
                                  JLabel selectedItem, JLabel cost) {
         super(list, 0, list.getMaxSelectionIndex(), true);
         this.card = card;

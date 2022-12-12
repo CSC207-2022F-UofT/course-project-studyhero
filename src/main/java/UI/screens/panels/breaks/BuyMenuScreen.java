@@ -1,6 +1,6 @@
 package UI.screens.panels.breaks;
 
-import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
+import entities.inventoryitem.InventoryItem;
 import use_cases.buy_menu.*;
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +24,8 @@ public class BuyMenuScreen extends JPanel {
     JLabel selectedItem;
     JLabel cost;
 
-    ArrayList<InventoryItemDsRequestModel> shopInventory;
-    ArrayList<InventoryItemDsRequestModel> playerInventory;
+    ArrayList<InventoryItem> shopInventory;
+    ArrayList<InventoryItem> playerInventory;
 
     BuyMenuPlayerInvUpdater buyMenuPlayerInvUpdater;
     BuyMenuGoldUpdater buyMenuGoldUpdater;

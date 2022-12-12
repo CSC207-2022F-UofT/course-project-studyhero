@@ -1,14 +1,15 @@
 package use_cases.buy_menu;
 
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
-import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
-import inventorymenu.inventoryitem.ShopInventoryFile;
+import entities.inventoryitem.InventoryItem;
+import entities.inventoryitem.ShopInventoryFile;
+import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+
 import java.util.ArrayList;
 
 
 public class BuyMenuShopInvInitializer {
 
-    ArrayList<InventoryItemDsRequestModel> shopInventory;
+    ArrayList<InventoryItem> shopInventory;
 
 
     /**
@@ -31,7 +32,7 @@ public class BuyMenuShopInvInitializer {
      *
      * @return the ArrayList of the shop inventory.
      */
-    public ArrayList<InventoryItemDsRequestModel> getShopInventory() {
+    public ArrayList<InventoryItem> getShopInventory() {
         return shopInventory;
     }
 
@@ -43,7 +44,7 @@ public class BuyMenuShopInvInitializer {
      */
     public ArrayList<String> DisplayShopItems() {
         ArrayList<String> displayShopItems = new ArrayList<>();
-        for (InventoryItemDsRequestModel inventoryItemDsRequestModel : shopInventory) {
+        for (InventoryItem inventoryItemDsRequestModel : shopInventory) {
             displayShopItems.add(inventoryItemDsRequestModel.getName());
         }
         return displayShopItems;

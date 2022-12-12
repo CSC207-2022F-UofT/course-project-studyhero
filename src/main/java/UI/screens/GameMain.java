@@ -68,7 +68,7 @@ public class GameMain {
         mainPanel.add(storyScreen, "Story");
         mainPanel.add(timerScreen, "Timer");
         mainPanel.add(breakScreen, "Break");
-        mainPanel.add(changeStatsScreen, "Change Stats");
+//        mainPanel.add(changeStatsScreen, "Change Stats");
         mainPanel.add(startSettingsScreen, "Start Settings");
         mainPanel.add(breakSettingsScreen, "Break Settings");
         mainPanel.add(shopMenuScreen, "Shop Menu");

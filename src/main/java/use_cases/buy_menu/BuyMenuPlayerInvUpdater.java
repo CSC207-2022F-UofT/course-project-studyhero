@@ -1,17 +1,17 @@
 package use_cases.buy_menu;
 
 
-import inventorymenu.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
-import inventorymenu.inventoryitem.InventoryItem;
-import inventorymenu.inventoryitem.InventoryItemDsRequestModel;
-import inventorymenu.inventoryitem.PlayerInventoryFile;
+import entities.inventoryitem.InventoryItem;
+import entities.inventoryitem.PlayerInventoryFile;
+import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
+
 import java.util.ArrayList;
 
 
 public class BuyMenuPlayerInvUpdater {
 
     PlayerInventoryFile playerInventoryFile;
-    ArrayList<InventoryItemDsRequestModel> playerInventory;
+    ArrayList<InventoryItem> playerInventory;
 
     /**
      * The BuyMenuPlayerInvUpdater interactor that takes in the playerInventoryFile from PlayerInventory.csv
@@ -32,7 +32,7 @@ public class BuyMenuPlayerInvUpdater {
      *
      * @return an ArrayList of the user's player inventory.
      */
-    public ArrayList<InventoryItemDsRequestModel> getPlayerInventory() {
+    public ArrayList<InventoryItem> getPlayerInventory() {
         return playerInventory;
     }
 
@@ -50,8 +50,9 @@ public class BuyMenuPlayerInvUpdater {
      *
      * @param itemAdded     An InventoryItem that has the type, name, effect, gold value, and equipped parameters.
      */
-    public void addItemPlayerInv(InventoryItemDsRequestModel itemAdded) {
+    public void addItemPlayerInv(InventoryItem itemAdded) {
         playerInventoryFile.save(new InventoryItem(
+             itemAdded.getId(),
              itemAdded.getType(),
              itemAdded.getName(),
              itemAdded.getEffect(),
