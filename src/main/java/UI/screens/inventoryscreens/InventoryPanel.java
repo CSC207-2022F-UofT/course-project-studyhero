@@ -1,6 +1,6 @@
 package UI.screens.inventoryscreens;
 
-import entities.inventoryitem.PlayerInventoryFile;
+import inventory.inventory_item.entities.PlayerInventoryFile;
 import use_cases.inventory_menu_use_case.delete_item_use_case.*;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.*;
 import use_cases.inventory_menu_use_case.equip_item_use_case.*;

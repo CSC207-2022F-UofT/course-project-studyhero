@@ -1,6 +1,6 @@
 package UI.screens.panels.settings;
 
-import entities.MusicPlayer;
+import settings.music.entities.MusicPlayer;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidFileDsGateway;

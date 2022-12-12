@@ -2,8 +2,7 @@ package UI.screens.panels.breaks;
 
 import UI.screens.inventoryscreens.InventoryPanel;
 import UI.screens.panels.StatsDisplayScreen;
-import use_cases.boss_fight.FightBossButtonController;
-import use_cases.boss_fight.FightBossInteractor;
+import bossfight.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

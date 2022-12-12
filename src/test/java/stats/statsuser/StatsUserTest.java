@@ -1,7 +1,7 @@
 package stats.statsuser;
 
-import entities.Stats;
-import entities.StatsUser;
+import stats.entities.Stats;
+import stats.entities.StatsUser;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 

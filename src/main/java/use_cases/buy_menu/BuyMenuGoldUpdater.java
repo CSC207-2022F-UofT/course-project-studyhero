@@ -1,6 +1,6 @@
 package use_cases.buy_menu;
 
-import entities.StatsUser;
+import stats.entities.StatsUser;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;

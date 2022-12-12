@@ -1,5 +1,5 @@
 package settings;
-import entities.MusicPlayer;
+import settings.music.entities.MusicPlayer;
 import org.junit.jupiter.api.*;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;

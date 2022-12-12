@@ -1,6 +1,6 @@
 package UI.screens.inventoryscreens;
 
-import entities.inventoryitem.InventoryItem;
+import inventory.inventory_item.entities.InventoryItem;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryOutputBoundary;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryResponseModel;

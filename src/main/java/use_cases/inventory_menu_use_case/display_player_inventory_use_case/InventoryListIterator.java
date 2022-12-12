@@ -1,6 +1,6 @@
 package use_cases.inventory_menu_use_case.display_player_inventory_use_case;
 
-import entities.inventoryitem.InventoryItem;
+import inventory.inventory_item.entities.InventoryItem;
 
 /**
  * This interface contains method that need to implemented for an iterator class

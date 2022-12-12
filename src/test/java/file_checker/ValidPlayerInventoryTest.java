@@ -1,6 +1,6 @@
 package file_checker;
 
-import entities.inventoryitem.ObjectTestInventoryItem;
+import inventory.inventory_item.entities.ObjectTestInventoryItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.errors.ErrorOutputBoundary;

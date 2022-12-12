@@ -1,7 +1,7 @@
 package use_cases.buy_menu;
 
-import entities.inventoryitem.InventoryItem;
-import entities.inventoryitem.ShopInventoryFile;
+import inventory.inventory_item.entities.InventoryItem;
+import inventory.inventory_item.entities.ShopInventoryFile;
 import use_cases.inventory_menu_use_case.display_player_inventory_use_case.PlayerDisplayInventoryDsRequestModel;
 
 import java.util.ArrayList;

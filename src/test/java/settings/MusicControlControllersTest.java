@@ -3,7 +3,7 @@ package settings;
 import controllers.music.PauseController;
 import controllers.music.PlayController;
 import controllers.music.RestartController;
-import entities.MusicPlayer;
+import settings.music.entities.MusicPlayer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import use_cases.errors.ErrorOutputBoundary;

@@ -1,6 +1,6 @@
 package UI.screens.inventoryscreens;
 
-import entities.inventoryitem.InventoryItem;
+import inventory.inventory_item.entities.InventoryItem;
 import use_cases.inventory_menu_use_case.equip_item_use_case.EquipItemDsGateway;
 import use_cases.inventory_menu_use_case.equip_item_use_case.EquipItemDsRequestModel;
 

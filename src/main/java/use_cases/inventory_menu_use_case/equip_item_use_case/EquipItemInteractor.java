@@ -1,7 +1,7 @@
 package use_cases.inventory_menu_use_case.equip_item_use_case;
 
 
-import entities.StatsUser;
+import stats.entities.StatsUser;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
 import use_cases.file_checker.ValidStats;

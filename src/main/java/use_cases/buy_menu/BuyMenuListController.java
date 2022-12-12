@@ -1,6 +1,6 @@
 package use_cases.buy_menu;
 
-import entities.inventoryitem.InventoryItem;
+import inventory.inventory_item.entities.InventoryItem;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;

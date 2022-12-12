@@ -1,7 +1,7 @@
 //package use_cases.stats_update_use_case;
 //
-//import entities.Stats;
-//import entities.StatsUser;
+//import stats.entities.Stats;
+//import stats.entities.StatsUser;
 //import use_cases.errors.ErrorOutputBoundary;
 //import use_cases.file_checker.ValidStats;
 //import use_cases.save_game.StatSave;

@@ -1,11 +1,11 @@
 package use_cases.new_game;
 
-import entities.FightingStatsInitializer;
-import entities.StatsUser;
-import entities.inventoryitem.InitializePlayerInventoryGateway;
-import entities.inventoryitem.InitializeShopInventoryGateway;
-import entities.inventoryitem.PlayerInventoryFile;
-import entities.inventoryitem.ShopInventoryFile;
+import bossfight.FightingStatsInitializer;
+import stats.entities.StatsUser;
+import inventory.inventory_item.entities.InitializePlayerInventoryGateway;
+import inventory.inventory_item.entities.InitializeShopInventoryGateway;
+import inventory.inventory_item.entities.PlayerInventoryFile;
+import inventory.inventory_item.entities.ShopInventoryFile;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.file_checker.ValidFileDsGateway;
 import use_cases.save_game.StatSave;

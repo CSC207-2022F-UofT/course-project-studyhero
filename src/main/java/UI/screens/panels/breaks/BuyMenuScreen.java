@@ -1,6 +1,6 @@
 package UI.screens.panels.breaks;
 
-import entities.inventoryitem.InventoryItem;
+import inventory.inventory_item.entities.InventoryItem;
 import use_cases.buy_menu.*;
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,6 @@
 package UI.screens.panels;
 
-import use_cases.boss_fight.*;
+import bossfight.*;
 
 import javax.swing.*;
 import java.awt.*;
