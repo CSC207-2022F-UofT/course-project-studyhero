@@ -6,10 +6,6 @@ import use_cases.file_checker.ValidStats;
 import use_cases.save_game.StatSave;
 import java.util.Map;
 
-
-/**
- * interactor
- */
 public class BuyMenuGoldUpdater {
     ValidStats stats;
     Map<String, Integer> statsMap;
@@ -18,7 +14,10 @@ public class BuyMenuGoldUpdater {
     ErrorOutputBoundary presenter;
 
 
-
+    /**
+     * The BuyMenuGoldUpdater interactor used in BuyMenuScreen use case in order to get and set the user's gold amount
+     * from 'stats.csv'.
+     */
     public BuyMenuGoldUpdater() {
         stats = new ValidStats("stats.csv", presenter);
         statsMap = stats.load();
@@ -26,6 +25,12 @@ public class BuyMenuGoldUpdater {
         statsUser = new StatsUser(statsMap);
     }
 
+    /**
+     * Updates the gold when an item is purchased by reducing it from the current statsUser file and saving it
+     * as a new statsMap and statsUser.
+     *
+     * @param price         An integer that represents the price for an item.
+     */
     public void updateGoldFromPurchase(int price) {
         statsUser.updateGold(-price);
         System.out.println(statsUser.updateGold(-price));
@@ -39,7 +44,9 @@ public class BuyMenuGoldUpdater {
 
 
     /**
-     * returns gold value
+     * Returns the user's gold value from the saved statsMap.
+     *
+     * @return the integer of the user's gold stat.
      */
     public int getUserGold() {
         return statsMap.get("gold");

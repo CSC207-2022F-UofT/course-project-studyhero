@@ -13,9 +13,7 @@ import java.util.ArrayList;
  * PlayerInventoryFile.
  */
 public class BuyMenuScreen extends JPanel {
-    /**
-     * Elements of the BuyMenuScreen.
-     */
+    // Elements of the buy menu screen.
     CardLayout card;
     JPanel parentPanel;
     Frame frame;
@@ -127,7 +125,5 @@ public class BuyMenuScreen extends JPanel {
         this.add(backToBreak);
 
         frame = new JFrame("Pop-Up Frame");
-
     }
-
 }
