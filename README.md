@@ -19,16 +19,13 @@ The character should have stats the user can access that see how strong they are
 **For more info on gameplay, check out [our wiki](https://github.com/CSC207-2022F-UofT/course-project-studyhero/wiki)!**
 
 ## Running the Code
-~~The program can not currently be run as an executable. However, for testing purposes, there are two parts of the program that are currently runnable:~~ <br/>
-~~1. The Timer Menu - The UI is available to look at, however, the Timer itself is not currently working (see Issues).~~ <br/>
-~~2. The Menus with skeletons for the Shop Menu, Break Menu, and Main Menu screens.~~ <br/>
-
-~~Both features can be run by clicking "Run" on the "main" functions in TimerScreen.java for the Timer Menu, and mainPanel.java for the Main Menus.~~
-
-The program can be run from the class GameMain.java (this does not exist in the main branch yet, check GUI branch to find it. TODO: merge branches to main so the game can be played from there.)
+The program can be run from the class GameMain.java.
 
 ## Design
-See our [Design Wiki](https://github.com/CSC207-2022F-UofT/course-project-studyhero/wiki/Design) for info on our major design decisions.
+See our [Design Wiki](https://github.com/CSC207-2022F-UofT/course-project-studyhero/wiki/Design) for info on our major design decisions (Clean Architecture, SOLID, packaging etc.).
+
+## Test Coverage
+(include coverage reports + explanations of what hasn't been tested here)
 
 ## Issues
 Some of the features of the program are not yet complete due to the core mechanics of the game (i.e., stats, timer, inventory, save data, GUI). Since our program is turning out to be a lot more ambitious than anticipated, some of these features took longer than expected, and thus delaying the implementation of some of our other features as well. Namely:
@@ -45,6 +42,3 @@ The code for the timer has been refactored and updated so that there are no depe
 However, since most of the implementations for the dependencies are now completed for the most part, these features can definitely be implemented by the final deadline for the project.
 
 There are also issues with naming conventions, especially with packages, however, this will be fixed by the time the program is finally handed in.
-
-## Test Coverage
-(include coverage reports + explanations of what hasn't been tested here)
