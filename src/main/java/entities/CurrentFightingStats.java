@@ -7,6 +7,9 @@ import use_cases.save_game.StatSave;
 import java.util.HashMap;
 import java.util.Map;
 
+/** An implementation of the FightingStats entity. FightingStats stores all the stats relevant to current combat,
+ * which includes maxHP, playerHP, playerDamage, playerDefence, bossHP, and bossDamage.
+ */
 public class CurrentFightingStats implements FightingStats{
 
     int maxHP;
@@ -21,6 +24,9 @@ public class CurrentFightingStats implements FightingStats{
 
     int bossDamage;
 
+    /**
+     * Empty constructor for setting up the entity using the currently saved fightingStats.csv file
+     */
     public CurrentFightingStats(){
         Map<String, Integer> statsMap = getFightStats();
         System.out.println(statsMap.toString());
@@ -32,11 +38,15 @@ public class CurrentFightingStats implements FightingStats{
         this.bossDamage = statsMap.get("bossDamage");
     }
 
+    /**
+     * Constructor for setting up the entity that takes in a string corresponding to a file path for the stats.csv
+     * using a helper function
+     * @param newFile: the path of the csv file
+     */
     public CurrentFightingStats(String newFile){
         initializeFight(newFile);
     }
     public void initializeFight(String newFile){
-        System.out.println("cock");
         Map<String, Integer> userStats = getPlayerStats(newFile);
         BossClass bossClass = new BossClass(userStats.get("level"));
         this.maxHP = userStats.get("maxHp");
@@ -71,7 +81,12 @@ public class CurrentFightingStats implements FightingStats{
         }
     }
 
-    public Map<String, Integer> getUpdatedFightStats(){
+    /**
+     * Takes the values currently in the instance variavles of the entity, and creates a mapping equivalent to those
+     * values
+     * @return mapping containing values of the entity
+     */
+    private Map<String, Integer> getUpdatedFightStats(){
         Map<String, Integer> updatedStatsMap = new HashMap<>();
         updatedStatsMap.put("maxHealth", this.maxHP);
         updatedStatsMap.put("playerHealth", this.playerHP);
