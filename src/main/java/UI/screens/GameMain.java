@@ -32,7 +32,6 @@ public class GameMain {
         InventoryPanel inventoryScreen = new InventoryPanel(card, mainPanel);
         BreakScreen breakScreen = new BreakScreen(card,mainPanel);
 
-//        SellMenuScreen sellMenuScreen = new SellMenuScreen(card, mainPanel);
         BuyMenuScreen buyMenuScreen = new BuyMenuScreen(card, mainPanel);
         ShopMenuScreen shopMenuScreen = new ShopMenuScreen(card,mainPanel);
 
