@@ -1,7 +1,10 @@
 package UI.screens.panels.breaks;
 
 import UI.screens.inventoryscreens.InventoryPanel;
+import UI.screens.panels.StatsDisplayScreen;
 import use_cases.boss_fight.FightBossButtonController;
+import use_cases.errors.ErrorPresenter;
+import use_cases.file_checker.ValidStats;
 
 
 import javax.swing.*;
@@ -31,6 +34,12 @@ public class BreakScreen extends JPanel {
 
         JButton shopMenu = new JButton("Shop");
         shopMenu.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
+
+        JButton statsMenu = new JButton("Stats");
+        statsMenu.addActionListener(e ->
+            {StatsDisplayScreen statsDisplayScreen = new StatsDisplayScreen(newCard, newPanel);
+                newPanel.add(statsDisplayScreen, "Stats");
+                newCard.show(newPanel, "Stats");});
 
         // ===== FightBoss Screen =====
         JButton fightBoss = new JButton("Fight Boss");
@@ -65,6 +74,7 @@ public class BreakScreen extends JPanel {
         tabsPanel.add(fightBoss);
         tabsPanel.add(settings);
         tabsPanel.add(inventoryMenu);
+        tabsPanel.add(statsMenu);
 
         mainPanel.add(tabsPanel, Component.CENTER_ALIGNMENT);
 
