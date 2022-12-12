@@ -1,7 +1,6 @@
 package use_cases.new_game;
 
 import entities.FightingStatsInitializer;
-import use_cases.boss_fight.FightingStatsInitializer;
 import entities.StatsUser;
 import entities.inventoryitem.InitializePlayerInventoryGateway;
 import entities.inventoryitem.InitializeShopInventoryGateway;
@@ -19,8 +18,7 @@ import java.util.Map;
  */
 public class NewGame implements NewGameInputBoundary{
     private final ValidFileDsGateway statsFile;
-    private final ValidFileDsGateway playerInventoryFile;
-    private final ValidFileDsGateway shopInventoryFile;
+    private final ValidFileDsGateway inventoryFile;
     private final ValidFileDsGateway fightStatsFile;
     private final ErrorOutputBoundary presenter;
 
@@ -30,8 +28,7 @@ public class NewGame implements NewGameInputBoundary{
      * files or writing new ones.
      *
      * @param statsFile             Player stats file
-     * @param playerInventoryFile   Player inventory file
-     * @param shopInventoryFile     Shop inventory file
+     * @param inventoryFile   Player inventory file
      * @param fightStatsFile        Fight stats file
      * @param presenter             Output boundary if any error occurs
      */
@@ -53,8 +50,8 @@ public class NewGame implements NewGameInputBoundary{
     public void newGame(String statsPath, String playerInvPath,
                         String shopInvPath, String fightStatsPath){
         //if any file exists, will print that files are being overwritten
-        if (statsFile.fileExists() || playerInventoryFile.fileExists()
-                || shopInventoryFile.fileExists() || fightStatsFile.fileExists()){
+        if (statsFile.fileExists() || inventoryFile.fileExists()
+                || fightStatsFile.fileExists()){
             System.out.println("Files exist. Overwriting...");
         }else{
             System.out.println("New save.");

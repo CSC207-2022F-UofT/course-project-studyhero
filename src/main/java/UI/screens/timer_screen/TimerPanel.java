@@ -51,6 +51,10 @@ public class TimerPanel extends JPanel {
         presetTimerController = new PresetTimerController(timerInteractor);
         timerPresenter = new TimerPresenter(timerInteractor.getTimerResponseModel());
 
+        progressBar = new JProgressBar();
+        endTimerButton = new JButton();
+
+
         progressBar.setMinimum(0);
         progressBar.setValue(0);
         endTimerButton.setEnabled(false);

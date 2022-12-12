@@ -53,7 +53,7 @@ public class ConfirmationWindowView extends JFrame{
 
         NewGameInputBoundary newGameUseCase =
                 new NewGame(statsChecker, playerInventoryChecker,
-                        shopInventoryChecker, fightStatsChecker,presenter);
+                        fightStatsChecker, presenter);
         NewGameConfirmationController newGameConfirmationController =
                 new NewGameConfirmationController(card, parentPanel,
                         this, newGameUseCase);

@@ -46,7 +46,7 @@ public class StartScreen extends JPanel{
 
         ValidFileDsGateway fightStatsChecker = new ValidStats(fightStatsFilepath, presenter);
         NewGameInputBoundary newGameUseCase =
-                new NewGame(statsChecker, playerInventoryChecker, shopInventoryChecker, fightStatsChecker, presenter);
+                new NewGame(statsChecker, playerInventoryChecker, fightStatsChecker, presenter);
         GameCheckInputBoundary gameCheckUseCase =
                 new GameCheckInteractor(statsChecker, playerInventoryChecker, fightStatsChecker);
 
