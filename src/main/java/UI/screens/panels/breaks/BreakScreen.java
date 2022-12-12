@@ -1,9 +1,12 @@
 package UI.screens.panels.breaks;
 
+import UI.screens.inventoryscreens.InventoryPanel;
+import use_cases.boss_fight.FightBossButtonController;
+
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-
 public class BreakScreen extends JPanel {
     CardLayout card;
     JPanel parentPanel;
@@ -16,6 +19,10 @@ public class BreakScreen extends JPanel {
         JPanel mainPanel = new JPanel();
         JPanel tabsPanel = new JPanel();
 
+        CardLayout newCard = new CardLayout();
+        JPanel newPanel = new JPanel();
+        newPanel.setLayout(newCard);
+
 
         JLabel title = new JLabel("Time to take a break...");
 
@@ -25,11 +32,21 @@ public class BreakScreen extends JPanel {
         JButton shopMenu = new JButton("Shop");
         shopMenu.addActionListener(e -> card.show(parentPanel, "Shop Menu"));
 
+        // ===== FightBoss Screen =====
         JButton fightBoss = new JButton("Fight Boss");
-        fightBoss.addActionListener(e -> card.show(parentPanel,"Fight Boss"));
+        FightBossButtonController fightBossButtonController =
+                new FightBossButtonController(card, parentPanel);
+        fightBoss.addActionListener(fightBossButtonController);
 
         JButton settings = new JButton("Settings");
         settings.addActionListener(e -> card.show(parentPanel, "Break Settings"));
+
+        // ===== Initialise An Inventory Menu =====
+        JButton inventoryMenu = new JButton("Inventory Menu");
+        inventoryMenu.addActionListener(e ->
+            {InventoryPanel inventoryPanel = new InventoryPanel(newCard, newPanel);
+            newPanel.add(inventoryPanel, "Inventory");
+            newCard.show(newPanel, "Inventory");});
 
         // Add Layouts
         BoxLayout mainBox = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
@@ -47,9 +64,14 @@ public class BreakScreen extends JPanel {
         tabsPanel.add(shopMenu);
         tabsPanel.add(fightBoss);
         tabsPanel.add(settings);
+        tabsPanel.add(inventoryMenu);
 
         mainPanel.add(tabsPanel, Component.CENTER_ALIGNMENT);
 
-        this.add(mainPanel);
+        newPanel.add(mainPanel,"Main Break");
+
+        newCard.show(newPanel,"Main Break");
+        this.add(newPanel);
+        //this.add(mainPanel);
     }
 }

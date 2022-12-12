@@ -2,6 +2,7 @@ package tutorial;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import use_cases.errors.tutorial.HelloWorld;
 
 class HelloWorldTest {
 
