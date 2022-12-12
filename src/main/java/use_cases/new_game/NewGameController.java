@@ -1,7 +1,7 @@
 package use_cases.new_game;
 
 import use_cases.game_check.GameCheckInputBoundary;
-import use_cases.new_game.confirmation_window.ConfirmationWindowInputBoundary;
+import UI.screens.panels.ConfirmationWindowView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,11 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NewGameController implements ActionListener {
-    CardLayout card;
-    JPanel parentPanel;
-    GameCheckInputBoundary gameCheckUseCase;
-    NewGameInputBoundary newGameUseCase;
-    ConfirmationWindowInputBoundary confirmationUseCase;
+    private final CardLayout card;
+    private final JPanel parentPanel;
+    private final GameCheckInputBoundary gameCheckUseCase;
+    private final NewGameInputBoundary newGameUseCase;
+    private final ConfirmationWindowView confirmationView;
+
+    private String statsPath = "stats.csv";
+    private String plyrInvPath = "PlayerInventory.csv";
+    private String shpInvPath =  "ShopInventory.csv";
+    private String fightStatsPath = "fightStats.csv";
 
     /**
      * Creates a GameCheckController object that handles all use cases
@@ -27,17 +32,30 @@ public class NewGameController implements ActionListener {
      *                              contains the next screen
      * @param gameCheckUseCase      Checks for valid game files
      * @param newGameUseCase        Generates all necessary game files
-     * @param confirmationUseCase   Presents to the user a confirmation window
+     * @param confirmationView   Presents to the user a confirmation window
      */
     public NewGameController(CardLayout card, JPanel parentPanel,
                              GameCheckInputBoundary gameCheckUseCase,
                              NewGameInputBoundary newGameUseCase,
-                             ConfirmationWindowInputBoundary confirmationUseCase){
+                             ConfirmationWindowView confirmationView){
         this.gameCheckUseCase = gameCheckUseCase;
         this.newGameUseCase = newGameUseCase;
         this.card = card;
         this.parentPanel = parentPanel;
-        this.confirmationUseCase = confirmationUseCase;
+        this.confirmationView = confirmationView;
+    }
+
+    public String getStatsPath() {return statsPath;}
+    public void setStatsPath(String newStatsPath){statsPath = newStatsPath;}
+    public String getPlyrInvPath() {return plyrInvPath;}
+    public void setPlyrInvPath(String newPlyrInvPath){
+        this.plyrInvPath = newPlyrInvPath;}
+    public String getShpInvPath() {return shpInvPath;}
+    public void setShpInvPath(String newShpInvPath){
+        this.shpInvPath = newShpInvPath;}
+    public String getFightStatsPath(){return fightStatsPath;}
+    public void setFightStatsPath(String fightStatsPath) {
+        this.fightStatsPath = fightStatsPath;
     }
 
     /**
@@ -52,11 +70,13 @@ public class NewGameController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameCheckUseCase.check()){
-            confirmationUseCase.createWindow();
+            confirmationView.viewWindow();
         }
         else{
-            newGameUseCase.newGame();
-            card.show(parentPanel, "Story");
+            newGameUseCase.newGame(statsPath, plyrInvPath,
+                    shpInvPath, fightStatsPath);
+            try{card.show(parentPanel, "Story");}
+            catch(HeadlessException ignored){}
         }
     }
 }

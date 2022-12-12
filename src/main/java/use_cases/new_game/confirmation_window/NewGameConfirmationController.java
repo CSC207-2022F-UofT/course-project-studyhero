@@ -12,7 +12,10 @@ public class NewGameConfirmationController implements ActionListener {
     private final JPanel parentPanel;
     private final JFrame parentFrame;
     private final NewGameInputBoundary useCase;
-
+    private String statsPath = "stats.csv";
+    private String plyrInvPath = "PlayerInventory.csv";
+    private String shpInvPath =  "ShopInventory.csv";
+    private String fightStatsPath = "fightStats.csv";
 
     /**
      * Creates a NewGameConfirmationController object that handles the creation
@@ -32,6 +35,19 @@ public class NewGameConfirmationController implements ActionListener {
         this.useCase = newGameUseCase;
     }
 
+    public String getStatsPath() {return statsPath;}
+    public void setStatsPath(String newStatsPath){statsPath = newStatsPath;}
+    public String getPlyrInvPath() {return plyrInvPath;}
+    public void setPlyrInvPath(String newPlyrInvPath){
+        this.plyrInvPath = newPlyrInvPath;}
+    public String getShpInvPath() {return shpInvPath;}
+    public void setShpInvPath(String newShpInvPath){
+        this.shpInvPath = newShpInvPath;}
+    public String getFightStatsPath(){return fightStatsPath;}
+    public void setFightStatsPath(String fightStatsPath) {
+        this.fightStatsPath = fightStatsPath;
+    }
+
     /**
      * In the event of a button press, new game files are created, the confirmation
      * window closes and the user will see the story screen.
@@ -40,7 +56,8 @@ public class NewGameConfirmationController implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        useCase.newGame();
+        useCase.newGame(statsPath, plyrInvPath,
+                shpInvPath, fightStatsPath);
         parentFrame.dispose();
         card.show(parentPanel, "Story");
     }

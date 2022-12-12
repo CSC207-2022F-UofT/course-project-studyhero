@@ -11,8 +11,7 @@ import use_cases.new_game.*;
 import use_cases.new_game.NewGameController;
 import use_cases.game_check.GameCheckInputBoundary;
 import use_cases.game_check.GameCheckInteractor;
-import use_cases.new_game.confirmation_window.ConfirmationWindowInputBoundary;
-import use_cases.new_game.confirmation_window.ConfirmationWindowInteractor;
+import UI.screens.panels.ConfirmationWindowView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,15 +49,14 @@ public class SettingsScreen extends JPanel {
         GameCheckInputBoundary gameCheckUseCase =
                 new GameCheckInteractor(statsChecker, playerInventoryChecker,
                         fightStatsChecker);
+
         String confirmationMsg = "Are you sure? This will overwrite your " +
                 "existing save files.";
-        ConfirmationWindowInputBoundary confirmationUseCase =
-                new ConfirmationWindowInteractor( confirmationMsg,card,
-                        parentPanel,presenter);
+        ConfirmationWindowView confirmationWindow =
+                new ConfirmationWindowView(confirmationMsg, card, parentPanel, presenter);
         NewGameController newGameController =
                 new NewGameController(card, parentPanel, gameCheckUseCase,
-                newGameUseCase, confirmationUseCase);
-
+                newGameUseCase, confirmationWindow);
         newGameButton.addActionListener(newGameController);
 
         JButton goBackButton = new JButton("Back");

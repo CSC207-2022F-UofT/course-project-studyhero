@@ -47,7 +47,8 @@ public class GameMain {
 
         }
         // ===== Create/ overwrite fightStats files =====
-        FightingStatsInitializer fightingStatsInitializer = new FightingStatsInitializer();
+        FightingStatsInitializer fightingStatsInitializer =
+                new FightingStatsInitializer();
         Map<String, Integer> fightStats = fightingStatsInitializer.initialize();
         StatSave saver = new StatSave(fightStats, presenter);
         saver.save("fightStats.csv");

@@ -1,4 +1,4 @@
-package use_cases.new_game.confirmation_window;
+package UI.screens.panels;
 
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
@@ -8,17 +8,18 @@ import use_cases.file_checker.ValidShopInventory;
 import use_cases.file_checker.ValidStats;
 import use_cases.new_game.NewGame;
 import use_cases.new_game.NewGameInputBoundary;
+import use_cases.new_game.confirmation_window.NewGameConfirmationController;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class ConfirmationWindowPresenter extends JFrame implements
-        ConfirmationWindowOutputBoundary {
+public class ConfirmationWindowView extends JFrame{
 
     private final static String statsFilepath = "stats.csv";
     private final static String playerInventoryFilepath = "PlayerInventory.csv";
     private final static String fightStatsFilepath = "fightStats.csv";
     private final static String shopInventoryFilepath = "ShopInventory.csv";
+    private boolean visible;
 
     /**
      * Creates a ConfirmationWindowPresenter object that can displays the
@@ -30,9 +31,9 @@ public class ConfirmationWindowPresenter extends JFrame implements
      * @param parentPanel   Panel where the next screen is stored
      * @param presenter     Output boundary if any error occurs
      */
-    public ConfirmationWindowPresenter(String confirmation, CardLayout card,
-                                       JPanel parentPanel,
-                                       ErrorOutputBoundary presenter){
+    public ConfirmationWindowView(String confirmation, CardLayout card,
+                                  JPanel parentPanel,
+                                  ErrorOutputBoundary presenter){
         JLabel title = new JLabel(confirmation);
         JPanel panel = new JPanel();
 
@@ -61,19 +62,24 @@ public class ConfirmationWindowPresenter extends JFrame implements
         // ===== Reject button =====
         // --- Closes the window
         JButton reject = new JButton("No");
-        reject.addActionListener(e -> this.dispose());
+        reject.addActionListener(e -> {this.setVisible(false); this.visible = false;});
 
         panel.add(title);
         panel.add(confirm);
         panel.add(reject);
         this.add(panel);
+        this.setSize(400, 200);
         this.pack();
-        viewWindow();
+        this.visible = false;
     }
 
-    @Override
+    public boolean isVisible(){return this.visible;}
+
     public void viewWindow(){
-        this.setVisible(true);
+        try{this.setVisible(true);}
+        catch (HeadlessException ignored){
+        }
+        this.visible = true;
     }
 
 }

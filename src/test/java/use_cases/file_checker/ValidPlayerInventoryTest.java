@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_cases.errors.ErrorOutputBoundary;
 import use_cases.errors.ErrorPresenter;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -84,16 +83,17 @@ class ValidPlayerInventoryTest {
 
     //An invalid inventoryList with incorrect inventory isEquipped
     ArrayList<ObjectTestInventoryItem> inValidInventoryListEquipped = new ArrayList<>();
-    ObjectTestInventoryItem invalidItemEquipped1 = new ObjectTestInventoryItem("invalid",
+    ObjectTestInventoryItem invalidItemEquipped1 = new ObjectTestInventoryItem(1,
             "Weapon",
             "Sword",
-            13, 10, false);
+            13, 10, "invalid");
 
 
 
 
     @BeforeEach
     void setUp(){
+        System.setProperty("java.awt.headless","false");
         testValidPlayerInventoryFile = new File("testValidPlayerInventoryFile.csv");
         filename = testValidPlayerInventoryFile.getName();
         validFileDsGateway = new ValidPlayerInventory(testValidPlayerInventoryFile.getName(), error);
@@ -181,7 +181,7 @@ class ValidPlayerInventoryTest {
     }
 
     @Test
-    void isPlayable() throws IOException {
+    void isPlayable() throws IOException{
         FileWriter writer = new FileWriter(testValidPlayerInventoryFile);
         writer.write("1");
         assertFalse(validFileDsGateway.isPlayable());
