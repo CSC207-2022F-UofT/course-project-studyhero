@@ -1,6 +1,7 @@
 package use_cases.new_game;
 
 import entities.FightingStatsInitializer;
+import use_cases.boss_fight.FightingStatsInitializer;
 import entities.StatsUser;
 import entities.inventoryitem.InitializePlayerInventoryGateway;
 import entities.inventoryitem.InitializeShopInventoryGateway;
@@ -35,13 +36,11 @@ public class NewGame implements NewGameInputBoundary{
      * @param presenter             Output boundary if any error occurs
      */
     public NewGame(ValidFileDsGateway statsFile,
-                   ValidFileDsGateway playerInventoryFile,
-                   ValidFileDsGateway shopInventoryFile,
+                   ValidFileDsGateway inventoryFile,
                    ValidFileDsGateway fightStatsFile,
                    ErrorOutputBoundary presenter) {
         this.statsFile = statsFile;
-        this.playerInventoryFile = playerInventoryFile;
-        this.shopInventoryFile = shopInventoryFile;
+        this.inventoryFile = inventoryFile;
         this.fightStatsFile = fightStatsFile;
         this.presenter = presenter;
     }
