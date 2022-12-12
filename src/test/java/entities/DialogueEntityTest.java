@@ -1,5 +1,5 @@
 package entities;
-import dialogue.dialogue_clean.entities.DialogueEntity;
+import dialogue.entities.DialogueEntity;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.HashMap;

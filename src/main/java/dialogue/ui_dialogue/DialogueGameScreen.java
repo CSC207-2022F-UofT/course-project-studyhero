@@ -1,8 +1,9 @@
-package dialogue.dialogue_clean.ui_dialogue;
-import dialogue.dialogue_clean.interface_adapters.DialogueChoice1Controller;
-import dialogue.dialogue_clean.interface_adapters.DialogueChoice2Controller;
-import dialogue.dialogue_clean.interface_adapters.DialogueChoice3Controller;
-import dialogue.dialogue_clean.interface_adapters.DialogueChoice4Controller;
+package dialogue.ui_dialogue;
+import dialogue.interface_adapters.DialogueChoice1Controller;
+import dialogue.interface_adapters.DialogueChoice2Controller;
+import dialogue.interface_adapters.DialogueChoice3Controller;
+import dialogue.interface_adapters.DialogueChoice4Controller;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

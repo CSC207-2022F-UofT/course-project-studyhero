@@ -1,4 +1,4 @@
-package dialogue.dialogue_clean.entities;
+package dialogue.entities;
 import java.util.HashMap;
 /*
 An abstract class that provides a framework if it

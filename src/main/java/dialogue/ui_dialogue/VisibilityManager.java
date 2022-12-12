@@ -1,4 +1,4 @@
-package dialogue.dialogue_clean.ui_dialogue;
+package dialogue.ui_dialogue;
 /*
 Disables the start screen after the player presses "start".
  */

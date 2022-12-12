@@ -1,6 +1,6 @@
-package dialogue.dialogue_clean.interface_adapters;
+package dialogue.interface_adapters;
 
-import dialogue.dialogue_clean.application_business_rules.DialogueOutputBoundary;
+import dialogue.application_business_rules.DialogueOutputBoundary;
 
 /*
 Presenter for the Dialogue feature.

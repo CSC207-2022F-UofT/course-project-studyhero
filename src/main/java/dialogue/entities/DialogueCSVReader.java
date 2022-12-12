@@ -1,4 +1,4 @@
-package dialogue.dialogue_clean.entities;
+package dialogue.entities;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

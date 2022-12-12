@@ -1,4 +1,4 @@
-package dialogue.dialogue_clean.ui_dialogue;
+package dialogue.ui_dialogue;
 import javax.swing.*;
 import java.awt.*;
 

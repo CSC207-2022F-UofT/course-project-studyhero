@@ -1,6 +1,6 @@
-package dialogue.dialogue_clean.interface_adapters;
-import dialogue.dialogue_clean.application_business_rules.DialogueInputBoundary;
-import dialogue.dialogue_clean.application_business_rules.DialogueInteractor;
+package dialogue.interface_adapters;
+import dialogue.application_business_rules.DialogueInputBoundary;
+import dialogue.application_business_rules.DialogueInteractor;
 
 /*
 Controller that dictates how the bottom (last) button acts upon pressed.

@@ -1,4 +1,4 @@
-package dialogue.dialogue_clean.ui_dialogue;
+package dialogue.ui_dialogue;
 /*
 The first introductory dialogue that the player sees after pressing "start".
 Part of the UI.
