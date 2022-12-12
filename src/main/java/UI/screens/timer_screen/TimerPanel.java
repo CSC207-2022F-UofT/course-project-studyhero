@@ -1,6 +1,6 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.TimerInteractor;
+import timer.timer_use_cases.TimerInteractor;
 import UI.screens.timer_screen.listeners.*;
 
 import javax.swing.*;
@@ -49,7 +49,7 @@ public class TimerPanel extends JPanel {
         TimerInteractor timerInteractor = new TimerInteractor();
         customTimerController = new CustomTimerController(timerInteractor);
         presetTimerController = new PresetTimerController(timerInteractor);
-        timerPresenter = new TimerPresenter(timerInteractor.getTimerResponseModel());
+        timerPresenter = new TimerPresenter(timerInteractor.getTimerResponseModel()); 
 
         progressBar.setMinimum(0);
         progressBar.setValue(0);

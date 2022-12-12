@@ -3,17 +3,16 @@ import UI.screens.panels.StatsDisplayScreen;
 import UI.screens.timer_screen.TimerPanel;
 import UI.screens.panels.*;
 import UI.screens.panels.breaks.BreakScreen;
-import UI.screens.panels.breaks.BuyMenuScreen;
 import UI.screens.panels.breaks.ShopMenuScreen;
 import UI.screens.panels.settings.SettingsScreen;
-import entities.FightingStatsInitializer;
-import entities.MusicPlayer;
-import entities.StatsUser;
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidStats;
-import use_cases.save_game.StatSave;
+import bossfight.FightingStatsInitializer;
+import settings.music.entities.MusicPlayer;
+import stats.entities.StatsUser;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidStats;
+import filesaver.usecases.save_game.StatSave;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,7 +65,7 @@ public class GameMain {
 
 
         mainPanel.add(storyScreen, "Story");
-        mainPanel.add(timerScreen, "Timer");
+        mainPanel.add(timerScreen, "timer");
         mainPanel.add(breakScreen, "Break");
 //        mainPanel.add(changeStatsScreen, "Change Stats");
         mainPanel.add(startSettingsScreen, "Start Settings");

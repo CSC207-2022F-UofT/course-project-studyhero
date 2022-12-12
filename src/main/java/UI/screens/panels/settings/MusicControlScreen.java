@@ -1,10 +1,11 @@
 package UI.screens.panels.settings;
 
-import entities.MusicPlayer;
-import controllers.music.PauseController;
-import controllers.music.PlayController;
-import controllers.music.RestartController;
-import use_cases.music_controls.*;
+import settings.music.entities.MusicPlayer;
+import settings.music.controllers.PauseController;
+import settings.music.controllers.PlayController;
+import settings.music.controllers.RestartController;
+import settings.music.usecases.*;
+
 
 import javax.swing.*;
 import java.awt.*;

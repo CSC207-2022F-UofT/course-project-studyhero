@@ -1,13 +1,13 @@
 package UI.screens.panels;
 
-import controllers.StatsDisplayController;
-import presenters.StatsDisplayPresenter;
-import presenters.StatsDisplayViewModel;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidStats;
-import use_cases.stats_display_use_case.StatsDisplayInputBoundary;
-import use_cases.stats_display_use_case.StatsDisplayInteractor;
-import use_cases.stats_display_use_case.StatsDisplayOutputBoundary;
+import stats.controllers.StatsDisplayController;
+import stats.presenters.StatsDisplayPresenter;
+import stats.presenters.StatsDisplayViewModel;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidStats;
+import stats.usecases.stats_display_use_case.StatsDisplayInputBoundary;
+import stats.usecases.stats_display_use_case.StatsDisplayInteractor;
+import stats.usecases.stats_display_use_case.StatsDisplayOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;

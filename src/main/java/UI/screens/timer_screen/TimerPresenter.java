@@ -1,7 +1,7 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.TimerOutputBoundary;
-import Timer.timer_use_cases.TimerResponseModel;
+import timer.timer_use_cases.TimerOutputBoundary;
+import timer.timer_use_cases.TimerResponseModel;
 
 /**
  * Presenter class for the timer.

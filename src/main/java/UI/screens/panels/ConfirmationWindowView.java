@@ -1,14 +1,14 @@
 package UI.screens.panels;
 
-import use_cases.errors.ErrorOutputBoundary;
-import use_cases.errors.ErrorPresenter;
-import use_cases.file_checker.ValidFileDsGateway;
-import use_cases.file_checker.ValidPlayerInventory;
-import use_cases.file_checker.ValidShopInventory;
-import use_cases.file_checker.ValidStats;
-import use_cases.new_game.NewGame;
-import use_cases.new_game.NewGameInputBoundary;
-import use_cases.new_game.confirmation_window.NewGameConfirmationController;
+import errors.usecases.ErrorOutputBoundary;
+import errors.usecases.ErrorPresenter;
+import filesaver.usecases.file_checker.ValidFileDsGateway;
+import filesaver.usecases.file_checker.ValidPlayerInventory;
+import filesaver.usecases.file_checker.ValidShopInventory;
+import filesaver.usecases.file_checker.ValidStats;
+import filesaver.usecases.new_game.NewGame;
+import filesaver.usecases.new_game.NewGameInputBoundary;
+import filesaver.usecases.new_game.confirmation_window.NewGameConfirmationController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,7 +53,7 @@ public class ConfirmationWindowView extends JFrame{
 
         NewGameInputBoundary newGameUseCase =
                 new NewGame(statsChecker, playerInventoryChecker,
-                        shopInventoryChecker, fightStatsChecker,presenter);
+                        fightStatsChecker, presenter);
         NewGameConfirmationController newGameConfirmationController =
                 new NewGameConfirmationController(card, parentPanel,
                         this, newGameUseCase);

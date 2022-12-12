@@ -5,7 +5,7 @@ The program is a productivity timer with an adventure game aspect, letting a use
 The character should have stats the user can access that see how strong they are and what equipment they have. These stats determine their ability to defeat bosses. The user should be able to change the timer settings to match how much time they want to study and save their progress if they want to keep how long they’ve studied for using the program.
 
 ## Features
-- Timer: Start, pause, or end the timer early. After the timer is complete, the user can click a button to go to the break menu. The user can select from three different preset timer durations or set their own duration.
+- timer: Start, pause, or end the timer early. After the timer is complete, the user can click a button to go to the break menu. The user can select from three different preset timer durations or set their own duration.
 - Inventory: Have access to different types of items, including equippable items and consumables, that the user can equip or use.
 - Stats: Stats that the user has and can level up as they continue to study and progress with the bosses. This also includes things like the user's gold and the stats for the Boss that the user can fight during their breaks.
 - Dialogue: A series of dialogue options that the user can see during their breaks, study times, boss fights, etc.

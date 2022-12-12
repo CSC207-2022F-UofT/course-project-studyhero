@@ -1,6 +1,6 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.TimerInteractor;
+import timer.timer_use_cases.TimerInteractor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,7 +1,7 @@
 package UI.screens.timer_screen;
 
-import Timer.timer_use_cases.CustomTimerRequestModel;
-import Timer.timer_use_cases.TimerInteractor;
+import timer.timer_use_cases.CustomTimerRequestModel;
+import timer.timer_use_cases.TimerInteractor;
 
 /**
  * Controller class for the custom portion of the timer.
